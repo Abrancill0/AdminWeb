@@ -1639,10 +1639,10 @@
 				"ncomensales": ncomensales,
 				"nmbcomensales": comensales,
 				"ugasto": ugasto,
-				"rfc": "",
-				"contacto": "",
-				"telefono": "",
-				"correo": "",
+				"rfc": "-",
+				"contacto": "-",
+				"telefono": "-",
+				"correo": "-",
 				"fileotros": ""
 			};
 			
