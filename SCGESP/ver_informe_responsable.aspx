@@ -722,7 +722,9 @@
 					<td>
 						<p class="valor">
 							{{#each comentario_rechazo}}
-							{{this}}<br />
+								{{#if this}}
+									{{this}}<br />
+								{{/if}}
 							{{/each}}
 						</p>
 					</td>
@@ -1649,7 +1651,7 @@
 			var apiEjecutar = IdGasto > 0 ? "UpdateGasto" : "InsertGasto";
 			console.log(datos);
 			$.ajax({
-				async: true,
+				async: false,
 				type: "POST",
 				url: ("/api/" + apiEjecutar),
 				data: (datos), //data,
@@ -1681,13 +1683,13 @@
 
 					$("#mEditarGastoInf").modal('hide');
 
-					selectInforme(IdInforme);
-					browseGastos(IdInforme);
+					
 
 				},
 				complete: function () {
 					//cargado();
-
+					selectInforme(IdInforme);
+					browseGastos(IdInforme);
 				},
 				error: function (result) {
 					//cargado();
@@ -2091,6 +2093,10 @@
 					}
 
 				},
+				complete: function (){
+					selectInforme(idinforme);
+					browseGastos(idinforme);
+				},
 				error: function (result) {
 					console.log("error", result);
 					$("#filexml").filestyle('clear');
@@ -2163,6 +2169,8 @@
 					$.notify("Gasto Actualizado [Comprobante PDF Cargado].", { globalPosition: 'top center', className: 'success' });
 				},
 				complete: function () {
+					selectInforme(idinforme);
+					browseGastos(idinforme);
 				},
 				error: function (result) {
 					console.log(result);
@@ -2239,6 +2247,8 @@
 					$.notify("Gasto Actualizado [Comprobante Cargado].", { globalPosition: 'top center', className: 'success' });
 				},
 				complete: function () {
+					selectInforme(idinforme);
+					browseGastos(idinforme);
 				},
 				error: function (result) {
 					console.log(result);
