@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Gastos</title>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap/bootstrap.min.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="../css/estilos.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="../css/jquery-ui.min.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="../css/dataTables/jquery.dataTables.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap/bootstrap-select.min.css" media="all" />
+        <style type="text/css">
+            body {
+                padding: 70px 0px 0px 0px;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <header>
+            <nav class="navbar navbar-default navbar-fixed-top" style="height:50px;">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-1">
+                            <span class="sr-only">Menu</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <table><tr><td valign="middle"><h3><b>CGE</b> - &nbsp;</h3></td><td><img id="logEmp" src="" width="140" height="50" style=" margin: 0px;padding: 0px;" alt="" onclick="window.history.back();" /></td></tr></table>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbar-1">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown active"><a href="#" class="active dropdown-toggle" data-toggle="dropdown" role="button">Administración<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="usuarios.html">Usuarios</a></li>
+                                    <li><a href="perfiles.html">Perfiles</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="informe.html">Informe</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="pull-left"><a href="#" role="button"><span class="glyphicon glyphicon-user"></span> Bienvenido: <span id="usuario"></span></a></li>
+                            <li class="pull-right"><a class="btn btn-default" style="height:50px;" href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="container" id="principal">
+
+
+        </div>
+
+        <script type="text/javascript" src="../js/external/jquery/jquery.js"></script>
+        <script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="../js/js.js"></script>
+        <script type="text/javascript" src="../js/informe.js"></script>
+        <script type="text/javascript" src="../js/gastos.js"></script>
+        <script type="text/javascript" src="../js/seguridad.js"></script>
+        <script type="text/javascript" src="../js/bootstrap/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap/bootstrap-select.min.js"></script>
+        <script type="text/javascript" src="../js/jquery.blockUI.js"></script>
+        <script type="text/javascript" src="../js/dataTables/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="../js/notify.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap/bootstrap-filestyle.min.js"></script>
+        <script type="text/javascript">
+                            Seguridad.sessionActiva();
+                            var logo = Seguridad.logo()["e_logo"];
+                            $("#logEmp").attr("src", logo);
+                            $("#usuario").empty();
+                            $("#usuario").append(Seguridad.login("nmb") + " " + Seguridad.login("apm"));
+                            $(document).ready(function () {
+                                var hash = url.hash();
+                                if (hash === "#informes") {
+                                    ir("informe.html");
+                                }
+                            });
+
+
+                            function ir(a) {
+                                $("#principal").load(a + ' #principal', function () {
+                                    rangoFechas();
+                                    var fechaini = sumaDias(fechaActual(), -15);
+                                    var fechafin = fechaActual();
+                                    $("input#repde").val(fechaini);
+                                    $("input#repa").val(fechafin);
+                                    crearTabla("#tblProyectos", 4, "desc");
+                                    crearTablaDetalleRow("#tblGastos", 1, "asc", 14, false);
+                                    ObtenerInformes();
+                                    ObtenerResponsables();
+                                });
+                            }
+        </script>
+
+    </body>
+
+</html>

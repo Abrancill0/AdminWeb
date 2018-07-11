@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="PeticionCatalogo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="doc">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PeticionCatalogoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="respuesta" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PeticionConsulta">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="doc">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PeticionConsultaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="respuesta" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PeticionReporte">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="doc">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PeticionReporteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="respuesta" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PeticionGeneral">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="doc">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PeticionGeneralResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="respuesta" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FechaActual">
+        <s:complexType />
+      </s:element>
+      <s:element name="FechaActualResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FechaActualResult" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UltimoDiaAnioActual">
+        <s:complexType />
+      </s:element>
+      <s:element name="UltimoDiaAnioActualResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UltimoDiaAnioActualResult" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="PeticionCatalogoSoapIn">
+    <wsdl:part name="parameters" element="tns:PeticionCatalogo" />
+  </wsdl:message>
+  <wsdl:message name="PeticionCatalogoSoapOut">
+    <wsdl:part name="parameters" element="tns:PeticionCatalogoResponse" />
+  </wsdl:message>
+  <wsdl:message name="PeticionConsultaSoapIn">
+    <wsdl:part name="parameters" element="tns:PeticionConsulta" />
+  </wsdl:message>
+  <wsdl:message name="PeticionConsultaSoapOut">
+    <wsdl:part name="parameters" element="tns:PeticionConsultaResponse" />
+  </wsdl:message>
+  <wsdl:message name="PeticionReporteSoapIn">
+    <wsdl:part name="parameters" element="tns:PeticionReporte" />
+  </wsdl:message>
+  <wsdl:message name="PeticionReporteSoapOut">
+    <wsdl:part name="parameters" element="tns:PeticionReporteResponse" />
+  </wsdl:message>
+  <wsdl:message name="PeticionGeneralSoapIn">
+    <wsdl:part name="parameters" element="tns:PeticionGeneral" />
+  </wsdl:message>
+  <wsdl:message name="PeticionGeneralSoapOut">
+    <wsdl:part name="parameters" element="tns:PeticionGeneralResponse" />
+  </wsdl:message>
+  <wsdl:message name="FechaActualSoapIn">
+    <wsdl:part name="parameters" element="tns:FechaActual" />
+  </wsdl:message>
+  <wsdl:message name="FechaActualSoapOut">
+    <wsdl:part name="parameters" element="tns:FechaActualResponse" />
+  </wsdl:message>
+  <wsdl:message name="UltimoDiaAnioActualSoapIn">
+    <wsdl:part name="parameters" element="tns:UltimoDiaAnioActual" />
+  </wsdl:message>
+  <wsdl:message name="UltimoDiaAnioActualSoapOut">
+    <wsdl:part name="parameters" element="tns:UltimoDiaAnioActualResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ElegrpSoap">
+    <wsdl:operation name="PeticionCatalogo">
+      <wsdl:input message="tns:PeticionCatalogoSoapIn" />
+      <wsdl:output message="tns:PeticionCatalogoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PeticionConsulta">
+      <wsdl:input message="tns:PeticionConsultaSoapIn" />
+      <wsdl:output message="tns:PeticionConsultaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PeticionReporte">
+      <wsdl:input message="tns:PeticionReporteSoapIn" />
+      <wsdl:output message="tns:PeticionReporteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PeticionGeneral">
+      <wsdl:input message="tns:PeticionGeneralSoapIn" />
+      <wsdl:output message="tns:PeticionGeneralSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FechaActual">
+      <wsdl:input message="tns:FechaActualSoapIn" />
+      <wsdl:output message="tns:FechaActualSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UltimoDiaAnioActual">
+      <wsdl:input message="tns:UltimoDiaAnioActualSoapIn" />
+      <wsdl:output message="tns:UltimoDiaAnioActualSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ElegrpSoap" type="tns:ElegrpSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="PeticionCatalogo">
+      <soap:operation soapAction="http://tempuri.org/PeticionCatalogo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PeticionConsulta">
+      <soap:operation soapAction="http://tempuri.org/PeticionConsulta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PeticionReporte">
+      <soap:operation soapAction="http://tempuri.org/PeticionReporte" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PeticionGeneral">
+      <soap:operation soapAction="http://tempuri.org/PeticionGeneral" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FechaActual">
+      <soap:operation soapAction="http://tempuri.org/FechaActual" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UltimoDiaAnioActual">
+      <soap:operation soapAction="http://tempuri.org/UltimoDiaAnioActual" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ElegrpSoap12" type="tns:ElegrpSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="PeticionCatalogo">
+      <soap12:operation soapAction="http://tempuri.org/PeticionCatalogo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PeticionConsulta">
+      <soap12:operation soapAction="http://tempuri.org/PeticionConsulta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PeticionReporte">
+      <soap12:operation soapAction="http://tempuri.org/PeticionReporte" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PeticionGeneral">
+      <soap12:operation soapAction="http://tempuri.org/PeticionGeneral" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FechaActual">
+      <soap12:operation soapAction="http://tempuri.org/FechaActual" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UltimoDiaAnioActual">
+      <soap12:operation soapAction="http://tempuri.org/UltimoDiaAnioActual" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Elegrp">
+    <wsdl:port name="ElegrpSoap" binding="tns:ElegrpSoap">
+      <soap:address location="http://192.0.1.180/ElegrpWsPba/Elegrp.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ElegrpSoap12" binding="tns:ElegrpSoap12">
+      <soap12:address location="http://192.0.1.180/ElegrpWsPba/Elegrp.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

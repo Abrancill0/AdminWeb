@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>AdminWeb - LogIn</title>
+
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Last-Modified" content="0" />
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" />
+    <link rel="stylesheet" href="vendors/bower_components/animate.css/animate.min.css" />
+    <!-- App styles -->
+    <link rel="stylesheet" href="css/app.css" />
+</head>
+<body data-ma-theme="blue">
+    <div class="login bold">
+        <!-- Login -->
+        <div class="login__block active" id="l-login">
+            <img src="img/SPapp_Icons_AdminWeb.png" class="img-responsive login__block__img" border="0" width="150" title="Seguros El Potos&iacute;" />
+           
+            <!--div class="login__block__header">
+                <img src="img/SPapp_Icons_AdminWeb.png" class="img-responsive" border="0" width="150" title="Seguros El Potos&iacute;" />
+                LogIn AdminWEB
+            </div-->
+            <div class="login__block__body">
+                <div class="form-group form-group--float form-group--centered">
+                    <input type="text" class="form-control" id="usuario" maxlength="10" />
+                    <label>Usuario</label>
+                    <i class="form-group__bar"></i>
+                </div>
+                <div class="form-group form-group--float form-group--centered">
+                    <input type="password" class="form-control" id="contrasena" />
+                    <label>Contraseña</label>
+                    <i class="form-group__bar"></i>
+                </div>
+                <!--a onclick="Login();" class="btn btn--icon login__block__btn"><i class="zmdi zmdi-long-arrow-right"></i></a-->
+                <button class="btn btn-lg btn-primary btn-block" type="button" onclick="Login();"><span class="zmdi zmdi-lock-open zmdi-hc-2x"></span>  Entrar</button>
+                <!--button class="btn btn-lg btn-primary btn-block" type="button" onclick="excel();"><span class="zmdi zmdi-lock-open zmdi-hc-2x"></span>  probar</button-->
+            </div>
+        </div>
+    </div>
+
+    <!-- Javascript -->
+    <script type="text/javascript" src="vendors/bower_components/Waves/dist/waves.min.js"></script>
+    <script type="text/javascript" src="vendors/bower_components/tether/dist/js/tether.min.js"></script>
+    <script type="text/javascript" src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- App functions and actions -->
+    <script type="text/javascript" src="js/app.min.js"></script>
+    <script type="text/javascript" src="js/js.js"></script>
+    <script type="text/javascript" src="js/plugins/jquery.blockUI.js"></script>
+
+    <script>
+        localStorage.clear();
+        
+        function Login() {
+            
+            jQuery.support.cors = true;
+            var tipolog = 1;
+            var origen = "login";
+            var usuario = $("#usuario").val();
+            var contrasena = $("#contrasena").val();
+
+            if (usuario == '' || usuario == null) {
+                alert('Campo usuario obligatorio');
+
+                return;
+            }
+
+            if (contrasena == '' || contrasena == null) {
+                alert('Campo contraseña obligatorio');
+
+                return;
+            }
+
+            var datos = {
+                "usuario": usuario,
+                "contrasena": contrasena,
+                "origen": origen,
+                "tipo": tipolog
+            };
+
+            $.ajax({
+                async: true,
+                type: 'POST',
+                url: '/api/LoginEle',
+                data: JSON.stringify(datos),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                beforeSend: cargando,
+                success: OnSuccess,
+                error: OnError
+            });
+        }
+
+        function OnSuccess(data) {
+            if (data != null) {
+
+                localStorage.setItem("cosa", data[0].cosa);
+                localStorage.setItem("cosa2", data[0].cosa2);
+                localStorage.setItem("nmbemp", data[0].cosa3);
+
+                var valDefault = {
+                    'GrEmpCentro': data[0].GrEmpCentro,
+                    'GrEmpOficina': data[0].GrEmpOficina,
+                    'GrEmpTipoGasto': data[0].GrEmpTipoGasto,
+                    'GrEmpTarjetaToka': data[0].GrEmpTarjetaToka
+                };
+                localStorage.setItem("default", JSON.stringify(valDefault));
+
+                //aqui pones el puerto que te de tu iss express
+                location.href = "Informes.aspx"; //"/Informes.aspx";
+            }
+            else {
+                alert('Usuario o contraseña incorrecta');
+                cargado();
+            }
+        }
+
+        function OnError(data) {
+
+            var logerror = data.responseJSON;
+            var error = logerror.ExceptionMessage;
+            alert(error);
+            cargado();
+        }
+        
+    </script>
+</body>
+</html>
