@@ -5203,6 +5203,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\APP\ListaVoBoRMController.cs" />
+    <Compile Include="Controllers\APP\ListaAutorizacionAdministrativaController.cs" />
+    <Compile Include="Controllers\APP\AutorizaVoboController.cs" />
+    <Compile Include="Controllers\APP\AutorizaAdministradorController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -5894,6 +5898,11 @@
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>
+    <MonoDevelop>
+      <Properties>
+        <XspParameters Port="8080" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
+      </Properties>
+    </MonoDevelop>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
