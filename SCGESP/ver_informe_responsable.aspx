@@ -722,7 +722,9 @@
 					<td>
 						<p class="valor">
 							{{#each comentario_rechazo}}
-							{{this}}<br />
+								{{#if this}}
+									{{this}}<br />
+								{{/if}}
 							{{/each}}
 						</p>
 					</td>
