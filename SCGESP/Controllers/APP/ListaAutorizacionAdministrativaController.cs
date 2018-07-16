@@ -23,8 +23,8 @@ namespace SCGESP.Controllers
             public string RmOcoId { get; set; }
             public string RmOcoRequisicion { get; set; }
             public string RmOcoCentroNombre { get; set; }
-            public string RmOcoOficinaNombre { get; set; }
-            public string RmOcoSubramoNombre { get; set; }
+            public string RmReqOficinaNombre { get; set; }
+            public string RmReqSubramoNombre { get; set; }
             public string RmOcoSolicitoNombre { get; set; }
             public string RmReqJustificacion { get; set; }
             public string RmOcoProveedorNombre { get; set; }
@@ -53,19 +53,6 @@ namespace SCGESP.Controllers
             {
                 DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 
-                //if (respuesta.Resultado == "1")
-                //{
-                //    return respuesta.Documento;
-                //}
-                //else
-                //{
-                //    var errores = respuesta.Errores;
-
-                //    return null;
-                //}
-
-                //RmOcoOficinaNombre = Convert.ToString(row["RmOcoOficinaNombre"]),
-                //RmOcoSubramoNombre = Convert.ToString(row["RmOcoSubramoNombre"]),
                 if (respuesta.Resultado == "1")
                 {
                     DTListaAdministrativos = respuesta.obtieneTabla("Catalogo");
@@ -80,6 +67,8 @@ namespace SCGESP.Controllers
                             RmOcoRequisicion = Convert.ToString(row["RmOcoRequisicion"]),
                             RmOcoCentroNombre = Convert.ToString(row["RmOcoCentroNombre"]),
                             RmOcoSolicitoNombre = Convert.ToString(row["RmOcoSolicitoNombre"]),
+                            RmReqSubramoNombre = Convert.ToString(row["RmReqSubramoNombre"]),
+                            RmReqOficinaNombre = Convert.ToString(row["RmReqOficinaNombre"]),
                             RmReqJustificacion = Convert.ToString(row["RmReqJustificacion"]),
                             RmOcoProveedorNombre = Convert.ToString(row["RmOcoProveedorNombre"]),
                             RmOcoSubtotal = Convert.ToString(row["RmOcoSubtotal"]),
