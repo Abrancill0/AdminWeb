@@ -31,7 +31,7 @@ namespace SCGESP.Controllers
             public string RmOcoSubtotal { get; set; }
             public string RmOcoIva { get; set; }
             public string RmOcoTotal { get; set; }
-        
+
         }
         //public List<ObtieneParametrosSalida> Post(ParametrosEntrada Datos)
         //public XmlDocument Post(ParametrosEntrada Datos)
@@ -46,56 +46,91 @@ namespace SCGESP.Controllers
             };
 
             entrada.agregaElemento("Estatus", 2);
-           
+
             DataTable DTListaAdministrativos = new DataTable();
 
-            DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
-
-            //if (respuesta.Resultado == "1")
-            //{
-            //    return respuesta.Documento;
-            //}
-            //else
-            //{
-            //    var errores = respuesta.Errores;
-
-            //    return null;
-            //}
-            if (respuesta.Resultado == "1")
+            try
             {
-                DTListaAdministrativos = respuesta.obtieneTabla("Catalogo");
+                DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 
-                List<ObtieneParametrosSalida> lista = new List<ObtieneParametrosSalida>();
+                //if (respuesta.Resultado == "1")
+                //{
+                //    return respuesta.Documento;
+                //}
+                //else
+                //{
+                //    var errores = respuesta.Errores;
 
-                foreach (DataRow row in DTListaAdministrativos.Rows)
+                //    return null;
+                //}
+                if (respuesta.Resultado == "1")
                 {
+                    DTListaAdministrativos = respuesta.obtieneTabla("Catalogo");
+
+                    List<ObtieneParametrosSalida> lista = new List<ObtieneParametrosSalida>();
+
+                    foreach (DataRow row in DTListaAdministrativos.Rows)
+                    {
+                        ObtieneParametrosSalida ent = new ObtieneParametrosSalida
+                        {
+                            RmOcoId = Convert.ToString(row["RmOcoId"]),
+                            RmOcoRequisicion = Convert.ToString(row["RmOcoRequisicion"]),
+                            RmOcoCentroNombre = Convert.ToString(row["RmOcoCentroNombre"]),
+                            RmOcoOficinaNombre = Convert.ToString(row["RmOcoOficinaNombre"]),
+                            RmOcoSubramoNombre = Convert.ToString(row["RmOcoSubramoNombre"]),
+                            RmOcoSolicitoNombre = Convert.ToString(row["RmOcoSolicitoNombre"]),
+
+                            RmReqJustificacion = Convert.ToString(row["RmReqJustificacion"]),
+                            RmOcoProveedorNombre = Convert.ToString(row["RmOcoProveedorNombre"]),
+                            RmOcoSubtotal = Convert.ToString(row["RmOcoSubtotal"]),
+                            RmOcoIva = Convert.ToString(row["RmOcoIva"]),
+                            RmOcoTotal = Convert.ToString(row["RmOcoTotal"])
+
+                        };
+                        lista.Add(ent);
+                    }
+
+                    return lista;
+                }
+                else
+                {
+                    List<ObtieneParametrosSalida> lista = new List<ObtieneParametrosSalida>();
+
                     ObtieneParametrosSalida ent = new ObtieneParametrosSalida
                     {
-                        RmOcoId = Convert.ToString(row["RmOcoId"]),
-                        RmOcoRequisicion = Convert.ToString(row["RmOcoRequisicion"]),
-                        RmOcoCentroNombre = Convert.ToString(row["RmOcoCentroNombre"]),
-                        RmOcoOficinaNombre = Convert.ToString(row["RmOcoOficinaNombre"]),
-                        RmOcoSubramoNombre = Convert.ToString(row["RmOcoSubramoNombre"]),
-                        RmOcoSolicitoNombre = Convert.ToString(row["RmOcoSolicitoNombre"]),
 
-                        RmReqJustificacion = Convert.ToString(row["RmReqJustificacion"]),
-                        RmOcoProveedorNombre = Convert.ToString(row["RmOcoProveedorNombre"]),
-                        RmOcoSubtotal = Convert.ToString(row["RmOcoSubtotal"]),
-                        RmOcoIva = Convert.ToString(row["RmOcoIva"]),
-                        RmOcoTotal = Convert.ToString(row["RmOcoTotal"]),
+                        RmOcoCentroNombre = Convert.ToString("no encontro nada"),
+
 
                     };
                     lista.Add(ent);
+
+
+
+                    return lista;
                 }
+
+
+            }
+            catch (Exception ex)
+            {
+                List<ObtieneParametrosSalida> lista = new List<ObtieneParametrosSalida>();
+
+                ObtieneParametrosSalida ent = new ObtieneParametrosSalida
+                {
+
+                    RmOcoCentroNombre = ex.ToString()
+                                          
+                };
+                lista.Add(ent);
+
+
 
                 return lista;
             }
-            else
-            {
-                return null;
-            }
+
         }
-    
+
         public static DocumentoSalida PeticionCatalogo(XmlDocument doc)
         {
             Localhost.Elegrp ws = new Localhost.Elegrp();
@@ -103,7 +138,7 @@ namespace SCGESP.Controllers
             string respuesta = ws.PeticionCatalogo(doc);
             return new DocumentoSalida(respuesta);
         }
-    
+
     }
 
 }
