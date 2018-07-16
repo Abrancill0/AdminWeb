@@ -491,21 +491,101 @@
 							
 							</div>
 						</div>
-						<div id="input_justificacion_uber" class="form-group justificar" style="margin: 5px 0px">
-							<label for="justificacion_autobus" class="col-lg-3 control-label bold">Justificaci&oacute;n:</label>
-							<div class="col-lg-4">
-							<div class="input-group">
-							  <span class="input-group-addon" style="width:70px">Origen</span>
-							  <input type='text' id='justificacion_uber_origen' name='justificacion_uber_origen' class='form-control input-mask' style="width:100%" />
-								<i class="form-group__bar"></i>
+						<div id="input_justificacion_uber_taxi" class="form-group justificar" style="margin: 5px 0px">
+							<label for="justificacion_uber_taxi_origen" class="col-lg-3 control-label bold">Justificaci&oacute;n:</label>
+							<div class="col-lg-9">
+								<div class="row">
+									<div class="input-group">
+									  <span class="input-group-addon" style="width:85px">Origen</span>
+									  <input type='text' id='justificacion_uber_taxi_origen' name='justificacion_uber_taxi_origen' class='form-control input-mask' style="width:100%" />
+										<i class="form-group__bar"></i>
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-group">
+									  <span class="input-group-addon" style="width:85px">Destino</span>
+									  <input type='text' id='justificacion_uber_taxi_destino' name='justificacion_uber_taxi_destino' class='form-control input-mask' style="width:100%" />
+										<i class="form-group__bar"></i>
+									</div>
+								</div>							
 							</div>
+						</div>
+						<div id="input_justificacion_estacionamiento" class="form-group justificar" style="margin: 5px 0px">
+							<label for="justificacion_estacionamiento" class="col-lg-3 control-label bold">Justificaci&oacute;n:</label>
+							<div class="col-lg-9">
+								<div class="row form-group" style="margin-bottom:0px; padding-bottom:0px;">
+									<input type='text' id='justificacion_estacionamiento' name='justificacion_estacionamiento' class='form-control input-mask' placeholder="Justificación / Motivo." />
+									<label style="width: 100%; display: block">
+										<small class="justificacion_text_ayuda"></small>
+									</label>
+									<i class="form-group__bar"></i>
+								</div>
+								<div class="row" style="margin-bottom:0px; padding-bottom:0px;">
+									<div class="input-group">
+									  <span class="input-group-addon" style="width:80px">Horas</span>
+									  <input type="number" id='justificacion_estacionamiento_horas' name='justificacion_estacionamiento_horas' class='form-control input-mask' style="width:100%" onkeypress="return justNumbers(event)" min="1" value="0" />
+										<i class="form-group__bar"></i>
+									</div>
+								</div>
+								<div class="row" style="margin-bottom:0px; padding-bottom:0px;">
+									<div class="input-group">
+									  <span class="input-group-addon" style="width:80px">Dias</span>
+									  <input type="number" id='justificacion_estacionamiento_dias' name='justificacion_estacionamiento_dias' class='form-control input-mask' style="width:100%" onkeypress="return justNumbers(event)" min="1" value="0" />
+										<i class="form-group__bar"></i>
+									</div>
+								</div>							
 							</div>
-							<div class="col-lg-5">
-							<div class="input-group">
-							  <span class="input-group-addon" style="width:80px">Destino</span>
-							  <input type='text' id='justificacion_uber_destino' name='justificacion_autobus_destino' class='form-control input-mask' style="width:100%" />
-								<i class="form-group__bar"></i>
+						</div>
+						<div id="input_justificacion_traslado_cobranza" class="form-group justificar" style="margin: 5px 0px">
+							<label for="justificacion_traslado_cobranza" class="col-lg-3 control-label bold">Justificaci&oacute;n:</label>
+							<div class="col-lg-9">
+								<div class="row form-group" style="margin-bottom:0px; padding-bottom:0px;">
+									<input type='text' id='justificacion_traslado_cobranza' name='justificacion_traslado_cobranza' class='form-control input-mask' placeholder="¿Motivo de la transportación?" />
+									<label style="width: 100%; display: block">
+										<small class="justificacion_text_ayuda"></small>
+									</label>
+									<i class="form-group__bar"></i>
+								</div>
+								<div class="row" style="margin-bottom:0px; padding-bottom:0px;">
+									<div class="input-group">
+									  <span class="input-group-addon" style="width:85px">Origen</span>
+									  <input type="text" id='justificacion_traslado_cobranza_origen' name='justificacion_traslado_cobranza_origen' class='form-control input-mask' style="width:100%" />
+										<i class="form-group__bar"></i>
+									</div>
+								</div>
+								<div class="row" style="margin-bottom:0px; padding-bottom:0px;">
+									<div class="input-group">
+									  <span class="input-group-addon" style="width:85px">Destino</span>
+									  <input type="text" id='justificacion_traslado_cobranzadestino' name='justificacion_traslado_cobranzadestino' class='form-control input-mask' style="width:100%" onkeypress="return justNumbers(event)" />
+										<i class="form-group__bar"></i>
+									</div>
+								</div>							
 							</div>
+						</div>
+						<div id="input_justificacion_traslado_cabina_siniestro" class="form-group justificar" style="margin: 5px 0px">
+							<label for="justificacion_traslado_cabina_siniestro" class="col-lg-3 control-label bold">Justificaci&oacute;n:</label>
+							<div class="col-lg-9">
+								<div class="row form-group" style="margin-bottom:0px; padding-bottom:0px;">
+									<input type='text' id='justificacion_traslado_cabina_siniestro' name='justificacion_traslado_cobranza' class='form-control input-mask' placeholder="¿Motivo de la transportación?" />
+									<label style="width: 100%; display: block">
+										<small class="justificacion_text_ayuda"></small>
+									</label>
+									<i class="form-group__bar"></i>
+								</div>
+								<div class="row" style="margin-bottom:0px; padding-bottom:0px;">
+									<div class="input-group">
+									  <span class="input-group-addon" style="width:85px">Origen</span>
+									  <input type="text" id='justificacion_traslado_cabina_siniestro_origen' name='justificacion_traslado_cabina_siniestro_origen' class='form-control input-mask' style="width:100%" />
+										<i class="form-group__bar"></i>
+									</div>
+								</div>
+								<div class="row" style="margin-bottom:0px; padding-bottom:0px;">
+									<div class="input-group">
+									  <span class="input-group-addon" style="width:85px">Destino</span>
+									  <input type="text" id='justificacion_traslado_cabina_siniestro_destino' name='justificacion_traslado_cabina_siniestro_destino' class='form-control input-mask' style="width:100%" onkeypress="return justNumbers(event)" />
+										<i class="form-group__bar"></i>
+									</div>
+								</div>							
 							</div>
 						</div>
 						<div id="comensales_gasto" class="form-group" style="margin: 5px 0px">
@@ -514,7 +594,7 @@
 								<div class="row form-group" style="margin-bottom:0px; padding-bottom:0px;">
 									<input type='text' id='comensales' name='comensales' class='form-control input-mask' placeholder="Comensal 1, Comensal 2, Comensal N..." />
 									<label style="width: 100%; display: block">
-										<small class="justificacion_text_ayuda"></small>
+										<small class="justificacion_text_ayuda_comensales"></small>
 									</label>
 									<i class="form-group__bar"></i>
 								</div>
@@ -2399,7 +2479,9 @@
 			var justificacion = $.trim($(this).val());
 			textAyudaJustificacion(NombreCategoria, justificacion);
 		});
-		$("#justificacion_huespedes_alimentos, #justificacion, #comensales").keyup(function () {
+		$("#justificacion_huespedes_alimentos, #justificacion, " +
+			"#justificacion_estacionamiento, #justificacion_traslado_cobranza, " +
+			"#input_justificacion_traslado_cabina_siniestro").keyup(function () {
 			var justificacion = $.trim($(this).val());
 			if (!valorVacio(justificacion)) {
 				var text_ayuda = $(this).attr("placeholder");
@@ -2407,6 +2489,16 @@
 				".justificacion_text_ayuda".AsHTML("*" + text_ayuda);
 			} else {
 				$(".justificacion_text_ayuda").hide().empty();
+			}
+		});
+		$("#comensales").keyup(function () {
+			var justificacion = $.trim($(this).val());
+			if (!valorVacio(justificacion)) {
+				var text_ayuda = $(this).attr("placeholder");
+				$(".justificacion_text_ayuda_comensales").show();
+				".justificacion_text_ayuda_comensales".AsHTML("*" + text_ayuda);
+			} else {
+				$(".justificacion_text_ayuda_comensales").hide().empty();
 			}
 		});
 		function textAyudaJustificacion(categoria, justificacion) {
@@ -2417,21 +2509,41 @@
 			} else if ((categoria.toLowerCase()).indexOf("autobus") > -1 ||
 				(categoria.toLowerCase()).indexOf("autobús") > -1 ||
 				(categoria.toLowerCase()).indexOf("autob") > -1) {
-				ayuda = "Ida o Vuelta.";
 				$("#input_justificacion_autobus").show();
 			} else if ((categoria.toLowerCase()).indexOf("caseta") > -1) {
 				ayuda = "¿Cuál?";
+				$("#justificacion").attr("placeholder",ayuda);
+				$("#input_justificacion").show();
 			} else if ((categoria.toLowerCase()).indexOf("uber") > -1 || (categoria.toLowerCase()).indexOf("taxi") > -1) {
 				ayuda = "Origen y Destino.";
+				$("#input_justificacion_uber_taxi").show();
 			} else if ((categoria.toLowerCase()).indexOf("estacionamiento") > -1) {
 				ayuda = "Motivo.";
+				$("#input_justificacion_estacionamiento").show();
 			} else if ((categoria.toLowerCase()).indexOf("alimenta") > -1) {
 				ayuda = "¿Desayuno, Comida o Cena?";
 				$("#justificacion").attr("placeholder",ayuda);
 				$("#input_justificacion").show();
+			} else if ((categoria.toLowerCase()).indexOf("otro") > -1 && (categoria.toLowerCase()).indexOf("viaje") > -1) {
+				ayuda = "¿Cual fue el gasto y el motivo del gasto?";
+				$("#justificacion").attr("placeholder",ayuda);
+				$("#input_justificacion").show();
 			} else if ((categoria.toLowerCase()).indexOf("sesion") > -1) {
-				ayuda = "Favor de indicar el negocio captado, renovado o el motivo de su gasto de representación, Ademas de el nombre de los comensales.";
-			}/*
+				ayuda = "Favor de indicar el negocio captado, renovado o el motivo de su gasto.";
+				$("#input_justificacion").show();
+			} else if ((categoria.toLowerCase()).indexOf("traslado") > -1 && (categoria.toLowerCase()).indexOf("cobranza") > -1) {
+				$("#input_justificacion_traslado_cobranza").show();
+			} else if ((categoria.toLowerCase()).indexOf("traslado") > -1 &&
+				(categoria.toLowerCase()).indexOf("cabina") > -1 && 
+				(categoria.toLowerCase()).indexOf("siniestro") > -1) {
+				$("#input_justificacion_traslado_cabina_siniestro").show();
+			} else {
+				ayuda = "¿Cual fue el gasto y el motivo del gasto?";
+				$("#justificacion").attr("placeholder",ayuda);
+				$("#input_justificacion").show();
+			} 
+			
+			/*
 			".text_ayuda small".AsHTML("*" + ayuda);
 			$("#justificacion").attr("placeholder", ayuda);
 			if (!valorVacio(justificacion)) {
