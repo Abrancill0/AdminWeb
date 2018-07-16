@@ -424,46 +424,115 @@
 						<div class="form-group" style="margin: 5px 0px">
 							<label for="fechagasto" class="col-lg-3 control-label bold">Fecha Gasto:</label>
 							<div class="col-lg-9">
-								<input type='text' id='fechagasto' name='fechagasto' readonly class='form-control input-mask fechagasto' style="background-color: white;" />
-								<i class="form-group__bar"></i>
+								<div class="row form-group" style="margin-bottom:0px;">
+									<input type='text' id='fechagasto' name='fechagasto' readonly class='form-control input-mask fechagasto' style="background-color: white;" />
+									<i class="form-group__bar"></i>
+								</div>
 							</div>
 						</div>
 						<div class="form-group" style="margin: 5px 0px">
 							<label for="categoria" class="col-lg-3 control-label bold">Categor&iacute;a:</label>
 							<div class="col-lg-9">
-								<select id='categoria' class="form-control" name='categoria' style="width: 100%">
-								</select>
-								<i class="form-group__bar"></i>
+								<div class="row form-group" style="margin-bottom:0px; padding-bottom:0px;">
+									<select id='categoria' class="form-control" name='categoria' style="width: 100%">
+									</select>
+									<i class="form-group__bar"></i>
+								</div>
 							</div>
 						</div>
-						<div class="form-group" style="margin: 5px 0px">
+						<div id="input_justificacion" class="form-group justificar" style="margin: 5px 0px">
 							<label for="justificacion" class="col-lg-3 control-label bold">Justificaci&oacute;n:</label>
 							<div class="col-lg-9">
-								<input type='text' id='justificacion' name='justificacion' class='form-control input-mask' />
-								<label id="text_ayuda" style="width: 100%; display: block">
-									<small>*Justificar Gasto.</small>
-								</label>
+								<div class="row form-group" style="margin-bottom:0px; padding-bottom:0px;">
+									<input type='text' id='justificacion' name='justificacion' class='form-control input-mask' />
+									<label style="width: 100%; display: block">
+										<small class="justificacion_text_ayuda"></small>
+									</label>
+									<i class="form-group__bar"></i>
+								</div>
+							</div>
+						</div>
+						<div id="input_justificacion_noches" class="form-group justificar" style="margin: 5px 0px">
+							<label for="justificacion_noches" class="col-lg-3 control-label bold">Justificaci&oacute;n:</label>
+							<div class="col-lg-9">
+								<div class="row form-group" style="margin-bottom:0px; padding-bottom:0px;">
+									<input type='text' id='justificacion_huespedes_alimentos' name='justificacion_huespedes_alimentos' class='form-control input-mask' placeholder="Nombre de los Huespedes y agregar en caso que incluya alimentos." />
+									<label style="width: 100%; display: block">
+										<small class="justificacion_text_ayuda"></small>
+									</label>
+									<i class="form-group__bar"></i>
+								</div>
+								<div class="row form-group" style="margin-top:1px; padding-top:1px; margin-bottom:0px; padding-bottom:0px;" >
+									<input type="number" id='justificacion_noches' name='justificacion_noches' class='form-control input-mask' onkeypress="return justNumbers(event)" min="1" value="1" />
+									<label style="width: 100%; display: block">
+										<small>*Noches de hospedaje.</small>
+									</label>
+									<i class="form-group__bar"></i>
+								</div>
+							</div>
+						</div>
+						<div id="input_justificacion_autobus" class="form-group justificar" style="margin: 5px 0px">
+							<label for="justificacion_autobus" class="col-lg-3 control-label bold">Justificaci&oacute;n:</label>
+							<div class="col-lg-9">
+								<div class="row">
+									<div class="input-group">
+									  <span class="input-group-addon" style="width:80px">Ida</span>
+									  <input type='text' id='justificacion_autobus_ida' name='justificacion_autobus_ida' class='form-control input-mask' style="width:100%" />
+										<i class="form-group__bar"></i>
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-group">
+									  <span class="input-group-addon" style="width:80px">Vuelta</span>
+									  <input type='text' id='justificacion_autobus_vuelta' name='justificacion_autobus_vuelta' class='form-control input-mask' style="width:100%" />
+										<i class="form-group__bar"></i>
+									</div>
+								</div>
+							
+							</div>
+						</div>
+						<div id="input_justificacion_uber" class="form-group justificar" style="margin: 5px 0px">
+							<label for="justificacion_autobus" class="col-lg-3 control-label bold">Justificaci&oacute;n:</label>
+							<div class="col-lg-4">
+							<div class="input-group">
+							  <span class="input-group-addon" style="width:70px">Origen</span>
+							  <input type='text' id='justificacion_uber_origen' name='justificacion_uber_origen' class='form-control input-mask' style="width:100%" />
 								<i class="form-group__bar"></i>
+							</div>
+							</div>
+							<div class="col-lg-5">
+							<div class="input-group">
+							  <span class="input-group-addon" style="width:80px">Destino</span>
+							  <input type='text' id='justificacion_uber_destino' name='justificacion_autobus_destino' class='form-control input-mask' style="width:100%" />
+								<i class="form-group__bar"></i>
+							</div>
 							</div>
 						</div>
 						<div id="comensales_gasto" class="form-group" style="margin: 5px 0px">
 							<label for="comensales" class="col-lg-3 control-label bold">Comensales:</label>
 							<div class="col-lg-9">
-								<input type='text' id='comensales' name='comensales' class='form-control input-mask' placeholder="Comensal 1, Comensal 2, Comensal N..." />
-								<i class="form-group__bar"></i>
+								<div class="row form-group" style="margin-bottom:0px; padding-bottom:0px;">
+									<input type='text' id='comensales' name='comensales' class='form-control input-mask' placeholder="Comensal 1, Comensal 2, Comensal N..." />
+									<label style="width: 100%; display: block">
+										<small class="justificacion_text_ayuda"></small>
+									</label>
+									<i class="form-group__bar"></i>
+								</div>
 							</div>
 						</div>
 						<div class="form-group" style="margin: 5px 0px">
 							<label for="monto" class="col-lg-3 control-label bold">Monto:</label>
 							<div class="col-lg-9">
-								<input type="number" id='monto' name='monto' class='form-control input-mask' onkeypress="return justNumbers(event)" valueold="" max="0" />
-								<i class="form-group__bar"></i>
+								<div class="row form-group" style="margin-bottom:0px; padding-bottom:0px;">
+									<input type="number" id='monto' name='monto' class='form-control input-mask' onkeypress="return justNumbers(event)" valueold="" min="0" />
+									<i class="form-group__bar"></i>
+								</div>
 							</div>
 						</div>
 						<div class="form-group" style="margin: 5px 0px">
 							<label for="monto" class="col-lg-3 control-label bold">Comprobante:</label>
 							<div class="col-lg-9">
-								<div class="row">
+								<div class="row" style="margin-top:0px; padding-top:0px;">
 									<div class="col-md-4">
 										<label for="monto" class="col-1 control-label bold">XML:</label>
 										<input id='filexml' accept='.xml' name='filexml' type='file' />
@@ -1562,7 +1631,12 @@
 			var fechagasto = $("#fechagasto").val();
 			var categoria = $("#categoria").val() * 1;
 			var CategoriaSelect = document.getElementById("categoria");
-			var NombreCategoria = CategoriaSelect.options[CategoriaSelect.selectedIndex].text;
+			var NombreCategoria = "";
+			try {
+				NombreCategoria = CategoriaSelect.options[CategoriaSelect.selectedIndex].text;
+			} catch (err) {
+				NombreCategoria = "";
+			}
 			var datosCat = [];
 			var ivacategoria = 0;
 			try {
@@ -2325,31 +2399,44 @@
 			var justificacion = $.trim($(this).val());
 			textAyudaJustificacion(NombreCategoria, justificacion);
 		});
+		$("#justificacion_huespedes_alimentos, #justificacion, #comensales").keyup(function () {
+			var justificacion = $.trim($(this).val());
+			if (!valorVacio(justificacion)) {
+				var text_ayuda = $(this).attr("placeholder");
+				$(".justificacion_text_ayuda").show();
+				".justificacion_text_ayuda".AsHTML("*" + text_ayuda);
+			} else {
+				$(".justificacion_text_ayuda").hide().empty();
+			}
+		});
 		function textAyudaJustificacion(categoria, justificacion) {
-			$("#text_ayuda").hide();
-			var ayuda = "Justificar Gasto.";
+			$(".text_ayuda, .justificar").hide();
+			var ayuda = "¿Cual fue el gasto y el motivo del gasto?";
 			if ((categoria.toLowerCase()).indexOf("hospeda") > -1) {
-				ayuda = "Noches de Hospedaje.";
+				$("#input_justificacion_noches").show();
 			} else if ((categoria.toLowerCase()).indexOf("autobus") > -1 ||
 				(categoria.toLowerCase()).indexOf("autobús") > -1 ||
 				(categoria.toLowerCase()).indexOf("autob") > -1) {
 				ayuda = "Ida o Vuelta.";
+				$("#input_justificacion_autobus").show();
 			} else if ((categoria.toLowerCase()).indexOf("caseta") > -1) {
 				ayuda = "¿Cuál?";
-			} else if ((categoria.toLowerCase()).indexOf("uber") > -1) {
+			} else if ((categoria.toLowerCase()).indexOf("uber") > -1 || (categoria.toLowerCase()).indexOf("taxi") > -1) {
 				ayuda = "Origen y Destino.";
 			} else if ((categoria.toLowerCase()).indexOf("estacionamiento") > -1) {
 				ayuda = "Motivo.";
 			} else if ((categoria.toLowerCase()).indexOf("alimenta") > -1) {
 				ayuda = "¿Desayuno, Comida o Cena?";
+				$("#justificacion").attr("placeholder",ayuda);
+				$("#input_justificacion").show();
 			} else if ((categoria.toLowerCase()).indexOf("sesion") > -1) {
 				ayuda = "Favor de indicar el negocio captado, renovado o el motivo de su gasto de representación, Ademas de el nombre de los comensales.";
-			}
-			"#text_ayuda small".AsHTML("*" + ayuda);
+			}/*
+			".text_ayuda small".AsHTML("*" + ayuda);
 			$("#justificacion").attr("placeholder", ayuda);
 			if (!valorVacio(justificacion)) {
-				$("#text_ayuda").show();
-			}
+				$(".text_ayuda").show();
+			}*/
 
 		}
 		function menucategorias() {
@@ -2427,7 +2514,7 @@
 					datos['NmbSolicitante'] = informe.datos.responsable;
 					var requisicion = SelectRequisicionExcel(informe.datos.r_idrequisicion);
 					if (requisicion.ok === true) {
-						datos['TipoReq'] = datoEle(requisicion.datos.RmReqTipoRequisicionNombre);
+						datos['TipoReq'] = datoEle(requisicion.datos.RmReqTipoRequisicionNombre)
 						datos['Departamento'] = "";
 						datos['Puesto'] = "";
 						datos['Area'] = "";
