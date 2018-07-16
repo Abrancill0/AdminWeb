@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -33,7 +34,8 @@ namespace SCGESP.Controllers
         
         }
         //public List<ObtieneParametrosSalida> Post(ParametrosEntrada Datos)
-        public XmlDocument Post(ParametrosEntrada Datos)
+        //public XmlDocument Post(ParametrosEntrada Datos)
+        public List<ObtieneParametrosSalida> Post(ParametrosEntrada Datos)
         {
             DocumentoEntrada entrada = new DocumentoEntrada
             {
@@ -45,17 +47,51 @@ namespace SCGESP.Controllers
 
             entrada.agregaElemento("Estatus", 2);
            
+            DataTable DTListaAdministrativos = new DataTable();
 
             DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 
+            //if (respuesta.Resultado == "1")
+            //{
+            //    return respuesta.Documento;
+            //}
+            //else
+            //{
+            //    var errores = respuesta.Errores;
+
+            //    return null;
+            //}
             if (respuesta.Resultado == "1")
             {
-                return respuesta.Documento;
+                DTListaAdministrativos = respuesta.obtieneTabla("Catalogo");
+
+                List<ObtieneParametrosSalida> lista = new List<ObtieneParametrosSalida>();
+
+                foreach (DataRow row in DTListaAdministrativos.Rows)
+                {
+                    ObtieneParametrosSalida ent = new ObtieneParametrosSalida
+                    {
+                        RmOcoId = Convert.ToString(row["RmOcoId"]),
+                        RmOcoRequisicion = Convert.ToString(row["RmOcoRequisicion"]),
+                        RmOcoCentroNombre = Convert.ToString(row["RmOcoCentroNombre"]),
+                        RmOcoOficinaNombre = Convert.ToString(row["RmOcoOficinaNombre"]),
+                        RmOcoSubramoNombre = Convert.ToString(row["RmOcoSubramoNombre"]),
+                        RmOcoSolicitoNombre = Convert.ToString(row["RmOcoSolicitoNombre"]),
+
+                        RmReqJustificacion = Convert.ToString(row["RmReqJustificacion"]),
+                        RmOcoProveedorNombre = Convert.ToString(row["RmOcoProveedorNombre"]),
+                        RmOcoSubtotal = Convert.ToString(row["RmOcoSubtotal"]),
+                        RmOcoIva = Convert.ToString(row["RmOcoIva"]),
+                        RmOcoTotal = Convert.ToString(row["RmOcoTotal"]),
+
+                    };
+                    lista.Add(ent);
+                }
+
+                return lista;
             }
             else
             {
-                var errores = respuesta.Errores;
-
                 return null;
             }
         }
