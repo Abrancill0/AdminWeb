@@ -63,6 +63,9 @@ namespace SCGESP.Controllers
 
                 //    return null;
                 //}
+
+                //RmOcoOficinaNombre = Convert.ToString(row["RmOcoOficinaNombre"]),
+                //RmOcoSubramoNombre = Convert.ToString(row["RmOcoSubramoNombre"]),
                 if (respuesta.Resultado == "1")
                 {
                     DTListaAdministrativos = respuesta.obtieneTabla("Catalogo");
@@ -76,8 +79,7 @@ namespace SCGESP.Controllers
                             RmOcoId = Convert.ToString(row["RmOcoId"]),
                             RmOcoRequisicion = Convert.ToString(row["RmOcoRequisicion"]),
                             RmOcoCentroNombre = Convert.ToString(row["RmOcoCentroNombre"]),
-                            //RmOcoOficinaNombre = Convert.ToString(row["RmOcoOficinaNombre"]),
-                            RmOcoSubramoNombre = Convert.ToString(row["RmOcoSubramoNombre"]),
+                           
                             RmOcoSolicitoNombre = Convert.ToString(row["RmOcoSolicitoNombre"]),
 
                             RmReqJustificacion = Convert.ToString(row["RmReqJustificacion"]),
