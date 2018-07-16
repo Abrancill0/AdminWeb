@@ -79,9 +79,7 @@ namespace SCGESP.Controllers
                             RmOcoId = Convert.ToString(row["RmOcoId"]),
                             RmOcoRequisicion = Convert.ToString(row["RmOcoRequisicion"]),
                             RmOcoCentroNombre = Convert.ToString(row["RmOcoCentroNombre"]),
-                           
                             RmOcoSolicitoNombre = Convert.ToString(row["RmOcoSolicitoNombre"]),
-
                             RmReqJustificacion = Convert.ToString(row["RmReqJustificacion"]),
                             RmOcoProveedorNombre = Convert.ToString(row["RmOcoProveedorNombre"]),
                             RmOcoSubtotal = Convert.ToString(row["RmOcoSubtotal"]),

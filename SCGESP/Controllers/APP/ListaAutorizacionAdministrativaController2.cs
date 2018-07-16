@@ -10,7 +10,7 @@ using Ele.Generales;
 
 namespace SCGESP.Controllers
 {
-    public class ListaAutorizacionAdministrativaController2 : ApiController
+    public class ListaAutorizacionAdministrativa2Controller : ApiController
     {
         //Parametros Entrada
         public class ParametrosEntrada
