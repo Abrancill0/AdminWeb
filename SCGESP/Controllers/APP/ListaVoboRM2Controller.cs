@@ -38,6 +38,9 @@ namespace SCGESP.Controllers
         public XmlDocument Post(ParametrosEntrada Datos)
         //public List<ObtieneParametrosSalida> Post(ParametrosEntrada Datos)
         {
+
+
+
             DocumentoEntrada entrada = new DocumentoEntrada
             {
                 Usuario = Datos.Usuario,
