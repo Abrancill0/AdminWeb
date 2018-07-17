@@ -10,21 +10,22 @@ using Ele.Generales;
 
 namespace SCGESP.Controllers
 {
-    public class ListaAutorizacionAdministrativa2Controller : ApiController
+    public class VoBoRM2Controller : ApiController
     {
         //Parametros Entrada
         public class ParametrosEntrada
         {
             public string Usuario { get; set; }
         }
+
         //Parametros Salida
         public class ObtieneParametrosSalida
         {
             public string RmOcoId { get; set; }
             public string RmOcoRequisicion { get; set; }
             public string RmOcoCentroNombre { get; set; }
-            public string RmOcoOficinaNombre { get; set; }
-            public string RmOcoSubramoNombre { get; set; }
+            public string RmReqOficinaNombre { get; set; }
+            public string RmReqSubramoNombre { get; set; }
             public string RmOcoSolicitoNombre { get; set; }
             public string RmReqJustificacion { get; set; }
             public string RmOcoProveedorNombre { get; set; }
@@ -34,8 +35,8 @@ namespace SCGESP.Controllers
 
         }
         //public List<ObtieneParametrosSalida> Post(ParametrosEntrada Datos)
-        //public XmlDocument Post(ParametrosEntrada Datos)
         public XmlDocument Post(ParametrosEntrada Datos)
+        //public List<ObtieneParametrosSalida> Post(ParametrosEntrada Datos)
         {
             DocumentoEntrada entrada = new DocumentoEntrada
             {
@@ -45,23 +46,22 @@ namespace SCGESP.Controllers
                 Operacion = 1,
             };
 
-            entrada.agregaElemento("estatus", 2);
+            //entrada.agregaElemento("estatus", 1);
+            entrada.agregaElemento("estatus", 1);
 
-          
-                DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
+            DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 
-                if (respuesta.Resultado == "1")
-                {
-                    return respuesta.Documento;
-                }
-                else
-                {
-                    var errores = respuesta.Errores;
+            if (respuesta.Resultado == "1")
+            {
+                return respuesta.Documento;
+            }
+            else
+            {
+                var errores = respuesta.Errores;
 
-                    return null;
-                }
+                return null;
+            }
 
-                 
 
         }
 

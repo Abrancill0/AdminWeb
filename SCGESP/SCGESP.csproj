@@ -5208,6 +5208,7 @@
     <Compile Include="Controllers\APP\AutorizaVoboController.cs" />
     <Compile Include="Controllers\APP\AutorizaAdministradorController.cs" />
     <Compile Include="Controllers\APP\ListaAutorizacionAdministrativaController2.cs" />
+    <Compile Include="Controllers\APP\ListaVoboRM2Controller.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

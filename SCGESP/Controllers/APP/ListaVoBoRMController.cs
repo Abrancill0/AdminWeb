@@ -46,7 +46,8 @@ namespace SCGESP.Controllers
                 Operacion = 1,
             };
 
-            entrada.agregaElemento("estatus", 1);
+            //entrada.agregaElemento("estatus", 1);
+            entrada.agregaElemento("Estatus", 1);
            
             DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 
