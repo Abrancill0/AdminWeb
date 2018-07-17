@@ -50,7 +50,6 @@ namespace SCGESP.Controllers
 
             entrada.agregaElemento("estatus", 2);
 
-          
                 DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 
                 if (respuesta.Resultado == "1")
