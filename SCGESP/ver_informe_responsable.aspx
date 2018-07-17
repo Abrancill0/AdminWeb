@@ -1731,7 +1731,7 @@
 			var comensales = $.trim($("#comensales").val());
 			var comensalesObligatorios = false;
 			var ncomensales = 0;
-
+			
 			if (((NombreCategoria.toLowerCase()).indexOf("alimenta") > -1 || (NombreCategoria.toLowerCase()).indexOf("sesion") > -1) && tipoajuste === 0) {
 				comensalesObligatorios = true;
 			}
@@ -1852,6 +1852,42 @@
 			});
 
 		});
+		function valor_justificacion() {
+			var justificacion = [];//$.trim($("#justificacion").val());
+			var error = 0;
+			var mensaje = "";
+			if ((categoria.toLowerCase()).indexOf("hospeda") > -1) {
+				//justificacion_huespedes_alimentos, justificacion_noches
+				var justificacion_huespedes_alimentos = $("justificacion_huespedes_alimentos");
+				var justificacion_noches = $("#justificacion_noches").val() * 1;
+				var error = justificacion_noches > 0 ? 0 : 1;
+				var mensaje = error === 1 ? "Las noches de hospedaje son obligatorias (mayor a cero)" : "";
+				justificacion = {
+					text: justificacion_huespedes_alimentos + ". Noches de hospedaje" +  justificacion_noches,
+					error: error,
+					mensaje: mensaje
+				};
+			} else if ((categoria.toLowerCase()).indexOf("autobus") > -1 ||
+				(categoria.toLowerCase()).indexOf("autobús") > -1 ||
+				(categoria.toLowerCase()).indexOf("autob") > -1) {
+				//
+			} else if ((categoria.toLowerCase()).indexOf("caseta") > -1) {
+				justificacion = $.trim($("#justificacion").val());
+			} else if ((categoria.toLowerCase()).indexOf("uber") > -1 || (categoria.toLowerCase()).indexOf("taxi") > -1) {
+				//
+			} else if ((categoria.toLowerCase()).indexOf("estacionamiento") > -1) {
+				//
+			} else if ((categoria.toLowerCase()).indexOf("otro") > -1 && (categoria.toLowerCase()).indexOf("viaje") > -1) {
+				justificacion = $.trim($("#justificacion").val());
+			} else if ((categoria.toLowerCase()).indexOf("traslado") > -1 && (categoria.toLowerCase()).indexOf("cobranza") > -1) {
+				//
+			} else if ((categoria.toLowerCase()).indexOf("traslado") > -1 &&
+				(categoria.toLowerCase()).indexOf("cabina") > -1 && 
+				(categoria.toLowerCase()).indexOf("siniestro") > -1) {
+				//
+			}
+			return justificacion;
+		}
 		$("#aenvia").click(function () {
 			var ConfBanco = $("#ConfBanco").val() * 1;
 			if (ConfBanco === 0) {
@@ -2466,10 +2502,6 @@
 		$("#categoria").change(function () {
 			var CategoriaSelect = document.getElementById("categoria");
 			var NombreCategoria = CategoriaSelect.options[CategoriaSelect.selectedIndex].text;
-			$("#comensales_gasto").hide();
-			if ((NombreCategoria.toLowerCase()).indexOf("alimenta") > -1 || (NombreCategoria.toLowerCase()).indexOf("sesion") > -1) {
-				$("#comensales_gasto").show();
-			}
 			var justificacion = $.trim($("#justificacion").val());
 			textAyudaJustificacion(NombreCategoria, justificacion);
 		});
@@ -2502,7 +2534,7 @@
 			}
 		});
 		function textAyudaJustificacion(categoria, justificacion) {
-			$(".text_ayuda, .justificar").hide();
+			$("#comensales_gasto, .text_ayuda, .justificar").hide();
 			var ayuda = "¿Cual fue el gasto y el motivo del gasto?";
 			if ((categoria.toLowerCase()).indexOf("hospeda") > -1) {
 				$("#input_justificacion_noches").show();
@@ -2523,14 +2555,14 @@
 			} else if ((categoria.toLowerCase()).indexOf("alimenta") > -1) {
 				ayuda = "¿Desayuno, Comida o Cena?";
 				$("#justificacion").attr("placeholder",ayuda);
-				$("#input_justificacion").show();
+				$("#input_justificacion, #comensales_gasto").show();
 			} else if ((categoria.toLowerCase()).indexOf("otro") > -1 && (categoria.toLowerCase()).indexOf("viaje") > -1) {
 				ayuda = "¿Cual fue el gasto y el motivo del gasto?";
 				$("#justificacion").attr("placeholder",ayuda);
 				$("#input_justificacion").show();
 			} else if ((categoria.toLowerCase()).indexOf("sesion") > -1) {
 				ayuda = "Favor de indicar el negocio captado, renovado o el motivo de su gasto.";
-				$("#input_justificacion").show();
+				$("#input_justificacion, #comensales_gasto").show();
 			} else if ((categoria.toLowerCase()).indexOf("traslado") > -1 && (categoria.toLowerCase()).indexOf("cobranza") > -1) {
 				$("#input_justificacion_traslado_cobranza").show();
 			} else if ((categoria.toLowerCase()).indexOf("traslado") > -1 &&
