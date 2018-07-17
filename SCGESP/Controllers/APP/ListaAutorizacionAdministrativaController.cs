@@ -49,7 +49,7 @@ namespace SCGESP.Controllers
             };
 
             //entrada.agregaElemento("estatus", 2);
-            entrada.agregaElemento("Estatus", 2);
+            entrada.agregaElemento("estatus", 2);
 
             DataTable DTListaAdministrativos = new DataTable();
 

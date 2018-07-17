@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Xml;
 using Ele.Generales;
+using SCGESP.Clases;
 
 namespace SCGESP.Controllers
 {
@@ -21,9 +22,11 @@ namespace SCGESP.Controllers
         //public List<ObtieneParametrosSalida> Post(ParametrosEntrada Datos)
         public XmlDocument Post(ParametrosEntrada Datos)
         {
+            string UsuarioDesencripta = Seguridad.DesEncriptar(Datos.Usuario);
+
             DocumentoEntrada entrada = new DocumentoEntrada
             {
-                Usuario = Datos.Usuario,
+                Usuario = UsuarioDesencripta,
                 Origen = "AdminAPP",
                 Transaccion = 120768,
                 Operacion = 10,

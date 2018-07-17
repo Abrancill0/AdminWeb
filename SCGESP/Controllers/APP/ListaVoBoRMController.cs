@@ -50,7 +50,7 @@ namespace SCGESP.Controllers
             };
 
             //entrada.agregaElemento("estatus", 1);
-            entrada.agregaElemento("Estatus", 1);
+            entrada.agregaElemento("estatus", 1);
            
             DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 
