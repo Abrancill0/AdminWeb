@@ -10,7 +10,7 @@ using SCGESP.Clases;
 
 namespace SCGESP.Controllers
 {
-    public class AutorizaAdministradorController : ApiController
+    public class AutorizaAdministrativoController : ApiController
     {
         //Parametros Entrada
         public class ParametrosEntrada
