@@ -29,7 +29,7 @@ namespace SCGESP.Controllers
                 Operacion = 10,
             };
 
-            entrada.agregaElemento("Estatus", 2);
+            entrada.agregaElemento("estatus", 2);
             entrada.agregaElemento("RmOcoId", Datos.RmOcoId);
 
             DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);

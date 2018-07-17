@@ -46,7 +46,7 @@ namespace SCGESP.Controllers
                 Operacion = 1,
             };
 
-            entrada.agregaElemento("Estatus", 1);
+            entrada.agregaElemento("estatus", 1);
            
             DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 
@@ -54,7 +54,6 @@ namespace SCGESP.Controllers
 
             try
             {
-               
                 if (respuesta.Resultado == "1")
                 {
                     DTListaVobo = respuesta.obtieneTabla("Catalogo");
