@@ -147,17 +147,36 @@ function ObtenerInformes() {
                 var rechazado = value.rechazado * 1;//estatus informe rechazado
 
                 btnEdit = "<button type='button' class='btn btn-success btn-sm' onclick='verInformeGastos(" + value.i_id + ", " + value.i_idproyecto + ", " + value.i_estatus + ")' data-dismiss='modal'><i class='zmdi zmdi-eye zmdi-hc-lg' style='padding: 3px 0px'></i> Ver</button>";
-                var btnVer = "<a href='/ver_informe_responsable?" + fh + "&item=" + value.i_id + "' class='btn btn-success btn-sm'><i class='zmdi zmdi-eye zmdi-hc-lg' style='padding: 3px 0px'></i> Ver 2</a>";
+                var btnVer = "<a href='/ver_informe_responsable?" + fh + "&item=" + value.i_id + "' class='btn btn-success btn-sm'><i class='zmdi zmdi-eye zmdi-hc-lg' style='padding: 3px 0px'></i> Ver</a>";
                 //if (todos === 1) {
 
                 var finicio = valorVacio(value.i_finicio) ? "" : formatFecha(new Date(value.i_finicio), "dd/mm/yyyy");
                 var ffin = valorVacio(value.i_ffin) ? "" : formatFecha(new Date(value.i_ffin), "dd/mm/yyyy");
 
                 estatus = rechazado === 1 ? "Rechazado" : estatus;
+                var just = (value.i_nmb).split("");
+                var njust = just.length;
+                var justificacion = "";
+                if (njust >= 30) {
+                    var ll = 0;
+                    for (var jj = 0; jj <= njust; jj++) {
+                        if (just[jj]) {
+                            justificacion += just[jj];
+                            if (ll === 30) {
+                                justificacion += "<br />";
+                                ll = 0;
+                            } else {
+                                ll++;
+                            }
+                        }
+                    }
+                } else {
+                    justificacion = value.i_nmb;
+                }
 
                 tablaInformes.row.add([value.r_idrequisicion,
                 value.i_ninforme,
-                value.i_nmb,
+                    justificacion,
                 formatNumber.new(ImpAutorizado.toFixed(2), "$ "),
                 value.responsable,
                     estatus,
@@ -167,10 +186,7 @@ function ObtenerInformes() {
             cargado();
         }, complete: function () {
             $("#tblProyectos tbody tr").each(function () {
-                $(this)[0].cells[5].className = "text-right";
-                $(this)[0].cells[6].className = "text-right";
-                $(this)[0].cells[7].className = "text-right";
-                $(this)[0].cells[8].className = "text-right";
+                $(this)[0].cells[3].className = "text-right";
             });
         },
         error: function (result) {

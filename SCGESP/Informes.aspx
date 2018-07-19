@@ -33,8 +33,8 @@
 								<th width="70px">Requisici&oacute;n</th>
 								<th width="70px">Informe</th>
 								<th width="200px">Justificaci&oacute;n</th>
-								<th width="150px" title="Importe solicitado en la requisición">Autorizado</th>
-								<th width="100px">Responsable</th>
+								<th width="100px" title="Importe solicitado en la requisición">Importe<br />Autorizado</th>
+								<th width="100px">Empleado</th>
 								<th width="70px">Estatus</th>
 								<th width="20px"></th>
 							</tr>
@@ -933,8 +933,8 @@
 	<!-- App functions and actions -->
 	<script src="js/app.min.js"></script>
 	<script src="js/js.js"></script>
-	<script src="js/informe.js?x1x1x1c1c11s1e1e1e1x"></script>
-	<script src="js/gastos.js?x1x1x1c1c1c1s1e1e1e11x"></script>
+	<script src="js/informe.js?l1l1"></script>
+	<script src="js/gastos.js?l1l1"></script>
 	<script>
 		$("#anuevo").click(function () {
 			$("#frmInforme").modal({
