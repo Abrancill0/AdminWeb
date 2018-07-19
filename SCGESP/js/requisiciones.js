@@ -145,7 +145,9 @@ function ConsultaCatalogo(usuario, catalogo, menuselect) {
         }
     });
 }
-$("#refreshTbl").click(ObtenerRequisiciones);
+$("#refreshTbl").click(function () {
+    ObtenerRequisiciones();
+});
 function ObtenerRequisiciones() {
     $("#anuevoa").show();
     
@@ -249,7 +251,7 @@ function confEliminarRequisiciones(id, nombre) {
     botones[0] = {
         text: "Si", click: function () {
             $(this).dialog("close");
-            eliminarRequisiciones(datos);
+            eliminarRequisiciones(datos, nombre);
         }
     };
     botones[1] = {
@@ -1876,7 +1878,7 @@ function guardadoAutomatico() {
 }
 function gAutomaticoRequisicion(datos) {
     $.ajax({
-        async: true,
+        async: false,
         type: "POST",
         url: '/api/RequisicionEncabezado',
         data: JSON.stringify(datos),
@@ -1885,6 +1887,7 @@ function gAutomaticoRequisicion(datos) {
         cache: false,
         beforeSend: function () {
             cargando();
+            $("#liDetalleReq").hide();
         },
         success: function (result) {
             var stresultado = 0;
@@ -1913,6 +1916,8 @@ function gAutomaticoRequisicion(datos) {
         },
         complete: function () {
             cargado();
+            $("#liDetalleReq").show();
+            ObtenerRequisiciones();
         },
         error: function (result) {
             cargado();
