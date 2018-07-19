@@ -143,7 +143,7 @@ function ObtenerInformes() {
                 var ffin = valorVacio(value.i_ffin) ? "" : formatFecha(new Date(value.i_ffin), "dd/mm/yyyy");
 
                 btnEdit = "<button type='button' class='btn btn-success btn-sm' onclick='verInformeGastos(" + value.i_id + ", " + 0 + ", " + value.i_estatus + ")' data-dismiss='modal'><i class='zmdi zmdi-eye zmdi-hc-lg' style='padding: 3px 0px'></i> Ver</button>";
-                var btnVer = "<a href='/ver_informe_autorizacion?" + fh + "&item=" + value.i_id + "' class='btn btn-success btn-sm'><i class='zmdi zmdi-eye zmdi-hc-lg' style='padding: 3px 0px'></i> Ver 2</a>";
+                var btnVer = "<a href='/ver_informe_autorizacion?" + fh + "&item=" + value.i_id + "' class='btn btn-success btn-sm'><i class='zmdi zmdi-eye zmdi-hc-lg' style='padding: 3px 0px'></i> Ver</a>";
                 //if (todos === 1) {
                 var just = (value.i_nmb).split("");
                 var njust = just.length;
@@ -172,7 +172,6 @@ function ObtenerInformes() {
                     formatNumber.new((value.r_montorequisicion * 1).toFixed(2), "$ "),
                     value.responsable,
                     value.e_estatus,
-                    //btnEdit,
                     btnVer
                 ]).draw(false);
                 ii++;

@@ -109,13 +109,9 @@
 				text-align: center;
 			}
 
-		#tblGastos tbody tr td {
-			text-transform: lowercase;
+		#tblGastos tbody tr td:first-letter, #tblGastos tbody tr td a:first-letter {
+			text-transform: uppercase;
 		}
-
-			#tblGastos tbody tr td:first-letter, #tblGastos tbody tr td a:first-letter {
-				text-transform: uppercase;
-			}
 
 		.rowGris {
 			background-color: #e0e0e0;
@@ -415,7 +411,7 @@
 			<div class="modal-content">
 				<div class="modal-header titulo-modal">
 					<span>Editar Gasto</span>
-                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close"><i class="zmdi zmdi-close"></i>Cerrar</button>
+					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close"><i class="zmdi zmdi-close"></i>Cerrar</button>
 				</div>
 				<div class="modal-body">
 					<input type="hidden" id="idGasto" value="" />
@@ -424,7 +420,7 @@
 						<div class="form-group" style="margin: 5px 0px">
 							<label for="fechagasto" class="col-lg-3 control-label bold">Fecha Gasto:</label>
 							<div class="col-lg-9">
-								<div class="row form-group" style="margin-bottom:0px;">
+								<div class="row form-group" style="margin-bottom: 0px;">
 									<input type='text' id='fechagasto' name='fechagasto' readonly class='form-control input-mask fechagasto' style="background-color: white;" />
 									<i class="form-group__bar"></i>
 								</div>
@@ -433,7 +429,7 @@
 						<div class="form-group" style="margin: 5px 0px">
 							<label for="categoria" class="col-lg-3 control-label bold">Categor&iacute;a:</label>
 							<div class="col-lg-9">
-								<div class="row form-group" style="margin-bottom:0px; padding-bottom:0px;">
+								<div class="row form-group" style="margin-bottom: 0px; padding-bottom: 0px;">
 									<select id='categoria' class="form-control" name='categoria' style="width: 100%">
 									</select>
 									<i class="form-group__bar"></i>
@@ -443,7 +439,7 @@
 						<div id="input_justificacion" class="form-group justificar" style="margin: 5px 0px">
 							<label for="justificacion" class="col-lg-3 control-label bold">Justificaci&oacute;n:</label>
 							<div class="col-lg-9">
-								<div class="row form-group" style="margin-bottom:0px; padding-bottom:0px;">
+								<div class="row form-group" style="margin-bottom: 0px; padding-bottom: 0px;">
 									<input type='text' id='justificacion' name='justificacion' class='form-control input-mask' />
 									<label style="width: 100%; display: block">
 										<small class="justificacion_text_ayuda"></small>
@@ -455,14 +451,14 @@
 						<div id="input_justificacion_noches" class="form-group justificar" style="margin: 5px 0px">
 							<label for="justificacion_noches" class="col-lg-3 control-label bold">Justificaci&oacute;n:</label>
 							<div class="col-lg-9">
-								<div class="row form-group" style="margin-bottom:0px; padding-bottom:0px;">
+								<div class="row form-group" style="margin-bottom: 0px; padding-bottom: 0px;">
 									<input type='text' id='justificacion_huespedes_alimentos' name='justificacion_huespedes_alimentos' class='form-control input-mask' placeholder="Nombre de los Huespedes y agregar en caso que incluya alimentos." />
 									<label style="width: 100%; display: block">
 										<small class="justificacion_text_ayuda"></small>
 									</label>
 									<i class="form-group__bar"></i>
 								</div>
-								<div class="row form-group" style="margin-top:1px; padding-top:1px; margin-bottom:0px; padding-bottom:0px;" >
+								<div class="row form-group" style="margin-top: 1px; padding-top: 1px; margin-bottom: 0px; padding-bottom: 0px;">
 									<input type="number" id='justificacion_noches' name='justificacion_noches' class='form-control input-mask' onkeypress="return justNumbers(event)" min="1" value="1" />
 									<label style="width: 100%; display: block">
 										<small>*Noches de hospedaje.</small>
@@ -476,19 +472,19 @@
 							<div class="col-lg-9">
 								<div class="row">
 									<div class="input-group">
-									  <span class="input-group-addon" style="width:80px">Ida</span>
-									  <input type='text' id='justificacion_autobus_ida' name='justificacion_autobus_ida' class='form-control input-mask' style="width:100%" />
+										<span class="input-group-addon" style="width: 80px">Ida</span>
+										<input type='text' id='justificacion_autobus_ida' name='justificacion_autobus_ida' class='form-control input-mask' style="width: 100%" />
 										<i class="form-group__bar"></i>
 									</div>
 								</div>
 								<div class="row">
 									<div class="input-group">
-									  <span class="input-group-addon" style="width:80px">Vuelta</span>
-									  <input type='text' id='justificacion_autobus_vuelta' name='justificacion_autobus_vuelta' class='form-control input-mask' style="width:100%" />
+										<span class="input-group-addon" style="width: 80px">Regreso</span>
+										<input type='text' id='justificacion_autobus_regreso' name='justificacion_autobus_regreso' class='form-control input-mask' style="width: 100%" />
 										<i class="form-group__bar"></i>
 									</div>
 								</div>
-							
+
 							</div>
 						</div>
 						<div id="input_justificacion_uber_taxi" class="form-group justificar" style="margin: 5px 0px">
@@ -496,102 +492,121 @@
 							<div class="col-lg-9">
 								<div class="row">
 									<div class="input-group">
-									  <span class="input-group-addon" style="width:85px">Origen</span>
-									  <input type='text' id='justificacion_uber_taxi_origen' name='justificacion_uber_taxi_origen' class='form-control input-mask' style="width:100%" />
+										<span class="input-group-addon" style="width: 85px">Origen</span>
+										<input type='text' id='justificacion_uber_taxi_origen' name='justificacion_uber_taxi_origen' class='form-control input-mask' style="width: 100%" />
 										<i class="form-group__bar"></i>
 									</div>
 								</div>
 								<div class="row">
 									<div class="input-group">
-									  <span class="input-group-addon" style="width:85px">Destino</span>
-									  <input type='text' id='justificacion_uber_taxi_destino' name='justificacion_uber_taxi_destino' class='form-control input-mask' style="width:100%" />
+										<span class="input-group-addon" style="width: 85px">Destino</span>
+										<input type='text' id='justificacion_uber_taxi_destino' name='justificacion_uber_taxi_destino' class='form-control input-mask' style="width: 100%" />
 										<i class="form-group__bar"></i>
 									</div>
-								</div>							
+								</div>
 							</div>
 						</div>
 						<div id="input_justificacion_estacionamiento" class="form-group justificar" style="margin: 5px 0px">
 							<label for="justificacion_estacionamiento" class="col-lg-3 control-label bold">Justificaci&oacute;n:</label>
 							<div class="col-lg-9">
-								<div class="row form-group" style="margin-bottom:0px; padding-bottom:0px;">
+								<div class="row form-group" style="margin-bottom: 0px; padding-bottom: 0px;">
 									<input type='text' id='justificacion_estacionamiento' name='justificacion_estacionamiento' class='form-control input-mask' placeholder="Justificación / Motivo." />
 									<label style="width: 100%; display: block">
 										<small class="justificacion_text_ayuda"></small>
 									</label>
 									<i class="form-group__bar"></i>
 								</div>
-								<div class="row" style="margin-bottom:0px; padding-bottom:0px;">
+								<div class="row" style="margin-bottom: 0px; padding-bottom: 0px;">
 									<div class="input-group">
-									  <span class="input-group-addon" style="width:80px">Horas</span>
-									  <input type="number" id='justificacion_estacionamiento_horas' name='justificacion_estacionamiento_horas' class='form-control input-mask' style="width:100%" onkeypress="return justNumbers(event)" min="1" value="0" />
+										<span class="input-group-addon" style="width: 80px">Horas</span>
+										<input type="number" id='justificacion_estacionamiento_horas' name='justificacion_estacionamiento_horas' class='form-control input-mask' style="width: 100%" onkeypress="return justNumbers(event)" min="1" value="0" />
 										<i class="form-group__bar"></i>
 									</div>
 								</div>
-								<div class="row" style="margin-bottom:0px; padding-bottom:0px;">
+								<div class="row" style="margin-bottom: 0px; padding-bottom: 0px;">
 									<div class="input-group">
-									  <span class="input-group-addon" style="width:80px">Dias</span>
-									  <input type="number" id='justificacion_estacionamiento_dias' name='justificacion_estacionamiento_dias' class='form-control input-mask' style="width:100%" onkeypress="return justNumbers(event)" min="1" value="0" />
+										<span class="input-group-addon" style="width: 80px">Dias</span>
+										<input type="number" id='justificacion_estacionamiento_dias' name='justificacion_estacionamiento_dias' class='form-control input-mask' style="width: 100%" onkeypress="return justNumbers(event)" min="1" value="0" />
 										<i class="form-group__bar"></i>
 									</div>
-								</div>							
+								</div>
 							</div>
 						</div>
 						<div id="input_justificacion_traslado_cobranza" class="form-group justificar" style="margin: 5px 0px">
 							<label for="justificacion_traslado_cobranza" class="col-lg-3 control-label bold">Justificaci&oacute;n:</label>
 							<div class="col-lg-9">
-								<div class="row form-group" style="margin-bottom:0px; padding-bottom:0px;">
+								<div class="row form-group" style="margin-bottom: 0px; padding-bottom: 0px;">
 									<input type='text' id='justificacion_traslado_cobranza' name='justificacion_traslado_cobranza' class='form-control input-mask' placeholder="¿Motivo de la transportación?" />
 									<label style="width: 100%; display: block">
 										<small class="justificacion_text_ayuda"></small>
 									</label>
 									<i class="form-group__bar"></i>
 								</div>
-								<div class="row" style="margin-bottom:0px; padding-bottom:0px;">
+								<div class="row" style="margin-bottom: 0px; padding-bottom: 0px;">
 									<div class="input-group">
-									  <span class="input-group-addon" style="width:85px">Origen</span>
-									  <input type="text" id='justificacion_traslado_cobranza_origen' name='justificacion_traslado_cobranza_origen' class='form-control input-mask' style="width:100%" />
+										<span class="input-group-addon" style="width: 85px">Origen</span>
+										<input type="text" id='justificacion_traslado_cobranza_origen' name='justificacion_traslado_cobranza_origen' class='form-control input-mask' style="width: 100%" />
 										<i class="form-group__bar"></i>
 									</div>
 								</div>
-								<div class="row" style="margin-bottom:0px; padding-bottom:0px;">
+								<div class="row" style="margin-bottom: 0px; padding-bottom: 0px;">
 									<div class="input-group">
-									  <span class="input-group-addon" style="width:85px">Destino</span>
-									  <input type="text" id='justificacion_traslado_cobranzadestino' name='justificacion_traslado_cobranzadestino' class='form-control input-mask' style="width:100%" onkeypress="return justNumbers(event)" />
+										<span class="input-group-addon" style="width: 85px">Destino</span>
+										<input type="text" id='justificacion_traslado_cobranza_destino' name='justificacion_traslado_cobranza_destino' class='form-control input-mask' style="width: 100%" />
 										<i class="form-group__bar"></i>
 									</div>
-								</div>							
+								</div>
 							</div>
 						</div>
 						<div id="input_justificacion_traslado_cabina_siniestro" class="form-group justificar" style="margin: 5px 0px">
 							<label for="justificacion_traslado_cabina_siniestro" class="col-lg-3 control-label bold">Justificaci&oacute;n:</label>
 							<div class="col-lg-9">
-								<div class="row form-group" style="margin-bottom:0px; padding-bottom:0px;">
-									<input type='text' id='justificacion_traslado_cabina_siniestro' name='justificacion_traslado_cobranza' class='form-control input-mask' placeholder="¿Motivo de la transportación?" />
+								<div class="row form-group" style="margin-bottom: 0px; padding-bottom: 0px;">
+									<input type='text' id='justificacion_traslado_cabina_siniestro' name='justificacion_traslado_cabina_siniestro' class='form-control input-mask' placeholder="¿Motivo de la transportación?" />
 									<label style="width: 100%; display: block">
 										<small class="justificacion_text_ayuda"></small>
 									</label>
 									<i class="form-group__bar"></i>
 								</div>
-								<div class="row" style="margin-bottom:0px; padding-bottom:0px;">
+								<div class="row" style="margin-bottom: 0px; padding-bottom: 0px;">
 									<div class="input-group">
-									  <span class="input-group-addon" style="width:85px">Origen</span>
-									  <input type="text" id='justificacion_traslado_cabina_siniestro_origen' name='justificacion_traslado_cabina_siniestro_origen' class='form-control input-mask' style="width:100%" />
+										<span class="input-group-addon" style="width: 85px">Origen</span>
+										<input type="text" id='justificacion_traslado_cabina_siniestro_origen' name='justificacion_traslado_cabina_siniestro_origen' class='form-control input-mask' style="width: 100%" />
 										<i class="form-group__bar"></i>
 									</div>
 								</div>
-								<div class="row" style="margin-bottom:0px; padding-bottom:0px;">
+								<div class="row" style="margin-bottom: 0px; padding-bottom: 0px;">
 									<div class="input-group">
-									  <span class="input-group-addon" style="width:85px">Destino</span>
-									  <input type="text" id='justificacion_traslado_cabina_siniestro_destino' name='justificacion_traslado_cabina_siniestro_destino' class='form-control input-mask' style="width:100%" onkeypress="return justNumbers(event)" />
+										<span class="input-group-addon" style="width: 85px">Destino</span>
+										<input type="text" id='justificacion_traslado_cabina_siniestro_destino' name='justificacion_traslado_cabina_siniestro_destino' class='form-control input-mask' style="width: 100%" />
 										<i class="form-group__bar"></i>
 									</div>
-								</div>							
+								</div>
+							</div>
+						</div>
+						<div id="input_justificacion_premio_cuaderno_incentivo" class="form-group justificar" style="margin: 5px 0px">
+							<label for="justificacion_premio_cuaderno_incentivo" class="col-lg-3 control-label bold">Justificaci&oacute;n:</label>
+							<div class="col-lg-9">
+								<div class="row form-group" style="margin-bottom: 0px; padding-bottom: 0px;">
+									<input type='text' id='justificacion_premio_cuaderno_incentivo' name='justificacion_premio_cuaderno_incentivo' class='form-control input-mask' placeholder="Meta Alcanzada en el Cuaderno de Incentivos" />
+									<label style="width: 100%; display: block">
+										<small class="justificacion_text_ayuda"></small>
+									</label>
+									<i class="form-group__bar"></i>
+								</div>
+								<div class="row" style="margin-bottom: 0px; padding-bottom: 0px;">
+									<div class="input-group">
+										<span class="input-group-addon" style="width: 90px">Agente</span>
+										<input type="text" id='justificacion_premio_cuaderno_incentivo_agente' name='justificacion_premio_cuaderno_incentivo_agente' class='form-control input-mask' style="width: 100%" />
+										<i class="form-group__bar"></i>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div id="comensales_gasto" class="form-group" style="margin: 5px 0px">
 							<label for="comensales" class="col-lg-3 control-label bold">Comensales:</label>
 							<div class="col-lg-9">
-								<div class="row form-group" style="margin-bottom:0px; padding-bottom:0px;">
+								<div class="row form-group" style="margin-bottom: 0px; padding-bottom: 0px;">
 									<input type='text' id='comensales' name='comensales' class='form-control input-mask' placeholder="Comensal 1, Comensal 2, Comensal N..." />
 									<label style="width: 100%; display: block">
 										<small class="justificacion_text_ayuda_comensales"></small>
@@ -603,16 +618,16 @@
 						<div class="form-group" style="margin: 5px 0px">
 							<label for="monto" class="col-lg-3 control-label bold">Monto:</label>
 							<div class="col-lg-9">
-								<div class="row form-group" style="margin-bottom:0px; padding-bottom:0px;">
+								<div class="row form-group" style="margin-bottom: 0px; padding-bottom: 0px;">
 									<input type="number" id='monto' name='monto' class='form-control input-mask' onkeypress="return justNumbers(event)" valueold="" min="0" />
 									<i class="form-group__bar"></i>
 								</div>
 							</div>
 						</div>
 						<div class="form-group" style="margin: 5px 0px">
-							<label for="monto" class="col-lg-3 control-label bold">Comprobante:</label>
+							<label class="col-lg-3 control-label bold">Comprobante:</label>
 							<div class="col-lg-9">
-								<div class="row" style="margin-top:0px; padding-top:0px;">
+								<div class="row" style="margin-top: 0px; padding-top: 0px;">
 									<div class="col-md-4">
 										<label for="monto" class="col-1 control-label bold">XML:</label>
 										<input id='filexml' accept='.xml' name='filexml' type='file' />
@@ -632,7 +647,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" id="btnGuardaGasto" class="btn btn-primary">
-						<span class="glyphicon glyphicon-floppy-saved"></span>Guardar</button>
+						<span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;Guardar</button>
 				</div>
 			</div>
 		</div>
@@ -783,6 +798,27 @@
 			</div>
 		</div>
 	</div>
+	<!-- Modal confirmar -->
+	<!--data-modal-color="bluegray"-->
+	<div class="modal fade" id="modal_alerta" data-modal-color="gray" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header titulo-modal">
+					<div id="titulo_modal_alert" style="width: 100%; padding: 1px 10px;">
+					</div>
+					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close"><i class="zmdi zmdi-close"></i>Cerrar</button>
+				</div>
+				<div class="modal-body">
+					<div id="contenido_modal_alert" style="width: 100%; color: black">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div id="footer_modal_alert" style="width: 100%">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!--Informe cabecera-->
 	<script id="informe-cabecera-template" type="text/x-handlebars-template">
@@ -873,7 +909,7 @@
 							{{#each comentario_rechazo}}
 								{{#if this}}
 									{{this}}<br />
-								{{/if}}
+							{{/if}}
 							{{/each}}
 						</p>
 					</td>
@@ -1015,6 +1051,68 @@
 			<td></td>
 		</tr>
 	</script>
+	<script id="modal-alerta-titulo" type="text/x-handlebars-template">
+		{{ titulo }}
+	</script>
+	<script id="modal-agrega-propina" type="text/x-handlebars-template">
+		<table cellpadding='0' style="width: 100%" cellspacing='0' border='0'>
+			<tr>
+				<td>Agregar otro gasto / propina al gasto: <span id="nmb_gasto_ajuste"></span></td>
+			</tr>
+			<tr>
+				<td>Justificación: </td>
+			</tr>
+			<tr>
+				<td>
+					<input id='justificacion_ajuste' data-toggle='tooltip' data-placement='top' style="width: 100%;" data-html='true' aria-hidden='true' type='text' />
+				</td>
+			</tr>
+			<tr>
+				<td>
+
+					<div class='input-group'>
+						<span class='input-group-addon' style="width: 70px">Monto: </span>
+						<div class='form-group'>
+							<input type='number' id='importePropina' name='importePropina' min='0' max='' class='form-control'>
+							<i class='form-group__bar'></i>
+							<small>(Politica de Propina 10%)</small>
+						</div>
+					</div>
+
+					<div id='chkAfectaImpPro' class='hidden'>
+						<b>Afecta al importe:</b><br />
+						<label class='custom-control custom-checkbox'>
+							<input type='checkbox' checked id='ImpGastadoPro' class='custom-control-input'>
+							<span class='custom-control-indicator'></span>
+							<span class='custom-control-description'>Gastado</span>
+						</label>
+						<label class='custom-control custom-checkbox'>
+							<input type='checkbox' checked id='ImpComprobadoPro' class='custom-control-input'>
+							<span class='custom-control-indicator'></span>
+							<span class='custom-control-description'>Comprobado</span>
+						</label>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</script>
+	<script id="modal-botones" type="text/x-handlebars-template">
+		{{#if btn1}}
+						<button type="button" class="btn btn-{{ tipo1 }}" onclick="{{ function1 }}">
+							<span class="{{ icono1 }}"></span>&nbsp;{{ label1 }}</button>
+		{{/if}}
+						{{#if btn2}}
+						<button type="button" class="btn btn-{{ tipo2 }}" onclick="{{ function2 }}">
+							<span class="{{ icono2 }}"></span>&nbsp;{{ label2 }}</button>
+		{{/if}}
+						{{#if btn3}}
+						<button type="button" class="btn btn-{{ tipo3 }}" onclick="{{ function3 }}">
+							<span class="{{ icono3 }}"></span>&nbsp;{{ label3 }}</button>
+		{{/if}}
+						<button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
+							<i class="zmdi zmdi-close"></i>&nbsp;Cancelar</button>
+	</script>
+
 
 	<script type="text/javascript" src="js/app.min.js"></script>
 	<script type="text/javascript" src="js/js.js"></script>
@@ -1191,7 +1289,7 @@
 						var btnEditar = true;
 						if (estatus > 2 || ConfBanco === 1)
 							btnEditar = false;
-
+						var result_justificacion = conceptos_adicionales(value.g_concepto, value.g_nombreCategoria);
 						var gasto = {
 							idgasto: value.g_id,
 							ngasto: value.orden,
@@ -1199,7 +1297,7 @@
 							fechagasto: fechagasto,
 							categoria: value.g_nombreCategoria,
 							idcategoria: value.g_categoria,
-							justificacion: value.g_concepto,
+							justificacion: result_justificacion[0][1],
 							monto: formatNumber.new((value.g_total).toFixed(2), "$ "),
 							nmbcomensales: value.nmbcomensales,
 							num_monto: value.g_total,
@@ -1218,7 +1316,8 @@
 							btnEditar: true,
 							classTr: colorRow,
 							btnAdicional: btnAdicional,
-							tipoajuste: tipoajuste
+							tipoajuste: tipoajuste,
+							valores_justificacion: valores_edit_justificacion(result_justificacion, value.g_nombreCategoria)
 						}
 						gasto['gasto'] = JSON.stringify(gasto);
 						gasto['datosGastoAdi'] = JSON.stringify(datosGastoAdi);
@@ -1230,6 +1329,38 @@
 						totalnodeducible += importenodeducible;
 
 						$("#tblGastos tbody").append(gastosInformeTemplate(gasto));
+						$.each(result_justificacion, function (key, value) {
+							if (key > 0) {
+								gasto = {
+									idgasto: "",
+									ngasto: "",
+									dia: "",
+									categoria: value[0],
+									idcategoria: 0,
+									justificacion: value[1],
+									monto: "",
+									num_monto: 0,
+									xml: "",
+									pdf: "",
+									img: "",
+									monto_comprobado: "",
+									num_monto_comprobado: 0,
+									dentro_politica: "",
+									num_dentro_politica: 0,
+									fuera_politica: "",
+									num_fuera_politica: 0,
+									no_deducible: "",
+									num_no_deducible: 0,
+									gasto: "",
+									btnEditar: false,
+									classTr: colorRow,
+									btnAdicional: false,
+									tipoajuste: tipoajuste,
+									valores_justificacion: []
+								};
+								$("#tblGastos tbody").append(gastosInformeTemplate(gasto));
+							}
+						});
 						$.each(nmbComensales, function (key, value) {
 							var ncomensal = key + 1;
 							var nmbcomensal = $.trim(value);
@@ -1258,7 +1389,8 @@
 									btnEditar: false,
 									classTr: colorRow,
 									btnAdicional: false,
-									tipoajuste: tipoajuste
+									tipoajuste: tipoajuste,
+									valores_justificacion: []
 								};
 								$("#tblGastos tbody").append(gastosInformeTemplate(gasto));
 							}
@@ -1290,6 +1422,138 @@
 			};
 			$("#tblGastos tfoot").empty();
 			$("#tblGastos tfoot").append(totalGastosInformeTemplate(totalesGasto));
+		}
+		function conceptos_adicionales(justificacion, categoria) {
+			var list_justificacion = [];
+			if ((categoria.toLowerCase()).indexOf("hospeda") > -1) {
+				//justificacion_huespedes_alimentos, justificacion_noches
+				var datos = justificacion.split("Noches de hospedaje: ");
+				var huespedes_alimentos = quitar_punto_final($.trim(datos[0]));
+				list_justificacion.push(["", huespedes_alimentos, "justificacion_huespedes_alimentos"]);
+				list_justificacion.push(["Noches de hospedaje: ", $.trim(datos[1]), "justificacion_noches"]);
+			} else if ((categoria.toLowerCase()).indexOf("autobus") > -1 ||
+				(categoria.toLowerCase()).indexOf("autobús") > -1 ||
+				(categoria.toLowerCase()).indexOf("autob") > -1) {
+				var regreso = "";
+				if ((justificacion.toLowerCase()).indexOf("ida:") > -1) {
+					var ida = justificacion.replace("Ida: ", "");
+					if ((ida.toLowerCase()).indexOf("regreso:") > -1) {
+						var regreso1 = ida.split("Regreso: ");
+						ida = regreso1[0].replace(" y ", "");
+						regreso = regreso1[1];
+					}
+					list_justificacion.push(["", "", "justificacion"]);
+					if ($.trim(ida) !== "") {
+						ida = quitar_punto_final($.trim(ida));
+						list_justificacion.push(["Ida", ida, "justificacion_autobus_ida"]);
+					}
+					if ($.trim(regreso) !== "") {
+						regreso = quitar_punto_final($.trim(regreso));
+						list_justificacion.push(["Regreso", regreso, "justificacion_autobus_regreso"]);
+					}
+				} else if ((justificacion.toLowerCase()).indexOf("regreso:") > -1) {
+					list_justificacion.push(["", "", "justificacion"]);
+					regreso = quitar_punto_final($.trim(justificacion.replace("Regreso: ", "")));
+					list_justificacion.push(["Regreso", regreso, "justificacion_autobus_regreso"]);
+				}
+			} else if ((categoria.toLowerCase()).indexOf("caseta") > -1) {
+				list_justificacion.push(["", $.trim(justificacion), "justificacion"]);
+			} else if ((categoria.toLowerCase()).indexOf("uber") > -1 || (categoria.toLowerCase()).indexOf("taxi") > -1) {
+				var datos1 = justificacion.replace("Origen: ", "");
+				var datos2 = datos1.split(" Destino: ");
+				var uber_taxi_origen = quitar_punto_final($.trim(datos2[0]));
+				var uber_taxi_destino = quitar_punto_final($.trim(datos2[1]));
+				list_justificacion.push(["", "", "justificacion"]);
+				list_justificacion.push(["Origen", uber_taxi_origen, "justificacion_uber_taxi_origen"]);
+				list_justificacion.push(["Destino", uber_taxi_destino, "justificacion_uber_taxi_destino"]);
+			} else if ((categoria.toLowerCase()).indexOf("estacionamiento") > -1) {
+				var datos = justificacion.split("Duración: ");
+				var horas = "";
+				var dias = "";
+				if ((datos[1].toLowerCase()).indexOf("día(s)") > -1) {
+					if ((datos[1].toLowerCase()).indexOf("hora(s)") > -1) {
+						var datos2 = datos[1].split("día(s) y ");
+						dias = datos2[0];
+						horas = datos2[1].replace(" hora(s)", "");
+					} else {
+						dias = datos[1].replace(" día(s)", "");
+					}
+
+				} else {
+					horas = datos[1].replace(" hora(s)", "");
+				}
+
+				var estacionamiento = quitar_punto_final($.trim(datos[0]));
+
+				list_justificacion.push(["", estacionamiento, "justificacion_estacionamiento"]);
+				if (dias !== "") {
+					list_justificacion.push(["Día(s)", $.trim(dias), "justificacion_estacionamiento_dias"]);
+				}
+				if (horas !== "") {
+					list_justificacion.push(["Hora(s)", $.trim(horas), "justificacion_estacionamiento_horas"]);
+				}
+			} else if ((categoria.toLowerCase()).indexOf("otro") > -1 && (categoria.toLowerCase()).indexOf("viaje") > -1) {
+				list_justificacion.push(["", $.trim(justificacion), "justificacion"]);
+			} else if ((categoria.toLowerCase()).indexOf("traslado") > -1 && (categoria.toLowerCase()).indexOf("cobranza") > -1) {
+				var datos1 = justificacion.split(" Origen: ");
+				var datos2 = datos1[1].split(" Destino: ");
+
+				var traslado_cobranza = quitar_punto_final($.trim(datos1[0]));
+				var traslado_cobranza_origen = quitar_punto_final($.trim(datos2[0]));
+				var traslado_cobranza_destino = quitar_punto_final($.trim(datos2[1]));
+
+				list_justificacion[0] = datos1[0];
+				list_justificacion.push(["", traslado_cobranza, "justificacion_traslado_cobranza"]);
+				list_justificacion.push(["Origen", traslado_cobranza_origen, "justificacion_traslado_cobranza_origen"]);
+				list_justificacion.push(["Destino", traslado_cobranza_destino, "justificacion_traslado_cobranza_destino"]);
+			} else if ((categoria.toLowerCase()).indexOf("traslado") > -1 &&
+				(categoria.toLowerCase()).indexOf("cabina") > -1 &&
+				(categoria.toLowerCase()).indexOf("siniestro") > -1) {
+				var datos1 = justificacion.split(" Origen: ");
+				var datos2 = datos1[1].split(" Destino: ");
+				var traslado_cabina_siniestro = quitar_punto_final($.trim(datos1[0]));
+				var traslado_cabina_siniestro_origen = quitar_punto_final($.trim(datos2[0]));
+				var traslado_cabina_siniestro_destino = quitar_punto_final($.trim(datos2[1]));
+				list_justificacion.push(["", traslado_cabina_siniestro, "justificacion_traslado_cabina_siniestro"]);
+				list_justificacion.push(["Origen", traslado_cabina_siniestro_origen, "justificacion_traslado_cabina_siniestro_origen"]);
+				list_justificacion.push(["Destino", traslado_cabina_siniestro_destino, "justificacion_traslado_cabina_siniestro_destino"]);
+			} else if ((categoria.toLowerCase()).indexOf("premio") > -1 &&
+				(categoria.toLowerCase()).indexOf("cuaderno") > -1 &&
+				(categoria.toLowerCase()).indexOf("incentivo") > -1) {
+				var datos = justificacion.split(" Agente: ");
+				var premio_cuaderno_incentivo = quitar_punto_final($.trim(datos[0]));
+				var premio_cuaderno_incentivo_agente = quitar_punto_final($.trim(datos[1]));
+				list_justificacion.push(["", premio_cuaderno_incentivo, "justificacion_premio_cuaderno_incentivo"]);
+				list_justificacion.push(["Agente", premio_cuaderno_incentivo_agente, "justificacion_premio_cuaderno_incentivo_agente"]);
+			} else if (((categoria.toLowerCase()).indexOf("alimenta") > -1 || (categoria.toLowerCase()).indexOf("sesion") > -1)) {
+				list_justificacion.push(["", $.trim(justificacion), "justificacion"]);
+			} else {
+				list_justificacion.push(["", $.trim(justificacion), "justificacion"]);
+			}
+			return list_justificacion;
+		}
+		function quitar_punto_final(cadena) {
+			var cadena_final = $.trim(cadena);
+			if (cadena_final.substr(-1) === ".") {
+				cadena_final = cadena_final.substr(0, cadena_final.length - 1);
+			}
+			return cadena_final;
+		}
+		function valores_edit_justificacion(justificacion, categoria) {
+			var datos = [];
+			var njustificacion = justificacion.length;
+			if (njustificacion === 1) {
+				datos.push({ "justificacion": justificacion[0][1] });
+			} else {
+				$.each(justificacion, function (key, value) {
+					var campo = valorVacio(value[2]) ? "" : value[2];
+					var valor = value[1];
+					var valores = "{\"" + campo + "\": \"" + valor + "\"}";
+					valores = JSON.parse(valores);
+					datos.push(valores);
+				});
+			}
+			return datos;
 		}
 		$(".fechagasto").datepicker({
 			dateFormat: "dd-mm-yy",
@@ -1347,7 +1611,6 @@
 				},
 				success: function (result) {
 					resultado = result.Salida.Tablas.Llave.NewDataSet.Llave;
-					console.log(resultado);
 					var fInicio = ((datoEle(resultado.RmReqFechaRequerida)).split("T"))[0];
 					var fFin = ((datoEle(resultado.RmReqFechaFinal)).split("T"))[0];
 
@@ -1605,7 +1868,7 @@
 				backdrop: "static"
 			});
 			"#mEditarGastoInf .modal-header.titulo-modal span".AsHTML("Agregar Gasto");
-			
+
 			$("#comensales_gasto").hide();
 			if ((gasto.categoria.toLowerCase()).indexOf("alimenta") > -1 || (gasto.categoria.toLowerCase()).indexOf("sesion") > -1) {
 				$("#comensales_gasto").show();
@@ -1634,7 +1897,8 @@
 			});
 			"#mEditarGastoInf .modal-header.titulo-modal span".AsHTML("Editar Gasto");
 			var gasto = JSON.parse(datos_gasto);
-
+			var valores_justificacion = gasto.valores_justificacion;
+			$("input[id~='justificacion']").val("");
 			$("#comensales_gasto").hide();
 			if ((gasto.categoria.toLowerCase()).indexOf("alimenta") > -1 || (gasto.categoria.toLowerCase()).indexOf("sesion") > -1) {
 				$("#comensales_gasto").show();
@@ -1648,7 +1912,23 @@
 			$("#idGasto").val(gasto.idgasto);
 			$("#gasto").val(JSON.stringify(gasto));
 			$("#categoria").val(gasto.idcategoria);
-			$("#justificacion").val(gasto.justificacion);
+			$.each(valores_justificacion, function (key, value) {
+				$.each(value, function (campo, valor) {
+					$("#" + campo).val(valor);
+
+					var justificacion = $("#" + campo).val();
+					if (!valorVacio(justificacion)) {
+						var text_ayuda = $("#" + campo).attr("placeholder");
+						if (!valorVacio(text_ayuda)) {
+							$(".justificacion_text_ayuda").show();
+							".justificacion_text_ayuda".AsHTML("*" + text_ayuda);
+						}
+					} else {
+						$(".justificacion_text_ayuda").hide().empty();
+					}
+
+				});
+			});
 			$("#comensales").val(gasto.nmbcomensales);
 			$("#monto").val(gasto.num_monto);
 			$("#monto").attr("max", (gasto.num_monto + disponible));
@@ -1726,12 +2006,18 @@
 				datosCat = [];
 				ivacategoria = 0;
 			}
-			var justificacion = $.trim($("#justificacion").val());
+			var result_justificacion = valor_justificacion(NombreCategoria);
+			var justificacion = result_justificacion.text;//$.trim($("#justificacion").val());
 			var hrg = horaActual("hh:mm");
 			var comensales = $.trim($("#comensales").val());
 			var comensalesObligatorios = false;
 			var ncomensales = 0;
-			
+
+			if (result_justificacion.error === 1) {
+				$.notify(result_justificacion.mensaje, { position: "top center" }, "error");
+				error = 1;
+			}
+			console.log(result_justificacion);
 			if (((NombreCategoria.toLowerCase()).indexOf("alimenta") > -1 || (NombreCategoria.toLowerCase()).indexOf("sesion") > -1) && tipoajuste === 0) {
 				comensalesObligatorios = true;
 			}
@@ -1751,11 +2037,7 @@
 				$.notify("Selecciona una categoria.", { position: "top center" }, "error");
 				error = 1;
 			}
-			if (justificacion === "") {
-				$.notify("Indica justificación del gasto.", { position: "top center" }, "error");
-				error = 1;
-			}
-			if (total === "" && total <= 0) {
+			if (total === "" || total <= 0) {
 				$.notify("Indica Importe gastado.", { position: "top center" }, "error");
 				error = 1;
 			}
@@ -1799,9 +2081,14 @@
 				"contacto": "-",
 				"telefono": "-",
 				"correo": "-",
-				"fileotros": ""
+				"fileotros": "",
+				"importecomprobar": 0,
+				"importenodeducible": 0,
+				"importereembolsable": 0,
+				"importenoreembolsable": 0,
+				"importenoaceptable": 0
 			};
-			
+
 			var apiEjecutar = IdGasto > 0 ? "UpdateGasto" : "InsertGasto";
 			console.log(datos);
 			$.ajax({
@@ -1815,7 +2102,7 @@
 					//cargando();
 				},
 				success: function (result) {
-					console.log("gasto guardado->",result);
+					console.log("gasto guardado->", result);
 					if (IdGasto > 0) {
 						$.notify("Gasto Actualizado.", { globalPosition: 'top center', className: 'success', autoHideDelay: 6000 });
 					} else {
@@ -1837,7 +2124,7 @@
 
 					$("#mEditarGastoInf").modal('hide');
 
-					
+
 
 				},
 				complete: function () {
@@ -1852,39 +2139,177 @@
 			});
 
 		});
-		function valor_justificacion() {
+		function valor_justificacion(categoria) {
 			var justificacion = [];//$.trim($("#justificacion").val());
 			var error = 0;
 			var mensaje = "";
 			if ((categoria.toLowerCase()).indexOf("hospeda") > -1) {
 				//justificacion_huespedes_alimentos, justificacion_noches
-				var justificacion_huespedes_alimentos = $("justificacion_huespedes_alimentos");
+				var justificacion_huespedes_alimentos = $.trim($("#justificacion_huespedes_alimentos").val());
 				var justificacion_noches = $("#justificacion_noches").val() * 1;
-				var error = justificacion_noches > 0 ? 0 : 1;
-				var mensaje = error === 1 ? "Las noches de hospedaje son obligatorias (mayor a cero)" : "";
+				error = justificacion_noches > 0 ? 0 : 1;
+				mensaje = error === 1 ? "Las noches de hospedaje son obligatorias (mayor a cero)" : "OK";
+				var texto = valorVacio(justificacion_huespedes_alimentos) ? "" : justificacion_huespedes_alimentos;
+				texto += valorVacio(texto) ? ("Noches de hospedaje: " + justificacion_noches) : (". Noches de hospedaje: " + justificacion_noches)
 				justificacion = {
-					text: justificacion_huespedes_alimentos + ". Noches de hospedaje" +  justificacion_noches,
+					text: texto,
 					error: error,
 					mensaje: mensaje
 				};
 			} else if ((categoria.toLowerCase()).indexOf("autobus") > -1 ||
 				(categoria.toLowerCase()).indexOf("autobús") > -1 ||
 				(categoria.toLowerCase()).indexOf("autob") > -1) {
-				//
+				var justificacion_autobus_ida = $.trim($("#justificacion_autobus_ida").val());
+				var justificacion_autobus_regreso = $.trim($("#justificacion_autobus_regreso").val());
+				error = valorVacio(justificacion_autobus_ida) && valorVacio(justificacion_autobus_regreso) ? 1 : 0;
+				mensaje = error === 1 ? "Especificar si es Ida y/o Regreso" : "OK";
+				var texto = valorVacio(justificacion_autobus_ida) ? "" : "Ida: " + justificacion_autobus_ida;
+				texto += valorVacio(texto) ? "" : (valorVacio(justificacion_autobus_regreso) ? "" : " y ");
+				texto += valorVacio(justificacion_autobus_regreso) ? "" : "Regreso: " + justificacion_autobus_regreso + ".";
+				justificacion = {
+					text: texto,
+					error: error,
+					mensaje: mensaje
+				};
 			} else if ((categoria.toLowerCase()).indexOf("caseta") > -1) {
-				justificacion = $.trim($("#justificacion").val());
+				var texto = $.trim($("#justificacion").val());
+				error = valorVacio(texto) ? 1 : 0;
+				mensaje = error === 1 ? "Especifica la caseta." : "OK";
+				justificacion = {
+					text: texto,
+					error: error,
+					mensaje: mensaje
+				};
 			} else if ((categoria.toLowerCase()).indexOf("uber") > -1 || (categoria.toLowerCase()).indexOf("taxi") > -1) {
-				//
+				var justificacion_uber_taxi_origen = $.trim($("#justificacion_uber_taxi_origen").val());
+				var justificacion_uber_taxi_destino = $.trim($("#justificacion_uber_taxi_destino").val());
+				error = valorVacio(justificacion_uber_taxi_origen) || valorVacio(justificacion_uber_taxi_destino) ? 1 : 0;
+				mensaje = error === 1 ? "Especificar Origen y Destino" : "OK";
+				var texto = "";
+				justificacion = {
+					text: "Origen: " + justificacion_uber_taxi_origen + ". Destino: " + justificacion_uber_taxi_destino + ".",
+					error: error,
+					mensaje: mensaje
+				};
 			} else if ((categoria.toLowerCase()).indexOf("estacionamiento") > -1) {
-				//
+				var justificacion_estacionamiento = $.trim($("#justificacion_estacionamiento").val());
+				var justificacion_estacionamiento_horas = $("#justificacion_estacionamiento_horas").val() * 1;
+				var justificacion_estacionamiento_dias = $("#justificacion_estacionamiento_dias").val() * 1;
+				error = (valorVacio(justificacion_estacionamiento) || (justificacion_estacionamiento_horas === 0 && justificacion_estacionamiento_dias === 0)) ? 1 : 0;
+				mensaje = "OK";
+				var texto = "";
+				if (error === 1) {
+					mensaje = valorVacio(justificacion_estacionamiento) ? "Se necesita una justificación. " : "";
+					mensaje += (justificacion_estacionamiento_horas === 0 && justificacion_estacionamiento_dias === 0) ? "Indicar el tiempo de uso del estacionamiento." : "";
+				} else {
+					texto = justificacion_estacionamiento + ". ";
+					texto += "Duración: ";
+					texto += (justificacion_estacionamiento_dias > 0) ? (justificacion_estacionamiento_dias + " día(s)") : "";
+					if (justificacion_estacionamiento_dias > 0 && justificacion_estacionamiento_horas > 0) {
+						texto += " y " + justificacion_estacionamiento_horas + " hora(s)";
+					} else if (justificacion_estacionamiento_horas > 0) {
+						texto += justificacion_estacionamiento_horas + " hora(s)";
+					}
+				}
+				justificacion = {
+					text: texto,
+					error: error,
+					mensaje: mensaje
+				};
 			} else if ((categoria.toLowerCase()).indexOf("otro") > -1 && (categoria.toLowerCase()).indexOf("viaje") > -1) {
-				justificacion = $.trim($("#justificacion").val());
+				var texto = $.trim($("#justificacion").val());
+				error = valorVacio(texto) ? 1 : 0;
+				mensaje = error === 1 ? "Se requiere una justificación. ¿Cual fue el gasto y el motivo del gasto?" : "OK";
+				justificacion = {
+					text: texto,
+					error: error,
+					mensaje: mensaje
+				};
 			} else if ((categoria.toLowerCase()).indexOf("traslado") > -1 && (categoria.toLowerCase()).indexOf("cobranza") > -1) {
-				//
+				var justificacion_traslado_cobranza = $.trim($("#justificacion_traslado_cobranza").val());
+				var justificacion_traslado_cobranza_origen = $.trim($("#justificacion_traslado_cobranza_origen").val());
+				var justificacion_traslado_cobranza_destino = $.trim($("#justificacion_traslado_cobranza_destino").val());
+				error = (valorVacio(justificacion_traslado_cobranza) || valorVacio(justificacion_traslado_cobranza_origen) || valorVacio(justificacion_traslado_cobranza_destino)) ? 1 : 0;
+				mensaje = "OK";
+				var texto = "";
+				if (error === 1) {
+					mensaje = valorVacio(justificacion_traslado_cobranza) ? "Se necesita una justificación. ¿Motivo de la transportación? " : "";
+					mensaje += (valorVacio(justificacion_traslado_cobranza_origen) || valorVacio(justificacion_traslado_cobranza_destino)) ? "Indicar el origen y destino." : "";
+				} else {
+					texto = justificacion_traslado_cobranza;
+					texto += " Origen: " + justificacion_traslado_cobranza_origen;
+					texto += " Destino: " + justificacion_traslado_cobranza_destino;
+				}
+				justificacion = {
+					text: texto,
+					error: error,
+					mensaje: mensaje
+				};
 			} else if ((categoria.toLowerCase()).indexOf("traslado") > -1 &&
-				(categoria.toLowerCase()).indexOf("cabina") > -1 && 
+				(categoria.toLowerCase()).indexOf("cabina") > -1 &&
 				(categoria.toLowerCase()).indexOf("siniestro") > -1) {
-				//
+				var justificacion_traslado_cabina_siniestro = $.trim($("#justificacion_traslado_cabina_siniestro").val());
+				var justificacion_traslado_cabina_siniestro_origen = $.trim($("#justificacion_traslado_cabina_siniestro_origen").val());
+				var justificacion_traslado_cabina_siniestro_destino = $.trim($("#justificacion_traslado_cabina_siniestro_destino").val());
+				error = (valorVacio(justificacion_traslado_cabina_siniestro) || valorVacio(justificacion_traslado_cabina_siniestro_origen) || valorVacio(justificacion_traslado_cabina_siniestro_destino)) ? 1 : 0;
+				mensaje = "OK";
+				var texto = "";
+				if (error === 1) {
+					mensaje = valorVacio(justificacion_traslado_cabina_siniestro) ? "Se necesita una justificación. Meta Alcanzada en el Cuaderno de Incentivos. " : "";
+					mensaje += (valorVacio(justificacion_traslado_cabina_siniestro_origen) || valorVacio(justificacion_traslado_cabina_siniestro_destino)) ? "Indicar el origen y destino." : "";
+				} else {
+					texto = justificacion_traslado_cabina_siniestro;
+					texto += " Origen: " + justificacion_traslado_cabina_siniestro_origen;
+					texto += " Destino: " + justificacion_traslado_cabina_siniestro_destino;
+				}
+				justificacion = {
+					text: texto,
+					error: error,
+					mensaje: mensaje
+				};
+			} else if ((categoria.toLowerCase()).indexOf("premio") > -1 &&
+				(categoria.toLowerCase()).indexOf("cuaderno") > -1 &&
+				(categoria.toLowerCase()).indexOf("incentivo") > -1) {
+				var justificacion_premio_cuaderno_incentivo = $.trim($("#justificacion_premio_cuaderno_incentivo").val());
+				var justificacion_premio_cuaderno_incentivo_agente = $.trim($("#justificacion_premio_cuaderno_incentivo_agente").val());
+				error = (valorVacio(justificacion_premio_cuaderno_incentivo) || valorVacio(justificacion_premio_cuaderno_incentivo_agente)) ? 1 : 0;
+				mensaje = "OK";
+				var texto = "";
+				if (error === 1) {
+					mensaje = valorVacio(justificacion_premio_cuaderno_incentivo) ? "Se necesita una justificación. Meta Alcanzada en el Cuaderno de Incentivos. " : "";
+					mensaje += (valorVacio(justificacion_premio_cuaderno_incentivo_agente)) ? "Indicar el nombre del agente." : "";
+				} else {
+					texto = justificacion_premio_cuaderno_incentivo;
+					texto += " Agente: " + justificacion_premio_cuaderno_incentivo_agente;
+				}
+				justificacion = {
+					text: texto,
+					error: error,
+					mensaje: mensaje
+				};
+			} else if (((categoria.toLowerCase()).indexOf("alimenta") > -1 || (categoria.toLowerCase()).indexOf("sesion") > -1)) {
+				var texto = $.trim($("#justificacion").val());
+				error = valorVacio(texto) ? 1 : 0;
+				mensaje = error === 1 ? "Se requiere una justificación. " : "OK";
+				if (error === 1 && categoria.toLowerCase().indexOf("alimenta") > -1) {
+					mensaje += "¿Desayuno, Comida o Cena?";
+				} if (error === 1 && categoria.toLowerCase().indexOf("sesion") > -1) {
+					mensaje += "Favor de indicar el negocio captado, renovado o el motivo de su gasto.";
+				}
+				justificacion = {
+					text: texto,
+					error: error,
+					mensaje: mensaje
+				};
+			} else {
+				var texto = $.trim($("#justificacion").val());
+				error = valorVacio(texto) ? 1 : 0;
+				mensaje = error === 1 ? "Se requiere una justificación. " : "OK";
+				justificacion = {
+					text: texto,
+					error: error,
+					mensaje: mensaje
+				};
 			}
 			return justificacion;
 		}
@@ -2052,7 +2477,6 @@
 		*/
 		function gastoAjuste(tipo, datos_gasto) {
 			var datos = JSON.parse(datos_gasto);
-			console.log("adicional", datos);
 			var ucrea = localStorage.getItem("cosa");
 			var ImportePropina = 0;
 			datos['Tipo'] = tipo;
@@ -2061,82 +2485,32 @@
 			datos['NombreArc'] = "";
 			datos['ExtFile'] = "";
 			if (tipo === 1) {
-				var botones = [];
-				botones[0] = {
-					text: "Si", click: function () {
-						var error = 0;
-						ImportePropina = $("#importePropina").val() * 1;
-						var importePropinaMax = $("#importePropina").attr("max") * 1;
-						var afecta = ($("#ImpGastadoPro").is(':checked') || $("#ImpComprobadoPro").is(':checked')) ? true : false;
-						if (ImportePropina <= 0) {
-							error = 1;
-							$.notify("El importe debe ser mayor a cero (0).", { position: "top center", className: "error" });
-						}
-						if (ImportePropina > importePropinaMax) {
-							error = 1;
-							$.notify("El importe no puede ser mayor a lo gastado.", { position: "top center", className: "error" });
-						}
-						if (afecta === false) {
-							error = 1;
-							$.notify("El importe debe afectar al importe gastado y/o comprobado.", { position: "top center", className: "error" });
-						}
-						if (error === 0) {
-							$(this).dialog("close");
-							datos['Observaciones'] = "Gasto: " + datos['Concepto'];
-							datos['Concepto'] = "Otro Gasto / Propina";
-							if ($("#ImpGastadoPro").is(':checked')) {
-								datos['TGastado'] = ImportePropina;
-								datos['AfectaImpGastado'] = 1;
-							}
-							else {
-								datos['TGastado'] = 0;
-								datos['AfectaImpGastado'] = 0;
-							}
+				let confirmaGastoAjuste = Handlebars.compile($("#modal-agrega-propina").html());
+				let alertaTitulo = Handlebars.compile($("#modal-alerta-titulo").html());
+				let botones = Handlebars.compile($("#modal-botones").html());
+				var boton = {
+					btn1: true,
+					label1: "Agregar",
+					tipo1: "primary",
+					function1: "agregaOtroGasto('" + tipo + "','" + datos_gasto + "')",
+					icono1: " glyphicon glyphicon-floppy-saved",
+					btn2: false,
+					btn3: false
+				}
 
-							if ($("#ImpComprobadoPro").is(':checked')) {
-								datos['TComprobar'] = ImportePropina;
-								datos['AfectaImpComprobado'] = 1;
-							}
-							else {
-								datos['TComprobar'] = 0;
-								datos['AfectaImpComprobado'] = 0;
-							}
+				$('#titulo_modal_alert').empty().append(alertaTitulo({ titulo: 'Agregar Otros Gastos Y/O Propina' }));
+				$("#contenido_modal_alert").empty().append(confirmaGastoAjuste());
+				$("#footer_modal_alert").empty().append(botones(boton));
 
-							agregaAjusteGasato(datos);
-						} else {
-							return false;
-						}
-					}
-				};
-				botones[1] = {
-					text: "No", click: function () {
-						$(this).dialog("close");
-					}
-				};
+				$("#importePropina").attr("max", datos.TGastado);
 				var gasto = datos.Concepto + " / " + formatNumber.new((datos.TGastado * 1).toFixed(2), "$ ");
-				var txtImporte = "<div class='input-group'>";
-				txtImporte += "<span class='input-group-addon' style='width: 140px;'>Por un importe de $</span>";
-				txtImporte += "<div class='form-group'>";
-				txtImporte += "<input type='number' id='importePropina' name='importePropina' placeholder='0.00' min='0' max='" + datos.TGastado + "' class='form-control'>";
-				txtImporte += "<i class='form-group__bar'></i> ";
-				txtImporte += "<small>(Politica de Propina 10%)</small>";
-				txtImporte += "</div>";
-				txtImporte += "</div>";
+				"#nmb_gasto_ajuste".AsHTML(gasto);
+				$("#modal_alerta").modal({
+					show: true,
+					keyboard: false,
+					backdrop: "static"
+				});
 
-				var chkAfectaa = "<div id='chkAfectaImpPro' class='hidden'>";
-				chkAfectaa += "<b>Afecta al importe:</b><br /><label class='custom-control custom-checkbox'>";
-				chkAfectaa += "<input type='checkbox' checked id='ImpGastadoPro' class='custom-control-input'>";
-				chkAfectaa += "<span class='custom-control-indicator'></span>";
-				chkAfectaa += "<span class='custom-control-description'>Gastado</span>";
-				chkAfectaa += "</label>";
-				chkAfectaa += "<label class='custom-control custom-checkbox'>";
-				chkAfectaa += "<input type='checkbox' checked id='ImpComprobadoPro' class='custom-control-input'>";
-				chkAfectaa += "<span class='custom-control-indicator'></span>";
-				chkAfectaa += "<span class='custom-control-description'>Comprobado</span>";
-				chkAfectaa += "</label>";
-				chkAfectaa += "</div>";
-
-				Seguridad.confirmar("Agregar otro gasto / propina al gasto: <b>" + gasto + "</b>" + txtImporte + chkAfectaa, botones, "Agregar Gasto Adicional.");
 			} else if (tipo === 2) {
 
 				var file = $("#fileXmlAdicional" + datos.IdGasto).get(0).files[0];
@@ -2208,6 +2582,66 @@
 					$.notify("Archivo invalido, prueba con otro.", { globalPosition: 'top center', className: 'error', autoHideDelay: 4000 });
 					$("#fileXmlAdicional" + datos.IdGasto).clearInputs();
 				}
+			}
+		}
+		function agregaOtroGasto(tipo, datos_gasto) {
+			var datos = JSON.parse(datos_gasto);
+			var ucrea = localStorage.getItem("cosa");
+			var ImportePropina = 0;
+			datos['Tipo'] = tipo;
+			datos['UCrea'] = ucrea;
+			datos['BinXML'] = "";
+			datos['NombreArc'] = "";
+			datos['ExtFile'] = "";
+			var error = 0;
+			ImportePropina = $("#importePropina").val() * 1;
+
+			var justificacion_ajustea = $("#justificacion_ajuste").val();
+
+			var importePropinaMax = $("#importePropina").attr("max") * 1;
+			var afecta = ($("#ImpGastadoPro").is(':checked') || $("#ImpComprobadoPro").is(':checked')) ? true : false;
+			if (valorVacio(justificacion_ajustea)) {
+				error = 1;
+				$.notify("Se requiere una justificación para el gasto.", { position: "top center", className: "error" });
+			}
+			if (ImportePropina <= 0) {
+				error = 1;
+				$.notify("El importe debe ser mayor a cero (0).", { position: "top center", className: "error" });
+			}
+			if (ImportePropina > importePropinaMax) {
+				error = 1;
+				$.notify("El importe no puede ser mayor a lo gastado.", { position: "top center", className: "error" });
+			}
+			if (afecta === false) {
+				error = 1;
+				$.notify("El importe debe afectar al importe gastado y/o comprobado.", { position: "top center", className: "error" });
+			}
+			if (error === 0) {
+				datos['Observaciones'] = "Gasto: " + datos['Concepto'];
+				datos['Concepto'] = justificacion_ajustea; //"Otro Gasto / Propina";
+				if ($("#ImpGastadoPro").is(':checked')) {
+					datos['TGastado'] = ImportePropina;
+					datos['AfectaImpGastado'] = 1;
+				}
+				else {
+					datos['TGastado'] = 0;
+					datos['AfectaImpGastado'] = 0;
+				}
+
+				if ($("#ImpComprobadoPro").is(':checked')) {
+					datos['TComprobar'] = ImportePropina;
+					datos['AfectaImpComprobado'] = 1;
+				}
+				else {
+					datos['TComprobar'] = 0;
+					datos['AfectaImpComprobado'] = 0;
+				}
+
+				agregaAjusteGasato(datos);
+
+				$("#modal_alerta").modal('hide');
+			} else {
+				return false;
 			}
 		}
 		function agregaAjusteGasato(datos) {
@@ -2283,7 +2717,7 @@
 					}
 
 				},
-				complete: function (){
+				complete: function () {
 					selectInforme(idinforme);
 					browseGastos(idinforme);
 				},
@@ -2511,9 +2945,7 @@
 			var justificacion = $.trim($(this).val());
 			textAyudaJustificacion(NombreCategoria, justificacion);
 		});
-		$("#justificacion_huespedes_alimentos, #justificacion, " +
-			"#justificacion_estacionamiento, #justificacion_traslado_cobranza, " +
-			"#input_justificacion_traslado_cabina_siniestro").keyup(function () {
+		$("input[id~='justificacion']").keyup(function () {
 			var justificacion = $.trim($(this).val());
 			if (!valorVacio(justificacion)) {
 				var text_ayuda = $(this).attr("placeholder");
@@ -2544,7 +2976,7 @@
 				$("#input_justificacion_autobus").show();
 			} else if ((categoria.toLowerCase()).indexOf("caseta") > -1) {
 				ayuda = "¿Cuál?";
-				$("#justificacion").attr("placeholder",ayuda);
+				$("#justificacion").attr("placeholder", ayuda);
 				$("#input_justificacion").show();
 			} else if ((categoria.toLowerCase()).indexOf("uber") > -1 || (categoria.toLowerCase()).indexOf("taxi") > -1) {
 				ayuda = "Origen y Destino.";
@@ -2554,11 +2986,11 @@
 				$("#input_justificacion_estacionamiento").show();
 			} else if ((categoria.toLowerCase()).indexOf("alimenta") > -1) {
 				ayuda = "¿Desayuno, Comida o Cena?";
-				$("#justificacion").attr("placeholder",ayuda);
+				$("#justificacion").attr("placeholder", ayuda);
 				$("#input_justificacion, #comensales_gasto").show();
 			} else if ((categoria.toLowerCase()).indexOf("otro") > -1 && (categoria.toLowerCase()).indexOf("viaje") > -1) {
 				ayuda = "¿Cual fue el gasto y el motivo del gasto?";
-				$("#justificacion").attr("placeholder",ayuda);
+				$("#justificacion").attr("placeholder", ayuda);
 				$("#input_justificacion").show();
 			} else if ((categoria.toLowerCase()).indexOf("sesion") > -1) {
 				ayuda = "Favor de indicar el negocio captado, renovado o el motivo de su gasto.";
@@ -2566,22 +2998,18 @@
 			} else if ((categoria.toLowerCase()).indexOf("traslado") > -1 && (categoria.toLowerCase()).indexOf("cobranza") > -1) {
 				$("#input_justificacion_traslado_cobranza").show();
 			} else if ((categoria.toLowerCase()).indexOf("traslado") > -1 &&
-				(categoria.toLowerCase()).indexOf("cabina") > -1 && 
+				(categoria.toLowerCase()).indexOf("cabina") > -1 &&
 				(categoria.toLowerCase()).indexOf("siniestro") > -1) {
 				$("#input_justificacion_traslado_cabina_siniestro").show();
+			} else if ((categoria.toLowerCase()).indexOf("premio") > -1 &&
+				(categoria.toLowerCase()).indexOf("cuaderno") > -1 &&
+				(categoria.toLowerCase()).indexOf("incentivo") > -1) {
+				$("#input_justificacion_premio_cuaderno_incentivo").show();
 			} else {
 				ayuda = "¿Cual fue el gasto y el motivo del gasto?";
-				$("#justificacion").attr("placeholder",ayuda);
+				$("#justificacion").attr("placeholder", ayuda);
 				$("#input_justificacion").show();
-			} 
-			
-			/*
-			".text_ayuda small".AsHTML("*" + ayuda);
-			$("#justificacion").attr("placeholder", ayuda);
-			if (!valorVacio(justificacion)) {
-				$(".text_ayuda").show();
-			}*/
-
+			}
 		}
 		function menucategorias() {
 			var IdRequisicion = $("#RmRdeRequisicion").val();
@@ -2777,7 +3205,7 @@
 		}
 		function actualizaInfReq(datos) {
 			datos['IdInforme'] = url.get("item") * 1;
-			console.log(datos);
+			//console.log(datos);
 			$.ajax({
 				async: true,
 				type: "POST",

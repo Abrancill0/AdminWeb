@@ -594,8 +594,8 @@
     <!-- App functions and actions -->
     <script src="js/app.min.js"></script>
     <script src="js/js.js"></script>
-    <script src="js/Autorizaciones.js?1q1q1"></script>
-    <script src="js/AutorizaInformes.js?1q1q1"></script>
+    <script src="js/Autorizaciones.js?1q1q11q"></script>
+    <script src="js/AutorizaInformes.js?1q1q11q"></script>
 
    
 

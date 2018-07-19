@@ -56,7 +56,6 @@ function cargaInicialReq() {
     ConsultaCatalogo(UsuarioActivo, 'ConsultaOficinaUsuario', 'RmReqOficina');
     ConsultaCatalogo(UsuarioActivo, 'ConsultaSubramos', 'RmReqSubramo');
     obtenerTipoRequisicion();
-
 }
 function ConsultaCatalogo(usuario, catalogo, menuselect) {
     var datos = { 'Usuario': usuario, 'Empleado': EmpeladoActivo };

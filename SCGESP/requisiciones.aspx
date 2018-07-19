@@ -141,7 +141,7 @@
                                                 <td colspan="3" id="tdCentro">
                                                     <span class="textotd "></span>
                                                     <span class="inputtd">
-                                                        <select id="RmReqCentro" name="RmReqCentro" class="select2" data-width="100%" onchange=""></select>
+                                                        <select id="RmReqCentro" name="RmReqCentro" class="select2" data-width="100%" onchange="" disabled ></select>
                                                     </span>
                                                 </td>
                                             </tr>
