@@ -30,7 +30,7 @@
 		}
 
 		.valor:first-letter {
-			text-transform: uppercase;
+			text-transform: uppercase !important;
 		}
 
 		.concepto-importe {
@@ -50,7 +50,6 @@
 				font-size: 12px;
 				color: #ffffff;
 				font-weight: bold;
-				text-transform: uppercase;
 			}
 
 				table.tblGastos thead tr th {
@@ -62,13 +61,11 @@
 
 			table.tblGastos tbody {
 				font-size: 10px;
-				text-transform: uppercase;
 			}
 
 			table.tblGastos td {
 				font-size: 11px;
 				font-weight: bold;
-				text-transform: uppercase;
 			}
 
 			table.tblGastos tbody tr {
@@ -90,7 +87,6 @@
 			table.tblGastos tfoot {
 				background: #DAE875;
 				border: #000 solid 1px;
-				text-transform: uppercase;
 				color: #000;
 			}
 
@@ -108,10 +104,6 @@
 				border: 1px solid black;
 				text-align: center;
 			}
-
-		#tblGastos tbody tr td:first-letter, #tblGastos tbody tr td a:first-letter {
-			text-transform: uppercase;
-		}
 
 		.rowGris {
 			background-color: #e0e0e0;
@@ -1161,8 +1153,8 @@
 					var reembolso = informe.reembolso * 1;
 					informe.del = valorVacio(informe.del) ? "" : formatFecha(new Date(informe.del), "dd/mm/yyyy");
 					informe.al = valorVacio(informe.al) ? "" : formatFecha(new Date(informe.al), "dd/mm/yyyy");
-					informe.i_comentarioaut = (informe.i_comentarioaut).toLowerCase();
-					informe.p_nmb = (informe.p_nmb).toLowerCase();
+					informe.i_comentarioaut = (informe.i_comentarioaut);
+					informe.p_nmb = (informe.p_nmb);
 					informe.i_uresponsable = $.trim(informe.i_uresponsable);
 					informe.i_comentarioaut = (informe.i_comentarioaut).replace("adminerp", "AdminERP")
 						.replace("adminweb", "AdminWeb").replace("adminapp", "AdminApp");
@@ -1289,7 +1281,7 @@
 						var btnEditar = true;
 						if (estatus > 2 || ConfBanco === 1)
 							btnEditar = false;
-						var result_justificacion = conceptos_adicionales(value.g_concepto, value.g_nombreCategoria);
+						var result_justificacion = conceptos_adicionales(value.g_concepto, value.g_nombreCategoria, tipoajuste);
 						var gasto = {
 							idgasto: value.g_id,
 							ngasto: value.orden,
@@ -1423,8 +1415,12 @@
 			$("#tblGastos tfoot").empty();
 			$("#tblGastos tfoot").append(totalGastosInformeTemplate(totalesGasto));
 		}
-		function conceptos_adicionales(justificacion, categoria) {
+		function conceptos_adicionales(justificacion, categoria, tipoajuste) {
 			var list_justificacion = [];
+			if (tipoajuste > 0) {
+				list_justificacion.push(["", $.trim(justificacion), "justificacion"]);
+				return list_justificacion;
+			}
 			if ((categoria.toLowerCase()).indexOf("hospeda") > -1) {
 				//justificacion_huespedes_alimentos, justificacion_noches
 				var datos = justificacion.split("Noches de hospedaje: ");
@@ -1456,6 +1452,7 @@
 					regreso = quitar_punto_final($.trim(justificacion.replace("Regreso: ", "")));
 					list_justificacion.push(["Regreso", regreso, "justificacion_autobus_regreso"]);
 				}
+				console.log(list_justificacion);
 			} else if ((categoria.toLowerCase()).indexOf("caseta") > -1) {
 				list_justificacion.push(["", $.trim(justificacion), "justificacion"]);
 			} else if ((categoria.toLowerCase()).indexOf("uber") > -1 || (categoria.toLowerCase()).indexOf("taxi") > -1) {
@@ -1876,7 +1873,7 @@
 				gasto.nmbcomensales = "";
 			}
 
-			textAyudaJustificacion("", "");
+			textAyudaJustificacion("", "", 0);
 
 			$("#fechagasto").val("");
 			$("#idGasto").val("");
@@ -1906,7 +1903,7 @@
 				gasto.nmbcomensales = "";
 			}
 
-			textAyudaJustificacion(gasto.categoria, gasto.justificacion);
+			textAyudaJustificacion(gasto.categoria, gasto.justificacion, gasto.tipoajuste);
 
 			$("#fechagasto").val(gasto.fechagasto);
 			$("#idGasto").val(gasto.idgasto);
@@ -2006,7 +2003,7 @@
 				datosCat = [];
 				ivacategoria = 0;
 			}
-			var result_justificacion = valor_justificacion(NombreCategoria);
+			var result_justificacion = valor_justificacion(NombreCategoria, tipoajuste);
 			var justificacion = result_justificacion.text;//$.trim($("#justificacion").val());
 			var hrg = horaActual("hh:mm");
 			var comensales = $.trim($("#comensales").val());
@@ -2016,8 +2013,11 @@
 			if (result_justificacion.error === 1) {
 				$.notify(result_justificacion.mensaje, { position: "top center" }, "error");
 				error = 1;
+			} else {
+				if (tipoajuste > 0) {
+					justificacion = $.trim($("#justificacion").val());
+				}
 			}
-			console.log(result_justificacion);
 			if (((NombreCategoria.toLowerCase()).indexOf("alimenta") > -1 || (NombreCategoria.toLowerCase()).indexOf("sesion") > -1) && tipoajuste === 0) {
 				comensalesObligatorios = true;
 			}
@@ -2134,15 +2134,28 @@
 				},
 				error: function (result) {
 					//cargado();
+					console.log(result);
 					$.notify("Error al Guardar", { globalPosition: 'top center', className: 'error' });
 				}
 			});
 
 		});
-		function valor_justificacion(categoria) {
+		function valor_justificacion(categoria, tipoajuste) {
+			tipoajuste = tipoajuste * 1;
 			var justificacion = [];//$.trim($("#justificacion").val());
 			var error = 0;
 			var mensaje = "";
+			if (tipoajuste > 0) {
+				var texto = $.trim($("#justificacion").val());
+				error = valorVacio(texto) ? 1 : 0;
+				mensaje = error === 1 ? "Se requiere una justificación." : "OK";
+				justificacion = {
+					text: texto,
+					error: error,
+					mensaje: mensaje
+				};
+				return justificacion;
+			}
 			if ((categoria.toLowerCase()).indexOf("hospeda") > -1) {
 				//justificacion_huespedes_alimentos, justificacion_noches
 				var justificacion_huespedes_alimentos = $.trim($("#justificacion_huespedes_alimentos").val());
@@ -2937,13 +2950,17 @@
 			var CategoriaSelect = document.getElementById("categoria");
 			var NombreCategoria = CategoriaSelect.options[CategoriaSelect.selectedIndex].text;
 			var justificacion = $.trim($("#justificacion").val());
-			textAyudaJustificacion(NombreCategoria, justificacion);
+			var datos_gasto = $("#gasto").val();
+			var gasto = JSON.parse(datos_gasto);
+			textAyudaJustificacion(NombreCategoria, justificacion, gasto.tipoajuste);
 		});
 		$("#justificacion").change(function () {
 			var CategoriaSelect = document.getElementById("categoria");
 			var NombreCategoria = CategoriaSelect.options[CategoriaSelect.selectedIndex].text;
 			var justificacion = $.trim($(this).val());
-			textAyudaJustificacion(NombreCategoria, justificacion);
+			var datos_gasto = $("#gasto").val();
+			var gasto = JSON.parse(datos_gasto);
+			textAyudaJustificacion(NombreCategoria, justificacion, gasto.tipoajuste);
 		});
 		$("input[id~='justificacion']").keyup(function () {
 			var justificacion = $.trim($(this).val());
@@ -2965,46 +2982,53 @@
 				$(".justificacion_text_ayuda_comensales").hide().empty();
 			}
 		});
-		function textAyudaJustificacion(categoria, justificacion) {
+		function textAyudaJustificacion(categoria, justificacion, tipoajuste) {
+			tipoajuste = tipoajuste * 1;
 			$("#comensales_gasto, .text_ayuda, .justificar").hide();
 			var ayuda = "¿Cual fue el gasto y el motivo del gasto?";
-			if ((categoria.toLowerCase()).indexOf("hospeda") > -1) {
-				$("#input_justificacion_noches").show();
-			} else if ((categoria.toLowerCase()).indexOf("autobus") > -1 ||
-				(categoria.toLowerCase()).indexOf("autobús") > -1 ||
-				(categoria.toLowerCase()).indexOf("autob") > -1) {
-				$("#input_justificacion_autobus").show();
-			} else if ((categoria.toLowerCase()).indexOf("caseta") > -1) {
-				ayuda = "¿Cuál?";
-				$("#justificacion").attr("placeholder", ayuda);
-				$("#input_justificacion").show();
-			} else if ((categoria.toLowerCase()).indexOf("uber") > -1 || (categoria.toLowerCase()).indexOf("taxi") > -1) {
-				ayuda = "Origen y Destino.";
-				$("#input_justificacion_uber_taxi").show();
-			} else if ((categoria.toLowerCase()).indexOf("estacionamiento") > -1) {
-				ayuda = "Motivo.";
-				$("#input_justificacion_estacionamiento").show();
-			} else if ((categoria.toLowerCase()).indexOf("alimenta") > -1) {
-				ayuda = "¿Desayuno, Comida o Cena?";
-				$("#justificacion").attr("placeholder", ayuda);
-				$("#input_justificacion, #comensales_gasto").show();
-			} else if ((categoria.toLowerCase()).indexOf("otro") > -1 && (categoria.toLowerCase()).indexOf("viaje") > -1) {
-				ayuda = "¿Cual fue el gasto y el motivo del gasto?";
-				$("#justificacion").attr("placeholder", ayuda);
-				$("#input_justificacion").show();
-			} else if ((categoria.toLowerCase()).indexOf("sesion") > -1) {
-				ayuda = "Favor de indicar el negocio captado, renovado o el motivo de su gasto.";
-				$("#input_justificacion, #comensales_gasto").show();
-			} else if ((categoria.toLowerCase()).indexOf("traslado") > -1 && (categoria.toLowerCase()).indexOf("cobranza") > -1) {
-				$("#input_justificacion_traslado_cobranza").show();
-			} else if ((categoria.toLowerCase()).indexOf("traslado") > -1 &&
-				(categoria.toLowerCase()).indexOf("cabina") > -1 &&
-				(categoria.toLowerCase()).indexOf("siniestro") > -1) {
-				$("#input_justificacion_traslado_cabina_siniestro").show();
-			} else if ((categoria.toLowerCase()).indexOf("premio") > -1 &&
-				(categoria.toLowerCase()).indexOf("cuaderno") > -1 &&
-				(categoria.toLowerCase()).indexOf("incentivo") > -1) {
-				$("#input_justificacion_premio_cuaderno_incentivo").show();
+			if (tipoajuste === 0) {
+				if ((categoria.toLowerCase()).indexOf("hospeda") > -1) {
+					$("#input_justificacion_noches").show();
+				} else if ((categoria.toLowerCase()).indexOf("autobus") > -1 ||
+					(categoria.toLowerCase()).indexOf("autobús") > -1 ||
+					(categoria.toLowerCase()).indexOf("autob") > -1) {
+					$("#input_justificacion_autobus").show();
+				} else if ((categoria.toLowerCase()).indexOf("caseta") > -1) {
+					ayuda = "¿Cuál?";
+					$("#justificacion").attr("placeholder", ayuda);
+					$("#input_justificacion").show();
+				} else if ((categoria.toLowerCase()).indexOf("uber") > -1 || (categoria.toLowerCase()).indexOf("taxi") > -1) {
+					ayuda = "Origen y Destino.";
+					$("#input_justificacion_uber_taxi").show();
+				} else if ((categoria.toLowerCase()).indexOf("estacionamiento") > -1) {
+					ayuda = "Motivo.";
+					$("#input_justificacion_estacionamiento").show();
+				} else if ((categoria.toLowerCase()).indexOf("alimenta") > -1) {
+					ayuda = "¿Desayuno, Comida o Cena?";
+					$("#justificacion").attr("placeholder", ayuda);
+					$("#input_justificacion, #comensales_gasto").show();
+				} else if ((categoria.toLowerCase()).indexOf("otro") > -1 && (categoria.toLowerCase()).indexOf("viaje") > -1) {
+					ayuda = "¿Cual fue el gasto y el motivo del gasto?";
+					$("#justificacion").attr("placeholder", ayuda);
+					$("#input_justificacion").show();
+				} else if ((categoria.toLowerCase()).indexOf("sesion") > -1) {
+					ayuda = "Favor de indicar el negocio captado, renovado o el motivo de su gasto.";
+					$("#input_justificacion, #comensales_gasto").show();
+				} else if ((categoria.toLowerCase()).indexOf("traslado") > -1 && (categoria.toLowerCase()).indexOf("cobranza") > -1) {
+					$("#input_justificacion_traslado_cobranza").show();
+				} else if ((categoria.toLowerCase()).indexOf("traslado") > -1 &&
+					(categoria.toLowerCase()).indexOf("cabina") > -1 &&
+					(categoria.toLowerCase()).indexOf("siniestro") > -1) {
+					$("#input_justificacion_traslado_cabina_siniestro").show();
+				} else if ((categoria.toLowerCase()).indexOf("premio") > -1 &&
+					(categoria.toLowerCase()).indexOf("cuaderno") > -1 &&
+					(categoria.toLowerCase()).indexOf("incentivo") > -1) {
+					$("#input_justificacion_premio_cuaderno_incentivo").show();
+				} else {
+					ayuda = "¿Cual fue el gasto y el motivo del gasto?";
+					$("#justificacion").attr("placeholder", ayuda);
+					$("#input_justificacion").show();
+				}
 			} else {
 				ayuda = "¿Cual fue el gasto y el motivo del gasto?";
 				$("#justificacion").attr("placeholder", ayuda);

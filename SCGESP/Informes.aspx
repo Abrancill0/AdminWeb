@@ -32,16 +32,10 @@
 							<tr>
 								<th width="70px">Requisici&oacute;n</th>
 								<th width="70px">Informe</th>
-								<th width="50px">Inicio</th>
-								<th width="50px">Vigencia</th>
 								<th width="200px">Justificaci&oacute;n</th>
 								<th width="150px" title="Importe solicitado en la requisición">Autorizado</th>
-								<th width="150px" title="Importe total registrado en la APP/WEB">Capturado</th>
-								<th width="180px" title="Importe total de los gastos con algun tipo de comprobante">Comprobado</th>
-								<th width="180px" title="Importe disponible (Autorizado - Gastado)">Disponible</th>
 								<th width="100px">Responsable</th>
 								<th width="70px">Estatus</th>
-								<th width="20px"></th>
 								<th width="20px"></th>
 							</tr>
 						</thead>

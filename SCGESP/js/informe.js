@@ -157,16 +157,10 @@ function ObtenerInformes() {
 
                 tablaInformes.row.add([value.r_idrequisicion,
                 value.i_ninforme,
-                    finicio,
-                    ffin,
                 value.i_nmb,
                 formatNumber.new(ImpAutorizado.toFixed(2), "$ "),
-                formatNumber.new(ImpCapturado.toFixed(2), "$ "),
-                formatNumber.new(ImpComprobado.toFixed(2), "$ "),
-                formatNumber.new(ImpDisponible.toFixed(2), "$ "),
                 value.responsable,
                     estatus,
-                    btnEdit,
                     btnVer
                 ]).draw(false);
             });
