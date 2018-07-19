@@ -30,7 +30,7 @@
 		}
 
 		.valor:first-letter {
-			text-transform: uppercase;
+			text-transform: uppercase !important;
 		}
 
 		.concepto-importe {
@@ -51,7 +51,6 @@
 				font-size: 12px;
 				color: #ffffff;
 				font-weight: bold;
-				text-transform: uppercase;
 			}
 
 				table.tblGastos thead tr th {
@@ -63,13 +62,11 @@
 
 			table.tblGastos tbody {
 				font-size: 10px;
-				text-transform: uppercase;
 			}
 
 			table.tblGastos td {
 				font-size: 11px;
 				font-weight: bold;
-				text-transform: uppercase;
 			}
 
 			table.tblGastos tbody tr {
@@ -108,14 +105,6 @@
 			#tblGastos thead th {
 				border: 1px solid black;
 				text-align: center;
-			}
-
-		#tblGastos tbody tr td {
-			text-transform: lowercase;
-		}
-
-			#tblGastos tbody tr td:first-letter, #tblGastos tbody tr td a:first-letter {
-				text-transform: uppercase;
 			}
 
 		.rowGris {
@@ -849,8 +838,8 @@
 					var informe = result[0];
 					informe.del = valorVacio(informe.del) ? "" : formatFecha(new Date(informe.del), "dd/mm/yyyy");
 					informe.al = valorVacio(informe.al) ? "" : formatFecha(new Date(informe.al), "dd/mm/yyyy");
-					informe.i_comentarioaut = (informe.i_comentarioaut).toLowerCase();
-					informe.p_nmb = (informe.p_nmb).toLowerCase();
+					informe.i_comentarioaut = (informe.i_comentarioaut);
+					informe.p_nmb = (informe.p_nmb);
 					informe.i_uresponsable = $.trim(informe.i_uresponsable);
 					informe.i_comentarioaut = (informe.i_comentarioaut).replace("adminerp", "AdminERP")
 						.replace("adminweb", "AdminWeb").replace("adminapp", "AdminApp");
@@ -961,14 +950,15 @@
 							monto = 0;
 							importeaceptable = 0;
 						}
-
+						var tipoajuste = value.tipoajuste * 1;
+						var result_justificacion = conceptos_adicionales(value.g_concepto, value.g_nombreCategoria, tipoajuste);
 						var gasto = {
 							idgasto: value.g_id,
 							ngasto: value.orden,
 							dia: fgasto,
 							categoria: value.g_nombreCategoria,
 							idcategoria: value.g_categoria,
-							justificacion: value.g_concepto,
+							justificacion: result_justificacion[0][1],
 							monto: formatNumber.new((value.g_total).toFixed(2), "$ "),
 							num_monto: value.g_total,
 							xml: dir_xml,
@@ -984,7 +974,8 @@
 							num_no_deducible: importenodeducible,
 							gasto: "",
 							btnEditar: habBtnEditar,
-							classTr: colorRow
+							classTr: colorRow,
+							valores_justificacion: valores_edit_justificacion(result_justificacion, value.g_nombreCategoria)
 						}
 						gasto['gasto'] = JSON.stringify(gasto);
 
@@ -995,6 +986,38 @@
 						totalnodeducible += importenodeducible;
 
 						$("#tblGastos tbody").append(gastosInformeTemplate(gasto));
+						$.each(result_justificacion, function (key, value) {
+							if (key > 0) {
+								gasto = {
+									idgasto: "",
+									ngasto: "",
+									dia: "",
+									categoria: value[0],
+									idcategoria: 0,
+									justificacion: value[1],
+									monto: "",
+									num_monto: 0,
+									xml: "",
+									pdf: "",
+									img: "",
+									monto_comprobado: "",
+									num_monto_comprobado: 0,
+									dentro_politica: "",
+									num_dentro_politica: 0,
+									fuera_politica: "",
+									num_fuera_politica: 0,
+									no_deducible: "",
+									num_no_deducible: 0,
+									gasto: "",
+									btnEditar: false,
+									classTr: colorRow,
+									btnAdicional: false,
+									tipoajuste: tipoajuste,
+									valores_justificacion: []
+								};
+								$("#tblGastos tbody").append(gastosInformeTemplate(gasto));
+							}
+						});
 						$.each(nmbComensales, function (key, value) {
 							var ncomensal = key + 1;
 							var nmbcomensal = $.trim(value);
@@ -1021,7 +1044,8 @@
 									num_no_deducible: 0,
 									gasto: "",
 									btnEditar: false,
-									classTr: colorRow
+									classTr: colorRow,
+									valores_justificacion: []
 								};
 								$("#tblGastos tbody").append(gastosInformeTemplate(gasto));
 							}
@@ -1046,6 +1070,159 @@
 			};
 			$("#tblGastos tfoot").empty();
 			$("#tblGastos tfoot").append(totalGastosInformeTemplate(totalesGasto));
+		}
+		function valores_edit_justificacion(justificacion, categoria) {
+			var datos = [];
+			var njustificacion = justificacion.length;
+			if (njustificacion === 1) {
+				datos.push({ "justificacion": justificacion[0][1] });
+			} else {
+				$.each(justificacion, function (key, value) {
+					var campo = valorVacio(value[2]) ? "" : value[2];
+					var valor = value[1];
+					var valores = "{\"" + campo + "\": \"" + valor + "\"}";
+					valores = JSON.parse(valores);
+					datos.push(valores);
+				});
+			}
+			return datos;
+		}
+		function conceptos_adicionales(justificacion, categoria, tipoajuste) {
+			var list_justificacion = [];
+			if (tipoajuste > 0) {
+				list_justificacion.push(["", $.trim(justificacion), "justificacion"]);
+				return list_justificacion;
+			}
+			if ((categoria.toLowerCase()).indexOf("hospeda") > -1) {
+				//justificacion_huespedes_alimentos, justificacion_noches
+				var datos = justificacion.split("Noches de hospedaje: ");
+				var huespedes_alimentos = quitar_punto_final($.trim(datos[0]));
+				list_justificacion.push(["", huespedes_alimentos, "justificacion_huespedes_alimentos"]);
+				list_justificacion.push(["Noches de hospedaje: ", $.trim(datos[1]), "justificacion_noches"]);
+			} else if ((categoria.toLowerCase()).indexOf("autobus") > -1 ||
+				(categoria.toLowerCase()).indexOf("autobús") > -1 ||
+				(categoria.toLowerCase()).indexOf("autob") > -1) {
+				var regreso = "";
+				if ((justificacion.toLowerCase()).indexOf("ida:") > -1) {
+					var ida = justificacion.replace("Ida: ", "");
+					if ((ida.toLowerCase()).indexOf("regreso:") > -1) {
+						var regreso1 = ida.split("Regreso: ");
+						ida = regreso1[0].replace(" y ", "");
+						regreso = regreso1[1];
+					}
+					list_justificacion.push(["", "", "justificacion"]);
+					if ($.trim(ida) !== "") {
+						ida = quitar_punto_final($.trim(ida));
+						list_justificacion.push(["Ida", ida, "justificacion_autobus_ida"]);
+					}
+					if ($.trim(regreso) !== "") {
+						regreso = quitar_punto_final($.trim(regreso));
+						list_justificacion.push(["Regreso", regreso, "justificacion_autobus_regreso"]);
+					}
+				} else if ((justificacion.toLowerCase()).indexOf("regreso:") > -1) {
+					list_justificacion.push(["", "", "justificacion"]);
+					regreso = quitar_punto_final($.trim(justificacion.replace("Regreso: ", "")));
+					list_justificacion.push(["Regreso", regreso, "justificacion_autobus_regreso"]);
+				}
+				console.log(list_justificacion);
+			} else if ((categoria.toLowerCase()).indexOf("caseta") > -1) {
+				list_justificacion.push(["", $.trim(justificacion), "justificacion"]);
+			} else if ((categoria.toLowerCase()).indexOf("uber") > -1 || (categoria.toLowerCase()).indexOf("taxi") > -1) {
+				var datos1 = justificacion.replace("Origen: ", "");
+				var datos2 = datos1.split(" Destino: ");
+				var uber_taxi_origen = quitar_punto_final($.trim(datos2[0]));
+				var uber_taxi_destino = quitar_punto_final($.trim(datos2[1]));
+				list_justificacion.push(["", "", "justificacion"]);
+				list_justificacion.push(["Origen", uber_taxi_origen, "justificacion_uber_taxi_origen"]);
+				list_justificacion.push(["Destino", uber_taxi_destino, "justificacion_uber_taxi_destino"]);
+			} else if ((categoria.toLowerCase()).indexOf("estacionamiento") > -1) {
+				var datos = justificacion.split("Duración: ");
+				var horas = "";
+				var dias = "";
+				if ((datos[1].toLowerCase()).indexOf("día(s)") > -1) {
+					if ((datos[1].toLowerCase()).indexOf("hora(s)") > -1) {
+						var datos2 = datos[1].split("día(s) y ");
+						dias = datos2[0];
+						horas = datos2[1].replace(" hora(s)", "");
+					} else {
+						dias = datos[1].replace(" día(s)", "");
+					}
+
+				} else {
+					horas = datos[1].replace(" hora(s)", "");
+				}
+
+				var estacionamiento = quitar_punto_final($.trim(datos[0]));
+
+				list_justificacion.push(["", estacionamiento, "justificacion_estacionamiento"]);
+				if (dias !== "") {
+					list_justificacion.push(["Día(s)", $.trim(dias), "justificacion_estacionamiento_dias"]);
+				}
+				if (horas !== "") {
+					list_justificacion.push(["Hora(s)", $.trim(horas), "justificacion_estacionamiento_horas"]);
+				}
+			} else if ((categoria.toLowerCase()).indexOf("otro") > -1 && (categoria.toLowerCase()).indexOf("viaje") > -1) {
+				list_justificacion.push(["", $.trim(justificacion), "justificacion"]);
+			} else if ((categoria.toLowerCase()).indexOf("traslado") > -1 && (categoria.toLowerCase()).indexOf("cobranza") > -1) {
+				var datos1 = justificacion.split(" Origen: ");
+				var datos2 = datos1[1].split(" Destino: ");
+
+				var traslado_cobranza = quitar_punto_final($.trim(datos1[0]));
+				var traslado_cobranza_origen = quitar_punto_final($.trim(datos2[0]));
+				var traslado_cobranza_destino = quitar_punto_final($.trim(datos2[1]));
+
+				list_justificacion[0] = datos1[0];
+				list_justificacion.push(["", traslado_cobranza, "justificacion_traslado_cobranza"]);
+				list_justificacion.push(["Origen", traslado_cobranza_origen, "justificacion_traslado_cobranza_origen"]);
+				list_justificacion.push(["Destino", traslado_cobranza_destino, "justificacion_traslado_cobranza_destino"]);
+			} else if ((categoria.toLowerCase()).indexOf("traslado") > -1 &&
+				(categoria.toLowerCase()).indexOf("cabina") > -1 &&
+				(categoria.toLowerCase()).indexOf("siniestro") > -1) {
+				var datos1 = justificacion.split(" Origen: ");
+				var datos2 = datos1[1].split(" Destino: ");
+				var traslado_cabina_siniestro = quitar_punto_final($.trim(datos1[0]));
+				var traslado_cabina_siniestro_origen = quitar_punto_final($.trim(datos2[0]));
+				var traslado_cabina_siniestro_destino = quitar_punto_final($.trim(datos2[1]));
+				list_justificacion.push(["", traslado_cabina_siniestro, "justificacion_traslado_cabina_siniestro"]);
+				list_justificacion.push(["Origen", traslado_cabina_siniestro_origen, "justificacion_traslado_cabina_siniestro_origen"]);
+				list_justificacion.push(["Destino", traslado_cabina_siniestro_destino, "justificacion_traslado_cabina_siniestro_destino"]);
+			} else if ((categoria.toLowerCase()).indexOf("premio") > -1 &&
+				(categoria.toLowerCase()).indexOf("cuaderno") > -1 &&
+				(categoria.toLowerCase()).indexOf("incentivo") > -1) {
+				var datos = justificacion.split(" Agente: ");
+				var premio_cuaderno_incentivo = quitar_punto_final($.trim(datos[0]));
+				var premio_cuaderno_incentivo_agente = quitar_punto_final($.trim(datos[1]));
+				list_justificacion.push(["", premio_cuaderno_incentivo, "justificacion_premio_cuaderno_incentivo"]);
+				list_justificacion.push(["Agente", premio_cuaderno_incentivo_agente, "justificacion_premio_cuaderno_incentivo_agente"]);
+			} else if (((categoria.toLowerCase()).indexOf("alimenta") > -1 || (categoria.toLowerCase()).indexOf("sesion") > -1)) {
+				list_justificacion.push(["", $.trim(justificacion), "justificacion"]);
+			} else {
+				list_justificacion.push(["", $.trim(justificacion), "justificacion"]);
+			}
+			return list_justificacion;
+		}
+		function quitar_punto_final(cadena) {
+			var cadena_final = $.trim(cadena);
+			if (cadena_final.substr(-1) === ".") {
+				cadena_final = cadena_final.substr(0, cadena_final.length - 1);
+			}
+			return cadena_final;
+		}
+		function valores_edit_justificacion(justificacion, categoria) {
+			var datos = [];
+			var njustificacion = justificacion.length;
+			if (njustificacion === 1) {
+				datos.push({ "justificacion": justificacion[0][1] });
+			} else {
+				$.each(justificacion, function (key, value) {
+					var campo = valorVacio(value[2]) ? "" : value[2];
+					var valor = value[1];
+					var valores = "{\"" + campo + "\": \"" + valor + "\"}";
+					valores = JSON.parse(valores);
+					datos.push(valores);
+				});
+			}
+			return datos;
 		}
 		function DatosRequisicion(RmRdeRequisicion) {
 			var RmReqId = RmRdeRequisicion * 1;
