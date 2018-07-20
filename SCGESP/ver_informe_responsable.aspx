@@ -1594,8 +1594,7 @@
 		function DatosRequisicion(RmReqId) {
 			var datos = { 'Usuario': UsuarioActivo, 'RmReqId': RmReqId, 'Empleado': EmpeladoActivo };
 			var resultado = [];
-			localStorage.removeItem('fechasReq');
-
+			
 			$.ajax({
 				async: false,
 				type: "POST",
@@ -1620,6 +1619,7 @@
 					actualizaInfReq(datos);
 					fInicio = formatFecha(fInicio, "dd-mm-yyyy");
 					fFin = formatFecha(fFin, "dd-mm-yyyy");
+					localStorage.removeItem('fechasReq');
 					localStorage.setItem('fechasReq', JSON.stringify({ 'fInicio': fInicio, 'fFin': fFin }));
 				},
 				error: function (result) {

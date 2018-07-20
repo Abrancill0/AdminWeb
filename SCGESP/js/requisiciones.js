@@ -1,4 +1,3 @@
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -250,8 +249,16 @@ function confEliminarRequisiciones(id, nombre) {
     var botones = [];
     botones[0] = {
         text: "Si", click: function () {
-            $(this).dialog("close");
-            eliminarRequisiciones(datos, nombre);
+            var permite = permitirAjustarReq(id);
+            if (permite.actualizaOk === false) {
+                var msnError = "No puedes eliminar la requisición cuando el estatus es: ";
+                msnError += permite.idestatus + ".- " + permite.nmbestatus + ".";
+                $.notify(msnError, { position: "top center", autoHideDelay: 4000, className: "error" });
+                return false;
+            } else {
+                $(this).dialog("close");
+                eliminarRequisiciones(datos, nombre);
+            }
         }
     };
     botones[1] = {
@@ -654,6 +661,7 @@ function guardarRequisicion(origen, doc) {
     }
     if (valorVacio(RmReqCentro) === "") {
         $("#RmReqCentro").notify("Selecciona un centro.", { position: "top", autoHideDelay: 2000 }, "error");
+        $("#RmReqCentro").removeAttr("disabled");
         error = 1;
     }
     if (valorVacio(RmReqTipoDeGasto)) {
@@ -701,6 +709,15 @@ function guardarRequisicion(origen, doc) {
     };
 
     var accion = (idrep * 1) === 0 ? "RequisicionEncabezado" : "RequisicionEncabezadoActualiza";
+    if (accion === "RequisicionEncabezadoActualiza") {
+        var permite = permitirAjustarReq(idrep);
+        if (permite.actualizaOk === false) {
+            var msnError = "No puedes actualizar la requisición cuando el estatus es: ";
+            msnError += permite.idestatus + ".- " + permite.nmbestatus + ".";
+            $.notify(msnError, { position: "top center", autoHideDelay: 4000, className: "error" });
+            return false;
+        }
+    }
     var terminarPreloader = 1;
     $.ajax({
         async: true,
@@ -751,6 +768,27 @@ function guardarRequisicion(origen, doc) {
         }
     });
     //}
+}
+function permitirAjustarReq(id) {
+    var drequisicion = DatosRequisicion(id);
+    var RmReqEstatus = datoEle(drequisicion.RmReqEstatus);
+    var RmReqEstatusNombre = datoEle(drequisicion.RmReqEstatusNombre);
+    var actualizaOk = false;
+    var resultado = [];
+    if (RmReqEstatus === "1" || RmReqEstatus === "98") {
+        resultado = {
+            actualizaOk: true,
+            idestatus: RmReqEstatus,
+            nmbestatus: RmReqEstatusNombre
+        };
+    } else {
+        resultado = {
+            actualizaOk: false,
+            idestatus: RmReqEstatus,
+            nmbestatus: RmReqEstatusNombre
+        };
+    }
+    return resultado;
 }
 function ConsultaMaterial() {
     var RmReqId = $("#idreq").val() * 1;
@@ -1006,7 +1044,18 @@ $("#guardaDetalleReq").click(function () {
 
     if (RmReqId > 0 && idCategoria > 0 &&
         cantidadcat > 0 && montocat > 0) {
-        guardarDetalleRequisicion(RmReqId, idCategoria, cantidadcat, datosCat);
+
+        var permite = permitirAjustarReq(RmReqId);
+        if (permite.actualizaOk === false) {
+            var msnError = "No puedes hacer ajustes en la requisición cuando el estatus es: ";
+            msnError += permite.idestatus + ".- " + permite.nmbestatus + ".";
+            $.notify(msnError, { position: "top center", autoHideDelay: 4000, className: "error" });
+            return false;
+        } else {
+            guardarDetalleRequisicion(RmReqId, idCategoria, cantidadcat, datosCat);
+        }
+
+        
     }
 });
 function guardarDetalleRequisicion(RmReqId, idCategoria, cantidadcat, datosCat) {
@@ -1093,7 +1142,13 @@ function actualizaDetalleReq(datos) {
 
         datos['Usuario'] = UsuarioActivo;
         datos['Empleado'] = EmpeladoActivo;
-
+        var permite = permitirAjustarReq(datos.RmRdeRequisicion);
+        if (permite.actualizaOk === false) {
+            var msnError = "No puedes hacer ajustes en la requisición cuando el estatus es: ";
+            msnError += permite.idestatus + ".- " + permite.nmbestatus + ".";
+            $.notify(msnError, { position: "top center", autoHideDelay: 4000, className: "error" });
+            return false;
+        }
         $.ajax({
             async: true,
             type: "POST",
@@ -1133,8 +1188,17 @@ function confEliminarDetalleReq(RmRdeRequisicion, RmReqDetalleId, RmRdeMaterialN
     var botones = [];
     botones[0] = {
         text: "Si", click: function () {
-            $(this).dialog("close");
-            eliminarDetalleReq(RmRdeRequisicion, RmReqDetalleId, RmRdeMaterialNombre, 1);
+            var permite = permitirAjustarReq(RmRdeRequisicion);
+            if (permite.actualizaOk === false) {
+                var msnError = "No puedes hacer ajustes en la requisición cuando el estatus es: ";
+                msnError += permite.idestatus + ".- " + permite.nmbestatus + ".";
+                $.notify(msnError, { position: "top center", autoHideDelay: 4000, className: "error" });
+                return false;
+            } else {
+                $(this).dialog("close");
+                eliminarDetalleReq(RmRdeRequisicion, RmReqDetalleId, RmRdeMaterialNombre, 1);
+            }
+            
         }
     };
     botones[1] = {
@@ -1923,4 +1987,27 @@ function gAutomaticoRequisicion(datos) {
             cargado();
         }
     });
+}
+
+function DatosRequisicion(RmReqId) {
+    var datos = { 'Usuario': UsuarioActivo, 'RmReqId': RmReqId, 'Empleado': EmpeladoActivo };
+    var resultado = [];
+    $.ajax({
+        async: false,
+        type: "POST",
+        url: '/api/ConsultaRequisicionIDCabecera',
+        data: JSON.stringify(datos),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        cache: false,
+        beforeSend: function () {
+        },
+        success: function (result) {
+            resultado = result.Salida.Tablas.Llave.NewDataSet.Llave;
+        },
+        error: function (result) {
+            console.log("error", result);
+        }
+    });
+    return resultado;
 }
