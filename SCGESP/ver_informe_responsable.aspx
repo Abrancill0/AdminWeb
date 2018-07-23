@@ -2,6 +2,15 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 	<style type="text/css">
+		input::-webkit-input-placeholder {
+		  font-size: 10px !important;
+		}
+		input:-moz-placeholder {
+		  font-size: 10px !important;
+		}
+		input:-ms-input-placeholder { 
+		  font-size: 10px !important;
+		}
 		table {
 			font-size: 12px;
 			width: 100%;
@@ -798,7 +807,7 @@
 				<div class="modal-header titulo-modal">
 					<div id="titulo_modal_alert" style="width: 100%; padding: 1px 10px;">
 					</div>
-					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close"><i class="zmdi zmdi-close"></i>Cerrar</button>
+					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close"><i class="zmdi zmdi-close"></i>&nbsp;Cerrar</button>
 				</div>
 				<div class="modal-body">
 					<div id="contenido_modal_alert" style="width: 100%; color: black">
@@ -1102,7 +1111,7 @@
 							<span class="{{ icono3 }}"></span>&nbsp;{{ label3 }}</button>
 		{{/if}}
 						<button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
-							<i class="zmdi zmdi-close"></i>&nbsp;Cancelar</button>
+							<i class="zmdi zmdi-close"></i>&nbsp;Cerrar</button>
 	</script>
 
 
@@ -1876,6 +1885,21 @@
 			textAyudaJustificacion("", "", 0);
 
 			$("#fechagasto").val("");
+			var hoy = new Date();
+			var fInicio1 = (fechasReq.fInicio).split("-");
+			var fFin1 = (fechasReq.fFin).split("-");
+			var fInicio = new Date(fInicio1[2] + "-" + fInicio1[1] + "-" + fInicio1[0]);
+			var fFin = new Date(fFin1[2] + "-" + fFin1[1] + "-" + fFin1[0]);
+
+			hoy.setHours(0, 0, 0, 0);
+			fInicio.setHours(0, 0, 0, 0); // Lo iniciamos a 00:00 horas
+			fFin.setHours(0, 0, 0, 0); // Lo iniciamos a 00:00 horas
+
+			if (hoy < fInicio || hoy > fFin) {
+				if (valorVacio($("#fechagasto").val())) {
+					$("#fechagasto").val(fechasReq.fInicio);
+				}
+			}
 			$("#idGasto").val("");
 			$("#categoria").val("");
 			$("#justificacion").val("");
@@ -1895,7 +1919,7 @@
 			"#mEditarGastoInf .modal-header.titulo-modal span".AsHTML("Editar Gasto");
 			var gasto = JSON.parse(datos_gasto);
 			var valores_justificacion = gasto.valores_justificacion;
-			$("input[id~='justificacion']").val("");
+			$("input[id*='justificacion']").val("");
 			$("#comensales_gasto").hide();
 			if ((gasto.categoria.toLowerCase()).indexOf("alimenta") > -1 || (gasto.categoria.toLowerCase()).indexOf("sesion") > -1) {
 				$("#comensales_gasto").show();
@@ -2268,7 +2292,7 @@
 				mensaje = "OK";
 				var texto = "";
 				if (error === 1) {
-					mensaje = valorVacio(justificacion_traslado_cabina_siniestro) ? "Se necesita una justificación. Meta Alcanzada en el Cuaderno de Incentivos. " : "";
+					mensaje = valorVacio(justificacion_traslado_cabina_siniestro) ? "Se necesita una justificación. " : "";
 					mensaje += (valorVacio(justificacion_traslado_cabina_siniestro_origen) || valorVacio(justificacion_traslado_cabina_siniestro_destino)) ? "Indicar el origen y destino." : "";
 				} else {
 					texto = justificacion_traslado_cabina_siniestro;
@@ -2346,6 +2370,35 @@
 			var estatus = req.RmReqEstatus * 1;
 			var estatusObligatorioReq = "Fondo Retirado";
 			var estatusActualReq = req.RmReqEstatusNombre;
+			var errorJustificacion = ValidarJustificacion();
+
+			if (errorJustificacion.Error !== 0) {
+				if (errorJustificacion.Error === 2) {
+					var list_errores = "<ul>";
+					$.each(errorJustificacion.Lista, function (key, value) {
+						list_errores += "<li>" + value.Valor + " <b>Gasto: </b>" + value.Justificacion + " <b>Categoría: </b>" + value.Categoria + "</li>";
+					});
+					list_errores += "</ul>";
+					
+					let alertaTitulo = Handlebars.compile($("#modal-alerta-titulo").html());
+					let botones = Handlebars.compile($("#modal-botones").html());
+
+					$('#titulo_modal_alert').empty().append(alertaTitulo({ titulo: 'Error en justificación del gasto' }));
+					$("#contenido_modal_alert").empty().append("No puedes Confrontar, existen errores en la justificación de los gastos:<br />" + list_errores);
+					$("#footer_modal_alert").empty().append(botones());
+					
+					$("#modal_alerta").modal({
+						show: true,
+						keyboard: false,
+						backdrop: "static"
+					});
+
+				} else {
+					Seguridad.alerta(errorJustificacion.Mensaje);
+				}
+				return false;
+			}
+
 			if (valida.NoGastosConComprobante != valida.NoGastos) {
 				Seguridad.alerta("Todos los gastos deben contener almenos un comprobante.");
 			} else {
@@ -2947,6 +3000,10 @@
 		}
 
 		$("#categoria").change(function () {
+			var idGasto = $("#idGasto").val() * 1;
+			if (idGasto === 0)
+				$("input[id*='justificacion']").val("");
+			$(".justificacion_text_ayuda").hide().empty();
 			var CategoriaSelect = document.getElementById("categoria");
 			var NombreCategoria = CategoriaSelect.options[CategoriaSelect.selectedIndex].text;
 			var justificacion = $.trim($("#justificacion").val());
@@ -2962,7 +3019,7 @@
 			var gasto = JSON.parse(datos_gasto);
 			textAyudaJustificacion(NombreCategoria, justificacion, gasto.tipoajuste);
 		});
-		$("input[id~='justificacion']").keyup(function () {
+		$("input[id*='justificacion']").keyup(function () {
 			var justificacion = $.trim($(this).val());
 			if (!valorVacio(justificacion)) {
 				var text_ayuda = $(this).attr("placeholder");
@@ -3007,13 +3064,14 @@
 					ayuda = "¿Desayuno, Comida o Cena?";
 					$("#justificacion").attr("placeholder", ayuda);
 					$("#input_justificacion, #comensales_gasto").show();
+				} else if ((categoria.toLowerCase()).indexOf("sesion") > -1) {
+					ayuda = "Favor de indicar el negocio captado, renovado o el motivo del gasto.";
+					$("#justificacion").attr("placeholder", ayuda);
+					$("#input_justificacion, #comensales_gasto").show();
 				} else if ((categoria.toLowerCase()).indexOf("otro") > -1 && (categoria.toLowerCase()).indexOf("viaje") > -1) {
 					ayuda = "¿Cual fue el gasto y el motivo del gasto?";
 					$("#justificacion").attr("placeholder", ayuda);
 					$("#input_justificacion").show();
-				} else if ((categoria.toLowerCase()).indexOf("sesion") > -1) {
-					ayuda = "Favor de indicar el negocio captado, renovado o el motivo de su gasto.";
-					$("#input_justificacion, #comensales_gasto").show();
 				} else if ((categoria.toLowerCase()).indexOf("traslado") > -1 && (categoria.toLowerCase()).indexOf("cobranza") > -1) {
 					$("#input_justificacion_traslado_cobranza").show();
 				} else if ((categoria.toLowerCase()).indexOf("traslado") > -1 &&
@@ -3258,11 +3316,47 @@
 			//}
 			var IdInforme = $("#idinforme").val() * 1;
 			var valida = validaExistenComprobantes();
+			var disAnticipo = $("#disAnticipo").val() * 1;
+			var errorJustificacion = ValidarJustificacion();
+
+			if (errorJustificacion.Error !== 0) {
+				if (errorJustificacion.Error === 2) {
+					var list_errores = "<ul>";
+					$.each(errorJustificacion.Lista, function (key, value) {
+						list_errores += "<li>" + value.Valor + " <b>Gasto: </b>" + value.Justificacion + " <b>Categoría: </b>" + value.Categoria + "</li>";
+					});
+					list_errores += "</ul>";
+					
+					let alertaTitulo = Handlebars.compile($("#modal-alerta-titulo").html());
+					let botones = Handlebars.compile($("#modal-botones").html());
+
+					$('#titulo_modal_alert').empty().append(alertaTitulo({ titulo: 'Error en justificación del gasto' }));
+					$("#contenido_modal_alert").empty().append("No puedes Confrontar, existen errores en la justificación de los gastos:<br />" + list_errores);
+					$("#footer_modal_alert").empty().append(botones());
+					
+					$("#modal_alerta").modal({
+						show: true,
+						keyboard: false,
+						backdrop: "static"
+					});
+
+				} else {
+					Seguridad.alerta(errorJustificacion.Mensaje);
+				}
+				return false;
+			}
 
 			if (valida.NoGastosConComprobante != valida.NoGastos) {
 				Seguridad.alerta("Para Confrontar, todos los gastos deben contener almenos un comprobante.");
 				return false;
 			}
+
+			if (disAnticipo > 0) {
+				Seguridad.alerta("No se puede Confrontar, aun hay importe por comprobar.");
+				return false;
+			}
+
+			
 			/*var vComensalesObjetivo = validaComensalesObjetivoEnGastos();
 			if (vComensalesObjetivo.estatus === false) {
 				Seguridad.alerta("No puedes confrontar el informe.<br />" + vComensalesObjetivo.mensaje);
@@ -3354,6 +3448,35 @@
 					return false;
 				}*/
 				var valida = validaExistenComprobantes();
+				var errorJustificacion = ValidarJustificacion();
+
+			if (errorJustificacion.Error !== 0) {
+				if (errorJustificacion.Error === 2) {
+					var list_errores = "<ul>";
+					$.each(errorJustificacion.Lista, function (key, value) {
+						list_errores += "<li>" + value.Valor + " <b>Gasto: </b>" + value.Justificacion + " <b>Categoría: </b>" + value.Categoria + "</li>";
+					});
+					list_errores += "</ul>";
+					
+					let alertaTitulo = Handlebars.compile($("#modal-alerta-titulo").html());
+					let botones = Handlebars.compile($("#modal-botones").html());
+
+					$('#titulo_modal_alert').empty().append(alertaTitulo({ titulo: 'Error en justificación del gasto' }));
+					$("#contenido_modal_alert").empty().append("No puedes Confrontar, existen errores en la justificación de los gastos:<br />" + list_errores);
+					$("#footer_modal_alert").empty().append(botones());
+					
+					$("#modal_alerta").modal({
+						show: true,
+						keyboard: false,
+						backdrop: "static"
+					});
+					$("#modal_alerta").css({ 'z-index': 2000 });
+				} else {
+					Seguridad.alerta(errorJustificacion.Mensaje, "#tabConfrontacion");
+				}
+				return false;
+				}
+
 				if (valida.NoGastosConComprobante != valida.NoGastos) {
 					Seguridad.alerta("Para Confrontar, todos los gastos deben contener almenos un comprobante.", "#tabConfrontacion");
 					return false;
@@ -3995,6 +4118,35 @@
 			};
 			Seguridad.confirmar("Cancelar la confrontación del informe?", botones, " Cancelar Confrontación.", "#tabConfrontacion");
 		});
+		function ValidarJustificacion() {
+			var datos = {
+				IdInforme: ($("#idinforme").val() * 1)
+			};
+			var resultado = [];
+			$.ajax({
+				async: false,
+				type: "POST",
+				url: "/api/ValidarJustificacion",
+				data: JSON.stringify(datos),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
+				success: function (result) {
+					resultado = result;
+				},
+				complete: function () {
+				},
+				error: function (result) {
+					console.log(result);
+					resultado = {
+						Error: 1,
+						Mensaje: "Error al validar justificación.",
+						Lista: null
+					};
+					
+				}
+			});
+			return resultado;
+		}
 	</script>
 
 </asp:Content>

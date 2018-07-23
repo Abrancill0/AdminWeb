@@ -5032,6 +5032,7 @@
     <Compile Include="Controllers\CGEAPI\UploadFileController.cs" />
     <Compile Include="Controllers\CGEAPI\ValidaExistenComprobantesController.cs" />
     <Compile Include="Controllers\CGEAPI\ValidaImagenController.cs" />
+    <Compile Include="Controllers\CGEAPI\ValidarJustificacionController.cs" />
     <Compile Include="Controllers\CGEAPI\VistoBuenoController.cs" />
     <Compile Include="Controllers\CGEAPI\VOBOController.cs" />
     <Compile Include="Controllers\EleAPI\AnalisisPresupuesto3Controller.cs" />
