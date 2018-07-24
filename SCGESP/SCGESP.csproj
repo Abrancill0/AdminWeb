@@ -5020,6 +5020,7 @@
     <Compile Include="Controllers\CGEAPI\ObtieneResponsableController.cs" />
     <Compile Include="Controllers\CGEAPI\PruebaGetController.cs" />
     <Compile Include="Controllers\CGEAPI\RechazarInformeController.cs" />
+    <Compile Include="Controllers\CGEAPI\RotarImagenController.cs" />
     <Compile Include="Controllers\CGEAPI\SaveDatosAdicionalesGastoController.cs" />
     <Compile Include="Controllers\CGEAPI\SelectInformeController.cs" />
     <Compile Include="Controllers\CGEAPI\TotalLetraController.cs" />
@@ -5084,6 +5085,7 @@
     <Compile Include="Controllers\EleAPI\RequisicionPeticionTraspasoController.cs" />
     <Compile Include="Controllers\EleAPI\RequisicionProcesosController.cs" />
     <Compile Include="Controllers\EleAPI\RequisicionReembolsoController.cs" />
+    <Compile Include="Controllers\EleAPI\ValidarCFDIController.cs" />
     <Compile Include="Controllers\SelectDatosAdicionalesController.cs" />
     <Compile Include="depuracionmovbanco.aspx.cs">
       <DependentUpon>depuracionmovbanco.aspx</DependentUpon>
