@@ -134,8 +134,6 @@
         <a href="#" onclick='cerrarPanel(".panel")' class='btn btn-danger btn-xs'><i class="zmdi zmdi-close"></i>Cerrar</a>
 			</div>
 			<div class="panel-body">
-				<a id="PRBCORREO" class="btn btn-primary btn-md" href="#" role="button"><span class="glyphicon glyphicon-send"></span>&nbsp;Enviar a Validación</a>
-				<asp:Button runat="Server" Text="envia correo" OnClick="Unnamed_Click" />
 				<table>
 					<tr>
 						<td style="width: 130px">
@@ -1754,7 +1752,7 @@
 				var controles = "";
 				controles += "<button type='button' class='btn btn-warning btn-xs' dir='" + dircomp + "' onclick='imprimirImg()'><i class='zmdi zmdi-print zmdi-hc-2x'></i> Imprimir</button> ";
 				controles += btnEliCom;
-				controles += "<button type='button' class='btn btn-primary btn-xs' dir='" + dircomp + "' onclick='rotarImg(\"" + dircomp + "\")'><i class='zmdi zmdi-print zmdi-hc-2x'></i> Rotar</button> ";
+				controles += "<button type='button' class='btn btn-primary btn-xs' dir='" + dircomp + "' onclick='rotarImg(\"" + dircomp + "\", 90)'><i class='zmdi zmdi-rotate-right zmdi-hc-2x'></i> </button> ";
 				var f = new Date();
 				var fh = f.getDate() + '' + f.getMonth() + '' + f.getFullYear() + '' + f.getHours() + '' + f.getMinutes() + '' + f.getSeconds();
 				$("#controles_compOTRO").append(controles);
@@ -1763,9 +1761,10 @@
 			}
 
 		}
-		function rotarImg(imagen) {
+		function rotarImg(imagen, angulo) {
 			var datos = {
-				'Imagen': imagen
+				'Imagen': imagen,
+				'Angulo': angulo
 			};
 			$.ajax({
 				async: false,
@@ -1778,6 +1777,10 @@
 				},
 				success: function (result) {
 					console.log(result);
+
+					var f = String(new Date().getTime());
+					$("#compOTRO").attr("src", imagen + "?" + fh);
+
 				},
 				error: function (result) {
 					console.log(result);

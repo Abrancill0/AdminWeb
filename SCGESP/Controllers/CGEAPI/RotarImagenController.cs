@@ -15,6 +15,7 @@ namespace SCGESP.Controllers.CGEAPI
 		public class ParametrosImagen
 		{
 			public string Imagen { get; set; }
+			public int Angulo { get; set; }
 		}
 		public class ListResult
 		{
@@ -29,7 +30,14 @@ namespace SCGESP.Controllers.CGEAPI
 			{
 				Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(path);
 				//bitmap1.RotateFlip(RotateFlipType.Rotate180FlipY);
-				bitmap1.RotateFlip(RotateFlipType.Rotate180FlipXY);
+				if (Datos.Angulo == 90)
+				{
+					bitmap1.RotateFlip(RotateFlipType.Rotate90FlipXY);
+				}
+				else {
+					bitmap1.RotateFlip(RotateFlipType.Rotate270FlipXY);
+				}
+				
 				ImageConverter converter = new ImageConverter();
 				var data = (byte[])converter.ConvertTo(bitmap1, typeof(byte[]));
 				
