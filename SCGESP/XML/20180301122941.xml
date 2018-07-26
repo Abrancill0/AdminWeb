@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:donat="http://www.sat.gob.mx/donat" xmlns:implocal="http://www.sat.gob.mx/implocal" xmlns:ine="http://www.sat.gob.mx/ine" xmlns:ns5="http://www.sat.gob.mx/detallista" xmlns:pago10="http://www.sat.gob.mx/Pagos" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Certificado="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" Fecha="2018-02-27T09:57:51" Folio="179693" FormaPago="28" LugarExpedicion="89219" MetodoPago="PUE" Moneda="MXN" NoCertificado="00001000000403363370" Sello="K84CBrKzyJKDHl2LZItPxT+boq4vBrKE5TBIyFUIG7c83pots4dBtr7zTeZQsvsMI9cGo9grGLoun/N6wvlJXTGoSaGS+52/sUlu7+RQsC9xL3RAVD8g8jkFxQRdZvKtpuQPmwifWMBkiM23IRPPW7UgANIjJJf+3dXAGUJKs7XP7Wm3MtuensYThZcRqopUs09Zqy5VXxH5hFlQ+Cm2Nd63K4qxESMy+G7onx49xSIpHi3HHjLRglfk+WeXNT/u8qej2xAgMT03CBo9gf4LZuFicBIw6vM0MctgvPLk6xAPqCIjuPZOAlkFv3l4PA3KfKwruusMpeoq4mmDAhRMeg==" SubTotal="3724.29" TipoDeComprobante="I" Total="4391.00" Version="3.3" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd http://www.sat.gob.mx/implocal http://www.sat.gob.mx/sitio_internet/cfd/implocal/implocal.xsd http://www.sat.gob.mx/ine http://www.sat.gob.mx/sitio_internet/cfd/ine/ine11.xsd http://www.sat.gob.mx/Pagos http://www.sat.gob.mx/sitio_internet/cfd/Pagos/Pagos10.xsd http://www.sat.gob.mx/donat http://www.sat.gob.mx/sitio_internet/cfd/donat/donat11.xsd">
+<cfdi:Emisor Nombre="INVERSIONES HOTELERAS LAGUNA SA DE CV" RegimenFiscal="601" Rfc="IHL000629TY6"/>
+<cfdi:Receptor Nombre="SEGUROS EL POTOSI SA" Rfc="SPO830427DQ1" UsoCFDI="P01"/>
+<cfdi:Conceptos>
+<cfdi:Concepto Cantidad="1" ClaveProdServ="90111800" ClaveUnidad="E48" Descripcion="RENTA DE HABITACION" Importe="3540.67" Unidad="SERVICIO" ValorUnitario="3540.67">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="3540.67" Importe="566.51" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+</cfdi:Traslados>
+</cfdi:Impuestos>
+</cfdi:Concepto>
+<cfdi:Concepto Cantidad="1" ClaveProdServ="90101501" ClaveUnidad="E48" Descripcion="RESTAURANTE" Importe="183.62" Unidad="SERVICIO" ValorUnitario="183.62">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="183.62" Importe="29.38" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+</cfdi:Traslados>
+</cfdi:Impuestos>
+</cfdi:Concepto>
+</cfdi:Conceptos>
+<cfdi:Impuestos TotalImpuestosTrasladados="595.89">
+<cfdi:Traslados>
+<cfdi:Traslado Importe="595.89" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+</cfdi:Traslados>
+</cfdi:Impuestos>
+<cfdi:Complemento>
+<implocal:ImpuestosLocales TotaldeRetenciones="0.00" TotaldeTraslados="70.82" version="1.0">
+<implocal:TrasladosLocales ImpLocTrasladado="ISH" Importe="70.82" TasadeTraslado="2.00"/>
+</implocal:ImpuestosLocales>
+<tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" FechaTimbrado="2018-02-27T09:57:57" NoCertificadoSAT="00001000000402636111" RfcProvCertif="SAD110722MQA" SelloCFD="K84CBrKzyJKDHl2LZItPxT+boq4vBrKE5TBIyFUIG7c83pots4dBtr7zTeZQsvsMI9cGo9grGLoun/N6wvlJXTGoSaGS+52/sUlu7+RQsC9xL3RAVD8g8jkFxQRdZvKtpuQPmwifWMBkiM23IRPPW7UgANIjJJf+3dXAGUJKs7XP7Wm3MtuensYThZcRqopUs09Zqy5VXxH5hFlQ+Cm2Nd63K4qxESMy+G7onx49xSIpHi3HHjLRglfk+WeXNT/u8qej2xAgMT03CBo9gf4LZuFicBIw6vM0MctgvPLk6xAPqCIjuPZOAlkFv3l4PA3KfKwruusMpeoq4mmDAhRMeg==" SelloSAT="OqHDVHK6rPc1spVIxYNuL4EXDrG8aKQkriot1+Vy0h28eSVaRCcDK4gOk+BBdZSjEZ9DMs+Z3OX0bS7PMdr8+M1nTOiJQrKxu0/DVih/KvhnOn265oZo9qPW/HJRQf2F20Imn4bx4AE1OuM3+qnjFnFC+fxRporfdN02jAuffn13qErbwbWXBZRQuQjdBQY68q6ebzZxPkATYKy8bOawlljP7Axh5vguaB/qkr44yxDJ8Y+HTwGQz2+AyYET9dHN6v/EjKGX93TwdslbRC29xdLhJ9cuFfthVeat2a/U1vpRrxUVbTjHIs6Zix1FwcEUnc6gPWNrgPp9M9hgp1UjHg==" UUID="3DB4260D-1598-074A-8C9D-3E192F2D0E00" Version="1.1" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd"/>
+</cfdi:Complemento>
+<cfdi:Addenda xmlns:posadas="http://www.posadas.com/MFE" xsi:schemaLocation="http://www.posadas.com/MFE https://posadas.factocloud.com.mx/addendaposadasvl2.xsd">
+<posadas:RequestForPayment>
+<posadas:Hoteleria cajero="LAO" extension="  0" fechaLlegada="2018/02/26" fechaSalida="2018/02/27" folio="260390" habitacion="106" huesped="CARBAJAL CERVANTES, SAMANTHA" importeaPagar="4391.00" numeroFormato="00" numeroReferencia="FITAM 321052" reservacion="I  283779     1"/>
+</posadas:RequestForPayment>
+</cfdi:Addenda>
+</cfdi:Comprobante>

@@ -148,7 +148,7 @@
 								<!--informe-cabecera-template-->
 							</div>
 
-							<div id="importesInforme" class="hidden-xs col-md-6 col-lg-4">
+							<div id="importesInforme" class="col-md-6 col-lg-4">
 								<!--importes-informe-template-->
 							</div>
 						</div>
@@ -1093,6 +1093,16 @@
 				list_justificacion.push(["", $.trim(justificacion), "justificacion"]);
 				return list_justificacion;
 			}
+			var hoy = new Date();
+			var fechaFormulario = new Date('2018-08-15');
+			// Comparamos solo las fechas => no las horas!!
+			hoy.setHours(0,0,0,0); // Lo iniciamos a 00:00 horas
+
+			if (hoy <= fechaFormulario) {
+				list_justificacion.push(["", $.trim(justificacion), "justificacion"]);
+				return list_justificacion;
+			}
+
 			if ((categoria.toLowerCase()).indexOf("hospeda") > -1) {
 				//justificacion_huespedes_alimentos, justificacion_noches
 				var datos = justificacion.split("Noches de hospedaje: ");

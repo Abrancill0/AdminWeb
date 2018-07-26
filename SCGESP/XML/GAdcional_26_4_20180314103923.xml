@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" Version="3.3" Serie="A" Folio="11582" Fecha="2018-01-21T10:29:22" Sello="mhs65UZK+Vv6Oq5e2e3cE1++8tHChgYQ0qANNj0HdO7+4IpHYBFNgRNYw0gT3A/QR/hsiNFnwhOhOOxYoGgdz6vraMlIV1WbzdIJxOLoTKpBcUyLBWfiENggpHqwA+jAcZFXOY6xorfsGKmB0PL3/PoPIg2EL/4OePjOn88c3pM=" FormaPago="01" NoCertificado="00001000000305133762" Certificado="MIIEcjCCA1qgAwIBAgIUMDAwMDEwMDAwMDAzMDUxMzM3NjIwDQYJKoZIhvcNAQEFBQAwggGKMTgwNgYDVQQDDC9BLkMuIGRlbCBTZXJ2aWNpbyBkZSBBZG1pbmlzdHJhY2nDs24gVHJpYnV0YXJpYTEvMC0GA1UECgwmU2VydmljaW8gZGUgQWRtaW5pc3RyYWNpw7NuIFRyaWJ1dGFyaWExODA2BgNVBAsML0FkbWluaXN0cmFjacOzbiBkZSBTZWd1cmlkYWQgZGUgbGEgSW5mb3JtYWNpw7NuMR8wHQYJKoZIhvcNAQkBFhBhY29kc0BzYXQuZ29iLm14MSYwJAYDVQQJDB1Bdi4gSGlkYWxnbyA3NywgQ29sLiBHdWVycmVybzEOMAwGA1UEEQwFMDYzMDAxCzAJBgNVBAYTAk1YMRkwFwYDVQQIDBBEaXN0cml0byBGZWRlcmFsMRQwEgYDVQQHDAtDdWF1aHTDqW1vYzEVMBMGA1UELRMMU0FUOTcwNzAxTk4zMTUwMwYJKoZIhvcNAQkCDCZSZXNwb25zYWJsZTogQ2xhdWRpYSBDb3ZhcnJ1YmlhcyBPY2hvYTAeFw0xNDA5MTkxNTIzMThaFw0xODA5MTkxNTIzMThaMIG+MSYwJAYDVQQDEx1NQVJJQSBFVUdFTklBIEFDT1NUQSBFU0NPQkVETzEmMCQGA1UEKRMdTUFSSUEgRVVHRU5JQSBBQ09TVEEgRVNDT0JFRE8xJjAkBgNVBAoTHU1BUklBIEVVR0VOSUEgQUNPU1RBIEVTQ09CRURPMRYwFAYDVQQtEw1BT0VFNzYxMTIxUlo1MRswGQYDVQQFExJBT0VFNzYxMTIxTVNQQ1NHMDQxDzANBgNVBAsTBnVuaWRhZDCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAqdJEFwjkq5mhCalVjaZLBJ100Sg5FZWHb1bwgSsdLfIhk5MMbjIfPAYnTG7idy3VLX+QxvEAC3T5eYR6r7c/Nr4bFhjTWc6ZihpGqQLVCk6FEBmGoK+Lkw40FCTtyd7R3pJXGc7yVTyse6sz9NsWeL9Ghq/vcfFns/Bn29N+A8ECAwEAAaMdMBswDAYDVR0TAQH/BAIwADALBgNVHQ8EBAMCBsAwDQYJKoZIhvcNAQEFBQADggEBAE7tcp4qnuj9q11ylnB1hcZO9r/cn6Dqk3zGnkGUgDf9LhCAHvlyeT2I7+x9jD3Uh6p9VBlPKKyh3f/nPmKtq1//wexiWGqF60r25T+a4CAzFqqd5hZyZisNKqqAGK9e8qfoTa7+i4kHtGyWNCyMLqKdEDJFNVRCUapf3B+lj9tOrwdfa6j6FPEo4f8PmiKNVvsZNF8blUvQtKsLqK977h2+/VGFi26V0gR0vd5qldG06CoYzz9Q4vHacpJdGh3n/j3W7Kh9tf/j5WKrBc50taneMmwHSatN+llYSdFBCbBOWzNWk8CREkduIsvz7s+BZh1enTgBlQPaUy4pfoHtT9c=" SubTotal="860.05" Moneda="MXN" Total="990.94" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="78220">
+  <cfdi:Emisor Rfc="AOEE761121RZ5" Nombre="Maria Engenia Acosta Escobedo" RegimenFiscal="612" />
+  <cfdi:Receptor Rfc="GOBM661001RQ0" UsoCFDI="G03" Nombre="MIGUEL ANGEL GONZALEZ BELTRAN" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="51171900" Cantidad="3" ClaveUnidad="PZ" Unidad="PZ" Descripcion="EQUIPO VENOCLISIS FLEBOTEK" ValorUnitario="10.34" Importe="31.02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="31.02" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.16" Importe="4.96" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="51171900" Cantidad="12" ClaveUnidad="PZ" Unidad="PZ" Descripcion="JELCO TODOS CALIBRES" ValorUnitario="16.38" Importe="196.56">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="196.56" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.16" Importe="31.45" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="51171900" Cantidad="3" ClaveUnidad="PZ" Unidad="pz" Descripcion="CLORURO DE SODIO .9% 100ML" ValorUnitario="14.00" Importe="42.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="42.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0" Importe="0.00" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="51171900" Cantidad="2" ClaveUnidad="PZ" Unidad="PZ" Descripcion="LAMPARA DE DIAGNOSTICO HOME CARE LUZ LED" ValorUnitario="90.51" Importe="181.02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="181.02" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.16" Importe="28.96" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="51171900" Cantidad="2" ClaveUnidad="PZ" Unidad="PZ" Descripcion="TIJERA USO RUDO 14 CM" ValorUnitario="47.41" Importe="94.82">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="94.82" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.16" Importe="15.17" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="51171900" Cantidad="2" ClaveUnidad="PZ" Unidad="PZ" Descripcion="TIJERA USO RUDO 16 CM" ValorUnitario="51.72" Importe="103.44">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="103.44" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.16" Importe="16.55" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="51171900" Cantidad="1" ClaveUnidad="PZ" Unidad="pz" Descripcion="CUBREBOCAS PLISADO C/50" ValorUnitario="51.72" Importe="51.72">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="51.72" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.16" Importe="8.28" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="51171900" Cantidad="3" ClaveUnidad="PZ" Unidad="pz" Descripcion="LIGADURA STRECH PARA TORNIQUETE" ValorUnitario="12.93" Importe="38.79">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="38.79" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.16" Importe="6.21" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="51171900" Cantidad="1" ClaveUnidad="PZ" Unidad="pz" Descripcion="GUANTE AMBIDERM ESTERIL C/10 M" ValorUnitario="17.24" Importe="17.24">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="17.24" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.16" Importe="2.76" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="51171900" Cantidad="2" ClaveUnidad="PZ" Unidad="PZ" Descripcion="TERMOMETRO DIGITAL MARCA MICROLIFE" ValorUnitario="51.72" Importe="103.44">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="103.44" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.16" Importe="16.55" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="130.89">
+    <cfdi:Traslados>
+      <cfdi:Traslado Importe="130.89" Impuesto="002" TasaOCuota="0.16" TipoFactor="Tasa" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" SelloCFD="mhs65UZK+Vv6Oq5e2e3cE1++8tHChgYQ0qANNj0HdO7+4IpHYBFNgRNYw0gT3A/QR/hsiNFnwhOhOOxYoGgdz6vraMlIV1WbzdIJxOLoTKpBcUyLBWfiENggpHqwA+jAcZFXOY6xorfsGKmB0PL3/PoPIg2EL/4OePjOn88c3pM=" NoCertificadoSAT="00001000000405332712" RfcProvCertif="FIN1203015JA" UUID="2FD3FB74-4C6B-413F-881F-89501B17C50A" FechaTimbrado="2018-01-22T10:29:39" SelloSAT="j22yYsxza5ZXLNjdir4F+DLXxVmjeieL1/6kpZGUXziUVa92JiqTTzBJqoprrf49hZAMSzP1ZuYvoCUH8xNihqpRLUbTK/AGs4Yn4D359QG/TX8c2bY2lwG53hqxz9lvIwePXy/sMHLQhqL3HnDZGRFaiSmaUDml5QvQSlUEiDT1D91pCk8YmJr9wicFo1dRRFeCVcIcXqgjj5RwZ2cCvPI9kBwYxhglrQSqYpVz1cFk1ZoqMuV/Q6R2bBXEpG1cOvC/6laDJaxQxExaeK/c22ElSqxGzoHaumJPSgQF4/nPj1L5N+HxmcfVOzg/anmsGpxML9NPASFTHJIU1qQAQg==" />
+  </cfdi:Complemento>
+</cfdi:Comprobante>

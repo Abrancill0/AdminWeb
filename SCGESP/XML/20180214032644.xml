@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:implocal="http://www.sat.gob.mx/implocal" xmlns:detallista="http://www.sat.gob.mx/detallista" xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xmlns:ine="http://www.sat.gob.mx/ine" Version="3.3" Serie="IH" Folio="996" Fecha="2018-01-10T08:09:46" Sello="hdxdgXdpd1nBEcPBxVWVMkY2CarD+IOKe6Mr86hBJhWIMW/GmdX+vSJNOx2LXJC8CKfeW1AyoiccH8YArR18Zs1HJzoGPZaJv2ifWXUaedvihFpbCcotAgnliTFK7ZZVoJxc4U4dDl+po5RyIuxfjI/2iZZVo8zs1gv7xMQA35GLzXNz09l5K780DyifmM54sLguGQUP5pypVtgSlV/wIhTNWSyPuph4WaEX03w5D59Yqy+GXu5hZB+LyvWee2fc4mlfJ5hUnMiAXmBdmyAv2Tr+71lBNBa0NTdXKhG7V0KxAQdbuz4iS4WHBojhEKPK8vd+//lCrUSJ8A2vLfYthw==" MetodoPago="PUE" NoCertificado="00001000000407949306" Certificado="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" SubTotal="271.01" Moneda="MXN" Total="322.50" TipoDeComprobante="I" FormaPago="28" LugarExpedicion="78000" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/TimbreFiscalDigital/TimbreFiscalDigital.xsd http://www.sat.gob.mx/detallista http://www.sat.gob.mx/sitio_internet/cfd/detallista/detallista.xsd http://www.sat.gob.mx/implocal http://www.sat.gob.mx/sitio_internet/cfd/implocal/implocal.xsd http://www.sat.gob.mx/ine http://www.sat.gob.mx/sitio_internet/cfd/ine/ine11.xsd">
+  <cfdi:Emisor Rfc="IPO640805KU9" Nombre="INVERSIONES POTOSINAS SA DE CV" RegimenFiscal="601"/>
+  <cfdi:Receptor Rfc="SPO830427DQ1" Nombre="SEGUROS EL POTOSI, S. A." UsoCFDI="G03"/>
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="90111800" Cantidad="1" ClaveUnidad="ROM" Unidad="SERVICIO" Descripcion="RENTA DE HABITACION" ValorUnitario="271.01" Importe="271.01">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="271.01" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="43.36"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="43.36">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="43.36"/>
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <implocal:ImpuestosLocales xmlns:implocal="http://www.sat.gob.mx/implocal" version="1.0" TotaldeRetenciones="0.00" TotaldeTraslados="8.13">
+      <implocal:TrasladosLocales ImpLocTrasladado="impuesto al hospedaje" TasadeTraslado="3" Importe="8.13"/>
+    </implocal:ImpuestosLocales>
+    <tfd:TimbreFiscalDigital xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="F4DF45EC-F60F-11E7-96A4-8395599E57D9" FechaTimbrado="2018-01-10T08:10:05" RfcProvCertif="FMO1007168C6" SelloCFD="hdxdgXdpd1nBEcPBxVWVMkY2CarD+IOKe6Mr86hBJhWIMW/GmdX+vSJNOx2LXJC8CKfeW1AyoiccH8YArR18Zs1HJzoGPZaJv2ifWXUaedvihFpbCcotAgnliTFK7ZZVoJxc4U4dDl+po5RyIuxfjI/2iZZVo8zs1gv7xMQA35GLzXNz09l5K780DyifmM54sLguGQUP5pypVtgSlV/wIhTNWSyPuph4WaEX03w5D59Yqy+GXu5hZB+LyvWee2fc4mlfJ5hUnMiAXmBdmyAv2Tr+71lBNBa0NTdXKhG7V0KxAQdbuz4iS4WHBojhEKPK8vd+//lCrUSJ8A2vLfYthw==" NoCertificadoSAT="00001000000401477845" SelloSAT="R3MW2+tuyVPvY9hNqNK+zSN5Vf0S4IqqJQKGZBcOruz6qPcg6JJx9zoWFTyMhEfQOp9HM4iVPKOQB78y2UpNAh59PXGqBWrmf1DgpzQRDJFFRcqDo0nseGxIjk3Ps3HxqGwqmlEyeOcDYTCv/MkSrWXzJZqhCjZmyh8b4v2VU+VLMvE7RN5G3Z8L0m8/nktDnpqpseBXBd5RgFUIaa8QVPXR9/yBd7YDrVQTZ0102w3OBLt8wyJJtLlmEQRY/HXZ10F+Awoh8zS9wER69odUjQerwswInZ7ljXITNN4wYK2p0O1FqHLBmsChLcPGfjl+vFmu2yyjfLUgI++H6keEfw=="/>
+  </cfdi:Complemento>
+
+<cfdi:Addenda>
+<DatosExtras
+Reservacion="0001698"
+Llegada="20180109"
+Salida="20180110"
+Facturacion="20180110"
+TipodeCuarto=" ST2 4"
+NumerodeCuarto="09 8"
+CodAgen="30428 14"
+HoraSalida="T09:"
+NobreHuesped="GONZALEZ ALFONSO & ALBA HECTOR ARTURO"
+CorreoElectronico="alejandro.nigenda@gmail.com"
+Propina=" 0.00"
+ImporteLetra="***(TRESCIENTOS VEINTIDOS PESOS 50/100 M.N.)***"
+></DatosExtras>
+</cfdi:Addenda>
+</cfdi:Comprobante>
+

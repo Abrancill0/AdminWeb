@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" Version="3.3" Serie="MA" Folio="781" Fecha="2018-02-26T07:31:37" Sello="TRxli0s2MggMrOHWsX4SQhhznAKEZRT5Rp5zU7kUW9a3xwateFY8zxBvAWQhLEZOzRFU/nV4rdr/w2bh3rBjS63BDJASJRcFaJiV8DC2FDyLB1Z5H1IBNaR0KcKNiQWmVCmp6pxyo7vXRFc46clckxwldhcFAC24ACOYUCWOrfJc3udtawwR8yrdEftMSHxeb/ubeaXML8DD/0kBtGKHqgt24oHRQKXsBjraG6fv4YZ5S7oJUoY8Ba4X0d0U665MqC9UzM+nUsdqgl38csgR4HaNi7Da1HLl/XV3EDIhnuDJ1l1xWVtqX8nXUPzwkbzZB0CeiILjWVW+Q6w5VrYHMg==" FormaPago="28" NoCertificado="00001000000406954723" Certificado="MIIGHzCCBAegAwIBAgIUMDAwMDEwMDAwMDA0MDY5NTQ3MjMwDQYJKoZIhvcNAQELBQAwggGyMTgwNgYDVQQDDC9BLkMuIGRlbCBTZXJ2aWNpbyBkZSBBZG1pbmlzdHJhY2nDs24gVHJpYnV0YXJpYTEvMC0GA1UECgwmU2VydmljaW8gZGUgQWRtaW5pc3RyYWNpw7NuIFRyaWJ1dGFyaWExODA2BgNVBAsML0FkbWluaXN0cmFjacOzbiBkZSBTZWd1cmlkYWQgZGUgbGEgSW5mb3JtYWNpw7NuMR8wHQYJKoZIhvcNAQkBFhBhY29kc0BzYXQuZ29iLm14MSYwJAYDVQQJDB1Bdi4gSGlkYWxnbyA3NywgQ29sLiBHdWVycmVybzEOMAwGA1UEEQwFMDYzMDAxCzAJBgNVBAYTAk1YMRkwFwYDVQQIDBBEaXN0cml0byBGZWRlcmFsMRQwEgYDVQQHDAtDdWF1aHTDqW1vYzEVMBMGA1UELRMMU0FUOTcwNzAxTk4zMV0wWwYJKoZIhvcNAQkCDE5SZXNwb25zYWJsZTogQWRtaW5pc3RyYWNpw7NuIENlbnRyYWwgZGUgU2VydmljaW9zIFRyaWJ1dGFyaW9zIGFsIENvbnRyaWJ1eWVudGUwHhcNMTcwNzE4MjE0NTU3WhcNMjEwNzE4MjE0NTU3WjCBvzEcMBoGA1UEAxMTTk9WT1JFVEFJTCBTQSBERSBDVjEcMBoGA1UEKRMTTk9WT1JFVEFJTCBTQSBERSBDVjEcMBoGA1UEChMTTk9WT1JFVEFJTCBTQSBERSBDVjElMCMGA1UELRMcTk9WMTYwOTI5OVRBIC8gQkFMQTg1MDkyNjdLMzEeMBwGA1UEBRMVIC8gQkFMQTg1MDkyNkhERlJKTDAwMRwwGgYDVQQLExNOT1ZPUkVUQUlMIFNBIERFIENWMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlkqTmc+QTw5FG2Rt5jOfKuuFHc8eSpS4VlrLmh9EwYDAF1iYzkkCXTKcjtsv6e8HHwYw8IyXLBZwDowBT8Tac4prL5BqVPXYnqJ8wDACpH/QHsaYZNx5JEovrc1soU0xfzfqo/g5jVVA3VY6UhnDXBHHSGyFH1XUWByhaSiwL91SNmjnknX9U2sZFJd25rgw9WPM2z8/W5qRLzXujc4OxeRTo/jgf/ByBU+IJFtM7HXEktxQxq5nFiuwO105JLZg1eFMWUL8zRdfuhjZRCaRKtONjFB1rXW6y9Ia8A3XzTirCODsssS1rBISeTEwZsf2agorgb9DZnMg7yu0jZm92QIDAQABox0wGzAMBgNVHRMBAf8EAjAAMAsGA1UdDwQEAwIGwDANBgkqhkiG9w0BAQsFAAOCAgEAMfBtjYt3yz1hVwMDpDTZ5UhncknmQdgKIfS3YHnS0fuGbod3t2aXDGB+IRMjIDzFjrveH0oJJZKO1DQHnLl6Zm32FyEQC4HW8E3TgSVMjaLpB09pnTnVc+a0IwsKsYeicRJchsceWwAwqAg9TMAlXsxifupfhbYTK1WSddgnyGhscLFBm5dVR4iX5ibwByEPhiuKn6zaUPYLVBgr/Gg4Lu9emq8xYmeWn1o+7H7ZLz/kH4c8ldGOBaafr2OA+pTuI6y/DFqbWKhph+/a2n0Gk5B0HWirbgSWD5rKyQ0Fp/J0m2jxpLBuCFIKTDOdrI1+SElCTuzBMR8lOao49IWO5nKAKg5tii7hCNYjNWJ4vJIORbUYqbSQiktDMKmUwjmltwtFUjZ6kAVLU5JU3ADweW8YVQDRsrD05/KnDXmhJwXKJQ8j00Vjj2ahcxza/29Z0zibBUIeUn+5T3KEf044IpXCe2FXXIaZp6okV24l5t5BwCcYuUiModbIwmrMAjEUBlcN92C22w7hVPQ8rxFKk47WvmrIsVtoFLjEL4JEbgC0ns/N6yH1blP/Mjwa8JJjF8V15yNN7WRGopaAvUqKGupMIg8sdul6UZQVXa1K9NmpI8GR4EwlRk6ce5E7fLWkuKH3g/vxqNsbsqSkN/efunkEfuSDyEyYVqM/Ss8xU08=" SubTotal="259.28" Moneda="MXN" Total="279.00" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="78430">
+	<cfdi:Emisor Rfc="NOV1609299TA" Nombre="NOVORETAIL" RegimenFiscal="601"/>
+	<cfdi:Receptor Rfc="SPO830427DQ1" Nombre="SEGUROS EL POTOSI SA DE CV" UsoCFDI="G03"/>
+	<cfdi:Conceptos>
+		<cfdi:Concepto ClaveProdServ="50202300" NoIdentificacion="019836103830" Cantidad="1" ClaveUnidad="H87" Unidad="PZ" Descripcion="BOING NECTAR NR UVA  354 ML " ValorUnitario="14.01" Importe="14.01">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="14.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.00"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="50202300" NoIdentificacion="758104001712" Cantidad="2" ClaveUnidad="H87" Unidad="PZ" Descripcion="BONAFONT  NATURAL  600ML" ValorUnitario="11.00" Importe="22.00">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="22.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.00"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="50202300" NoIdentificacion="758104003907" Cantidad="1" ClaveUnidad="H87" Unidad="PZ" Descripcion="BONAFONT LEVITE FRESA 1 LT" ValorUnitario="23.00" Importe="23.00">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="23.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.00"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="50131700" NoIdentificacion="7501040092886" Cantidad="1" ClaveUnidad="H87" Unidad="PZ" Descripcion="GRIEGO SABORES 220G" ValorUnitario="14.00" Importe="14.00">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="14.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.00"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="50181900" NoIdentificacion="7501030473947" Cantidad="1" ClaveUnidad="H87" Unidad="PZ" Descripcion="BIMBO TARTINAS 78G" ValorUnitario="14.00" Importe="14.00">
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="50181900" NoIdentificacion="7501000112128" Cantidad="1" ClaveUnidad="H87" Unidad="PZ" Descripcion="BIMBO ROLES GLASEADOS Y PASAS 135G" ValorUnitario="15.00" Importe="15.00">
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="50201700" NoIdentificacion="CAFE1" Cantidad="1" ClaveUnidad="H87" Unidad="PZ" Descripcion="CAFE TERRATOSTA CHICO " ValorUnitario="17.00" Importe="17.00">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="17.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.00"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="50201700" NoIdentificacion="CAFE1" Cantidad="1" ClaveUnidad="H87" Unidad="PZ" Descripcion="CAFE TERRATOSTA CHICO " ValorUnitario="17.00" Importe="17.00">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="17.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.00"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="50192700" NoIdentificacion="S1" Cantidad="1" ClaveUnidad="H87" Unidad="PZ" Descripcion="SANDWICH 12 GRANOS" ValorUnitario="30.172414" Importe="30.17">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="30.17" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="4.8272"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="50192700" NoIdentificacion="BAGUEL1" Cantidad="2" ClaveUnidad="H87" Unidad="PZ" Descripcion="BAGUEL JAMON PIERNA" ValorUnitario="46.5518" Importe="93.10">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="93.10" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="14.896"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+	</cfdi:Conceptos>
+	<cfdi:Impuestos TotalImpuestosTrasladados="19.72">
+		<cfdi:Traslados>
+			<cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.00"/>
+			<cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="19.72"/>
+		</cfdi:Traslados>
+	</cfdi:Impuestos>
+	<cfdi:Complemento><tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" SelloSAT="UQcAk9lp4vFUri8p7ehIr0TeI4YpkXYiatLgclx/QLDmOD2mMWqze7ZKGC6rB9/UDy6ViaciDmlOAP86QFv3QB9JUDUnywx9V2E4uE4FGxfxlI7W3xOh8X/w4WL+dBLdGATfLe5o+zOv01j7Wr63msqpgXqqrjrBh9bDSQrxSkSasSvz6LxU2rQgRGBhd0JTiTp5U9IY0E53xhyYXPiwI5mVX0btkOrt09B7+XD0TGEKcQpcc8kBLUwrBSCOcHPB880W6Ar5MjWbJK5KgNJRoO5XaK5VLbhsxTUjQJgp2oueB0mRttc/hFq5DT4I16OHnyBK7w07UiBYdx6adYoJiQ==" NoCertificadoSAT="00001000000401041203" SelloCFD="TRxli0s2MggMrOHWsX4SQhhznAKEZRT5Rp5zU7kUW9a3xwateFY8zxBvAWQhLEZOzRFU/nV4rdr/w2bh3rBjS63BDJASJRcFaJiV8DC2FDyLB1Z5H1IBNaR0KcKNiQWmVCmp6pxyo7vXRFc46clckxwldhcFAC24ACOYUCWOrfJc3udtawwR8yrdEftMSHxeb/ubeaXML8DD/0kBtGKHqgt24oHRQKXsBjraG6fv4YZ5S7oJUoY8Ba4X0d0U665MqC9UzM+nUsdqgl38csgR4HaNi7Da1HLl/XV3EDIhnuDJ1l1xWVtqX8nXUPzwkbzZB0CeiILjWVW+Q6w5VrYHMg==" RfcProvCertif="SCD110105654" FechaTimbrado="2018-02-26T18:11:14" UUID="54BBC247-4CA2-5746-967E-3D96A7D474DC" Version="1.1"/></cfdi:Complemento></cfdi:Comprobante>

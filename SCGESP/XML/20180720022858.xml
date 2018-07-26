@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:iedu="http://www.sat.gob.mx/iedu" xmlns:implocal="http://www.sat.gob.mx/implocal" xmlns:ine="http://www.sat.gob.mx/ine" xmlns:ns6="http://www.sat.gob.mx/detallista" xmlns:pago10="http://www.sat.gob.mx/Pagos" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Certificado="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" Fecha="2018-07-04T20:57:02" Folio="6415" FormaPago="28" LugarExpedicion="38080" MetodoPago="PUE" Moneda="MXN" NoCertificado="00001000000403291457" Sello="dK7T91WBavUv3RiVJ6GzkNKSQbBJgZnlpLCd0aKC8OToUZ+vCC5gWKBqUonFkcgBHdYDhpc9Q9RlEnPSo4u0E8dXBFS52j/FsIkvQnQ0YDR/HE1WhG+S6LlzPCOsXLx1G4bh9LarCzcIwWgypVh7MAKctSkFuwog0zryWd78AKDGHnGZGZv39eaifuDZjKUgvsC+Nyhc9R2Dj2FA69v2kHV2+W+2wBVb7zYYMjwBhG4ap9C2B69Ba2GycmVm9nSxQdif9lwEKpzVTIdZQEPjVrj4bp89VienpPPU8CzBPhv6bqjNVU5/4nFKDqpqrYqErlXSAVGgvWZ1iD151W926w==" Serie="G" SubTotal="1270.00" TipoDeComprobante="I" Total="1498.60" Version="3.3" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd http://www.sat.gob.mx/implocal http://www.sat.gob.mx/sitio_internet/cfd/implocal/implocal.xsd http://www.sat.gob.mx/ine http://www.sat.gob.mx/sitio_internet/cfd/ine/ine11.xsd http://www.sat.gob.mx/Pagos http://www.sat.gob.mx/sitio_internet/cfd/Pagos/Pagos10.xsd">
+<cfdi:Emisor Nombre="Inmobiliaria Coral de Vallarta, S.A. de C.V." RegimenFiscal="601" Rfc="ICV9006077Q6"/>
+<cfdi:Receptor Nombre="SEGUROS EL POTOSI SA" Rfc="SPO830427DQ1" UsoCFDI="G03"/>
+<cfdi:Conceptos>
+<cfdi:Concepto Cantidad="1" ClaveProdServ="90111501" ClaveUnidad="E48" Descripcion="Renta-Habitacion" Importe="1270.00" Unidad="Servicios" ValorUnitario="1270.00">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="1270.00" Importe="203.20" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+</cfdi:Traslados>
+</cfdi:Impuestos>
+</cfdi:Concepto>
+</cfdi:Conceptos>
+<cfdi:Impuestos TotalImpuestosTrasladados="203.20">
+<cfdi:Traslados>
+<cfdi:Traslado Importe="203.20" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+</cfdi:Traslados>
+</cfdi:Impuestos>
+<cfdi:Complemento>
+<implocal:ImpuestosLocales TotaldeRetenciones="0.00" TotaldeTraslados="25.40" version="1.0">
+<implocal:TrasladosLocales ImpLocTrasladado="HOSPEDAJE" Importe="25.40" TasadeTraslado="2.00"/>
+</implocal:ImpuestosLocales>
+<tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" FechaTimbrado="2018-07-04T20:59:34" NoCertificadoSAT="00001000000402636111" RfcProvCertif="SAD110722MQA" SelloCFD="dK7T91WBavUv3RiVJ6GzkNKSQbBJgZnlpLCd0aKC8OToUZ+vCC5gWKBqUonFkcgBHdYDhpc9Q9RlEnPSo4u0E8dXBFS52j/FsIkvQnQ0YDR/HE1WhG+S6LlzPCOsXLx1G4bh9LarCzcIwWgypVh7MAKctSkFuwog0zryWd78AKDGHnGZGZv39eaifuDZjKUgvsC+Nyhc9R2Dj2FA69v2kHV2+W+2wBVb7zYYMjwBhG4ap9C2B69Ba2GycmVm9nSxQdif9lwEKpzVTIdZQEPjVrj4bp89VienpPPU8CzBPhv6bqjNVU5/4nFKDqpqrYqErlXSAVGgvWZ1iD151W926w==" SelloSAT="P+JU66R2onmUR/YGtorOADyaeIyPG1lk4V0sFjkvy9i0jQYyIuh4BGduqIQEuiipU275hVUPqE8uTStnSrX4n9bTyK/QjKijzErmKg0Exouhkv645wDiO5gXhLEx59/paowI/qQHdkKw1+kW0SNe5i1Lx5RsV413zfXzy23wfAhHMJG1J8W/EAYaXGWcFoTYCchEwOv3GO9Cpd4PC4I6b9sy400rE9E99vV70Xkz58KStOLE1X1Eu9B7/i/hFF1LH+J6UENOdKuuKPzQw6zr1b0puOWI7EOONDzDv9bnYCgX5siixQ2XX2biAZEDI8NYeIiwrETN4dmSY7DOmYQOsA==" UUID="4810F4D8-EA3B-6302-F064-FD7F1453F0CD" Version="1.1" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd"/>
+</cfdi:Complemento>
+<cfdi:Addenda>
+<addendaFacto:addendaFacto xmlns:addendaFacto="http://www.facto.addendaFacto.net/addendaFacto33" xsi:schemaLocation="http://www.facto.addendaFacto.net/addendaFacto33 http://www.next-technologies.com.mx/AddendaFacto.xsd">
+  <addendaFacto:notas>Oscar Vega 04/07/2018 05/07/2018</addendaFacto:notas>
+  <addendaFacto:granTotal>1498.60</addendaFacto:granTotal>
+</addendaFacto:addendaFacto>
+</cfdi:Addenda>
+</cfdi:Comprobante>

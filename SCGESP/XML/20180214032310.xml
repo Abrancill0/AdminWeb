@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cfdi:Comprobante xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd http://www.sat.gob.mx/implocal http://www.sat.gob.mx/sitio_internet/cfd/implocal/implocal.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:implocal="http://www.sat.gob.mx/implocal" Version="3.3" Serie="E" Folio="7148" Fecha="2018-01-09T08:31:45" Sello="C41NKtiYeVVa7csOmPU8/V+xVQpq6fznpzS0qHr0qjvfDBOMYSj8cZzNAGX/mRaX3+SvbiEEH/DmMgzs3Ikk+z0chjXZtqLEUh4ctWGbTQPL+UP37M5rXWsoG5a0sPtwG6e0GPl900+MFXIf/comQqr5oJxuThi7ERcDzlLmk/DjLrRfaRNLixTMxWy3RTZqNV5HV2KMGt58CG0rRReFXVVSuj+OMpAWVEuw6oZCacbCP9M04chz50hzaqcu/G0q+l7dpRs1+OaAWsg5lJFEO36pZhczjYrONFc+wPSCmCz93oQPC2pKiy9NqvihD4atVRkJexrXR8UHddi9Tt2v6g==" FormaPago="04" NoCertificado="00001000000401614909" Certificado="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" SubTotal="172.41" Moneda="MXN" TipoCambio="1" Total="200.00" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="37180">
+  <cfdi:Emisor Rfc="OPE1506185I6" Nombre="OPERAINNSUITES S.A. DE C.V." RegimenFiscal="601" />
+  <cfdi:Receptor Rfc="SPO830427DQ1" Nombre="SEGUROS EL POTOSI SA" UsoCFDI="G03" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="90101500" Cantidad="1" ClaveUnidad="E48" Unidad="E48" Descripcion="Consumo de Alimentos      (  1)" ValorUnitario="172.41" Importe="172.41">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="172.41" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="27.59" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="27.59">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="27.59" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <implocal:ImpuestosLocales version="1.0" TotaldeRetenciones="0.00" TotaldeTraslados="0.00">
+      <implocal:TrasladosLocales ImpLocTrasladado="ISH" TasadeTraslado="2" Importe="0.00" />
+    </implocal:ImpuestosLocales>
+    <tfd:TimbreFiscalDigital UUID="65cbb570-ec01-45ad-b1a7-d6ac18746755" FechaTimbrado="2018-01-09T08:31:55" Version="1.1" SelloCFD="C41NKtiYeVVa7csOmPU8/V+xVQpq6fznpzS0qHr0qjvfDBOMYSj8cZzNAGX/mRaX3+SvbiEEH/DmMgzs3Ikk+z0chjXZtqLEUh4ctWGbTQPL+UP37M5rXWsoG5a0sPtwG6e0GPl900+MFXIf/comQqr5oJxuThi7ERcDzlLmk/DjLrRfaRNLixTMxWy3RTZqNV5HV2KMGt58CG0rRReFXVVSuj+OMpAWVEuw6oZCacbCP9M04chz50hzaqcu/G0q+l7dpRs1+OaAWsg5lJFEO36pZhczjYrONFc+wPSCmCz93oQPC2pKiy9NqvihD4atVRkJexrXR8UHddi9Tt2v6g==" NoCertificadoSAT="00001000000405999912" SelloSAT="dLoMaGurQfuw0EBllVasjFTGOw1FrAXQ/c8TMnJbn/2+1x3KLJz+BkBnMsQBTf5qsTUTCss4hIgNx4yxyRzhW00rO60lhEPsHbjjlmjFHvqOjrCEHaeKiwXI9+JDzkGv5DFvotOQF58KQ343LZdpeTkybx9CAoHMbaED8q4hNIgZ5A7KvKafe5UaibqIcHQjDu70rrDXTTVBrk2AXm/TPxZXDKnqwb7Z1vhauRbqQ00pQxejY4kKQwGk+ybmZBHJGrBkYphLAAqLPLPSpxcvF9lxrb/vM8ao6OFP+WkPP1X6yPoezKUa2W4hk3rnTT4V4n+H80BblOUYvPiSRtM3nA==" RfcProvCertif="NSI050810TIA" xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/timbrefiscaldigital/TimbreFiscalDigitalv11.xsd" />
+  </cfdi:Complemento>
+  <cfdi:Addenda xmlns:ecfd="http://www.edxsolutions.com/schemas/strict" xsi:schemaLocation="http://www.edxsolutions.com/schemas/strict http://www.edxsolutions.com/schemas/strict/ecfd.xsd">
+    <ecfd:ECFD version="1.0">
+      <ecfd:Documento ID="T33E7148">
+        <ecfd:Encabezado>
+          <ecfd:IdDoc>
+            <ecfd:NroAprob>129273</ecfd:NroAprob>
+            <ecfd:AnoAprob>2010</ecfd:AnoAprob>
+            <ecfd:Tipo>33</ecfd:Tipo>
+            <ecfd:Serie>E</ecfd:Serie>
+            <ecfd:Folio>7148</ecfd:Folio>
+            <ecfd:Estado>ORIGINAL</ecfd:Estado>
+            <ecfd:FechaEmis>2018-01-09T08:31:45</ecfd:FechaEmis>
+            <ecfd:FormaPago>PUE</ecfd:FormaPago>
+            <ecfd:MedioPago>04</ecfd:MedioPago>
+            <ecfd:LugarExpedicion>37180</ecfd:LugarExpedicion>
+            <ecfd:TermPagoCdg>1</ecfd:TermPagoCdg>
+          </ecfd:IdDoc>
+          <ecfd:ExEmisor>
+            <ecfd:RFCEmisor>OPE1506185I6</ecfd:RFCEmisor>
+            <ecfd:NmbEmisor>OPERAINNSUITES S.A. DE C.V.</ecfd:NmbEmisor>
+            <ecfd:CodigoExEmisor>
+              <ecfd:TpoCdgIntEmisor>INT</ecfd:TpoCdgIntEmisor>
+            </ecfd:CodigoExEmisor>
+            <ecfd:DomFiscal>
+              <ecfd:Calle>Adolfo Lopez Mateos Poniente 2619</ecfd:Calle>
+              <ecfd:Colonia>Villas El Juncal (477) 775 5100</ecfd:Colonia>
+              <ecfd:Municipio>Leon</ecfd:Municipio>
+              <ecfd:Estado>Guanajuato</ecfd:Estado>
+              <ecfd:Pais>MEX</ecfd:Pais>
+              <ecfd:CodigoPostal>37180</ecfd:CodigoPostal>
+            </ecfd:DomFiscal>
+            <ecfd:LugarExped>
+              <ecfd:Calle>Adolfo Lopez Mateos Poniente 2619</ecfd:Calle>
+              <ecfd:Colonia>Villas El Juncal</ecfd:Colonia>
+              <ecfd:Municipio>Leon</ecfd:Municipio>
+              <ecfd:Estado>Leon</ecfd:Estado>
+              <ecfd:Pais>MEX</ecfd:Pais>
+              <ecfd:CodigoPostal>37180</ecfd:CodigoPostal>
+            </ecfd:LugarExped>
+          </ecfd:ExEmisor>
+          <ecfd:ExReceptor>
+            <ecfd:RFCRecep>SPO830427DQ1</ecfd:RFCRecep>
+            <ecfd:NmbRecep>SEGUROS EL POTOSI SA</ecfd:NmbRecep>
+            <ecfd:CodigoExReceptor>
+              <ecfd:CdgIntRecep>24396</ecfd:CdgIntRecep>
+            </ecfd:CodigoExReceptor>
+            <ecfd:UsoCFDI>G03</ecfd:UsoCFDI>
+            <ecfd:DomFiscalRcp>
+              <ecfd:Calle>AV VENUSTIANO CARRANZA 426</ecfd:Calle>
+              <ecfd:Colonia>CENTRO</ecfd:Colonia>
+              <ecfd:Municipio>San Luis Potosi</ecfd:Municipio>
+              <ecfd:Estado>SP</ecfd:Estado>
+              <ecfd:Pais>MX</ecfd:Pais>
+              <ecfd:CodigoPostal>78000</ecfd:CodigoPostal>
+            </ecfd:DomFiscalRcp>
+            <ecfd:LugarRecep>
+              <ecfd:Calle>AV VENUSTIANO CARRANZA 426</ecfd:Calle>
+              <ecfd:Colonia>CENTRO</ecfd:Colonia>
+              <ecfd:Municipio>San Luis Potosi</ecfd:Municipio>
+              <ecfd:Estado>SP</ecfd:Estado>
+              <ecfd:Pais>MEXICO</ecfd:Pais>
+              <ecfd:CodigoPostal>78000</ecfd:CodigoPostal>
+            </ecfd:LugarRecep>
+          </ecfd:ExReceptor>
+          <ecfd:Totales>
+            <ecfd:Moneda>MXN</ecfd:Moneda>
+            <ecfd:FctConv>1</ecfd:FctConv>
+            <ecfd:SubTotal>172.41</ecfd:SubTotal>
+            <ecfd:MntBase>172.41</ecfd:MntBase>
+            <ecfd:MntImp>27.59</ecfd:MntImp>
+            <ecfd:VlrPagar>200.00</ecfd:VlrPagar>
+            <ecfd:VlrPalabras>DOSCIENTOS PESOS 00/100 M.N.</ecfd:VlrPalabras>
+          </ecfd:Totales>
+          <ecfd:ExImpuestos>
+            <ecfd:TipoImp>002</ecfd:TipoImp>
+            <ecfd:TipoFactor>Tasa</ecfd:TipoFactor>
+            <ecfd:TasaImp>0.160000</ecfd:TasaImp>
+            <ecfd:MontoImp>27.59</ecfd:MontoImp>
+          </ecfd:ExImpuestos>
+        </ecfd:Encabezado>
+        <ecfd:Detalle>
+          <ecfd:NroLinDet>1</ecfd:NroLinDet>
+          <ecfd:DscLang>ES</ecfd:DscLang>
+          <ecfd:ClaveProdServ>90101500</ecfd:ClaveProdServ>
+          <ecfd:DscItem>Consumo de Alimentos      (  1)</ecfd:DscItem>
+          <ecfd:QtyItem>1</ecfd:QtyItem>
+          <ecfd:ClaveUnidad>E48</ecfd:ClaveUnidad>
+          <ecfd:UnmdItem>E48</ecfd:UnmdItem>
+          <ecfd:PrcBrutoItem>200.00</ecfd:PrcBrutoItem>
+          <ecfd:PrcNetoItem>172.41</ecfd:PrcNetoItem>
+          <ecfd:ImpuestosDet>
+            <ecfd:TipoImp>002</ecfd:TipoImp>
+            <ecfd:TasaImp>0.160000</ecfd:TasaImp>
+            <ecfd:MontoImp>27.59</ecfd:MontoImp>
+            <ecfd:MontoBaseImp>172.41</ecfd:MontoBaseImp>
+            <ecfd:TipoFactor>Tasa</ecfd:TipoFactor>
+          </ecfd:ImpuestosDet>
+          <ecfd:MontoBrutoItem>200.00</ecfd:MontoBrutoItem>
+          <ecfd:MontoNetoItem>172.41</ecfd:MontoNetoItem>
+          <ecfd:MontoTotalItem>200.00</ecfd:MontoTotalItem>
+        </ecfd:Detalle>
+        <ecfd:TimeStamp>2018-01-09T08:33:21</ecfd:TimeStamp>
+      </ecfd:Documento>
+      <ecfd:Personalizados>
+        <ecfd:campoString name="edx_version">cfdi_opera_20120417</ecfd:campoString>
+        <ecfd:campoString name="Fuente">opera</ecfd:campoString>
+        <ecfd:campoString name="eFactu">3.14</ecfd:campoString>
+        <ecfd:campoString name="habitacion">9052</ecfd:campoString>
+        <ecfd:campoString name="checkin">09-01-18</ecfd:campoString>
+        <ecfd:campoString name="checkout">09-01-18</ecfd:campoString>
+        <ecfd:campoString name="EMail">haalba@elpotosi.com.mx</ecfd:campoString>
+        <ecfd:campoString name="Printer">SI</ecfd:campoString>
+        <ecfd:campoString name="pNombreVendedor" />
+        <ecfd:campoString name="SI_ZZZ1">DOSCIENTOS VEINTE PESOS 00/100 M.N.</ecfd:campoString>
+        <ecfd:campoString name="SI_ZZZ">DOSCIENTOS PESOS 00/100 M.N.</ecfd:campoString>
+        <ecfd:campoString name="tipopago1">MasterCard XXXXXXXXXXXX0000 (MXN)</ecfd:campoString>
+        <ecfd:campoString name="tipopago2" />
+        <ecfd:campoString name="tipopago3" />
+        <ecfd:campoString name="tipopago4" />
+        <ecfd:campoString name="NombreHuesped">SEGUROS EL POTOSI SA,</ecfd:campoString>
+        <ecfd:campoString name="pasaporte" />
+        <ecfd:campoString name="MetodoPago">04 04</ecfd:campoString>
+        <ecfd:campoString name="NumCuenta" />
+        <ecfd:campoString name="RegimenFiscal">601</ecfd:campoString>
+        <ecfd:campoString name="LugarDeExpedicion">37180</ecfd:campoString>
+        <ecfd:campoNumero name="folioopera">49087</ecfd:campoNumero>
+        <ecfd:campoNumero name="VlrPagarMasPropinas">220.00</ecfd:campoNumero>
+        <ecfd:campoNumero name="Propinas">20.00</ecfd:campoNumero>
+        <ecfd:campoNumero name="PaidOuts">0.00</ecfd:campoNumero>
+        <ecfd:campoNumero name="Otros">0.00</ecfd:campoNumero>
+        <ecfd:campoNumero name="pago1">220.00</ecfd:campoNumero>
+        <ecfd:campoNumero name="pago2">0.00</ecfd:campoNumero>
+        <ecfd:campoNumero name="pago3">0.00</ecfd:campoNumero>
+        <ecfd:campoNumero name="TASAISH">2</ecfd:campoNumero>
+        <ecfd:campoNumero name="TASAIVA">16</ecfd:campoNumero>
+        <ecfd:campoNumero name="IMPISH">0.00</ecfd:campoNumero>
+        <ecfd:campoNumero name="IMPIVA">27.59</ecfd:campoNumero>
+        <ecfd:CustDetalle>
+          <ecfd:CustDetNroLin>1</ecfd:CustDetNroLin>
+          <ecfd:CustDetNUE_01>2</ecfd:CustDetNUE_01>
+        </ecfd:CustDetalle>
+      </ecfd:Personalizados>
+    </ecfd:ECFD>
+  </cfdi:Addenda>
+</cfdi:Comprobante>

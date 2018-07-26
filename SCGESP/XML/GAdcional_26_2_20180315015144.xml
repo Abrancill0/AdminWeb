@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" Version="3.3" Serie="A" Folio="11571" Fecha="2018-01-19T14:59:07" Sello="V7esBpWJUhamGJxI/jzFX2bPJg2rfbLTMzbx1/D1IbT726Nb2kG/E7EeVU1QzZvfnj21FCi9piKkxGIV85rENim5SJvYg0yr89SUtBS2ISpMSUugYw7vbcbLI8Tf5DjYGaONhScnCkVpyVDeSnTXv0iPls2zzKV/cK+jwnXp8rk=" FormaPago="04" NoCertificado="00001000000305133762" Certificado="MIIEcjCCA1qgAwIBAgIUMDAwMDEwMDAwMDAzMDUxMzM3NjIwDQYJKoZIhvcNAQEFBQAwggGKMTgwNgYDVQQDDC9BLkMuIGRlbCBTZXJ2aWNpbyBkZSBBZG1pbmlzdHJhY2nDs24gVHJpYnV0YXJpYTEvMC0GA1UECgwmU2VydmljaW8gZGUgQWRtaW5pc3RyYWNpw7NuIFRyaWJ1dGFyaWExODA2BgNVBAsML0FkbWluaXN0cmFjacOzbiBkZSBTZWd1cmlkYWQgZGUgbGEgSW5mb3JtYWNpw7NuMR8wHQYJKoZIhvcNAQkBFhBhY29kc0BzYXQuZ29iLm14MSYwJAYDVQQJDB1Bdi4gSGlkYWxnbyA3NywgQ29sLiBHdWVycmVybzEOMAwGA1UEEQwFMDYzMDAxCzAJBgNVBAYTAk1YMRkwFwYDVQQIDBBEaXN0cml0byBGZWRlcmFsMRQwEgYDVQQHDAtDdWF1aHTDqW1vYzEVMBMGA1UELRMMU0FUOTcwNzAxTk4zMTUwMwYJKoZIhvcNAQkCDCZSZXNwb25zYWJsZTogQ2xhdWRpYSBDb3ZhcnJ1YmlhcyBPY2hvYTAeFw0xNDA5MTkxNTIzMThaFw0xODA5MTkxNTIzMThaMIG+MSYwJAYDVQQDEx1NQVJJQSBFVUdFTklBIEFDT1NUQSBFU0NPQkVETzEmMCQGA1UEKRMdTUFSSUEgRVVHRU5JQSBBQ09TVEEgRVNDT0JFRE8xJjAkBgNVBAoTHU1BUklBIEVVR0VOSUEgQUNPU1RBIEVTQ09CRURPMRYwFAYDVQQtEw1BT0VFNzYxMTIxUlo1MRswGQYDVQQFExJBT0VFNzYxMTIxTVNQQ1NHMDQxDzANBgNVBAsTBnVuaWRhZDCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAqdJEFwjkq5mhCalVjaZLBJ100Sg5FZWHb1bwgSsdLfIhk5MMbjIfPAYnTG7idy3VLX+QxvEAC3T5eYR6r7c/Nr4bFhjTWc6ZihpGqQLVCk6FEBmGoK+Lkw40FCTtyd7R3pJXGc7yVTyse6sz9NsWeL9Ghq/vcfFns/Bn29N+A8ECAwEAAaMdMBswDAYDVR0TAQH/BAIwADALBgNVHQ8EBAMCBsAwDQYJKoZIhvcNAQEFBQADggEBAE7tcp4qnuj9q11ylnB1hcZO9r/cn6Dqk3zGnkGUgDf9LhCAHvlyeT2I7+x9jD3Uh6p9VBlPKKyh3f/nPmKtq1//wexiWGqF60r25T+a4CAzFqqd5hZyZisNKqqAGK9e8qfoTa7+i4kHtGyWNCyMLqKdEDJFNVRCUapf3B+lj9tOrwdfa6j6FPEo4f8PmiKNVvsZNF8blUvQtKsLqK977h2+/VGFi26V0gR0vd5qldG06CoYzz9Q4vHacpJdGh3n/j3W7Kh9tf/j5WKrBc50taneMmwHSatN+llYSdFBCbBOWzNWk8CREkduIsvz7s+BZh1enTgBlQPaUy4pfoHtT9c=" SubTotal="383.61" Moneda="MXN" Total="444.99" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="78220">
+  <cfdi:Emisor Rfc="AOEE761121RZ5" Nombre="Maria Engenia Acosta Escobedo" RegimenFiscal="612" />
+  <cfdi:Receptor Rfc="MOCS790630UB0" UsoCFDI="G03" Nombre="SAUL MORENO COLUNGA" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="51171900" Cantidad="1" ClaveUnidad="PZ" Unidad="PZA" Descripcion="RODILLERA BAMBOO VARILLA FLEX T/T" ValorUnitario="206.89" Importe="206.89">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="206.89" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.16" Importe="33.10" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="51171900" Cantidad="1" ClaveUnidad="PZ" Unidad="pz" Descripcion="RODILLA CON VARILLA ORIFICIO" ValorUnitario="176.72" Importe="176.72">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="176.72" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.16" Importe="28.28" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="61.38">
+    <cfdi:Traslados>
+      <cfdi:Traslado Importe="61.38" Impuesto="002" TasaOCuota="0.16" TipoFactor="Tasa" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" SelloCFD="V7esBpWJUhamGJxI/jzFX2bPJg2rfbLTMzbx1/D1IbT726Nb2kG/E7EeVU1QzZvfnj21FCi9piKkxGIV85rENim5SJvYg0yr89SUtBS2ISpMSUugYw7vbcbLI8Tf5DjYGaONhScnCkVpyVDeSnTXv0iPls2zzKV/cK+jwnXp8rk=" NoCertificadoSAT="00001000000405332712" RfcProvCertif="FIN1203015JA" UUID="D601AF49-A7A4-4B93-882E-0608036C1ABC" FechaTimbrado="2018-01-20T14:59:25" SelloSAT="0ETzybDH3l8/q48UgqKLqx6FBnW9OEbXfDRa2S2++FQw3R8LiFVDzTNn5uBn9bxgxp6Risf2oHgiZdjfIM9vqjm4Q+lq5ONqMvYSsD15n6KxWYePSoj0HgCB2nz5NQvWzZDCvhqwe46Yf6sKYGp6DTFtRgvUiCUvepCk1r9E7+6FQ3jKVXBK0Zd1SU4MEjdTDbf8AJ0BatzqY/fGZdL0ty0IgyGKwtll6kT75XpO/drj3hX6sSVhE0RK2BlUVtFd1k9MaE/ZUEEiL+qzrJVJ5vH+1NR6pvDL9a6vkrzHtP84gWFsR8EozFZ7dv94U124wSSnQ5hr471hP+yr7hORSA==" />
+  </cfdi:Complemento>
+</cfdi:Comprobante>

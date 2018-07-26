@@ -163,7 +163,7 @@
 								<!--informe-cabecera-template-->
 							</div>
 
-							<div id="importesInforme" class="hidden-xs col-md-6 col-lg-4">
+							<div id="importesInforme" class="col-md-6 col-lg-4">
 								<!--importes-informe-template-->
 							</div>
 						</div>
@@ -1706,7 +1706,7 @@
 			var ConfBanco = $("#ConfBanco").val() * 1;
 			var btnEliCom = "";
 			if (ConfBanco === 0) {
-				btnEliCom = "<button type='button' class='btn btn-danger btn-xs' onclick='eliminarGastoCom(\"" + comprobante + "\", " + IdInforme + ", " + idgasto + ")'><i class='zmdi zmdi-delete zmdi-hc-2x'></i> Eliminar</button>";
+				btnEliCom = "&nbsp;<a type='button' class='btn btn-danger btn-xs' href='#' onclick='eliminarGastoCom(\"" + comprobante + "\", " + IdInforme + ", " + idgasto + ")'><i class='zmdi zmdi-delete zmdi-hc-2x'></i> </a>";
 			};
 
 			if (comprobante === "XML") {
@@ -1721,8 +1721,9 @@
 						//console.log(response);
 						$("#verComprobante").modal('show');
 						var controles = "";
-						controles = "<button type='button' class='btn btn-warning btn-xs' onclick='imprimirXML()'><i class='zmdi zmdi-print zmdi-hc-2x'></i> Imprimir</button> ";
+						controles = "&nbsp;<a type='button' class='btn btn-warning btn-xs' href='#' onclick='imprimirXML()'><i class='zmdi zmdi-print zmdi-hc-2x'></i> </a>";
 						controles += btnEliCom;
+						controles += "&nbsp;<a type='button' class='btn btn-warning btn-xs' href='" + dircomp + "' target='_blank'><i class='zmdi zmdi-download zmdi-hc-2x'></i> </a>";
 						$("#controles_compXML").append(controles);
 
 						var xmljson = xmlToJson(response);
@@ -1750,9 +1751,11 @@
 				$("#verComprobante").modal('show');
 				dircomp = "/" + dircomp;
 				var controles = "";
-				controles += "<button type='button' class='btn btn-warning btn-xs' dir='" + dircomp + "' onclick='imprimirImg()'><i class='zmdi zmdi-print zmdi-hc-2x'></i> Imprimir</button> ";
+				controles += "&nbsp;<a type='button' class='btn btn-warning btn-xs' href='#' dir='" + dircomp + "' onclick='imprimirImg()'><i class='zmdi zmdi-print zmdi-hc-2x'></i> </a>";
 				controles += btnEliCom;
-				controles += "<button type='button' class='btn btn-primary btn-xs' dir='" + dircomp + "' onclick='rotarImg(\"" + dircomp + "\", 90)'><i class='zmdi zmdi-rotate-right zmdi-hc-2x'></i> </button> ";
+				controles += "&nbsp;<a type='button' class='btn btn-primary btn-xs' href='#' dir='" + dircomp + "' onclick='rotarImg(\"" + dircomp + "\", -90)'><i class='zmdi zmdi-rotate-left zmdi-hc-2x'></i> </a>";
+				controles += "&nbsp;<a type='button' class='btn btn-primary btn-xs' href='#' onclick='rotarImg(\"" + dircomp + "\", 90)'><i class='zmdi zmdi-rotate-right zmdi-hc-2x'></i> </a>";
+				controles += "&nbsp;<a type='button' class='btn btn-warning btn-xs' href='" + dircomp + "' target='_blank'><i class='zmdi zmdi-download zmdi-hc-2x'></i> </a>";
 				var f = new Date();
 				var fh = f.getDate() + '' + f.getMonth() + '' + f.getFullYear() + '' + f.getHours() + '' + f.getMinutes() + '' + f.getSeconds();
 				$("#controles_compOTRO").append(controles);
@@ -1776,11 +1779,8 @@
 					//
 				},
 				success: function (result) {
-					console.log(result);
-
-					var f = String(new Date().getTime());
-					$("#compOTRO").attr("src", imagen + "?" + fh);
-
+					var f = String(new Date().getTime()) + "-" + Math.random();
+					$("#compOTRO").attr("src", imagen + "?" + f);
 				},
 				error: function (result) {
 					console.log(result);
@@ -2384,6 +2384,7 @@
 			return justificacion;
 		}
 		$("#aenvia").click(function () {
+			var RmRdeRequisicion = $("#RmRdeRequisicion").val() * 1;
 			var ConfBanco = $("#ConfBanco").val() * 1;
 			if (ConfBanco === 0) {
 				Seguridad.alerta("No puedes enviar a autorización.<br />Informe NO Confrontado.");
@@ -2395,7 +2396,7 @@
 				return false;
 			}*/
 			var valida = validaExistenComprobantes();
-			var req = DatosRequisicion();
+			var req = DatosRequisicion(RmRdeRequisicion);
 			//console.log(req);
 			//RmReqImporteComprobar, RmReqEstatus
 			var totalg = $("#totalg").val() * 1;//monto a comprobar informe
@@ -4182,7 +4183,6 @@
 						Mensaje: "Error al validar justificación.",
 						Lista: null
 					};
-
 				}
 			});
 			return resultado;

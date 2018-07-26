@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Certificado="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" Fecha="2018-02-21T11:15:49" Folio="147786" FormaPago="04" LugarExpedicion="54050" MetodoPago="PUE" Moneda="MXN" NoCertificado="00001000000404174722" Sello="N7pLFCSQSF7UpQK1thZHTYtJrZIGP7S7bH0f7Rvz5rzzGlgOkdgR3+/GGDY7UVZSmOsCbGbNmn0KUzZvO/wOPmblVtNmQMJFIe7sTX0L948A+g5TTfZcvp1AcqzdYWv+8G9FygojUnza24Y9h6fJtHpQ023nq0N7RyWPHfhffuYureUSrFs1x1Uj8CMoTCJWxnvzVhUCuf9fB1AEmNemYwG14QoEM2mOOFEpB3nA3658yVNbsrBF//41EmLbKE4nEIYsoIfcQn169Bbn5T/q7yjsuOMJ9FJXkeK9foX30YwM1Oo/D55CVKxldypeckNxpI7Uy555/S8LGIIljGm2Cg==" Serie="AABD" SubTotal="54.38" TipoCambio="1" TipoDeComprobante="I" Total="61.00" Version="3.3" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd">
+<cfdi:Emisor Nombre="7-ELEVEN MÉXICO, SA DE CV" RegimenFiscal="601" Rfc="SEM980701STA"/>
+<cfdi:Receptor Nombre="SEGUROS EL POTOSI, SA" Rfc="SPO830427DQ1" UsoCFDI="G03"/>
+<cfdi:Conceptos>
+<cfdi:Concepto Cantidad="1.0" ClaveProdServ="50192500" ClaveUnidad="H87" Descripcion="CROISSANT INTEGRAL DE PAVO 148 MTY" Importe="28.45" NoIdentificacion="100006046" Unidad="PZA" ValorUnitario="28.45">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="28.45" Importe="4.55" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+</cfdi:Traslados>
+</cfdi:Impuestos>
+</cfdi:Concepto>
+<cfdi:Concepto Cantidad="1.0" ClaveProdServ="50192100" ClaveUnidad="EA" Descripcion="FRITOS FRIT SAL Y 57GR" Importe="10.65" NoIdentificacion="100161058" Unidad="PZA" ValorUnitario="10.65">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="11.50" Importe="0.00" Impuesto="002" TasaOCuota="0.000000" TipoFactor="Tasa"/>
+<cfdi:Traslado Base="10.65" Importe="0.85" Impuesto="003" TasaOCuota="0.080000" TipoFactor="Tasa"/>
+</cfdi:Traslados>
+</cfdi:Impuestos>
+</cfdi:Concepto>
+<cfdi:Concepto Cantidad="1.0" ClaveProdServ="50181900" ClaveUnidad="H87" Descripcion="LITTL BITE MINI MUFIN VAINILLA 92GR" Importe="15.28" NoIdentificacion="100007020" Unidad="PZA" ValorUnitario="15.28">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="16.50" Importe="0.00" Impuesto="002" TasaOCuota="0.000000" TipoFactor="Tasa"/>
+<cfdi:Traslado Base="15.28" Importe="1.22" Impuesto="003" TasaOCuota="0.080000" TipoFactor="Tasa"/>
+</cfdi:Traslados>
+</cfdi:Impuestos>
+</cfdi:Concepto>
+</cfdi:Conceptos>
+<cfdi:Impuestos TotalImpuestosTrasladados="6.62">
+<cfdi:Traslados>
+<cfdi:Traslado Importe="0.00" Impuesto="002" TasaOCuota="0.000000" TipoFactor="Tasa"/>
+<cfdi:Traslado Importe="2.07" Impuesto="003" TasaOCuota="0.080000" TipoFactor="Tasa"/>
+<cfdi:Traslado Importe="4.55" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+</cfdi:Traslados>
+</cfdi:Impuestos>
+<cfdi:Complemento>
+<tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" FechaTimbrado="2018-02-21T11:15:51" NoCertificadoSAT="00001000000405428713" RfcProvCertif="EDI101020E99" SelloCFD="N7pLFCSQSF7UpQK1thZHTYtJrZIGP7S7bH0f7Rvz5rzzGlgOkdgR3+/GGDY7UVZSmOsCbGbNmn0KUzZvO/wOPmblVtNmQMJFIe7sTX0L948A+g5TTfZcvp1AcqzdYWv+8G9FygojUnza24Y9h6fJtHpQ023nq0N7RyWPHfhffuYureUSrFs1x1Uj8CMoTCJWxnvzVhUCuf9fB1AEmNemYwG14QoEM2mOOFEpB3nA3658yVNbsrBF//41EmLbKE4nEIYsoIfcQn169Bbn5T/q7yjsuOMJ9FJXkeK9foX30YwM1Oo/D55CVKxldypeckNxpI7Uy555/S8LGIIljGm2Cg==" SelloSAT="VcWSRpISMVjxPfNMrsy56q4/LKnP77vzKNfOAvEuG0Q9Y6UQ4Wz3lfQS6qarRohTt2W97hPZJmOrm7CZK5rz+IlRu3J3V2IHDe8osBdYE60C7zuKgPcHtAoetEJVqb6KthFpsrO5vxP276M39FtRDd9HLATlEpNssBIr2+2ZzYbDFBkhWx+N5MTZ4JV/BBpUB8+RpUf6LH+dzdf/1V2/DBFDwFDKyDNHDvwvy6Mg+ul8KF3U8ghBfRlcMARSKeYN4b+SOEkP4o5+O2Ik/swYJhE/COiq8zWj5qFsDnPvg01XvdHsWiRGOPHgW7rDH1L7Ip0ay0QK6e/AECgDFzdMWA==" UUID="8b8071ed-5e5f-4a93-984d-472fccbc414e" Version="1.1" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd"/>
+</cfdi:Complemento>
+</cfdi:Comprobante>

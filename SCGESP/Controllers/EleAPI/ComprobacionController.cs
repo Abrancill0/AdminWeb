@@ -112,17 +112,18 @@ namespace SCGESP.Controllers.EleAPI
 
 						if (ValidacionEnviaComprobantes == "")
 						{
-							int gastoCargado = xmlcargado + pdfcargado + otroscargado;
+							int gastoCargado = xmlcargado + pdfcargado + otroscargado + Convert.ToInt32(valXML[2]);
 							if (gastoCargado == 0)
 							{
-								
+
 								if (valXML[0] == "ENTRA")
 								{
 									ValidacionEnviaComprobantes = EnviaComprobantes(g_id, idinforme, RmReqGasto, g_dirpdf, g_dirxml, usuariodesencripta,
 																xmlcargado, pdfcargado, g_fgasto, g_concepto, g_negocio, g_formaPago, g_categoria, g_total,
 																g_importenodeducible, g_dirotros, g_importenoaceptable, otroscargado);
 								}
-								else {
+								else
+								{
 									if (valXML[1] != "")
 									{
 										ValidacionEnviaComprobantes = valXML[1];
@@ -179,112 +180,116 @@ namespace SCGESP.Controllers.EleAPI
 			entradadoc.agregaElemento("FiCfdUuid", uuid); //obtenerlo de la requisición (RmReqGasto)
 
 			DocumentoSalida salida = PeticionCatalogo(entradadoc.Documento);
-			if (salida.Resultado != "1")
+			int FicfdTipoDocumento = 0;
+			int FiCfdNumeroDocumento = 0;
+			string FiCfdUuid = "";
+
+			try
 			{
-				int FicfdTipoDocumento = 0;
-				int FiCfdNumeroDocumento = 0;
-				string FiCfdUuid = "";
+				DataTable DTCFDI = new DataTable();
 
-				try
+				if (salida.Resultado == "1")
 				{
-					DataTable DTCFDI = new DataTable();
-
-					if (salida.Resultado == "1")
+					DTCFDI = salida.obtieneTabla("Llave");
+					for (int i = 0; i < DTCFDI.Rows.Count; i++)
 					{
-						DTCFDI = salida.obtieneTabla("Llave");
-						for (int i = 0; i < DTCFDI.Rows.Count; i++)
+						FicfdTipoDocumento = Convert.ToInt32(DTCFDI.Rows[i]["FicfdTipoDocumento"]);
+						FiCfdNumeroDocumento = Convert.ToInt32(DTCFDI.Rows[i]["FiCfdNumeroDocumento"]);
+						FiCfdUuid = Convert.ToString(DTCFDI.Rows[i]["FiCfdUuid"]);
+					}
+					string query = "";
+					string mensaje = "";
+					if (FicfdTipoDocumento == 95)
+					{//Gasto
+						if (FiCfdNumeroDocumento == RmReqGasto)
 						{
-							FicfdTipoDocumento = Convert.ToInt32(DTCFDI.Rows[i]["FicfdTipoDocumento"]);
-							FiCfdNumeroDocumento = Convert.ToInt32(DTCFDI.Rows[i]["FiCfdNumeroDocumento"]);
-							FiCfdUuid = Convert.ToString(DTCFDI.Rows[i]["FiCfdUuid"]);
+							query = "UPDATE gastos SET g_xmlcargado = 1 WHERE g_idinforme = " + idinforme + " AND g_id = '" + idgasto + "'; ";
 						}
-						string query = "";
-						string mensaje = "";
-						if (FicfdTipoDocumento == 95)
-						{//Gasto
-							if (FiCfdNumeroDocumento == RmReqGasto)
-							{
-								query = "UPDATE gastos SET g_xmlcargado = 1 WHERE g_idinforme = " + idinforme + " AND g_id = '" + idgasto + "'; ";
-							}
-							else
-							{
-								mensaje = "El XML (UUID: " + FiCfdUuid + ") cargado ya se encuentra en el Gasto " + FiCfdNumeroDocumento;
-							}
-						}
-						else if (FicfdTipoDocumento == 96)
-						{//Recepción
-							mensaje = "El XML (UUID: " + FiCfdUuid + ") cargado ya se encuentra en la Recepción " + FiCfdNumeroDocumento;
-						}
-						else if (FicfdTipoDocumento == 97)
-						{//Requisición
-							if (FiCfdNumeroDocumento == idrequisicion)
-							{
-								query = "UPDATE gastos SET g_xmlcargado = 1 WHERE g_idinforme = " + idinforme + " AND g_id = '" + idgasto + "'; ";
-							}
-							else
-							{
-								mensaje = "El XML (UUID: " + FiCfdUuid + ") cargado ya se encuentra en la Requisición " + FiCfdNumeroDocumento;
-							}
-						}
-
-						try
+						else
 						{
-							if (query != "")
-							{
-								SqlConnection Conexion = new SqlConnection
-								{
-									ConnectionString = VariablesGlobales.CadenaConexion
-								};
-								SqlDataAdapter DA;
-								DataSet DT = new DataSet();
-								DA = new SqlDataAdapter(query, Conexion);
-								DA.Fill(DT, "Tabla");
+							mensaje = "El XML (UUID: " + FiCfdUuid + ") cargado ya se encuentra en el Gasto " + FiCfdNumeroDocumento;
+						}
+					}
+					else if (FicfdTipoDocumento == 96)
+					{//Recepción
+						mensaje = "El XML (UUID: " + FiCfdUuid + ") cargado ya se encuentra en la Recepción " + FiCfdNumeroDocumento;
+					}
+					else if (FicfdTipoDocumento == 97)
+					{//Requisición
+						if (FiCfdNumeroDocumento == idrequisicion)
+						{
+							query = "UPDATE gastos SET g_xmlcargado = 1 WHERE g_idinforme = " + idinforme + " AND g_id = '" + idgasto + "'; ";
+						}
+						else
+						{
+							mensaje = "El XML (UUID: " + FiCfdUuid + ") cargado ya se encuentra en la Requisición " + FiCfdNumeroDocumento;
+						}
+					}
 
-								respuesta[0] = "NO ENTRA";
+					try
+					{
+						if (query != "")
+						{
+							SqlConnection Conexion = new SqlConnection
+							{
+								ConnectionString = VariablesGlobales.CadenaConexion
+							};
+							SqlDataAdapter DA;
+							DataSet DT = new DataSet();
+							DA = new SqlDataAdapter(query, Conexion);
+							DA.Fill(DT, "Tabla");
+
+							respuesta[0] = "NO ENTRA";
+							respuesta[1] = "";
+							respuesta[2] = "1";
+
+							return respuesta;
+						}
+						else
+						{
+							if (FicfdTipoDocumento == 0)
+							{
+								respuesta[0] = "ENTRA";
 								respuesta[1] = "";
-
-								return respuesta;
+								respuesta[2] = "0";
 							}
 							else
 							{
 								respuesta[0] = "NO ENTRA";
 								respuesta[1] = mensaje;
-
-								return respuesta;
+								respuesta[2] = "1";
 							}
-						}
-						catch (Exception err)
-						{
-							respuesta[0] = "ENTRA";
-							respuesta[1] = "";
 
 							return respuesta;
 						}
-
 					}
-					else {
+					catch (Exception err)
+					{
 						respuesta[0] = "ENTRA";
 						respuesta[1] = "";
+						respuesta[2] = "0";
 
 						return respuesta;
 					}
-				}
-				catch (Exception)
-				{
 
+				}
+				else
+				{
 					respuesta[0] = "ENTRA";
 					respuesta[1] = "";
-
+					respuesta[2] = "0";
 					return respuesta;
 				}
-
 			}
-			else {
+			catch (Exception)
+			{
+
 				respuesta[0] = "ENTRA";
 				respuesta[1] = "";
-
+				respuesta[2] = "0";
 				return respuesta;
 			}
+
 		}
 
 		public static string EnviaComprobantes(int g_id, int idinforme, int RmReqGasto, string PDF, string XML, string Usuario, int xmlcargado, int pdfcargado, string g_fgasto, string g_concepto, string g_negocio, string g_formaPago, int g_categoria, double g_total, double g_importenodeducible, string g_dirotros, int g_importenoaceptable, int otroscargado)

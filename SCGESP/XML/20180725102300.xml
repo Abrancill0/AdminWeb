@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" Version="3.3" Serie="A" Folio="12868" Fecha="2018-07-22T14:01:15" Sello="oI6a1Rs2oefkrqe6+zVUJYZivlYRJyQ89+toppvtrjkxtZ7bRXOeKdz7HUb7cGvWcwgN2542opgsvN5Ip0N0ze4LJbzrZV1+/PLyWcRc4Ay88RV6su9ZQT0vIh87Y04RNG6eEgTK3aJcX3doUoRwxXxyBQWn+w3OOCxPeqG47fE=" FormaPago="01" NoCertificado="00001000000305133762" Certificado="MIIEcjCCA1qgAwIBAgIUMDAwMDEwMDAwMDAzMDUxMzM3NjIwDQYJKoZIhvcNAQEFBQAwggGKMTgwNgYDVQQDDC9BLkMuIGRlbCBTZXJ2aWNpbyBkZSBBZG1pbmlzdHJhY2nDs24gVHJpYnV0YXJpYTEvMC0GA1UECgwmU2VydmljaW8gZGUgQWRtaW5pc3RyYWNpw7NuIFRyaWJ1dGFyaWExODA2BgNVBAsML0FkbWluaXN0cmFjacOzbiBkZSBTZWd1cmlkYWQgZGUgbGEgSW5mb3JtYWNpw7NuMR8wHQYJKoZIhvcNAQkBFhBhY29kc0BzYXQuZ29iLm14MSYwJAYDVQQJDB1Bdi4gSGlkYWxnbyA3NywgQ29sLiBHdWVycmVybzEOMAwGA1UEEQwFMDYzMDAxCzAJBgNVBAYTAk1YMRkwFwYDVQQIDBBEaXN0cml0byBGZWRlcmFsMRQwEgYDVQQHDAtDdWF1aHTDqW1vYzEVMBMGA1UELRMMU0FUOTcwNzAxTk4zMTUwMwYJKoZIhvcNAQkCDCZSZXNwb25zYWJsZTogQ2xhdWRpYSBDb3ZhcnJ1YmlhcyBPY2hvYTAeFw0xNDA5MTkxNTIzMThaFw0xODA5MTkxNTIzMThaMIG+MSYwJAYDVQQDEx1NQVJJQSBFVUdFTklBIEFDT1NUQSBFU0NPQkVETzEmMCQGA1UEKRMdTUFSSUEgRVVHRU5JQSBBQ09TVEEgRVNDT0JFRE8xJjAkBgNVBAoTHU1BUklBIEVVR0VOSUEgQUNPU1RBIEVTQ09CRURPMRYwFAYDVQQtEw1BT0VFNzYxMTIxUlo1MRswGQYDVQQFExJBT0VFNzYxMTIxTVNQQ1NHMDQxDzANBgNVBAsTBnVuaWRhZDCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAqdJEFwjkq5mhCalVjaZLBJ100Sg5FZWHb1bwgSsdLfIhk5MMbjIfPAYnTG7idy3VLX+QxvEAC3T5eYR6r7c/Nr4bFhjTWc6ZihpGqQLVCk6FEBmGoK+Lkw40FCTtyd7R3pJXGc7yVTyse6sz9NsWeL9Ghq/vcfFns/Bn29N+A8ECAwEAAaMdMBswDAYDVR0TAQH/BAIwADALBgNVHQ8EBAMCBsAwDQYJKoZIhvcNAQEFBQADggEBAE7tcp4qnuj9q11ylnB1hcZO9r/cn6Dqk3zGnkGUgDf9LhCAHvlyeT2I7+x9jD3Uh6p9VBlPKKyh3f/nPmKtq1//wexiWGqF60r25T+a4CAzFqqd5hZyZisNKqqAGK9e8qfoTa7+i4kHtGyWNCyMLqKdEDJFNVRCUapf3B+lj9tOrwdfa6j6FPEo4f8PmiKNVvsZNF8blUvQtKsLqK977h2+/VGFi26V0gR0vd5qldG06CoYzz9Q4vHacpJdGh3n/j3W7Kh9tf/j5WKrBc50taneMmwHSatN+llYSdFBCbBOWzNWk8CREkduIsvz7s+BZh1enTgBlQPaUy4pfoHtT9c=" SubTotal="129.31" Moneda="MXN" Total="150.00" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="78220">
+  <cfdi:Emisor Rfc="AOEE761121RZ5" Nombre="Maria Eugenia Acosta Escobedo" RegimenFiscal="612" />
+  <cfdi:Receptor Rfc="SPO830427DQ1" UsoCFDI="G01" Nombre="GUARDERIA Y JARDIN DE NIÑOS WENDY II S.C." />
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="51171900" Cantidad="1" ClaveUnidad="PZ" Unidad="PZ" Descripcion="ABATELENGUAS C/500 POP " ValorUnitario="129.31" Importe="129.31">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="129.31" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.16" Importe="20.689600" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="20.69">
+    <cfdi:Traslados>
+      <cfdi:Traslado Importe="20.69" Impuesto="002" TasaOCuota="0.16" TipoFactor="Tasa" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" SelloCFD="oI6a1Rs2oefkrqe6+zVUJYZivlYRJyQ89+toppvtrjkxtZ7bRXOeKdz7HUb7cGvWcwgN2542opgsvN5Ip0N0ze4LJbzrZV1+/PLyWcRc4Ay88RV6su9ZQT0vIh87Y04RNG6eEgTK3aJcX3doUoRwxXxyBQWn+w3OOCxPeqG47fE=" NoCertificadoSAT="00001000000405332712" RfcProvCertif="FIN1203015JA" UUID="47C48B83-BD25-4153-A381-68A309218CE1" FechaTimbrado="2018-07-23T14:01:33" SelloSAT="zarKxC/FtSj4890IE47JXmRpdZTnPKG+YpNDYVugQ72p7p7nv/cYsuDu/u5Gx1IozXDaKpm9HbEt7vwl7BuzBtEiUqTJLRWBCm9iZIlhygeaXOU5YoGlLuLBgeGEDkvWpC5vEekyRyZzDxqsMOVnIZ38W4eLKmLb6h4x4/Zp6Jp5Dcy2wVZzgr/qCsZCeipJRpp4edJfl753nVY+yJCIIl0JcxPRgUgC5il953EX5/VIVWnwb05J1bOlvmhUR6yGzAetRQQowTfMHEu/Funf1X1Pq4N24+Ry7osER77XKzuoKcn/WKiZvEHFH1KVAjvPDbjvJWl89bkeFuMb00Nl6w==" />
+  </cfdi:Complemento>
+</cfdi:Comprobante>

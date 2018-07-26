@@ -139,8 +139,8 @@ function ObtenerInformes() {
             $.each(result, function (i, value) {
                 //console.log(value);
                 var btnEdit = "";
-                var finicio = valorVacio(value.i_finicio) ? "" : formatFecha(new Date(value.i_finicio), "dd/mm/yyyy");
-                var ffin = valorVacio(value.i_ffin) ? "" : formatFecha(new Date(value.i_ffin), "dd/mm/yyyy");
+                //var finicio = valorVacio(value.i_finicio) ? "" : formatFecha(new Date(value.i_finicio), "dd/mm/yyyy");
+                //var ffin = valorVacio(value.i_ffin) ? "" : formatFecha(new Date(value.i_ffin), "dd/mm/yyyy");
 
                 btnEdit = "<button type='button' class='btn btn-success btn-sm' onclick='verInformeGastos(" + value.i_id + ", " + 0 + ", " + value.i_estatus + ")' data-dismiss='modal'><i class='zmdi zmdi-eye zmdi-hc-lg' style='padding: 3px 0px'></i> Ver</button>";
                 var btnVer = "<a href='/ver_informe_autorizacion?" + fh + "&item=" + value.i_id + "' class='btn btn-success btn-sm'><i class='zmdi zmdi-eye zmdi-hc-lg' style='padding: 3px 0px'></i> Ver</a>";
