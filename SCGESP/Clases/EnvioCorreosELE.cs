@@ -67,7 +67,7 @@ namespace SCGESP.Clases
                 {
                     Correo = correo;
                 }
-
+				Correo = "hector.ramos@trascenti.com";
 				try
 				{
 					bool correoOK = Enviar_correo_html(Correo, Asunto, Mensaje);
@@ -77,7 +77,19 @@ namespace SCGESP.Clases
 						xml.LoadXml("<resultado>Correo Enviado</resultado>");
 					}
 					else {
-						xml.LoadXml("<resultado>Error al enviar el correo.</resultado>");
+						entrada.agregaElemento("Para", Correo);
+						entrada.agregaElemento("Copia", correoCopia);
+						entrada.agregaElemento("Asunto", Asunto);
+						entrada.agregaElemento("Mensaje", Mensaje);
+						DocumentoSalida respuesta = PeticionGeneral(entrada.Documento);
+						if (respuesta.Resultado == "1")
+						{
+							return respuesta.Documento;
+						}
+						else
+						{
+							return respuesta.Documento;
+						}
 					}					
 					return xml;
 				}
@@ -555,6 +567,5 @@ namespace SCGESP.Clases
 
 
 		}
-
     }
 }
