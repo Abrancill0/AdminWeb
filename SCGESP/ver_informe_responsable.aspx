@@ -1125,7 +1125,14 @@
 
 		var UsuarioActivo = localStorage.getItem("cosa");
 		var EmpeladoActivo = localStorage.getItem("cosa2");
-		var fechasReq = JSON.parse(localStorage.getItem("fechasReq"));
+		var fechasReq = {
+			"fInicio": fechaActual(),
+			"fFin": FechaMasMenos(fechaActual(), 7, "d", "+")
+		};
+		if (valorVacio(localStorage.getItem("fechasReq")) === false) {
+			fechasReq = JSON.parse(localStorage.getItem("fechasReq"));
+		}
+		
 		var f = new Date();
 		var fh = f.getDate() + '' + f.getMonth() + '' + f.getFullYear() + '' + f.getHours() + '' + f.getMinutes() + '' + f.getSeconds();
 		// compile handlebars templates and store them for use later
@@ -1564,45 +1571,48 @@
 			}
 			return datos;
 		}
-		$(".fechagasto").datepicker({
-			dateFormat: "dd-mm-yy",
-			dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
-			dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
-			monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
-			monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-			changeMonth: true,
-			changeYear: true,
-			minDate: fechasReq.fInicio,
-			maxDate: fechasReq.fFin,
-			onSelect: function (selectedDate) {
-				//
-			},
-			beforeShow: function (input, inst) {
-				var calendar = inst.dpDiv;
-				setTimeout(function () {
-					calendar.css({
-						'z-index': 2000
-					});
-					var hoy = new Date();
-					var fInicio1 = (fechasReq.fInicio).split("-");
-					var fFin1 = (fechasReq.fFin).split("-");
-					var fInicio = new Date(fInicio1[2] + "-" + fInicio1[1] + "-" + fInicio1[0]);
-					var fFin = new Date(fFin1[2] + "-" + fFin1[1] + "-" + fFin1[0]);
+		function armaInputFecha() {
+			$(".fechagasto").datepicker("destroy");
+			$(".fechagasto").datepicker({
+				dateFormat: "dd-mm-yy",
+				dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+				dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+				monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+				monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+				changeMonth: true,
+				changeYear: true,
+				minDate: fechasReq.fInicio,
+				maxDate: fechasReq.fFin,
+				onSelect: function (selectedDate) {
+					//
+				},
+				beforeShow: function (input, inst) {
+					var calendar = inst.dpDiv;
+					setTimeout(function () {
+						calendar.css({
+							'z-index': 2000
+						});
+						var hoy = new Date();
+						var fInicio1 = (fechasReq.fInicio).split("-");
+						var fFin1 = (fechasReq.fFin).split("-");
+						var fInicio = new Date(fInicio1[2] + "-" + fInicio1[1] + "-" + fInicio1[0]);
+						var fFin = new Date(fFin1[2] + "-" + fFin1[1] + "-" + fFin1[0]);
 
-					hoy.setHours(0, 0, 0, 0);
-					fInicio.setHours(0, 0, 0, 0); // Lo iniciamos a 00:00 horas
-					fFin.setHours(0, 0, 0, 0); // Lo iniciamos a 00:00 horas
+						hoy.setHours(0, 0, 0, 0);
+						fInicio.setHours(0, 0, 0, 0); // Lo iniciamos a 00:00 horas
+						fFin.setHours(0, 0, 0, 0); // Lo iniciamos a 00:00 horas
 
-					if (hoy < fInicio || hoy > fFin) {
-						if (valorVacio($("#fechagasto").val())) {
-							$("#fechagasto").val(fechasReq.fInicio);
+						if (hoy < fInicio || hoy > fFin) {
+							if (valorVacio($("#fechagasto").val())) {
+								$("#fechagasto").val(fechasReq.fInicio);
+							}
 						}
-					}
 
-				}, 0);
+					}, 0);
 
-			}
-		});
+				}
+			});
+		}
 		function DatosRequisicion(RmReqId) {
 			var datos = { 'Usuario': UsuarioActivo, 'RmReqId': RmReqId, 'Empleado': EmpeladoActivo };
 			var resultado = [];
@@ -1634,6 +1644,8 @@
 					fFin = formatFecha(fFin, "dd-mm-yyyy");
 					localStorage.removeItem('fechasReq');
 					localStorage.setItem('fechasReq', JSON.stringify({ 'fInicio': fInicio, 'fFin': fFin }));
+					fechasReq = JSON.parse(localStorage.getItem("fechasReq"));
+					armaInputFecha();
 				},
 				error: function (result) {
 					console.log("error", result);
@@ -3062,6 +3074,10 @@
 		});
 		$("input[id*='justificacion']").keyup(function () {
 			var justificacion = $.trim($(this).val());
+			var IdInput = $(this)[0].id;
+			if (IdInput === "justificacion_noches")
+				return false;
+
 			if (!valorVacio(justificacion)) {
 				var text_ayuda = $(this).attr("placeholder");
 				$(".justificacion_text_ayuda").show();
@@ -3708,7 +3724,7 @@
 			var gasto = "";
 			$.each(listGastos, function (key, value) {
 				if (datos.IdGasto === value.IdGasto) {
-					gasto = value.Concepto + " / " + value.Negocio;
+					gasto = value.Concepto;
 				}
 			});
 			return gasto;

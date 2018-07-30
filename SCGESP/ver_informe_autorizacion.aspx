@@ -836,8 +836,8 @@
 				},
 				success: function (result) {
 					var informe = result[0];
-					informe.del = valorVacio(informe.del) ? "" : formatFecha(new Date(informe.del), "dd/mm/yyyy");
-					informe.al = valorVacio(informe.al) ? "" : formatFecha(new Date(informe.al), "dd/mm/yyyy");
+					//informe.del = valorVacio(informe.del) ? "" : formatFecha(new Date(informe.del), "dd/mm/yyyy");
+					//informe.al = valorVacio(informe.al) ? "" : formatFecha(new Date(informe.al), "dd/mm/yyyy");
 					informe.i_comentarioaut = (informe.i_comentarioaut);
 					informe.p_nmb = (informe.p_nmb);
 					informe.i_uresponsable = $.trim(informe.i_uresponsable);
@@ -1320,7 +1320,8 @@
 						//console.log(response);
 						$("#verComprobante").modal('show');
 						var controles = "";
-						controles = "<button type='button' class='btn btn-warning btn-xs' onclick='imprimirXML()'><i class='zmdi zmdi-print zmdi-hc-2x'></i> Imprimir</button> ";
+						controles = "&nbsp;<a type='button' class='btn btn-warning btn-xs' href='#'  onclick='imprimirXML()' title='Imprimir'><i class='zmdi zmdi-print zmdi-hc-2x'></i> </a> ";
+						controles += "&nbsp;<a type='button' class='btn btn-warning btn-xs' href='" + dircomp + "' target='_blank' title='Descargar'><i class='zmdi zmdi-download zmdi-hc-2x'></i> </a>";
 						$("#controles_compXML").append(controles);
 
 						var xmljson = xmlToJson(response);
@@ -1349,7 +1350,10 @@
 				$("#verComprobante").modal('show');
 				dircomp = "/" + dircomp;
 				var controles = "";
-				controles += "<button type='button' class='btn btn-warning btn-xs' dir='" + dircomp + "' onclick='imprimirImg()'><i class='zmdi zmdi-print zmdi-hc-2x'></i> Imprimir</button> ";
+				controles += "&nbsp;<a type='button' class='btn btn-warning btn-xs' href='#' dir='" + dircomp + "' onclick='imprimirImg()' title='Imprimir'><i class='zmdi zmdi-print zmdi-hc-2x'></i> </button> ";
+				controles += "&nbsp;<a type='button' class='btn btn-primary btn-xs' href='#' dir='" + dircomp + "' onclick='rotarImg(\"" + dircomp + "\", -90)' title='Rotar a la izquierda'><i class='zmdi zmdi-rotate-left zmdi-hc-2x'></i> </a>";
+				controles += "&nbsp;<a type='button' class='btn btn-primary btn-xs' href='#' onclick='rotarImg(\"" + dircomp + "\", 90)' title='Rotar a la derecha'><i class='zmdi zmdi-rotate-right zmdi-hc-2x'></i> </a>";
+				controles += "&nbsp;<a type='button' class='btn btn-warning btn-xs' href='" + dircomp + "' target='_blank' title='Descargar'><i class='zmdi zmdi-download zmdi-hc-2x'></i> </a>";
 				var f = new Date();
 				var fh = f.getDate() + '' + f.getMonth() + '' + f.getFullYear() + '' + f.getHours() + '' + f.getMinutes() + '' + f.getSeconds();
 				$("#controles_compOTRO").append(controles);
@@ -1357,6 +1361,29 @@
 				$("#compOTRO").attr("src", dircomp + "?" + fh);
 			}
 
+		}
+		function rotarImg(imagen, angulo) {
+			var datos = {
+				'Imagen': imagen,
+				'Angulo': angulo
+			};
+			$.ajax({
+				async: false,
+				type: "POST",
+				url: "/api/RotarImagen",
+				data: datos,
+				dataType: "json",
+				beforeSend: function () {
+					//
+				},
+				success: function (result) {
+					var f = String(new Date().getTime()) + "-" + Math.random();
+					$("#compOTRO").attr("src", imagen + "?" + f);
+				},
+				error: function (result) {
+					console.log(result);
+				}
+			});
 		}
 		function imprimirImg() {
 			$("#print_compOTRO").printArea({
@@ -1750,7 +1777,7 @@
 
 					setTimeout(function () {
 						window.location.href = "/Autorizaciones?" + fh;
-					}, 1000);
+					}, 2000);
 
 				}
 			});
