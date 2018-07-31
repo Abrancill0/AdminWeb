@@ -375,7 +375,7 @@ namespace SCGESP.Controllers
 
             //Asignacion de valores a parametros
             comando.Parameters["@uresponsable"].Value = usuario;
-            comando.Parameters["@motivo"].Value = Motivo;
+            comando.Parameters["@motivo"].Value = viaje;
             comando.Parameters["@viaje"].Value = viaje;
             comando.Parameters["@tipo"].Value = tipo;
             comando.Parameters["@idempresa"].Value = 0;
@@ -393,15 +393,15 @@ namespace SCGESP.Controllers
 			int diaf = FechaFinal.Day;
 			int mesf = FechaFinal.Month;
 
-			comando.Parameters["@fini"].Value = Convert.ToDateTime(Anioi + "-0" + mesi + "-" + diai);
+			comando.Parameters["@fini"].Value = FechaRequrida;
 
             if (FechaFinal != null)
             {
-                comando.Parameters["@ffin"].Value = Convert.ToDateTime(Aniof + "-0" + mesf + "-0" + diaf);
+                comando.Parameters["@ffin"].Value = FechaFinal;
             }
             else
             {
-                comando.Parameters["@ffin"].Value = Convert.ToDateTime(Anioi + "-0" + mesi + "-" + diai);
+                comando.Parameters["@ffin"].Value = FechaRequrida;
 			}
 
 

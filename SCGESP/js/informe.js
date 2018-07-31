@@ -539,7 +539,8 @@ function selectInforme(id, actControles) {
                 $("#solAnticipo").hide();
 
                 if (value.i_comentarioaut !== "" && value.i_comentarioaut !== null) {
-                    $("#tdcomAut").append("<b>Comentario de Rechazo: </b> " + value.i_comentarioaut);
+                    var comRechazo = (value.i_comentarioaut).replace(";;", "<br />");
+                    $("#tdcomAut").append("<b>Comentario de Rechazo: </b> " + comRechazo);
                     $("#comentarioaut").val(value.i_comentarioaut);
                 }
                 var lblCon = "<span style='font-size: 11px' class='label label-success'><span class='glyphicon glyphicon-ok'></span></span>";
