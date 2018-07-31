@@ -539,7 +539,7 @@ function selectInforme(id, actControles) {
                 $("#solAnticipo").hide();
 
                 if (value.i_comentarioaut !== "" && value.i_comentarioaut !== null) {
-                    var comRechazo = (value.i_comentarioaut).replace(";;", "<br />");
+                    var comRechazo = (value.i_comentarioaut).replace(/;;/gi, "<br />");
                     $("#tdcomAut").append("<b>Comentario de Rechazo: </b> " + comRechazo);
                     $("#comentarioaut").val(value.i_comentarioaut);
                 }
