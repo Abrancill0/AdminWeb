@@ -385,16 +385,24 @@ namespace SCGESP.Controllers
             comando.Parameters["@RmReqGasto"].Value = RmReqGasto;
             comando.Parameters["@TarjetaToka"].Value = Tarjetatoka ?? "";
 
-            comando.Parameters["@fini"].Value = FechaRequrida;
+			int Anioi = FechaRequrida.Year;
+			int diai = FechaRequrida.Day;
+			int mesi = FechaRequrida.Month;
+
+			int Aniof = FechaFinal.Year;
+			int diaf = FechaFinal.Day;
+			int mesf = FechaFinal.Month;
+
+			comando.Parameters["@fini"].Value = Convert.ToDateTime(Anioi + "-0" + mesi + "-" + diai);
 
             if (FechaFinal != null)
             {
-                comando.Parameters["@ffin"].Value = FechaFinal;
+                comando.Parameters["@ffin"].Value = Convert.ToDateTime(Aniof + "-0" + mesf + "-0" + diaf);
             }
             else
             {
-                comando.Parameters["@ffin"].Value = FechaRequrida;
-            }
+                comando.Parameters["@ffin"].Value = Convert.ToDateTime(Anioi + "-0" + mesi + "-" + diai);
+			}
 
 
             try
@@ -410,8 +418,9 @@ namespace SCGESP.Controllers
                 comando.Connection.Close();
                 DA.Fill(DT);
             }
-            catch (Exception) {
-                return "";
+            catch (Exception ex) {
+				var error = ex.ToString();
+                return error;
             }
 
                     return "";

@@ -236,6 +236,13 @@ namespace SCGESP.Controllers.CGEAPI
 
 				return "El XML No se puede cargar, el comprobante " + FiCfdUuid + " ya existe en AdminERP. Documento : " + FiCfdNumeroDocumento.ToString();
 			}
+
+			if (Receptor.ToUpper() != "SPO830427DQ1")
+			{
+				Deletexml(Ruta);
+
+				return "El RFC es invalido.";
+			}
 			//FIN valida xml en AdminERP
 
 
@@ -297,6 +304,10 @@ namespace SCGESP.Controllers.CGEAPI
 					Deletexml(Ruta);
 				}
 				if (Mensaje == "El UUID ingresado ya existe")
+				{
+					Deletexml(Ruta);
+				}
+				if (Mensaje == "El RFC es invalido.")
 				{
 					Deletexml(Ruta);
 				}

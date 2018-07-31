@@ -1195,6 +1195,13 @@ function recuperagastoxml(id, idinforme, idproyecto, xml, pdf, otros, estatusinf
                 //ObtenerInformes();
             };
 
+
+            if (result === 'El RFC es invalido.') {
+                $.notify(result, { globalPosition: 'top center', className: 'error', autoHideDelay: 6000 });
+                consultaInfoGastos(idinforme, estatusinf, 0);
+                error = 1;
+            };
+
             if (result === 'No se puede guardar el comprobante, el importe es igual o mayor a $ 2000.00 y la forma de pago es efectivo.') {
                 $.notify(result, { globalPosition: 'top center', className: 'error', autoHideDelay: 6000 });
 

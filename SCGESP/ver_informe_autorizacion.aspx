@@ -1320,7 +1320,7 @@
 						//console.log(response);
 						$("#verComprobante").modal('show');
 						var controles = "";
-						controles = "&nbsp;<a type='button' class='btn btn-warning btn-xs' href='#'  onclick='imprimirXML()' title='Imprimir'><i class='zmdi zmdi-print zmdi-hc-2x'></i> </a> ";
+						controles = "&nbsp;<a type='button' class='btn btn-warning btn-xs' href='#'  onclick='imprimirXML()' title='Imprimir'><i class='zmdi zmdi-print zmdi-hc-2x'></i> </a>";
 						controles += "&nbsp;<a type='button' class='btn btn-warning btn-xs' href='" + dircomp + "' target='_blank' title='Descargar'><i class='zmdi zmdi-download zmdi-hc-2x'></i> </a>";
 						$("#controles_compXML").append(controles);
 
