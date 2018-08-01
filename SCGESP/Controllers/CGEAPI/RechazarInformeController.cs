@@ -39,7 +39,6 @@ namespace SCGESP.Controllers.CGEAPI
             comando.CommandTimeout = 0;
             comando.Connection.Open();
             //DA.SelectCommand = comando;
-            comando.ExecuteNonQuery();
 
             DataTable DT = new DataTable();
             SqlDataAdapter DA = new SqlDataAdapter(comando);

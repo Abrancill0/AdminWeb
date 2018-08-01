@@ -118,7 +118,7 @@
 	<section class="content">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				Requisición / Informe de gastos por autorizar (*Validar)
+				Requisición / Informe de gastos por autorizar
         <a href="#" onclick='cerrarPanel(".panel")' class='btn btn-danger btn-xs'><i class="zmdi zmdi-close"></i>Cerrar</a>
 			</div>
 			<div class="panel-body">
@@ -1571,13 +1571,13 @@
 					$.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'success' });
 					setTimeout(function () {
 						window.location.href = "/Autorizaciones?" + fh;
-					}, 1000);
+					}, 2000);
 				} else {
 					//"Error al enviar comprobacion,favor de verificar"
 					$.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'error' });
-					setTimeout(function () {
+					/*setTimeout(function () {
 						location.reload();
-					}, 1000);
+					}, 1000);*/
 				}
 				cargado();
 			}
@@ -1656,17 +1656,19 @@
 				contentType: 'application/json; charset=utf-8',
 				dataType: 'json',
 				beforeSend: function () {
+					$("#modal_alerta").modal('hide');
 					cargando();
 				},
 				success: function (result) {
 
-					$.notify("Se ha enviado correctamente a Visto Bueno.", { globalPosition: 'top center', className: 'success' });
+					$.notify("Se ha enviado correctamente a revisión.", { globalPosition: 'top center', className: 'success' });
 					//$("#verInformeGastos").modal("hide");
 					setTimeout(function () {
 						window.location.href = "/Autorizaciones?" + fh;
 					}, 1000);
 				},
 				error: function (result) {
+					cargado();
 					$.notify("Error al enviar Visto Bueno.", { globalPosition: 'top center', className: 'error' });
 					console.log(result);
 				}
@@ -1675,7 +1677,7 @@
 		function enviarAAutorizacion(datos) {
 			var respuesta = [];
 			$.ajax({
-				async: false,
+				async: true,
 				type: "POST",
 				url: "/api/Comprobacion",
 				data: JSON.stringify(datos),
@@ -1683,6 +1685,7 @@
 				dataType: 'json',
 				cache: false,
 				beforeSend: function () {
+					cargando();
 					//$("#verInformeGastos").modal('hide');
 				},
 				success: function (result) {
@@ -1726,7 +1729,7 @@
 				btn1: true,
 				label1: "Rechazar",
 				tipo1: "primary",
-				function1: "recharzar()",
+				function1: "rechazar()",
 				icono1: " zmdi zmdi-mail-send",
 				btn2: false,
 				btn3: false
@@ -1746,7 +1749,7 @@
 				$("#ComentariosRechazo").focus();
 			},500);
 		});
-		function recharzar() {
+		function rechazar() {
 			var idinforme = $("#idinforme").val();
 			var UsuarioActivo = localStorage.getItem("cosa");
 			var nmbemp = localStorage.getItem("nmbemp");
@@ -1771,14 +1774,18 @@
 				contentType: 'application/json; charset=utf-8',
 				dataType: 'json',
 				cache: false,
+				beforeSend: function () {
+					$("#modal_alerta").modal('hide');
+					cargando();
+				},
 				success: function (result) {
-
+					
+				},
+				complete: function () {
 					$.notify("El informe se ha rechazado correctamente", { globalPosition: 'top center', className: 'success', autoHideDelay: 8000 });
-
 					setTimeout(function () {
 						window.location.href = "/Autorizaciones?" + fh;
 					}, 2000);
-
 				}
 			});
 

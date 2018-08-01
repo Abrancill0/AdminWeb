@@ -514,7 +514,7 @@
 							<label for="justificacion_estacionamiento" class="col-lg-3 control-label bold">Justificaci&oacute;n:</label>
 							<div class="col-lg-9">
 								<div class="row form-group" style="margin-bottom: 0px; padding-bottom: 0px;">
-									<input type='text' id='justificacion_estacionamiento' name='justificacion_estacionamiento' class='form-control input-mask' placeholder="Justificación / Motivo." />
+									<input type='text' id='justificacion_estacionamiento' name='justificacion_estacionamiento' class='form-control input-mask' placeholder="Motivo." />
 									<label style="width: 100%; display: block">
 										<small class="justificacion_text_ayuda"></small>
 									</label>
@@ -611,7 +611,7 @@
 							<label for="comensales" class="col-lg-3 control-label bold">Comensales:</label>
 							<div class="col-lg-9">
 								<div class="row form-group" style="margin-bottom: 0px; padding-bottom: 0px;">
-									<input type='text' id='comensales' name='comensales' class='form-control input-mask' placeholder="Comensal 1, Comensal 2, Comensal N..." />
+									<input type='text' id='comensales' name='comensales' class='form-control input-mask' placeholder="Nombre 1, Nombre 2, Nombre N..." />
 									<label style="width: 100%; display: block">
 										<small class="justificacion_text_ayuda_comensales"></small>
 									</label>
@@ -680,7 +680,7 @@
 								<input class="form-control reporte2" name="repa2" id="repa2" type="hidden" style="width: 80px;" />
 								<input type="hidden" id="importede" name="importede" class="form-control text-right" style="width: 80px;" />
 								<input type="hidden" id="importea" name="importea" class="form-control text-right" style="width: 80px;" />
-								<a id="btnBuscarMovBanco" class="btn btn-primary" href="#" role="button" onclick="ObtenerInformes()"><i class="zmdi zmdi-refresh-alt"></i>Actualizar</a>
+								<a id="btnBuscarMovBanco" class="btn btn-primary" href="#" role="button"><i class="zmdi zmdi-refresh-alt"></i>Actualizar</a>
 							</form>
 							<div id="scrolltblMovBanco">
 								<table id="tblMovBanco" class="display browse" cellspacing="0" width="100%">
@@ -1982,7 +1982,8 @@
 			$("#justificacion").val("");
 			$("#comensales").val("");
 			$("#monto").val("");
-			$("#monto").attr("max", (disponible));
+			$("#monto").attr("max", (disponible).toFixed(2));
+			$("span.buttonText").empty();
 		});
 		function editar_gasto(datos_gasto) {
 			$(":file").filestyle('clear');
@@ -1993,6 +1994,7 @@
 				keyboard: false,
 				backdrop: "static"
 			});
+			$("span.buttonText").empty();
 			"#mEditarGastoInf .modal-header.titulo-modal span".AsHTML("Editar Gasto");
 			var gasto = JSON.parse(datos_gasto);
 			var valores_justificacion = gasto.valores_justificacion;
@@ -2029,7 +2031,7 @@
 			});
 			$("#comensales").val(gasto.nmbcomensales);
 			$("#monto").val(gasto.num_monto);
-			$("#monto").attr("max", (gasto.num_monto + disponible));
+			$("#monto").attr("max", (gasto.num_monto + disponible).toFixed(2));
 			$("#monto").attr("valueOld", gasto.num_monto);
 
 		}
@@ -3518,6 +3520,9 @@
 			});
 			BuscarMovBancariosParaConfrontar(tarjeta);
 			$("#confrontacion").css({ 'z-index': 2000 });
+
+			$("span.buttonText").empty();
+
 		});
 		$("#importede, #importea").change(function () {
 			BuscarMovBancariosParaConfrontar("");
@@ -3534,7 +3539,7 @@
 			var ConfBanco = $("#ConfBanco").val() * 1;
 			if (ConfBanco === 0) {
 				var IdInforme = $("#idinforme").val() * 1;
-				var ImporteRequisicion = $("#RmRdeRequisicion").val() * 1;
+				var ImporteRequisicion = $("#montoRequisicion").val() * 1;
 				var ImporteMovBanco = $("#totalMovBanco").val() * 1;
 				var ImporteGastado = $("#totalg").val() * 1;
 				/*var vComensalesObjetivo = validaComensalesObjetivoEnGastos();

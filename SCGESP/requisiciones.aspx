@@ -130,7 +130,7 @@
                                                 <td id="tdTipoGasto">
                                                     <span class="textotd "></span>
                                                     <span class="inputtd">
-                                                        <select id="RmReqTipoDeGasto" name="RmReqTipoDeGasto" class="select2" data-width="100%"></select>
+                                                        <select id="RmReqTipoDeGasto" name="RmReqTipoDeGasto" class="select2" data-width="100%" disabled></select>
                                                     </span>
                                                 </td>
                                                 <!--td>Forma de Pago:</!--td>
