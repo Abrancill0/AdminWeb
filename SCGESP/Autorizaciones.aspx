@@ -7,7 +7,7 @@
     <section class="content">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                Autorizaciones Requisición de Viaje
+                Autorizaciones Requisición por Comprobar
         <a href="#" onclick='cerrarPanel(".panel")' class='btn btn-danger btn-xs'><i class="zmdi zmdi-close"></i>Cerrar</a>
             </div>
             <div class="panel-body">

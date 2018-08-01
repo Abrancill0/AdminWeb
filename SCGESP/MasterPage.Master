@@ -161,7 +161,7 @@
                     <li><a href='/requisiciones'><i class='zmdi zmdi-money'></i>Mis Requisiciones Solicitadas</a></li>
                     <li><a href='/requisicionesporautorizar'><i class='zmdi zmdi-check-all'></i>Requisiciones por Autorizar</a></li>
                     <li><a href='/Informes'><i class='zmdi zmdi-assignment'></i>Mis Requisiciones por Comprobar</a></li>
-                    <li><a href='/Autorizaciones'><i class='zmdi zmdi-assignment-account'></i>Autorizaciones de Requisiciones de Viaje</a></li>
+                    <li><a href='/Autorizaciones'><i class='zmdi zmdi-assignment-account'></i>Autorizaciones de Requisiciones por Comprobar</a></li>
                     <li class='navigation__sub sp-info'>
                         <a href='#' onclick="abreMenuModulo(this)"><i class='zmdi zmdi-help'></i> Ayuda</a>
                         <ul class='main-menu'>
