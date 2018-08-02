@@ -1170,8 +1170,8 @@
 
 					var uresponsable = informe.i_uresponsable;
 					var reembolso = informe.reembolso * 1;
-					informe.del = valorVacio(informe.del) ? "" : formatFecha(new Date(informe.del), "dd/mm/yyyy");
-					informe.al = valorVacio(informe.al) ? "" : formatFecha(new Date(informe.al), "dd/mm/yyyy");
+					//informe.del = valorVacio(informe.del) ? "" : formatFecha(new Date(informe.del), "dd/mm/yyyy");
+					//informe.al = valorVacio(informe.al) ? "" : formatFecha(new Date(informe.al), "dd/mm/yyyy");
 					informe.i_comentarioaut = (informe.i_comentarioaut);
 					informe.p_nmb = (informe.p_nmb);
 					informe.i_uresponsable = $.trim(informe.i_uresponsable);
@@ -1227,6 +1227,8 @@
 						num_decrementado: RmReqImporteDecrementado,
 						num_montog: informe.i_total
 					};
+					
+
 					$("#importesInforme").empty();
 					$("#importesInforme").append(importesInformeTemplate(importesInforme));
 
@@ -1324,7 +1326,7 @@
 							no_deducible: formatNumber.new(importenodeducible.toFixed(2), "$ "),
 							num_no_deducible: importenodeducible,
 							gasto: "",
-							btnEditar: true,
+							btnEditar: btnEditar,
 							classTr: colorRow,
 							btnAdicional: btnAdicional,
 							tipoajuste: tipoajuste,
@@ -1729,9 +1731,16 @@
 				$("#aagregarg").hide();
 			}
 
+			if (conciliacionOk === 1 && estatus > 2) {
+				$("#aconfrontar").hide();
+			}
+
 			if (conciliacionOk === 0) {
 				$("#aenvia").hide();
 			}
+			
+			if (($("#disAnticipo").val() * 1) === 0)
+				$("#aagregarg").hide();
 		}
 		function verComprobante(dircomp, comprobante, idgasto) {
 
@@ -2193,16 +2202,16 @@
 			};
 
 			var apiEjecutar = IdGasto > 0 ? "UpdateGasto" : "InsertGasto";
-			console.log(datos);
 			$.ajax({
-				async: false,
+				async: true,
 				type: "POST",
 				url: ("/api/" + apiEjecutar),
 				data: (datos), //data,
 				dataType: "json",
 				cache: false,
 				beforeSend: function () {
-					//cargando();
+					$("#mEditarGastoInf").modal('hide');
+					cargando();
 				},
 				success: function (result) {
 					console.log("gasto guardado->", result);
@@ -2224,19 +2233,19 @@
 						actualizarGastoComPDF(IdGasto, IdInforme);
 						actualizarGastoComOTRO(IdGasto, IdInforme);
 					}
-
-					$("#mEditarGastoInf").modal('hide');
-
-
-
 				},
 				complete: function () {
-					//cargado();
 					selectInforme(IdInforme);
 					browseGastos(IdInforme);
+					cargado();
 				},
 				error: function (result) {
-					//cargado();
+					cargado();
+					$("#mEditarGastoInf").modal({
+						show: true,
+						keyboard: false,
+						backdrop: "static"
+					});
 					console.log(result);
 					$.notify("Error al Guardar", { globalPosition: 'top center', className: 'error' });
 				}
@@ -2544,8 +2553,8 @@
 						contentType: 'application/json; charset=utf-8',
 						dataType: "json",
 						beforeSend: function () {
-
 							cargando();
+							//$("#modal_alerta").modal('hide');
 						},
 						success: function (result) {
 							$.notify("Informe enviado correctamente.", { globalPosition: 'top center', className: 'success', autoHideDelay: 6000 });
@@ -2555,7 +2564,6 @@
 
 						},
 						complete: function () {
-
 							cargado();
 						},
 						error: function (result) {
@@ -3529,11 +3537,18 @@
 		});
 		$("#btnBuscarMovBanco").click(function () {
 			var IdInforme = $("#idinforme").val() * 1;
+			$("#confrontacion").modal("hide");
+			cargando();
 			browseGastos(IdInforme);
 			setTimeout(function () {
 				BuscarMovBancariosParaConfrontar("");
+				cargado();
+				$("#confrontacion").modal({
+					show: true,
+					keyboard: false,
+					backdrop: "static"
+				});
 			}, 2000);
-
 		});
 		$("#confrontarInforme").click(function () {
 			var ConfBanco = $("#ConfBanco").val() * 1;
@@ -3634,7 +3649,8 @@
 				dataType: 'json',
 				cache: false,
 				beforeSend: function () {
-					//cargado();
+					$("#confrontacion").modal("hide");
+					cargado();
 				},
 				success: function (result) {
 					//console.log(result)
@@ -3642,16 +3658,15 @@
 						$.notify(result.Descripcion, { position: "top center", className: "success" });
 						selectInforme(datos.IdInforme);
 						browseGastos(datos.IdInforme);
-						$("#confrontacion").modal("hide");
 					} else {
 						$.notify(result.Descripcion, { position: "top center", className: "error" });
 					}
 				},
 				complete: function () {
-					//cargado();
+					cargado();
 				},
 				error: function (result) {
-					//cargado();
+					cargado();
 					console.log("error", result);
 				}
 			});
@@ -3694,7 +3709,7 @@
 					//cargando();
 				},
 				success: function (result) {
-					//console.log(result);
+					console.log(result);
 					$("#tblMovBanco tbody").empty();
 					var i = 1;
 					if (valorVacio(result))
@@ -3993,6 +4008,8 @@
 				dataType: 'json',
 				cache: false,
 				beforeSend: function () {
+					cargando();
+					$("#confrontacion").modal("hide");
 					$("#filebanco").filestyle('clear');
 					$("#tdTarjeta, #tdNombre, #tdNomina").empty();
 					$("#tblMovimientos tbody").empty().remove();
@@ -4067,6 +4084,12 @@
 						$(this)[0].cells[3].className = "text-right";
 					});
 					validaDuplicados();
+					
+					$("#confrontacion").modal({
+						show: true,
+						keyboard: false,
+						backdrop: "static"
+					});
 				},
 				error: function (result) {
 					cargado();
@@ -4126,9 +4149,12 @@
 			var elementosSel = false;
 			var IdInforme = $("#idinforme").val() * 1;
 			//resetInformeConfrontado();
+			$("#confrontacion").modal("hide");
+			cargando();
 			$("input:checkbox[name=movBanco]").each(function () {
 				if ($(this).is(':checked')) {
 					elementosSel = true;
+					
 					var datos = $(this).val(); //JSON.parse($(this).val());
 					var resultado = guardarMBanco(datos);
 					if (resultado.Exito.GuardadoOk === true) {
@@ -4139,13 +4165,23 @@
 					}
 				}
 			});
-
 			if (elementosSel === false) {
 				$.notify("Seleccionar movimiento(s).", { position: "top center", className: 'error' });
 			} else {
-				obtenerGastosInforme(IdInforme, 0, 2);
+				//obtenerGastosInforme(IdInforme, 0, 2);
 				$.notify("Información guardada.", { position: "top center", className: 'success' });
 			}
+			
+			setTimeout(function () {
+				cargado();
+				$("#confrontacion").modal({
+					show: true,
+					keyboard: false,
+					backdrop: "static"
+				});
+			}, 2000);
+			
+
 		});
 		function resetInformeConfrontado() {
 			var IdInforme = $("#idinforme").val() * 1;

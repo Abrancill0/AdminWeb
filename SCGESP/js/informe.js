@@ -147,7 +147,7 @@ function ObtenerInformes() {
                 var rechazado = value.rechazado * 1;//estatus informe rechazado
 
                 btnEdit = "<button type='button' class='btn btn-success btn-sm' onclick='verInformeGastos(" + value.i_id + ", " + value.i_idproyecto + ", " + value.i_estatus + ")' data-dismiss='modal'><i class='zmdi zmdi-eye zmdi-hc-lg' style='padding: 3px 0px'></i> Ver</button>";
-                var btnVer = "<a href='/ver_informe_responsable?" + fh + "&item=" + value.i_id + "' class='btn btn-success btn-sm'><i class='zmdi zmdi-eye zmdi-hc-lg' style='padding: 3px 0px'></i> Ver 2</a>";
+                var btnVer = "<a href='/ver_informe_responsable?" + fh + "&item=" + value.i_id + "' class='btn btn-success btn-sm'><i class='zmdi zmdi-eye zmdi-hc-lg' style='padding: 3px 0px'></i> Ver</a>";
                 //if (todos === 1) {
 
                 //var finicio = valorVacio(value.i_finicio) ? "" : formatFecha(new Date(value.i_finicio), "dd/mm/yyyy");
@@ -180,7 +180,6 @@ function ObtenerInformes() {
                 formatNumber.new(ImpAutorizado.toFixed(2), "$ "),
                 value.responsable,
                     estatus,
-                    btnEdit,
                     btnVer
                 ]).draw(false);
             });

@@ -37,7 +37,6 @@
 								<th width="100px">Empleado</th>
 								<th width="70px">Estatus</th>
 								<th width="20px"></th>
-								<th width="20px"></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -934,8 +933,8 @@
 	<!-- App functions and actions -->
 	<script src="js/app.min.js"></script>
 	<script src="js/js.js"></script>
-	<script src="js/informe.js?2xx"></script>
-	<script src="js/gastos.js?2xx"></script>
+	<script src="js/informe.js?2xxx"></script>
+	<script src="js/gastos.js?2xxx"></script>
 	<script>
 		$("#anuevo").click(function () {
 			$("#frmInforme").modal({
