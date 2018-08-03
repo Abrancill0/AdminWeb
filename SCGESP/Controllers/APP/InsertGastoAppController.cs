@@ -120,8 +120,7 @@ namespace SCGESP.Controllers.APP
                 comando.Parameters.Add("@idinforme", SqlDbType.Int);
                 comando.Parameters.Add("@fgasto", SqlDbType.Date);
                 comando.Parameters.Add("@ugasto", SqlDbType.VarChar);
-                comando.Parameters.Add("@concepto", SqlDbType.VarChar);
-                comando.Parameters.Add("@negocio", SqlDbType.VarChar);
+               
                 comando.Parameters.Add("@formapago", SqlDbType.VarChar);
                 comando.Parameters.Add("@categoria", SqlDbType.Int);
                 comando.Parameters.Add("@subtotal", SqlDbType.Float);
@@ -157,8 +156,7 @@ namespace SCGESP.Controllers.APP
                 comando.Parameters["@idinforme"].Value = Datos.idinforme;
                 comando.Parameters["@fgasto"].Value = Convert.ToDateTime(Datos.fgasto);
                 comando.Parameters["@ugasto"].Value = UsuarioDesencripta;
-                comando.Parameters["@concepto"].Value = Datos.concepto;
-                comando.Parameters["@negocio"].Value = Datos.negocio;
+
                 comando.Parameters["@formapago"].Value = Datos.formapago;
                 comando.Parameters["@categoria"].Value = Datos.categoria;
                 comando.Parameters["@subtotal"].Value = Datos.subtotal;
