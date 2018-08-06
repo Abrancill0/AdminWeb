@@ -17,8 +17,6 @@ namespace SCGESP.Controllers
             public int idinforme { get; set; }
             public string fgasto { get; set; }
             public string hgasto { get; set; }
-            public string concepto { get; set; }
-            public string negocio { get; set; }
             public string formapago { get; set; }
             public int categoria { get; set; }
             public double total { get; set; }

@@ -16,8 +16,6 @@ namespace SCGESP.Controllers.APP
             public int idinforme { get; set; }
             public string fgasto { get; set; }
             public string ugasto { get; set; }
-            public string concepto { get; set; }
-            public string negocio { get; set; }
             public string formapago { get; set; }
             public int categoria { get; set; }
             public float subtotal { get; set; }
@@ -113,7 +111,7 @@ namespace SCGESP.Controllers.APP
             {
                 string UsuarioDesencripta = Seguridad.DesEncriptar(Datos.ugasto);
 
-                SqlCommand comando = new SqlCommand("InsertGasto");
+                SqlCommand comando = new SqlCommand("InsertGastoApp");
                 comando.CommandType = CommandType.StoredProcedure;
 
                 //Declaracion de parametros
