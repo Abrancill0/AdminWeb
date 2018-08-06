@@ -130,7 +130,7 @@
 
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				Requisición / Informe de gastos (*Modo Prueba)
+				Requisición / Informe de gastos
         <a href="#" onclick='cerrarPanel(".panel")' class='btn btn-danger btn-xs'><i class="zmdi zmdi-close"></i>Cerrar</a>
 			</div>
 			<div class="panel-body">
@@ -690,7 +690,7 @@
 											<th>Descripción</th>
 											<th width="70px">Fecha</th>
 											<th width="70px">Monto $</th>
-											<th width="70px"></th>
+											<th width="200px" style="width:200px"></th>
 										</tr>
 									</thead>
 									<tbody></tbody>
@@ -1303,6 +1303,14 @@
 						if (estatus > 2 || ConfBanco === 1)
 							btnEditar = false;
 						var result_justificacion = conceptos_adicionales(value.g_concepto, value.g_nombreCategoria, tipoajuste);
+
+						var justificacion_text_1 = "";
+						try {
+							justificacion_text_1 = result_justificacion[0][1];
+						} catch (e) {
+							justificacion_text_1 = value.g_concepto;
+						}
+
 						var gasto = {
 							idgasto: value.g_id,
 							ngasto: value.orden,
@@ -1310,7 +1318,7 @@
 							fechagasto: fechagasto,
 							categoria: value.g_nombreCategoria,
 							idcategoria: value.g_categoria,
-							justificacion: result_justificacion[0][1],
+							justificacion: justificacion_text_1,
 							monto: formatNumber.new((value.g_total).toFixed(2), "$ "),
 							nmbcomensales: value.nmbcomensales,
 							num_monto: value.g_total,
@@ -3537,17 +3545,17 @@
 		});
 		$("#btnBuscarMovBanco").click(function () {
 			var IdInforme = $("#idinforme").val() * 1;
-			$("#confrontacion").modal("hide");
+			//$("#confrontacion").modal("hide");
 			cargando();
 			browseGastos(IdInforme);
 			setTimeout(function () {
 				BuscarMovBancariosParaConfrontar("");
 				cargado();
-				$("#confrontacion").modal({
+				/*$("#confrontacion").modal({
 					show: true,
 					keyboard: false,
 					backdrop: "static"
-				});
+				});*/
 			}, 2000);
 		});
 		$("#confrontarInforme").click(function () {
@@ -3768,7 +3776,8 @@
 				return opciones;
 			} else {
 				var gasto = selGastoStorage(datos);
-				gasto = "<h6><label class='label' style='font-size: 11px; margin:3px; color:black'>Gasto: " + gasto + "</label></h6>";
+				//word-wrap: break-word !important; width: 150px;
+				gasto = "<p style='font-size: 11px; margin:3px; color:black; word-wrap: break-word !important; width: 200px !important;'>Gasto: " + gasto + "</p>";
 				var opciones = {
 					'opciones': gasto,
 					'menu': false
@@ -4009,7 +4018,7 @@
 				cache: false,
 				beforeSend: function () {
 					cargando();
-					$("#confrontacion").modal("hide");
+					//$("#confrontacion").modal("hide");
 					$("#filebanco").filestyle('clear');
 					$("#tdTarjeta, #tdNombre, #tdNomina").empty();
 					$("#tblMovimientos tbody").empty().remove();
@@ -4085,11 +4094,11 @@
 					});
 					validaDuplicados();
 					
-					$("#confrontacion").modal({
+					/*$("#confrontacion").modal({
 						show: true,
 						keyboard: false,
 						backdrop: "static"
-					});
+					});*/
 				},
 				error: function (result) {
 					cargado();

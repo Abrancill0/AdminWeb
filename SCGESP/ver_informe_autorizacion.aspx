@@ -1565,6 +1565,7 @@
 				enviarVoBo();
 			} else {
 				//console.log("enviado a adminerp");
+				cargando();
 				var respuesta = enviarAAutorizacion(datos);
 				//if (respuesta.stResultado === 1) {
 				if (respuesta.stResultado === 1) {
@@ -1677,7 +1678,7 @@
 		function enviarAAutorizacion(datos) {
 			var respuesta = [];
 			$.ajax({
-				async: true,
+				async: false,
 				type: "POST",
 				url: "/api/Comprobacion",
 				data: JSON.stringify(datos),
@@ -1685,7 +1686,7 @@
 				dataType: 'json',
 				cache: false,
 				beforeSend: function () {
-					cargando();
+					$("#modal_alerta").modal('hide');
 					//$("#verInformeGastos").modal('hide');
 				},
 				success: function (result) {
