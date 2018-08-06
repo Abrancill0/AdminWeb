@@ -17,8 +17,6 @@ namespace SCGESP.Controllers
             public int idinforme { get; set; }
             public string fgasto { get; set; }
             public string hgasto { get; set; }
-            public string concepto { get; set; }
-            public string negocio { get; set; }
             public string formapago { get; set; }
             public int categoria { get; set; }
             public double total { get; set; }
@@ -89,8 +87,6 @@ namespace SCGESP.Controllers
                 comando.Parameters.Add("@idinforme", SqlDbType.Int);
                 comando.Parameters.Add("@fgasto", SqlDbType.Date);
                 comando.Parameters.Add("@hgasto", SqlDbType.VarChar);
-                comando.Parameters.Add("@concepto", SqlDbType.VarChar);
-                comando.Parameters.Add("@negocio", SqlDbType.VarChar);
                 comando.Parameters.Add("@formapago", SqlDbType.VarChar);
                 comando.Parameters.Add("@categoria", SqlDbType.Int);
                 comando.Parameters.Add("@total", SqlDbType.Float);
@@ -121,8 +117,7 @@ namespace SCGESP.Controllers
                     hora = Datos.hgasto;
                 }
                 comando.Parameters["@hgasto"].Value = hora;
-                comando.Parameters["@concepto"].Value = Datos.concepto;
-                comando.Parameters["@negocio"].Value = Datos.negocio;
+               
                 comando.Parameters["@formapago"].Value = Datos.formapago;
                 comando.Parameters["@categoria"].Value = Datos.categoria;
                 comando.Parameters["@total"].Value = Datos.total;
