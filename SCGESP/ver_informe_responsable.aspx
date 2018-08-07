@@ -3472,13 +3472,6 @@
 				return false;
 			}
 
-
-			/*var vComensalesObjetivo = validaComensalesObjetivoEnGastos();
-			if (vComensalesObjetivo.estatus === false) {
-				Seguridad.alerta("No puedes confrontar el informe.<br />" + vComensalesObjetivo.mensaje);
-				return false;
-			}*/
-
 			browseGastos(IdInforme);
 			var datos = JSON.parse(localStorage.getItem("listGastos"));
 			var importeMin = 99999;
@@ -3511,7 +3504,7 @@
 
 			$("#msnmb").empty();
 
-			rangoFechas("repde2", "repa2", "reporte2", "BuscarMovBancariosParaConfrontar('" + tarjeta + "')");
+			rangoFechas("repde2", "repa2", "reporte2", "");//BuscarMovBancariosParaConfrontar('" + tarjeta + "')
 			$("#repde2, #repde2 + span span").datepicker("destroy");
 
 			var fechafin = FechaMax;
@@ -3527,13 +3520,13 @@
 
 
 			$("#tabsConfrontar").tabs();
-			$("#confrontacion").modal({
+			/*$("#confrontacion").modal({
 				show: true,
 				keyboard: false,
 				backdrop: "static"
-			});
+			});*/
 			BuscarMovBancariosParaConfrontar(tarjeta);
-			$("#confrontacion").css({ 'z-index': 2000 });
+			//$("#confrontacion").css({ 'z-index': 2000 });
 			//#filebanco + bootstrap-filestyle.input-group .group-span-filestyle label
 			$("label[for='filebanco']").attr("class", "btn btn-success waves-effect");
 			$("label[for='filebanco'] span.buttonText").empty().append("&nbsp; Cargar Movimientos*");
@@ -3546,22 +3539,14 @@
 
 		});
 		$("#importede, #importea").change(function () {
-			BuscarMovBancariosParaConfrontar("");
+			//BuscarMovBancariosParaConfrontar("");
 		});
 		$("#btnBuscarMovBanco").click(function () {
 			var IdInforme = $("#idinforme").val() * 1;
 			//$("#confrontacion").modal("hide");
-			cargando();
+			//cargando();
 			browseGastos(IdInforme);
-			setTimeout(function () {
 				BuscarMovBancariosParaConfrontar("");
-				cargado();
-				/*$("#confrontacion").modal({
-					show: true,
-					keyboard: false,
-					backdrop: "static"
-				});*/
-			}, 2000);
 		});
 		$("#confrontarInforme").click(function () {
 			var ConfBanco = $("#ConfBanco").val() * 1;
@@ -3654,7 +3639,7 @@
 		});
 		function confrontarInforme(datos) {
 			$.ajax({
-				async: false,
+				async: true,
 				type: "POST",
 				url: '/api/ConfrontarInforme',
 				data: JSON.stringify(datos),
@@ -3719,7 +3704,10 @@
 				dataType: 'json',
 				cache: false,
 				beforeSend: function () {
-					//cargando();
+					cargando();
+					var ocultarModal = $('#confrontacion').is(':visible');
+					if (ocultarModal)
+					   $("#confrontacion").modal("hide");
 				},
 				success: function (result) {
 					console.log(result);
@@ -3759,9 +3747,26 @@
 						} catch (err) {
 						}
 					});
+
+					setTimeout(function () {
+						cargado();
+						$("#confrontacion").modal({
+							show: true,
+							keyboard: false,
+							backdrop: "static"
+						});
+					}, 600)
 				},
 				error: function (result) {
 					console.log(result);
+					setTimeout(function () {
+						cargado();
+						$("#confrontacion").modal({
+							show: true,
+							keyboard: false,
+							backdrop: "static"
+						});
+					}, 600)
 				}
 			});
 		}
@@ -3979,9 +3984,10 @@
 		}
 		function cargaBanco() {
 			var IdInforme = $("#idinforme").val() * 1;
-			cargando();
 			var banco = $("#banco").val();
 			if (!valorVacio(banco)) {
+				$("#confrontacion").modal("hide");
+				cargando();
 				resetInformeConfrontado();
 				var file = $("#filebanco").get(0).files[0];
 				var r = new FileReader();
@@ -4022,8 +4028,7 @@
 				dataType: 'json',
 				cache: false,
 				beforeSend: function () {
-					cargando();
-					//$("#confrontacion").modal("hide");
+					//cargando();
 					$("#filebanco").filestyle('clear');
 					$("#tdTarjeta, #tdNombre, #tdNomina").empty();
 					$("#tblMovimientos tbody").empty().remove();
@@ -4093,20 +4098,28 @@
 					}
 				},
 				complete: function () {
-					cargado();
 					$("#tblMovimientos tbody tr").each(function () {
 						$(this)[0].cells[3].className = "text-right";
 					});
 					validaDuplicados();
-					
-					/*$("#confrontacion").modal({
-						show: true,
-						keyboard: false,
-						backdrop: "static"
-					});*/
+					setTimeout(function () {
+						cargado();
+						$("#confrontacion").modal({
+							show: true,
+							keyboard: false,
+							backdrop: "static"
+						});
+					}, 600);
 				},
 				error: function (result) {
-					cargado();
+					setTimeout(function () {
+						cargado();
+						$("#confrontacion").modal({
+							show: true,
+							keyboard: false,
+							backdrop: "static"
+						});
+					}, 600);
 					console.log("error", result);
 				}
 			});
