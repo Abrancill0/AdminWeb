@@ -3851,18 +3851,17 @@
 				'IdMovBanco': datosMovBan.IdMovBanco,
 				'IdInforme': datosMovBan.IdInf,
 				'IdGasto': datosGastos.IdGasto,
-				'Importe': datosMovBan.Importe
+				'Importe': datosMovBan.Importe,
+				'Tarjeta': datosMovBan.Tarjeta
 			};
 
 			crearLigaGasto(datos);
-			//obtenerGastosInforme(datosMovBan.IdInf, 0, 2);
-			browseGastos(datosMovBan.IdInf);
-			BuscarMovBancariosParaConfrontar(datosMovBan.Tarjeta);
+			
 			cargado();
 		}
 		function crearLigaGasto(datos) {
 			$.ajax({
-				async: false,
+				async: true,
 				type: "POST",
 				url: '/api/RelacionaGastoMovBanco',
 				data: JSON.stringify(datos),
@@ -3870,13 +3869,17 @@
 				dataType: 'json',
 				cache: false,
 				beforeSend: function () {
+					var ocultarModal = $('#confrontacion').is(':visible');
+					if (ocultarModal)
+					   $("#confrontacion").modal("hide");
 				},
 				success: function (result) {
 					var tipomsn = result.RelacionOk === true ? "success" : "error";
 					$.notify(result.Descripcion, { position: "top center", className: tipomsn });
 				},
 				complete: function () {
-
+					browseGastos(datos.IdInforme);
+					BuscarMovBancariosParaConfrontar(datos.Tarjeta);
 				},
 				error: function (result) {
 				}
@@ -3945,13 +3948,16 @@
 			//console.log("datos insert=>", datos);
 			cargando();
 			$.ajax({
+				async: true,
 				type: "POST",
 				url: "/api/InsertGasto",
 				data: JSON.stringify(datos), //checar con hector{'dirxml': dirxml, 'dirpdf': dirpdf, 'dirotros': dirotros},
 				contentType: 'application/json; charset=utf-8',
 				dataType: 'json',
 				beforeSend: function () {
-
+					var ocultarModal = $('#confrontacion').is(':visible');
+					if (ocultarModal)
+					   $("#confrontacion").modal("hide");
 				},
 				success: function (result) {
 					$.notify("Gasto Guardado.", { globalPosition: 'top center', className: 'success' });
