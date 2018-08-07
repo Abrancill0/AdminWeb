@@ -2453,15 +2453,9 @@
 				Seguridad.alerta("No puedes enviar a autorización.<br />Informe NO Confrontado.");
 				return false;
 			}
-			/*var vComensalesObjetivo = validaComensalesObjetivoEnGastos();
-			if (vComensalesObjetivo.estatus === false) {
-				Seguridad.alerta("No puedes enviar a autorización el informe.<br />" + vComensalesObjetivo.mensaje);
-				return false;
-			}*/
+			cargando();
 			var valida = validaExistenComprobantes();
 			var req = DatosRequisicion(RmRdeRequisicion);
-			//console.log(req);
-			//RmReqImporteComprobar, RmReqEstatus
 			var totalg = $("#totalg").val() * 1;//monto a comprobar informe
 			var RmReqImporteComprobar = req.RmReqImporteComprobar * 1;//monto a comprobar requisicion
 			var estatus = req.RmReqEstatus * 1;
@@ -2493,13 +2487,16 @@
 				} else {
 					Seguridad.alerta(errorJustificacion.Mensaje);
 				}
+				cargado();
 				return false;
 			}
 
 			if (valida.NoGastosConComprobante != valida.NoGastos) {
+				cargado();
 				Seguridad.alerta("Todos los gastos deben contener almenos un comprobante.");
 			} else {
-				if (estatus === 52) {
+				cargado();
+				if (estatus === 52) {					
 					if (valida.NoGastosNoDeducible > 0) {
 						confGastosNoDeducibles(totalg, RmReqImporteComprobar);
 					} else if (totalg.toFixed(2) != RmReqImporteComprobar.toFixed(2)) {
@@ -3429,6 +3426,7 @@
 			//}
 			var IdInforme = $("#idinforme").val() * 1;
 			var valida = validaExistenComprobantes();
+			console.log(valida);
 			var disAnticipo = $("#disAnticipo").val() * 1;
 			var errorJustificacion = ValidarJustificacion();
 
@@ -3459,9 +3457,14 @@
 				return false;
 			}
 
-			if (valida.NoGastosConComprobante != valida.NoGastos) {
-				Seguridad.alerta("Para Confrontar, todos los gastos deben contener almenos un comprobante.");
-				return false;
+			if (!valorVacio(valida)) {
+				if (valida.NoGastosConComprobante != valida.NoGastos) {
+					Seguridad.alerta("Para Confrontar, todos los gastos deben contener almenos un comprobante.");
+					return false;
+				}
+			} else {
+				Seguridad.alerta("No existen gastos para confrontar.");
+					return false;
 			}
 
 			if (disAnticipo > 0) {
@@ -3477,11 +3480,6 @@
 			}*/
 
 			browseGastos(IdInforme);
-			$("#filebanco:file").filestyle({
-				input: false,
-				buttonName: "btn-success",
-				buttonText: "&nbsp; Cargar Movimientos*"
-			});
 			var datos = JSON.parse(localStorage.getItem("listGastos"));
 			var importeMin = 99999;
 			var importeMax = 0;
@@ -3536,8 +3534,15 @@
 			});
 			BuscarMovBancariosParaConfrontar(tarjeta);
 			$("#confrontacion").css({ 'z-index': 2000 });
-
-			$("span.buttonText").empty();
+			//#filebanco + bootstrap-filestyle.input-group .group-span-filestyle label
+			$("label[for='filebanco']").attr("class", "btn btn-success waves-effect");
+			$("label[for='filebanco'] span.buttonText").empty().append("&nbsp; Cargar Movimientos*");
+			
+			/*$("#filebanco:file").filestyle({
+				input: false,
+				buttonName: "btn-success",
+				buttonText: "&nbsp; Cargar Movimientos*"
+			});*/
 
 		});
 		$("#importede, #importea").change(function () {
