@@ -17,13 +17,12 @@
                     <span id="infoDisp"></span>
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 </div>
-				<div id="divListInformes" style="padding: 0px; width: 100%; margin: 0 auto; white-space: nowrap; display: block;">
-					<table id="tblProyectos" class="display browse" style="overflow-x: auto; white-space: nowrap;" cellspacing="0" data-page-length="10">
+					<table id="tblProyectos" class="display browse" cellspacing="0" width="100%" data-page-length="-1">
                     <thead>
                         <tr style="text-align:center;">
                             <th width="50px" style="text-align:center;">Requisici&oacute;n</th>
                             <th width="40px" style="text-align:center;">Informe</th>
-                            <th width="200px" style="text-align:center; width: 200px !important;">Justificaci&oacute;n</th>
+                            <th width="250px">Justificaci&oacute;n</th>
                             <th width="100px" style="text-align:center;">Importe<br />Autorizado</th>
                             <th width="100px" style="text-align:center;">Empleado</th>
 							<th width="100px" style="text-align:center;">Estatus</th>
@@ -33,7 +32,6 @@
                     <tbody>
                     </tbody>
                 </table>
-</div>
             </div>
         </div>
         
@@ -594,8 +592,8 @@
     <!-- App functions and actions -->
     <script src="js/app.min.js"></script>
     <script src="js/js.js"></script>
-    <script src="js/Autorizaciones.js?1q1q11q"></script>
-    <script src="js/AutorizaInformes.js?1q1q1x1q"></script>
+    <script src="js/Autorizaciones.js?11q1q111q"></script>
+    <script src="js/AutorizaInformes.js?11q11q1x1q"></script>
 
    
 

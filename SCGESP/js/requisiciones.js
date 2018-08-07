@@ -1533,6 +1533,15 @@ function CrearRequisicionPeticionTraspaso(strError) {
     //Seguridad.alerta(strError, "#verRequisiciones");
 
     if (RmReqId > 0) {
+
+        var permite = permitirAjustarReq(RmReqId);
+        if (permite.actualizaOk === false) {
+            var msnError = "No puedes hacer ajustes en la requisición cuando el estatus es: ";
+            msnError += permite.idestatus + ".- " + permite.nmbestatus + ".";
+            $.notify(msnError, { position: "top center", autoHideDelay: 4000, className: "error" });
+            return false;
+        }
+
         var botones = [];
         botones[0] = {
             text: "Si", click: function () {

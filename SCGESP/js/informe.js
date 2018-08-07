@@ -72,6 +72,8 @@ function ObtenerInformes() {
 
     $('#tblProyectos tbody').empty();
     if (!tablaInformes) {
+        tablaInformes = crearTabla("#tblProyectos", 0, "desc");
+        /*
         tablaInformes = $("#tblProyectos").DataTable({
             "order": [[0, "desc"]],
             "processing": true,
@@ -107,7 +109,7 @@ function ObtenerInformes() {
                 "header": true,
                 "footer": true
             }
-        });
+        });*/
     }
 
     var f = new Date();
@@ -156,8 +158,9 @@ function ObtenerInformes() {
                 estatus = rechazado === 1 ? "Rechazado" : estatus;
                 var just = (value.i_nmb).split("");
                 var njust = just.length;
-                var justificacion = "";
-                if (njust >= 30) {
+                //var justificacion = "<p style='color:black; word-wrap: break-word !important; width: 200px !important;'>" + value.i_nmb + "</p>";
+                var justificacion = value.i_nmb;
+                /*if (njust >= 30) {
                     var ll = 0;
                     for (var jj = 0; jj <= njust; jj++) {
                         if (just[jj]) {
@@ -172,7 +175,7 @@ function ObtenerInformes() {
                     }
                 } else {
                     justificacion = value.i_nmb;
-                }
+                }*/
 
                 tablaInformes.row.add([value.r_idrequisicion,
                 value.i_ninforme,
@@ -187,6 +190,8 @@ function ObtenerInformes() {
         }, complete: function () {
             $("#tblProyectos tbody tr").each(function () {
                 $(this)[0].cells[3].className = "text-right";
+                $(this)[0].cells[2].className = "valJustificacion";
+                console.log($(this)[0].cells[2]);
             });
         },
         error: function (result) {

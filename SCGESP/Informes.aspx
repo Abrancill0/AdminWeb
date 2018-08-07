@@ -1,7 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Informes.aspx.cs" Inherits="SCGESP.Informes" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
+	<style type="text/css">
+		.valJustificacion {
+			 word-wrap: break-word !important;
+			 width: 200px !important;
+		}
+	</style>
 	<section class="content">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
@@ -26,13 +31,12 @@
 					</table>
 				</form>
 				<br />
-				<div id="divListInformes" style="padding: 0px; width: 100%; margin: 0 auto; white-space: nowrap; display: block;">
-					<table id="tblProyectos" class="display browse" style="overflow-x: auto; white-space: nowrap;" cellspacing="0" data-page-length="10">
+					<table id="tblProyectos" class="display browse" cellspacing="0" width="100%" data-page-length="-1">
 						<thead>
 							<tr>
 								<th width="70px">Requisici&oacute;n</th>
 								<th width="70px">Informe</th>
-								<th width="200px">Justificaci&oacute;n</th>
+								<th width="250px">Justificaci&oacute;n</th>
 								<th width="100px" title="Importe solicitado en la requisición">Importe<br />Autorizado</th>
 								<th width="100px">Empleado</th>
 								<th width="70px">Estatus</th>
@@ -42,7 +46,6 @@
 						<tbody>
 						</tbody>
 					</table>
-				</div>
 			</div>
 		</div>
 
@@ -933,8 +936,8 @@
 	<!-- App functions and actions -->
 	<script src="js/app.min.js"></script>
 	<script src="js/js.js"></script>
-	<script src="js/informe.js?2xxx"></script>
-	<script src="js/gastos.js?2xxx"></script>
+	<script src="js/informe.js?211211xxx"></script>
+	<script src="js/gastos.js?21111x1xx"></script>
 	<script>
 		$("#anuevo").click(function () {
 			$("#frmInforme").modal({

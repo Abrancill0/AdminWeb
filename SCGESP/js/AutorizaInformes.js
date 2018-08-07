@@ -74,7 +74,8 @@ function ObtenerInformes() {
     $('#tblProyectos tbody').empty();
 
     if (!tablaInformes) {
-        tablaInformes = $("#tblProyectos").DataTable({
+        tablaInformes = crearTabla("#tblProyectos", 0, "desc");
+        /*tablaInformes = $("#tblProyectos").DataTable({
             "order": [[0, "desc"]],
             "processing": true,
             "scrollCollapse": false,
@@ -110,7 +111,7 @@ function ObtenerInformes() {
                 "header": true,
                 "footer": true
             }
-        });
+        });*/
     }
     var f = new Date();
     var fh = f.getDate() + '' + f.getMonth() + '' + f.getFullYear() + '' + f.getHours() + '' + f.getMinutes() + '' + f.getSeconds();
@@ -147,8 +148,9 @@ function ObtenerInformes() {
                 //if (todos === 1) {
                 var just = (value.i_nmb).split("");
                 var njust = just.length;
-                var justificacion = "";
-                if (njust >= 30) {
+                //var justificacion = "";
+                var justificacion = value.i_nmb;
+                /*if (njust >= 30) {
                     var ll = 0;
                     for (var jj = 0; jj <= njust; jj++) {
                         if (just[jj]) {
@@ -163,7 +165,7 @@ function ObtenerInformes() {
                     }
                 } else {
                     justificacion = value.i_nmb;
-                }
+                }*/
 
                 tablaInformes.row.add([
                     value.r_idrequisicion,
