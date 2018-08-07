@@ -453,6 +453,7 @@
 			</div>
 		</div>
 		<!--Autorizadores-->
+		
 		<div id="tabAutoriza" class="modal fade" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -1832,6 +1833,8 @@
 			if (Comentarios === "") {
 				$.notify("Se requiere un comentario de VoBo.", { globalPosition: 'top center', className: 'error', autoHideDelay: 2000 });
 				return false;
+			} else {
+				$("#modal_alerta").modal("hide");
 			}
 			var fecha = fechaActual() + " " + horaActual("hh:mm");
 			var usuario_fecha = ". (Enviado por: " + nmbemp + " / " + fecha + ")";
@@ -1844,11 +1847,26 @@
 				contentType: 'application/json; charset=utf-8',
 				dataType: 'json',
 				cache: false,
+				beforeSend: function () {
+					cargando();
+				},
 				success: function (result) {
 					$.notify("Los comentarios fueron enviados correctamente.", { globalPosition: 'top center', className: 'success' });
 					setTimeout(function () {
+						cargado();
 						window.location.href = "/Autorizaciones?" + fh;
 					}, 1000);
+				},
+				error: function () {
+					setTimeout(function () {
+						$.notify("Error al enviar comentarios.", { globalPosition: 'top center', className: 'error' });
+						cargado();
+						$("#modal_alerta").modal({
+							show: true,
+							keyboard: false,
+							backdrop: "static"
+						});
+					}, 600);
 				}
 			});
 		}
@@ -2146,6 +2164,8 @@
 			return seleccionado;
 		}
 		$("#EnviarAutorizadores").click(function () {
+			
+			$("#tabAutoriza").modal("hide");
 			let confirmaSolicitarVobo = Handlebars.compile($("#modal-confirma-solicitar-vobo").html());
 			let alertaTitulo = Handlebars.compile($("#modal-alerta-titulo").html());
 			let botones = Handlebars.compile($("#modal-botones").html());
@@ -2164,15 +2184,18 @@
 			$("#contenido_modal_alert").empty().append(confirmaSolicitarVobo());
 			$("#footer_modal_alert").empty().append(botones(boton));
 
-			$("#modal_alerta").modal({
-				show: true,
-				keyboard: false,
-				backdrop: "static"
-			});
-			$("#modal_alerta").css({ 'z-index': 2000 });
 			setTimeout(function () {
-				$("#comentarioEnvioVoBo").focus();
-			},500);
+				$("#modal_alerta").modal({
+					show: true,
+					keyboard: false,
+					backdrop: "static"
+				});
+				$("#modal_alerta").css({ 'z-index': 2000 });
+				setTimeout(function () {
+					$("#comentarioEnvioVoBo").focus();
+				},500);
+			}, 600);
+			
 		});
 		function solicitarVoBo() {
 			var idinforme = $("#idinforme").val()
@@ -2189,6 +2212,8 @@
 				if (Comentarios === "") {
 					$.notify("Se requiere un comentario para envio a VoBo.", { globalPosition: 'top center', className: 'error', autoHideDelay: 2000 });
 					return false;
+				} else {
+					$("#modal_alerta").modal("hide");
 				}
 				var fecha = fechaActual() + " " + horaActual("hh:mm");
 				var usuario_fecha = ". (Enviado por: " + nmbemp + " / " + fecha + ")";
@@ -2202,7 +2227,7 @@
 				};
 
 				$.ajax({
-					async: false,
+					async: true,
 					type: "POST",
 					url: '/api/EnviaAutorizadores',
 					data: JSON.stringify(datos),
@@ -2210,9 +2235,10 @@
 					dataType: 'json',
 					cache: false,
 					beforeSend: function () {
-
+						cargando();
 					},
 					success: function (result) {
+						cargado();
 						$.notify("El informe se ha enviado a VoBo", { globalPosition: 'top center', className: 'success' });
 						setTimeout(function () {
 							window.location.href = "/Autorizaciones?" + fh;
@@ -2220,6 +2246,14 @@
 					}
 				});
 			} else {
+				cargado();
+				setTimeout(function () {
+					$("#tabAutoriza").modal({
+						show: true,
+						keyboard: false,
+						backdrop: "static"
+					});
+				}, 600)
 				$.notify("Se requiere seleccionar almenos a un usuario.", { globalPosition: 'top center', className: 'error' });
 			}
 		}
