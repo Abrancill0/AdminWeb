@@ -10,64 +10,66 @@ using System.Xml;
 
 namespace SCGESP.Clases
 {
-    public class EnvioCorreosELE
-    {
+	public class EnvioCorreosELE
+	{
 
-        public class AutorizaRequisicionResult
-        {
-            public int Resultado { get; set; }
-        }
+		public class AutorizaRequisicionResult
+		{
+			public int Resultado { get; set; }
+		}
 
-        public static XmlDocument Envio(string Usuario, string correo, string EmpleadoID, string UsuarioID, string correoCopia, string Asunto, string Mensaje, int usuEncriptado)
-        {
-            try
-            {
-                string UsuarioDesencripta = "";
-                if (usuEncriptado == 1)
-                {
-                    UsuarioDesencripta = Clases.Seguridad.DesEncriptar(Usuario);
-                }
-                else {
-                    UsuarioDesencripta = Usuario;
-                }                
+		public static XmlDocument Envio(string Usuario, string correo, string EmpleadoID, string UsuarioID, string correoCopia, string Asunto, string Mensaje, int usuEncriptado)
+		{
+			try
+			{
+				string UsuarioDesencripta = "";
+				if (usuEncriptado == 1)
+				{
+					UsuarioDesencripta = Clases.Seguridad.DesEncriptar(Usuario);
+				}
+				else
+				{
+					UsuarioDesencripta = Usuario;
+				}
 
-                if (correo == "" && EmpleadoID == "" && UsuarioID == "") {
-                    XmlDocument xml = new XmlDocument();
-                    xml.LoadXml("<Error>No se cuenta con un correo o con una forma para recuperarlo.</Error>");
-                    return xml;
-                }
+				if (correo == "" && EmpleadoID == "" && UsuarioID == "")
+				{
+					XmlDocument xml = new XmlDocument();
+					xml.LoadXml("<Error>No se cuenta con un correo o con una forma para recuperarlo.</Error>");
+					return xml;
+				}
 
-                DocumentoEntrada entrada = new DocumentoEntrada
-                {
-                    Usuario = UsuarioDesencripta,
-                    Origen = "Programa CGE",
-                    Transaccion = 3
-                };
+				DocumentoEntrada entrada = new DocumentoEntrada
+				{
+					Usuario = UsuarioDesencripta,
+					Origen = "Programa CGE",
+					Transaccion = 3
+				};
 
-                string Empleado = "";
-                string Correo = "";
+				string Empleado = "";
+				string Correo = "";
 
-                DataTable DTCorreo = new DataTable();
+				DataTable DTCorreo = new DataTable();
 
-                if (correo == "")
-                {
-                    if (EmpleadoID == "")
-                    {
-                        Empleado = ObtieneEmpelado(UsuarioID, UsuarioDesencripta);
+				if (correo == "")
+				{
+					if (EmpleadoID == "")
+					{
+						Empleado = ObtieneEmpelado(UsuarioID, UsuarioDesencripta);
 
-                        Correo = ObtieneCorreo(Empleado, UsuarioDesencripta);
-                    }
-                    else
-                    {
-                        Correo = ObtieneCorreo(EmpleadoID, UsuarioDesencripta);
-                    }
+						Correo = ObtieneCorreo(Empleado, UsuarioDesencripta);
+					}
+					else
+					{
+						Correo = ObtieneCorreo(EmpleadoID, UsuarioDesencripta);
+					}
 
-                }
-                else
-                {
-                    Correo = correo;
-                }
-				Correo = "hector.ramos@trascenti.com";
+				}
+				else
+				{
+					Correo = correo;
+				}
+				//Correo = "hector.ramos@trascenti.com";
 				try
 				{
 					bool correoOK = Enviar_correo_html(Correo, Asunto, Mensaje);
@@ -76,21 +78,31 @@ namespace SCGESP.Clases
 					{
 						xml.LoadXml("<resultado>Correo Enviado</resultado>");
 					}
-					else {
-						entrada.agregaElemento("Para", Correo);
-						entrada.agregaElemento("Copia", correoCopia);
-						entrada.agregaElemento("Asunto", Asunto);
-						entrada.agregaElemento("Mensaje", Mensaje);
-						DocumentoSalida respuesta = PeticionGeneral(entrada.Documento);
-						if (respuesta.Resultado == "1")
+					else
+					{
+						correoOK = Enviar_correo_html(Correo, Asunto, Mensaje);
+						if (correoOK)
 						{
-							return respuesta.Documento;
+							xml.LoadXml("<resultado>Correo Enviado (comprogapp)</resultado>");
 						}
 						else
 						{
-							return respuesta.Documento;
+							entrada.agregaElemento("Para", Correo);
+							entrada.agregaElemento("Copia", correoCopia);
+							entrada.agregaElemento("Asunto", Asunto);
+							entrada.agregaElemento("Mensaje", Mensaje);
+							DocumentoSalida respuesta = PeticionGeneral(entrada.Documento);
+							if (respuesta.Resultado == "1")
+							{
+								return respuesta.Documento;
+							}
+							else
+							{
+								return respuesta.Documento;
+							}
 						}
-					}					
+					}
+
 					return xml;
 				}
 				catch (Exception)
@@ -108,114 +120,115 @@ namespace SCGESP.Clases
 					{
 						return respuesta.Documento;
 					}
-				}                
-            }
-            catch (System.Exception ex)
-            {
-                XmlDocument xml = new XmlDocument();
-                xml.LoadXml("<Error>" + ex.ToString() + "</Error>");
-                return xml;
-            }
-        }
+				}
+			}
+			catch (System.Exception ex)
+			{
+				XmlDocument xml = new XmlDocument();
+				xml.LoadXml("<Error>" + ex.ToString() + "</Error>");
+				return xml;
+			}
+		}
 
-        public static DocumentoSalida PeticionGeneral(XmlDocument doc)
-        {
-            Localhost.Elegrp ws = new Localhost.Elegrp();
-            ws.Timeout = -1;
-            string respuesta = ws.PeticionGeneral(doc);
-            return new DocumentoSalida(respuesta);
-        }
+		public static DocumentoSalida PeticionGeneral(XmlDocument doc)
+		{
+			Localhost.Elegrp ws = new Localhost.Elegrp();
+			ws.Timeout = -1;
+			string respuesta = ws.PeticionGeneral(doc);
+			return new DocumentoSalida(respuesta);
+		}
 
-        public static string ObtieneEmpelado(string UsuarioID, string UsuarioDesencriptado)
-        {
+		public static string ObtieneEmpelado(string UsuarioID, string UsuarioDesencriptado)
+		{
 
-            DocumentoEntrada entrada = new DocumentoEntrada
-            {
-                Usuario = UsuarioDesencriptado,
-                Origen = "Programa CGE",  //Datos.Origen; 
-                Transaccion = 100004,
-                Operacion = 6//verifica si existe una llave y regresa una tabla de un renglon con todos los campos de la tabla
-            };
-            entrada.agregaElemento("SgUsuId", UsuarioID);
+			DocumentoEntrada entrada = new DocumentoEntrada
+			{
+				Usuario = UsuarioDesencriptado,
+				Origen = "Programa CGE",  //Datos.Origen; 
+				Transaccion = 100004,
+				Operacion = 6//verifica si existe una llave y regresa una tabla de un renglon con todos los campos de la tabla
+			};
+			entrada.agregaElemento("SgUsuId", UsuarioID);
 
-            DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
+			DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 
-            DataTable DTEmpleado = new DataTable();
+			DataTable DTEmpleado = new DataTable();
 
-            string EmpleadoResult = "";
+			string EmpleadoResult = "";
 
-            if (respuesta.Resultado == "1")
-            {
+			if (respuesta.Resultado == "1")
+			{
 
-                DTEmpleado = respuesta.obtieneTabla("Catalogo");
+				DTEmpleado = respuesta.obtieneTabla("Catalogo");
 
-                for (int i = 0; i < DTEmpleado.Rows.Count; i++)
-                {
-                    EmpleadoResult = Convert.ToString(DTEmpleado.Rows[i]["GrEmpId"]);
-                }
+				for (int i = 0; i < DTEmpleado.Rows.Count; i++)
+				{
+					EmpleadoResult = Convert.ToString(DTEmpleado.Rows[i]["GrEmpId"]);
+				}
 
-                return EmpleadoResult;
+				return EmpleadoResult;
 
-            }
-            else
-            {
-                var errores = respuesta.Errores;
+			}
+			else
+			{
+				var errores = respuesta.Errores;
 
-                return "";
-            }
-        }
+				return "";
+			}
+		}
 
-        public static string ObtieneCorreo(string Empelado, string UsuarioDesencriptado)
-        {
-            string UsuarioDesencripta = Seguridad.DesEncriptar(UsuarioDesencriptado);
+		public static string ObtieneCorreo(string Empelado, string UsuarioDesencriptado)
+		{
+			string UsuarioDesencripta = Seguridad.DesEncriptar(UsuarioDesencriptado);
 
-            DocumentoEntrada entrada = new DocumentoEntrada
-            {
-                Usuario = UsuarioDesencripta,
-                Origen = "Programa CGE",  //Datos.Origen; 
-                Transaccion = 120037,
-                Operacion = 6//verifica si existe una llave y regresa una tabla de un renglon con todos los campos de la tabla
-            };
-            entrada.agregaElemento("GrEmpId", Empelado);
+			DocumentoEntrada entrada = new DocumentoEntrada
+			{
+				Usuario = UsuarioDesencripta,
+				Origen = "Programa CGE",  //Datos.Origen; 
+				Transaccion = 120037,
+				Operacion = 6//verifica si existe una llave y regresa una tabla de un renglon con todos los campos de la tabla
+			};
+			entrada.agregaElemento("GrEmpId", Empelado);
 
-            DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
+			DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 
-            DataTable DTCorreo = new DataTable();
-            string CorreoResult = "";
+			DataTable DTCorreo = new DataTable();
+			string CorreoResult = "";
 
-            if (respuesta.Resultado == "1")
-            {
-                DTCorreo = respuesta.obtieneTabla("Catalogo");
+			if (respuesta.Resultado == "1")
+			{
+				DTCorreo = respuesta.obtieneTabla("Catalogo");
 
-                for (int i = 0; i < DTCorreo.Rows.Count; i++)
-                {
-                    CorreoResult = Convert.ToString(DTCorreo.Rows[i]["GrEmpCorreoElectronico"]);
-                }
+				for (int i = 0; i < DTCorreo.Rows.Count; i++)
+				{
+					CorreoResult = Convert.ToString(DTCorreo.Rows[i]["GrEmpCorreoElectronico"]);
+				}
 
-                return CorreoResult;
-            }
-            else
-            {
-                var errores = respuesta.Errores;
+				return CorreoResult;
+			}
+			else
+			{
+				var errores = respuesta.Errores;
 
-                return null;
-            }
-        }
+				return null;
+			}
+		}
 
-        public static DocumentoSalida PeticionCatalogo(XmlDocument doc)
-        {
-            Localhost.Elegrp ws = new Localhost.Elegrp
-            {
-                Timeout = -1
-            };
-            string respuesta = ws.PeticionCatalogo(doc);
-            return new DocumentoSalida(respuesta);
-        }
+		public static DocumentoSalida PeticionCatalogo(XmlDocument doc)
+		{
+			Localhost.Elegrp ws = new Localhost.Elegrp
+			{
+				Timeout = -1
+			};
+			string respuesta = ws.PeticionCatalogo(doc);
+			return new DocumentoSalida(respuesta);
+		}
 
-		public static bool Enviar_correo_html(string CorreoCliente, string Asunto, string Contenido) {
+		public static bool Enviar_correo_html(string CorreoCliente, string Asunto, string Contenido)
+		{
 			try
 			{
-				string htmlBody = Template_html();
+				string htmlBody = Template_html(0);
 
 				htmlBody = htmlBody.Replace("saludo_nombre", "");
 				htmlBody = htmlBody.Replace("texto_contenido", Contenido);
@@ -254,7 +267,51 @@ namespace SCGESP.Clases
 			}
 		}
 
-		public static string Template_html() {
+		public static bool Enviar_correo_html_comprogapp(string CorreoCliente, string Asunto, string Contenido)
+		{
+			try
+			{
+				string htmlBody = Template_html(1);
+
+				htmlBody = htmlBody.Replace("saludo_nombre", "");
+				htmlBody = htmlBody.Replace("texto_contenido", Contenido);
+				//saludo_nombre, texto_contenido
+				var objSmtp = new SmtpClient();
+				var objMail = new MailMessage("notificaciones@comprogapp.com", CorreoCliente);
+
+				AlternateView avHtml = AlternateView.CreateAlternateViewFromString(htmlBody, null, MediaTypeNames.Text.Html);
+
+				objMail.Subject = Asunto;
+				objMail.AlternateViews.Add(avHtml);
+				objMail.From = new System.Net.Mail.MailAddress("notificaciones@comprogapp.com");
+
+
+				objSmtp.Host = "mail.comprogapp.com"; //"smtp.live.com"
+
+				objSmtp.EnableSsl = true;
+
+				objSmtp.Port = 25;
+
+				objSmtp.Credentials = new System.Net.NetworkCredential("notificaciones@comprogapp.com", "notificaciones_123");
+
+				try
+				{
+					objSmtp.Send(objMail);
+					return true;
+				}
+				catch (Exception ex)
+				{
+					return false;
+				}
+			}
+			catch (Exception ex)
+			{
+				return false;
+			}
+		}
+
+		public static string Template_html(int esRespaldo)
+		{
 			/*
 			 adminerp-notificaciones@elpotosi.com.mx
 			 Ham61041
@@ -460,8 +517,7 @@ namespace SCGESP.Clases
 "<h1 class='webfont h1' style='color: #FFFFFF; font-size: 36px;" +
 "font-weight: 300; line-height: 100%; margin: 0;'>" +
 "<a href='link_webpage'>" +
-"<img src='https://gapp.elpotosi.com.mx/img/logo.png' alt='Seguros El Potosi' style='width:" +
-"188px; height: 84px;'>" +
+"<img src='https://gapp.elpotosi.com.mx/img/logo.png' alt='Seguros El Potosi' width='170px' height='70px' style='width:170px; height: 70px;'>" +
 "</a>" +
 "</h1>" +
 "</td>" +
@@ -558,14 +614,35 @@ namespace SCGESP.Clases
 "</table>" +
 "</td>" +
 "</tr>" +
-"</table>" +
-"" +
-"</body>" +
+"</table>";
+			if (esRespaldo == 1)
+			{
+				htmlBody += "<table class='wrapper' cellpadding='0' cellspacing='0' role='presentation' width='100%'>" +
+			"<tr>" +
+			"<td class='px-sm-8' bgcolor='#EEEEEE' style='padding: 0 24px;'>" +
+			"<div class='spacer line-height-sm-0 py-sm-8' style='line-height: 24px;'>&zwnj;</div>" +
+			"<table cellpadding = '0' cellspacing='0' role='presentation' width='100%'>" +
+			"<tr>" +
+			"<td class='col' align='center' width='100%' style='padding: 0 8px;'>" +
+			"<p style = 'color: #888888; margin: 0; font-weight: bold;' > " +
+			"Correo de respaldo." +
+			"</p>" +
+			"</td>" +
+			"</tr>" +
+			"</table>" +
+			"<div class='spacer line-height-sm-0 py-sm-8' style='line-height: 24px;'>&zwnj;</div>" +
+			"</td>" +
+			"</tr>" +
+			"</table>";
+			}
+
+
+			htmlBody += "</body>" +
 "</html>";
 
 			return htmlBody;
 
 
 		}
-    }
+	}
 }
