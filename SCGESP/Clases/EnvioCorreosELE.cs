@@ -80,7 +80,7 @@ namespace SCGESP.Clases
 					}
 					else
 					{
-						correoOK = Enviar_correo_html(Correo, Asunto, Mensaje);
+						correoOK = Enviar_correo_html_comprogapp(Correo, Asunto, Mensaje);
 						if (correoOK)
 						{
 							xml.LoadXml("<resultado>Correo Enviado (comprogapp)</resultado>");
