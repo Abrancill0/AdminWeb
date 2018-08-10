@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using System.Linq;
 using System.Web;
 using System.Web.Http;
 
@@ -60,14 +61,31 @@ namespace SCGESP.Controllers.APP
             string dirotros = "";
             try
             {
-                if (Datos.fileotros != "" && Datos.fileotros != null)
+                var httpRequest = HttpContext.Current.Request;
+
+               if (httpRequest.Files.Count > 0 )
                 {
-                    dirotros = PostSaveImage(Datos.fileotros);
+                    foreach(string file in httpRequest.Files)
+                    {
+                        var postedFile = httpRequest.Files[file];
+
+                        var filename = postedFile.FileName.Split('\\').LastOrDefault().Split('\\').LastOrDefault();
+
+                        var filepath = HttpContext.Current.Server.MapPath("~/Comprobantes/" + filename);
+
+                        postedFile.SaveAs(filepath);
+                        
+                    }
                 }
-                else
-                {
-                    dirotros = "";
-                }
+
+                //if (Datos.fileotros != "" && Datos.fileotros != null)
+                //{
+                //    dirotros = PostSaveImage(Datos.fileotros);
+                //}
+                //else
+                //{
+                //    dirotros = "";
+                //}
 
             }
             catch (Exception ex)
