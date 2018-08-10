@@ -55,6 +55,34 @@ function cargaInicialInf() {
 
     ////////$("[]").tooltip();
 }
+
+function Historico() {
+    
+    var datos = {
+        "Usuario": UsuarioActivo,
+        "FechaInicio": '01/06/2018',
+        "FechaFinal": '01/07/2018',
+        "Origen": 'App'
+    };
+
+
+    $.ajax({
+        type: 'POST',
+        url: '/api/HistoricoApp',
+        data: JSON.stringify(datos),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        cache: false,
+        beforeSend: function () {
+        },
+        success: function (result) {
+            
+        }
+    });
+
+}
+
+
 function ObtenerInformes() {
     $("#AlertInfoDisp").hide();
 

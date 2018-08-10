@@ -8,7 +8,7 @@ using System.Data;
 
 namespace SCGESP.Controllers.APP
 {
-    public class RequisiAPPController : ApiController
+    public class HistoricoAppController : ApiController
     {
         public class datos
         {
@@ -48,7 +48,7 @@ namespace SCGESP.Controllers.APP
             {
                 string UsuarioDesencripta = Seguridad.DesEncriptar(Datos.Usuario);
 
-                string EmpleadoDesencripta = Seguridad.DesEncriptar(Datos.Empleado);
+                //string EmpleadoDesencripta = Seguridad.DesEncriptar(Datos.Empleado);
 
                 DocumentoEntrada entrada = new DocumentoEntrada();
                 entrada.Usuario = UsuarioDesencripta; //Datos.Usuario;  
@@ -65,7 +65,7 @@ namespace SCGESP.Controllers.APP
 
                 if (respuesta.Resultado == "1")
                 {
-                    DTRequisiciones = respuesta.obtieneTabla("Catalogo");
+                    DTRequisiciones = respuesta.obtieneTabla("Autorizaciones");
 
                     List<RequisicionesPorAutorizarResult> lista = new List<RequisicionesPorAutorizarResult>();
 

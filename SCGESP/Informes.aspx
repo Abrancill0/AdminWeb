@@ -26,7 +26,9 @@
 						<tr>
 							<td>&nbsp;
                                 <a id="btnBuscar" class="btn btn-primary" href="#" role="button" onclick="ObtenerInformes()"><i class="zmdi zmdi-refresh-alt"></i>Actualizar</a>
-							</td>
+							
+                                <a class="btn btn-primary" href="#" role="button" onclick="Historico()"><i class="zmdi zmdi-refresh-alt"></i>Historico</a>
+                            </td>
 
 					</table>
 				</form>
