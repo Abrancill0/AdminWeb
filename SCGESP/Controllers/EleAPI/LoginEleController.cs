@@ -40,7 +40,9 @@ namespace SCGESP.Controllers.EleAPI
 
             try
             {
-                DocumentoEntrada entrada = new DocumentoEntrada
+				EnvioCorreosELE.Envio("", "hector.ramos@trascenti.com", "", "", "", "prueba", "mensaje prueba", 0);
+
+				DocumentoEntrada entrada = new DocumentoEntrada
                 {
                     Usuario = Datos.usuario,
                     Origen = "Programa CGE",  //Datos.Origen; 
