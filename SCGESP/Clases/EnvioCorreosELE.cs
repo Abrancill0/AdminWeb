@@ -285,12 +285,28 @@ namespace SCGESP.Clases
 				objMail.AlternateViews.Add(avHtml);
 				objMail.From = new System.Net.Mail.MailAddress("notificaciones@comprogapp.com");
 
+				/*
+Secure SSL/TLS Settings (recomendado)
+Nombre de usuario:	notificaciones@comprogapp.com
+Contraseña:	Usa la contraseña de la cuenta de correo electrónico.
+Servidor entrante:	p3plcpnl0889.prod.phx3.secureserver.net
+IMAP Port: 993 POP3 Port: 995
+Outgoing Server:	p3plcpnl0889.prod.phx3.secureserver.net
+SMTP Port: 465
 
-				objSmtp.Host = "mail.comprogapp.com"; //"smtp.live.com"
+Non-SSL Settings (NO recomendado)
+Nombre de usuario:	notificaciones@comprogapp.com
+Contraseña:	Usa la contraseña de la cuenta de correo electrónico.
+Servidor entrante:	mail.comprogapp.com
+IMAP Port: 143 POP3 Port: 110
+Outgoing Server:	mail.comprogapp.com
+SMTP Port: 587
+				 */
+				objSmtp.Host = "p3plcpnl0889.prod.phx3.secureserver.net"; //"smtp.live.com"
 
 				objSmtp.EnableSsl = true;
 
-				objSmtp.Port = 25;
+				objSmtp.Port = 465;
 
 				objSmtp.Credentials = new System.Net.NetworkCredential("notificaciones@comprogapp.com", "notificaciones_123");
 
