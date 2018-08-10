@@ -40,7 +40,7 @@ namespace SCGESP.Controllers.EleAPI
 
             try
             {
-				EnvioCorreosELE.Envio("", "hector.ramos@trascenti.com", "", "", "", "prueba", "mensaje prueba", 0);
+			//	EnvioCorreosELE.Envio("", "hector.ramos@trascenti.com", "", "", "", "prueba", "mensaje prueba", 0);
 
 				DocumentoEntrada entrada = new DocumentoEntrada
                 {
