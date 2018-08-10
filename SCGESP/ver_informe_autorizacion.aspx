@@ -1833,9 +1833,7 @@
 			if (Comentarios === "") {
 				$.notify("Se requiere un comentario de VoBo.", { globalPosition: 'top center', className: 'error', autoHideDelay: 2000 });
 				return false;
-			} else {
-				$("#modal_alerta").modal("hide");
-			}
+			} 
 			var fecha = fechaActual() + " " + horaActual("hh:mm");
 			var usuario_fecha = ". (Enviado por: " + nmbemp + " / " + fecha + ")";
 			datos['comentario'] = Comentarios + usuario_fecha;
@@ -1849,12 +1847,15 @@
 				cache: false,
 				beforeSend: function () {
 					cargando();
+					var ocultarModal = $('#modal_alerta').is(':visible');
+					if (ocultarModal)
+						$("#modal_alerta").modal("hide");
 				},
 				success: function (result) {
 					$.notify("Los comentarios fueron enviados correctamente.", { globalPosition: 'top center', className: 'success' });
 					setTimeout(function () {
-						cargado();
 						window.location.href = "/Autorizaciones?" + fh;
+						cargado();
 					}, 1000);
 				},
 				error: function () {
