@@ -11,6 +11,7 @@ namespace SCGESP.Controllers.APP
 {
     public class CargaImagenController : ApiController
     {
+       // [Route("api/Files/Upload")]
         public async Task<string> Post()
         {
             try
@@ -39,7 +40,7 @@ namespace SCGESP.Controllers.APP
             }
             catch (Exception ex)
             {
-                return ex.ToString();
+                return ex.ToString() + ' ' + "Error no se subio";
 
             }
 
