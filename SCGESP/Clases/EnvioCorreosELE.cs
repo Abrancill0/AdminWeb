@@ -302,11 +302,11 @@ IMAP Port: 143 POP3 Port: 110
 Outgoing Server:	mail.comprogapp.com
 SMTP Port: 587
 				 */
-				objSmtp.Host = "p3plcpnl0889.prod.phx3.secureserver.net"; //"smtp.live.com"
+				objSmtp.Host = "mail.comprogapp.com"; //"smtp.live.com"
 
-				objSmtp.EnableSsl = true;
+				objSmtp.EnableSsl = false;
 
-				objSmtp.Port = 465;
+				objSmtp.Port = 587;
 
 				objSmtp.Credentials = new System.Net.NetworkCredential("notificaciones@comprogapp.com", "notificaciones_123");
 
