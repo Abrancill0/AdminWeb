@@ -159,13 +159,15 @@ namespace SCGESP.Clases
 			if (respuesta.Resultado == "1")
 			{
 
-				DTEmpleado = respuesta.obtieneTabla("Catalogo");
-
+				DTEmpleado = respuesta.obtieneTabla("Llave");
 				for (int i = 0; i < DTEmpleado.Rows.Count; i++)
 				{
-					EmpleadoResult = Convert.ToString(DTEmpleado.Rows[i]["GrEmpId"]);
+					EmpleadoResult = Convert.ToString(DTEmpleado.Rows[i]["SgUsuEmpleado"]);  // Convert.ToString(DTEmpleado.Rows[i]["GrEmpId"]);
 				}
-
+				string nEmp = respuesta.obtieneValor("SgUsuEmpleado");
+				if (EmpleadoResult.Trim() == "") {
+					EmpleadoResult = nEmp.Trim();
+				}
 				return EmpleadoResult;
 
 			}
@@ -197,7 +199,7 @@ namespace SCGESP.Clases
 
 			if (respuesta.Resultado == "1")
 			{
-				DTCorreo = respuesta.obtieneTabla("Catalogo");
+				DTCorreo = respuesta.obtieneTabla("Llave");
 
 				for (int i = 0; i < DTCorreo.Rows.Count; i++)
 				{

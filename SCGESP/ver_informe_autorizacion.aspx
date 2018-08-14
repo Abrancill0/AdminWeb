@@ -1566,22 +1566,7 @@
 				enviarVoBo();
 			} else {
 				//console.log("enviado a adminerp");
-				cargando();
-				var respuesta = enviarAAutorizacion(datos);
-				//if (respuesta.stResultado === 1) {
-				if (respuesta.stResultado === 1) {
-					$.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'success' });
-					setTimeout(function () {
-						window.location.href = "/Autorizaciones?" + fh;
-					}, 2000);
-				} else {
-					//"Error al enviar comprobacion,favor de verificar"
-					$.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'error' });
-					/*setTimeout(function () {
-						location.reload();
-					}, 1000);*/
-				}
-				cargado();
+				enviarAAutorizacion(datos);
 			}
 		}
 		function habilitaChkVoBo() {
@@ -1677,9 +1662,24 @@
 			});
 		}
 		function enviarAAutorizacion(datos) {
+/*
+cargando();
+				var respuesta = enviarAAutorizacion(datos);
+				//if (respuesta.stResultado === 1) {
+				if (respuesta.stResultado === 1) {
+					$.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'success' });
+					setTimeout(function () {
+						window.location.href = "/Autorizaciones?" + fh;
+					}, 2000);
+				} else {
+					//"Error al enviar comprobacion,favor de verificar"
+					$.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'error' });
+				}
+				cargado();
+*/
 			var respuesta = [];
 			$.ajax({
-				async: false,
+				async: true,
 				type: "POST",
 				url: "/api/Comprobacion",
 				data: JSON.stringify(datos),
@@ -1687,18 +1687,23 @@
 				dataType: 'json',
 				cache: false,
 				beforeSend: function () {
-					$("#modal_alerta").modal('hide');
+					cargado()
+					var ocultarModal = $('#modal_alerta').is(':visible');
+					if (ocultarModal)
+						$("#modal_alerta").modal("hide");
 					//$("#verInformeGastos").modal('hide');
 				},
 				success: function (result) {
 					//var stResultado = result.Salida.Resultado * 1;
 					//if (stResultado === 1) {
+cargado();
 					var stResultado = result;
 					if (stResultado === 'OK') {
 						respuesta = {
 							'stResultado': 1,
 							'descripcion': 'El informe se envio a comprobación.'
 						};
+$.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'success' });
 					} else {
 						var error = stResultado; //datoEle(result.Salida.Errores.Error.Descripcion);
 						if (valorVacio(error)) {
@@ -1708,7 +1713,9 @@
 							'stResultado': 0,
 							'descripcion': error
 						};
+					$.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'error' });
 					}
+					
 				},
 				error: function (result) {
 					console.log(result);
@@ -1717,6 +1724,7 @@
 						'stResultado': 0,
 						'descripcion': result
 					};
+$.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'error' });
 				}
 			});
 			return respuesta;

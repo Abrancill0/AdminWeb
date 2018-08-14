@@ -3647,8 +3647,10 @@
 				dataType: 'json',
 				cache: false,
 				beforeSend: function () {
-					$("#confrontacion").modal("hide");
-					cargado();
+					cargando();
+					var ocultarModal = $('#confrontacion').is(':visible');
+					if (ocultarModal)
+						$("#confrontacion").modal("hide");
 				},
 				success: function (result) {
 					//console.log(result)
@@ -3658,6 +3660,19 @@
 						browseGastos(datos.IdInforme);
 					} else {
 						$.notify(result.Descripcion, { position: "top center", className: "error" });
+						setTimeout(function () {
+							cargado();
+							$("#confrontacion").modal({
+								show: true,
+								keyboard: false,
+								backdrop: "static"
+							});
+						}, 600);
+						/*.modal({
+							show: true,
+							keyboard: false,
+							backdrop: "static"
+						});*/
 					}
 				},
 				complete: function () {
@@ -3755,7 +3770,7 @@
 							keyboard: false,
 							backdrop: "static"
 						});
-					}, 600)
+					}, 600);
 				},
 				error: function (result) {
 					console.log(result);
@@ -3766,7 +3781,7 @@
 							keyboard: false,
 							backdrop: "static"
 						});
-					}, 600)
+					}, 600);
 				}
 			});
 		}
