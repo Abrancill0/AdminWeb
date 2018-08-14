@@ -159,13 +159,15 @@ namespace SCGESP.Clases
 			if (respuesta.Resultado == "1")
 			{
 
-				DTEmpleado = respuesta.obtieneTabla("Catalogo");
-
+				DTEmpleado = respuesta.obtieneTabla("Llave");
 				for (int i = 0; i < DTEmpleado.Rows.Count; i++)
 				{
-					EmpleadoResult = Convert.ToString(DTEmpleado.Rows[i]["GrEmpId"]);
+					EmpleadoResult = Convert.ToString(DTEmpleado.Rows[i]["SgUsuEmpleado"]);  // Convert.ToString(DTEmpleado.Rows[i]["GrEmpId"]);
 				}
-
+				string nEmp = respuesta.obtieneValor("SgUsuEmpleado");
+				if (EmpleadoResult.Trim() == "") {
+					EmpleadoResult = nEmp.Trim();
+				}
 				return EmpleadoResult;
 
 			}
@@ -197,7 +199,7 @@ namespace SCGESP.Clases
 
 			if (respuesta.Resultado == "1")
 			{
-				DTCorreo = respuesta.obtieneTabla("Catalogo");
+				DTCorreo = respuesta.obtieneTabla("Llave");
 
 				for (int i = 0; i < DTCorreo.Rows.Count; i++)
 				{
@@ -335,8 +337,7 @@ SMTP Port: 587
 			 rConPuertoSMTP: 587
 			 */
 			string htmlBody = "<!DOCTYPE html>" +
-"<html lang='en' xmlns:v='urn:schemas-microsoft-com:vml'" +
-"xmlns:o='urn:schemas-microsoft-com:office:office'>" +
+"<html lang='en' xmlns:v='urn:schemas-microsoft-com:vml' xmlns:o='urn:schemas-microsoft-com:office:office'>" +
 "<head><meta http-equiv='Content-Type' content='text/html; charset=gb18030'>" +
 "<meta http-equiv='x-ua-compatible' content='ie=edge'>" +
 "<meta name='viewport' content='width=device-width, initial-scale=1'>" +
@@ -362,12 +363,9 @@ SMTP Port: 587
 "" +
 "@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700|Open+Sans');" +
 "@media only screen {" +
-".col, td, th, div, p {font-family: 'Open" +
-"Sans',-apple-system,system-ui,BlinkMacSystemFont,'Segoe" +
+".col, td, th, div, p {font-family: 'Open Sans',-apple-system,system-ui,BlinkMacSystemFont,'Segoe" +
 "UI','Roboto','Helvetica Neue',Arial,sans-serif;}" +
-".webfont {font-family:" +
-"Lato',-apple-system,system-ui,BlinkMacSystemFont,'Segoe" +
-"UI','Roboto','Helvetica Neue',Arial,sans-serif;}" +
+".webfont {font-family: 'Lato',-apple-system,system-ui,BlinkMacSystemFont,'Segoe UI','Roboto','Helvetica Neue',Arial,sans-serif;}" +
 "}" +
 "" +
 "img {border: 0; line-height: 100%; vertical-align: middle;}" +
@@ -481,28 +479,22 @@ SMTP Port: 587
 "</head>" +
 "<body style='box-sizing:border-box;margin:0;padding:0;width:100%;word-break:break-word;-webkit-font-smoothing:antialiased;'>" +
 "" +
-"<div style='display:none;font-size:0;line-height:0;'><!-- Add your" +
-"inbox preview text here --></div>" +
+"<div style='display:none;font-size:0;line-height:0;'><!-- Add your inbox preview text here --></div>" +
 "" +
-"<table class='wrapper' cellpadding='0' cellspacing='0'" +
-"role='presentation' width='100%'>" +
+"<table class='wrapper' cellpadding='0' cellspacing='0' role='presentation' width='100%'>" +
 "<tr>" +
 "<td class='px-sm-16' align='center' bgcolor='#EEEEEE'>" +
-"<table class='container' cellpadding='0' cellspacing='0'" +
-"role='presentation' width='600'>" +
+"<table class='container' cellpadding='0' cellspacing='0' role='presentation' width='600'>" +
 "<tr>" +
 "<td class='px-sm-8' align='left' bgcolor='#EEEEEE'>" +
-"<div class='spacer line-height-sm-0 py-sm-8' style='line-height:" +
-"24px;'>&zwnj;</div>" +
-"<table cellpadding='0' cellspacing='0' role='presentation'" +
-"style='margin: 0 auto;'>" +
+"<div class='spacer line-height-sm-0 py-sm-8' style='line-height: 24px;'>&zwnj;</div>" +
+"<table cellpadding='0' cellspacing='0' role='presentation' style='margin: 0 auto;'>" +
 "<tr>" +
 "<td class='col' align='center'>" +
 "</td>" +
 "</tr>" +
 "</table>" +
-"<div class='spacer line-height-sm-0 py-sm-8' style='line-height:" +
-"24px;'>&zwnj;</div>" +
+"<div class='spacer line-height-sm-0 py-sm-8' style='line-height: 24px;'>&zwnj;</div>" +
 "</td>" +
 "</tr>" +
 "</table>" +
@@ -510,37 +502,32 @@ SMTP Port: 587
 "</tr>" +
 "</table>" +
 "" +
-"<table class='wrapper' cellpadding='0' cellspacing='0'" +
-"role='presentation' width='100%'>" +
+"<table class='wrapper' cellpadding='0' cellspacing='0' role='presentation' width='100%'>" +
 "<tr>" +
 "<td align='center' bgcolor='#EEEEEE' class='px-sm-16'>" +
-"<table class='container' cellpadding='0' cellspacing='0'" +
-"role='presentation' width='600'>" +
+"<table class='container' cellpadding='0' cellspacing='0' role='presentation' width='600'>" +
 "<tr>" +
-"<td bgcolor='#f2f2f2' style='background: linear-gradient(to right," +
-"#f2f2f2, #f2f2f2);'>" +
+"<td bgcolor='#f2f2f2' style='background: linear-gradient(to right, #f2f2f2, #f2f2f2);'>" +
 "<!--[if gte mso 9]>" +
 "<v:rect xmlns:v='urn:schemas-microsoft-com:vml' fill='true'" +
 "stroke='false' style='width:600px;'>" +
 "<v:fill type='gradient' color='#f2f2f2' color2='#f2f2f2' angle='90' />" +
 "<v:textbox style='mso-fit-shape-to-text:true' inset='0,0,0,0'>" +
 "<div><![endif]-->" +
-"<div class='spacer line-height-sm-0 py-sm-16' style='line-height:" +
-"32px;'>&zwnj;</div>" +
+"<div class='spacer line-height-sm-0 py-sm-16' style='line-height: 32px;'>&zwnj;</div>" +
 "<table cellpadding='0' cellspacing='0' role='presentation' width='100%'>" +
 "<tr>" +
 "<td align='center' class='px-sm-16' style='padding: 0 96px;'>" +
 "<h1 class='webfont h1' style='color: #FFFFFF; font-size: 36px;" +
 "font-weight: 300; line-height: 100%; margin: 0;'>" +
 "<a href='link_webpage'>" +
-"<img src='https://gapp.elpotosi.com.mx/img/logo.png' alt='Seguros El Potosi' width='170px' height='70px' style='width:170px; height: 70px;'>" +
+"<img src='https://gapp.elpotosi.com.mx/img/logo170x70.png' alt='Seguros El Potosi' width='170px' height='70px' style='width:170px; height: 70px;'>" +
 "</a>" +
 "</h1>" +
 "</td>" +
 "</tr>" +
 "</table>" +
-"<div class='spacer line-height-sm-0 py-sm-16' style='line-height:" +
-"40px;'>&zwnj;</div>" +
+"<div class='spacer line-height-sm-0 py-sm-16' style='line-height: 40px;'>&zwnj;</div>" +
 "<!--[if gte mso 9]></div></v:textbox></v:rect><![endif]-->" +
 "</td>" +
 "</tr>" +
@@ -557,13 +544,11 @@ SMTP Port: 587
 "role='presentation' width='600'>" +
 "<tr>" +
 "<td class='px-sm-8' align='left' bgcolor='#FFFFFF' style='padding: 0 24px;'>" +
-"<div class='spacer line-height-sm-0 py-sm-8' style='line-height:" +
-"24px;'>&zwnj;</div>" +
+"<div class='spacer line-height-sm-0 py-sm-8' style='line-height: 24px;'>&zwnj;</div>" +
 "<table cellpadding='0' cellspacing='0' role='presentation' width='100%'>" +
 "<tr>" +
 "<td class='col px-sm-16' align='center' width='100%' style='padding: 0 64px;'>" +
-"<h2 style='color: #000; font-size: 20px; font-weight: 300;" +
-"line-height: 28px; margin: 0 0 24px;'>" +
+"<h2 style='color: #000; font-size: 20px; font-weight: 300; line-height: 28px; margin: 0 0 24px;'>" +
 "saludo_nombre" +
 "</h2>" +
 "<p style='color: #888888; font-size: 18px; line-height: 24px; margin: 0;'>" +
@@ -573,8 +558,7 @@ SMTP Port: 587
 "</td>" +
 "</tr>" +
 "</table>" +
-"<div class='spacer line-height-sm-0 py-sm-8' style='line-height:" +
-"24px;'>&zwnj;</div>" +
+"<div class='spacer line-height-sm-0 py-sm-8' style='line-height: 24px;'>&zwnj;</div>" +
 "</td>" +
 "</tr>" +
 "</table>" +
@@ -582,15 +566,12 @@ SMTP Port: 587
 "</tr>" +
 "</table>" +
 "" +
-"<table class='wrapper' cellpadding='0' cellspacing='0'" +
-"role='presentation' width='100%'>" +
+"<table class='wrapper' cellpadding='0' cellspacing='0' role='presentation' width='100%'>" +
 "<tr>" +
 "<td class='px-sm-16' align='center' bgcolor='#EEEEEE'>" +
-"<table class='container' cellpadding='0' cellspacing='0'" +
-"role='presentation' width='600'>" +
+"<table class='container' cellpadding='0' cellspacing='0' role='presentation' width='600'>" +
 "<tr>" +
-"<td class='divider py-sm-16 px-sm-16' bgcolor='#FFFFFF'" +
-"style='padding: 24px 32px;'>" +
+"<td class='divider py-sm-16 px-sm-16' bgcolor='#FFFFFF' style='padding: 24px 32px;'>" +
 "<div style='background: #EEEEEE; height: 1px; line-height: 1px;'>&zwnj;</div>" +
 "</td>" +
 "</tr>" +
@@ -599,18 +580,14 @@ SMTP Port: 587
 "</tr>" +
 "</table>" +
 "" +
-"<table class='wrapper' cellpadding='0' cellspacing='0'" +
-"role='presentation' width='100%'>" +
+"<table class='wrapper' cellpadding='0' cellspacing='0' role='presentation' width='100%'>" +
 "<tr>" +
 "<td class='px-sm-16' align='center' bgcolor='#EEEEEE'>" +
-"<table class='container' cellpadding='0' cellspacing='0'" +
-"role='presentation' width='600'>" +
+"<table class='container' cellpadding='0' cellspacing='0' role='presentation' width='600'>" +
 "<tr>" +
 "<td class='px-sm-8' bgcolor='#FFFFFF' style='padding: 0 24px;'>" +
-"<div class='spacer line-height-sm-0 py-sm-8' style='line-height:" +
-"24px;'>&zwnj;</div>" +
-"<div class='spacer line-height-sm-0 py-sm-8' style='line-height:" +
-"24px;'>&zwnj;</div>" +
+"<div class='spacer line-height-sm-0 py-sm-8' style='line-height: 24px;'>&zwnj;</div>" +
+"<div class='spacer line-height-sm-0 py-sm-8' style='line-height: 24px;'>&zwnj;</div>" +
 "</td>" +
 "</tr>" +
 "</table>" +
@@ -618,12 +595,10 @@ SMTP Port: 587
 "</tr>" +
 "</table>" +
 "" +
-"<table class='wrapper' cellpadding='0' cellspacing='0'" +
-"role='presentation' width='100%'>" +
+"<table class='wrapper' cellpadding='0' cellspacing='0' role='presentation' width='100%'>" +
 "<tr>" +
 "<td class='px-sm-16' align='center' bgcolor='#EEEEEE'>" +
-"<table class='container' cellpadding='0' cellspacing='0'" +
-"role='presentation' width='600'>" +
+"<table class='container' cellpadding='0' cellspacing='0' role='presentation' width='600'>" +
 "<tr>" +
 "<td class='spacer height-sm-auto py-sm-8' bgcolor='#EEEEEE' height='24'></td>" +
 "</tr>" +

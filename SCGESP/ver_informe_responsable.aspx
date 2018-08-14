@@ -3647,8 +3647,10 @@
 				dataType: 'json',
 				cache: false,
 				beforeSend: function () {
-					$("#confrontacion").modal("hide");
-					cargado();
+					cargando();
+					var ocultarModal = $('#confrontacion').is(':visible');
+					if (ocultarModal)
+						$("#confrontacion").modal("hide");
 				},
 				success: function (result) {
 					//console.log(result)
@@ -3658,6 +3660,19 @@
 						browseGastos(datos.IdInforme);
 					} else {
 						$.notify(result.Descripcion, { position: "top center", className: "error" });
+						setTimeout(function () {
+							cargado();
+							$("#confrontacion").modal({
+								show: true,
+								keyboard: false,
+								backdrop: "static"
+							});
+						}, 600);
+						/*.modal({
+							show: true,
+							keyboard: false,
+							backdrop: "static"
+						});*/
 					}
 				},
 				complete: function () {
@@ -3755,7 +3770,7 @@
 							keyboard: false,
 							backdrop: "static"
 						});
-					}, 600)
+					}, 600);
 				},
 				error: function (result) {
 					console.log(result);
@@ -3766,7 +3781,7 @@
 							keyboard: false,
 							backdrop: "static"
 						});
-					}, 600)
+					}, 600);
 				}
 			});
 		}
@@ -4276,8 +4291,9 @@
 			botones[0] = {
 				text: "Si", click: function () {
 					$(this).dialog("close");
-					resetInformeConfrontado();
-					consultaInfoGastos(IdInforme, 2, 1);
+					//resetInformeConfrontado();
+					//consultaInfoGastos(IdInforme, 2, 1);
+					cancelarConfrontacion();
 				}
 			};
 			botones[1] = {
@@ -4287,6 +4303,53 @@
 			};
 			Seguridad.confirmar("Cancelar la confrontación del informe?", botones, " Cancelar Confrontación.", "#tabConfrontacion");
 		});
+		function cancelarConfrontacion() {
+			var IdInforme = $("#idinforme").val() * 1;
+			$.ajax({
+				async: true,
+				type: "POST",
+				url: '/api/ResetInformeConfrontado',
+				data: JSON.stringify({ 'IdInforme': IdInforme }),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
+				cache: false,
+				beforeSend: function () {
+					var ocultarModal = $('#confrontacion').is(':visible');
+					if (ocultarModal)
+						$("#confrontacion").modal("hide");
+
+					cargado();
+				},
+				success: function (result) {
+					//
+				},
+				complete: function () {
+					//consultaInfoGastos(IdInforme, 2, 1);
+					selectInforme(IdInforme);
+					browseGastos(IdInforme);
+
+					setTimeout(function () {
+						var verModal = $('#confrontacion').is(':visible');
+						if (verModal === false)
+							$("#confrontacion").modal({
+								show: true,
+								keyboard: false,
+								backdrop: "static"
+							});
+						setTimeout(function () {
+							cargado();
+							BuscarMovBancariosParaConfrontar("");
+						}, 400);						
+					}, 1000);
+					
+				},
+				error: function (result) {
+					//cargado();
+					console.log("error", result);
+					resultado = null;
+				}
+			});
+		}
 		function ValidarJustificacion() {
 			var datos = {
 				IdInforme: ($("#idinforme").val() * 1)
