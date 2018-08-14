@@ -521,7 +521,7 @@ SMTP Port: 587
 "<h1 class='webfont h1' style='color: #FFFFFF; font-size: 36px;" +
 "font-weight: 300; line-height: 100%; margin: 0;'>" +
 "<a href='link_webpage'>" +
-"<img src='https://gapp.elpotosi.com.mx/img/logo.png' alt='Seguros El Potosi' width='170px' height='70px' style='width:170px; height: 70px;'>" +
+"<img src='https://gapp.elpotosi.com.mx/img/logo170x70.png' alt='Seguros El Potosi' width='170px' height='70px' style='width:170px; height: 70px;'>" +
 "</a>" +
 "</h1>" +
 "</td>" +
