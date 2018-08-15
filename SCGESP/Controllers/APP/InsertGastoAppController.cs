@@ -243,30 +243,30 @@ namespace SCGESP.Controllers.APP
         {
             try
             {
-                //string format = "";
+                string format = "";
                 string path = HttpContext.Current.Server.MapPath("/Comprobantes/");
-                //string name = DateTime.Now.ToString("yyyyMMddhhmmss");
+                string name = DateTime.Now.ToString("yyyyMMddhhmmss");
 
 
-                //if (Based64BinaryString.Contains("data:image/jpeg;base64,"))
-                //{
-                //    format = "jpg";
-                //}
-                //else if (Based64BinaryString.Contains("data:image/png;base64,"))
-                //{
-                //    format = "png";
-                //}
-                //else
-                //{
-                //    format = "jpg";
-                //}
+                if (Based64BinaryString.Contains("data:image/jpeg;base64,"))
+                {
+                    format = "jpg";
+                }
+                else if (Based64BinaryString.Contains("data:image/png;base64,"))
+                {
+                    format = "png";
+                }
+                else
+                {
+                    format = "jpg";
+                }
 
 
-                //string str = Based64BinaryString.Replace("data:image/jpeg;base64,", " ");//jpg check
-                //str = str.Replace("data:image/png;base64,", " ");//png check
-                //str = str.Replace("data:text/plain;base64,", " ");//text file check
-                //str = str.Replace("data:;base64,", " ");//zip file check
-                //str = str.Replace("data:application/zip;base64,", " ");//zip file check
+                string str = Based64BinaryString.Replace("data:image/jpeg;base64,", " ");//jpg check
+                str = str.Replace("data:image/png;base64,", " ");//png check
+                str = str.Replace("data:text/plain;base64,", " ");//text file check
+                str = str.Replace("data:;base64,", " ");//zip file check
+                str = str.Replace("data:application/zip;base64,", " ");//zip file check
 
                 byte[] data = Convert.FromBase64String(str);
 

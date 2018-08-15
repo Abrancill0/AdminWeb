@@ -27,15 +27,13 @@ namespace SCGESP.Controllers.APP
             public string NombreDepartamento { get; set; }
             public string Oficina { get; set; }
             public string NombreOficina { get; set; }
-
             public string TipoGasto { get; set; }
             public string Importe { get; set; }
             public string Moneda { get; set; }
             public string NombreMoneda { get; set; }
             public string Usuario { get; set; }
             public string NombreUsuario { get; set; }
-
-
+            public string NombreTipoGasto { get; set; }
             public string UsuarioObligado { get; set; }
             public string NombreUsuarioObligado { get; set; }
             public string FechaAutorizacion { get; set; }
@@ -82,6 +80,7 @@ namespace SCGESP.Controllers.APP
                             Oficina = Convert.ToString(row["Oficina"]),
                             NombreOficina = Convert.ToString(row["NombreOficina"]),
                             TipoGasto = Convert.ToString(row["TipoGasto"]),
+                            NombreTipoGasto = Convert.ToString(row["NombreTipoGasto"]),
                             Importe = Convert.ToString(row["Importe"]),
                             Moneda = Convert.ToString(row["Moneda"]),
                             NombreMoneda = Convert.ToString(row["NombreMoneda"]),
