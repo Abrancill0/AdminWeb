@@ -139,14 +139,17 @@ namespace SCGESP.Controllers
 
                 for (int i = 0; i < DTRequisiciones.Rows.Count; i++)
                 {
+					CreaInforme = 0;
 
-                    foreach (DataRow row in DT.Rows)
+					foreach (DataRow row in DT.Rows)
                     {
+						int requisicionInf = Convert.ToInt32(row["r_idrequisicion"]);
+						int idRequisicion = Convert.ToInt32(DTRequisiciones.Rows[i]["RmReqId"]);
 
-                        if (Convert.ToInt32(row["r_idrequisicion"]) == Convert.ToInt32(DTRequisiciones.Rows[i]["RmReqId"]))
-                        {
-                            CreaInforme = 1;
-                        }
+						if (requisicionInf == idRequisicion)
+						{
+							CreaInforme = 1;
+						}
 
 
                     }
