@@ -4197,7 +4197,10 @@
 			var elementosSel = false;
 			var IdInforme = $("#idinforme").val() * 1;
 			//resetInformeConfrontado();
-			$("#confrontacion").modal("hide");
+			var ocultarModal = $('#confrontacion').is(':visible');
+			if (ocultarModal)
+				$("#confrontacion").modal("hide");
+
 			cargando();
 			$("input:checkbox[name=movBanco]").each(function () {
 				if ($(this).is(':checked')) {
@@ -4205,12 +4208,6 @@
 					
 					var datos = $(this).val(); //JSON.parse($(this).val());
 					var resultado = guardarMBanco(datos);
-					if (resultado.Exito.GuardadoOk === true) {
-						var idchk = resultado.DatosGuardados.IdChk;
-						("#tdChk" + idchk).AsHTML("<span style='font-size: 11px' class='label label-success'><span class='glyphicon glyphicon-ok'></span> Cargado</span>");
-					} else {
-						("#tdChk" + idchk).AsHTML("<span style='font-size: 11px' class='label label-danger'><span class='glyphicon glyphicon-remove'></span> Cargado</span>");
-					}
 				}
 			});
 			if (elementosSel === false) {
@@ -4258,7 +4255,7 @@
 			var IdInforme = $("#idinforme").val() * 1;
 			var resultado = [];
 			$.ajax({
-				async: false,
+				async: true,
 				type: "POST",
 				url: '/api/GuardarMovBanco',
 				data: datos,
@@ -4273,6 +4270,14 @@
 						'DatosGuardados': JSON.parse(datos),
 						'Exito': result
 					};
+
+					if (resultado.Exito.GuardadoOk === true) {
+						var idchk = resultado.DatosGuardados.IdChk;
+						("#tdChk" + idchk).AsHTML("<span style='font-size: 11px' class='label label-success'><span class='glyphicon glyphicon-ok'></span> Cargado</span>");
+					} else {
+						("#tdChk" + idchk).AsHTML("<span style='font-size: 11px' class='label label-danger'><span class='glyphicon glyphicon-remove'></span> Cargado</span>");
+					}
+
 				},
 				complete: function () {
 					//cargado();

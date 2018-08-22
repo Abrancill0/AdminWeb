@@ -22,7 +22,8 @@ namespace SCGESP.Controllers
             public string Tarjeta { get; set; }
             public string Banco { get; set; }
             public string Fecha { get; set; }
-            public decimal Importe { get; set; }
+			public string Descripcion { get; set; }
+			public decimal Importe { get; set; }
         }
 
         public IEnumerable<ListResult> Post(ParametrosMovBanco Datos)
@@ -42,8 +43,9 @@ namespace SCGESP.Controllers
                     "SELECT ISNULL(MAX(m_id), 0) AS idmovimiento " +
                     "FROM movbancarios " +
                     "WHERE m_tarjeta = '" + Datos.Tarjeta + "' " +
-                    "AND m_banco = '" + Datos.Banco + "' " +
-                    "AND m_fmovimiento >= '" + Convert.ToDateTime(Datos.Fecha).ToString("yyyy-MM-dd") + "' AND m_importe = " + Datos.Importe + " " +
+					"AND m_banco = '" + Datos.Banco + "' " +
+					"AND (m_observaciones  = '" + Datos.Descripcion + "' OR m_referencia  = '" + Datos.Descripcion + "' ) " +
+					"AND m_fmovimiento >= '" + Convert.ToDateTime(Datos.Fecha).ToString("yyyy-MM-dd") + "' AND m_importe = " + Datos.Importe + " " +
                 ") AS DATOS";
 
 

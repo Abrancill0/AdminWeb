@@ -953,13 +953,21 @@
 						}
 						var tipoajuste = value.tipoajuste * 1;
 						var result_justificacion = conceptos_adicionales(value.g_concepto, value.g_nombreCategoria, tipoajuste);
+
+						var justificacion_text_1 = "";
+						try {
+							justificacion_text_1 = result_justificacion[0][1];
+						} catch (e) {
+							justificacion_text_1 = value.g_concepto;
+						}
+
 						var gasto = {
 							idgasto: value.g_id,
 							ngasto: value.orden,
 							dia: fgasto,
 							categoria: value.g_nombreCategoria,
 							idcategoria: value.g_categoria,
-							justificacion: result_justificacion[0][1],
+							justificacion: justificacion_text_1,
 							monto: formatNumber.new((value.g_total).toFixed(2), "$ "),
 							num_monto: value.g_total,
 							xml: dir_xml,
@@ -1643,7 +1651,9 @@
 				contentType: 'application/json; charset=utf-8',
 				dataType: 'json',
 				beforeSend: function () {
-					$("#modal_alerta").modal('hide');
+					var ocultarModal = $('#modal_alerta').is(':visible');
+					if (ocultarModal)
+						$("#modal_alerta").modal('hide');
 					cargando();
 				},
 				success: function (result) {
@@ -1687,7 +1697,7 @@ cargando();
 				dataType: 'json',
 				cache: false,
 				beforeSend: function () {
-					cargado()
+					cargando()
 					var ocultarModal = $('#modal_alerta').is(':visible');
 					if (ocultarModal)
 						$("#modal_alerta").modal("hide");
@@ -1785,17 +1795,19 @@ $.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'erro
 				dataType: 'json',
 				cache: false,
 				beforeSend: function () {
-					$("#modal_alerta").modal('hide');
 					cargando();
+					var ocultarModal = $('#modal_alerta').is(':visible');
+					if (ocultarModal)
+						$("#modal_alerta").modal('hide');
 				},
 				success: function (result) {
-					
-				},
-				complete: function () {
 					$.notify("El informe se ha rechazado correctamente", { globalPosition: 'top center', className: 'success', autoHideDelay: 8000 });
 					setTimeout(function () {
 						window.location.href = "/Autorizaciones?" + fh;
 					}, 2000);
+				},
+				complete: function () {
+					
 				}
 			});
 
@@ -2222,7 +2234,13 @@ $.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'erro
 					$.notify("Se requiere un comentario para envio a VoBo.", { globalPosition: 'top center', className: 'error', autoHideDelay: 2000 });
 					return false;
 				} else {
-					$("#modal_alerta").modal("hide");
+					var ocultarModal = $('#modal_alerta').is(':visible');
+					if (ocultarModal)
+						$("#modal_alerta").modal("hide");
+
+					ocultarModal = $('#tabAutoriza').is(':visible');
+					if (ocultarModal)
+						$("#tabAutoriza").modal("hide");
 				}
 				var fecha = fechaActual() + " " + horaActual("hh:mm");
 				var usuario_fecha = ". (Enviado por: " + nmbemp + " / " + fecha + ")";

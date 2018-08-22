@@ -206,6 +206,7 @@
     <Content Include="img\chkVoBo\chkDesactivadoDesbloqueado.PNG" />
     <Content Include="img\ejemploEdoCtaTOKA.PNG" />
     <Content Include="img\logo.png" />
+    <Content Include="img\logo170x70.png" />
     <Content Include="img\SPapp_Icons_AdminApp.png" />
     <Content Include="img\SPapp_Icons_AdminERP.png" />
     <Content Include="img\SPapp_Icons_AdminWeb.png" />
@@ -4961,7 +4962,6 @@
     <Compile Include="Controllers\APP\BrowseInformeAppController.cs" />
     <Compile Include="Controllers\APP\BrowseInformeTodoController.cs" />
     <Compile Include="Controllers\APP\CambioPasswordEle.cs" />
-    <Compile Include="Controllers\APP\UploadController.cs" />
     <Compile Include="Controllers\APP\CargaImagenController.cs" />
     <Compile Include="Controllers\APP\ConsultaMaterialesAppController.cs" />
     <Compile Include="Controllers\APP\ConsultaRequisicionDetalleAppController.cs" />
@@ -4974,6 +4974,7 @@
     <Compile Include="Controllers\APP\RestablecePassController.cs" />
     <Compile Include="Controllers\APP\UpdateGastoAppController.cs" />
     <Compile Include="Controllers\APP\UpdateInformeAppController.cs" />
+    <Compile Include="Controllers\APP\UploadController.cs" />
     <Compile Include="Controllers\CGEAPI\ActualizaGastoController.cs" />
     <Compile Include="Controllers\CGEAPI\ActualizaInfReqController.cs" />
     <Compile Include="Controllers\CGEAPI\ActualizarCtaGastoController.cs" />
