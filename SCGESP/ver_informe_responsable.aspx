@@ -4197,17 +4197,22 @@
 			var elementosSel = false;
 			var IdInforme = $("#idinforme").val() * 1;
 			//resetInformeConfrontado();
+cargando();
 			var ocultarModal = $('#confrontacion').is(':visible');
-			if (ocultarModal)
-				$("#confrontacion").modal("hide");
-
-			cargando();
+			setTimeout(function () {
+				if (ocultarModal)
+					$("#confrontacion").modal("hide");
+			}, 2000);
+			
+			var nchkBox = $("input:checkbox[name=movBanco]").length;
+var ii=1;
 			$("input:checkbox[name=movBanco]").each(function () {
 				if ($(this).is(':checked')) {
 					elementosSel = true;
 					
 					var datos = $(this).val(); //JSON.parse($(this).val());
-					var resultado = guardarMBanco(datos);
+					var resultado = guardarMBanco(datos, nchkBox, ii);
+ii++;
 				}
 			});
 			if (elementosSel === false) {
@@ -4216,16 +4221,6 @@
 				//obtenerGastosInforme(IdInforme, 0, 2);
 				$.notify("Información guardada.", { position: "top center", className: 'success' });
 			}
-			
-			setTimeout(function () {
-				cargado();
-				$("#confrontacion").modal({
-					show: true,
-					keyboard: false,
-					backdrop: "static"
-				});
-			}, 2000);
-			
 
 		});
 		function resetInformeConfrontado() {
@@ -4251,7 +4246,7 @@
 				}
 			});
 		}
-		function guardarMBanco(datos) {
+		function guardarMBanco(datos, nchkBox, ii) {
 			var IdInforme = $("#idinforme").val() * 1;
 			var resultado = [];
 			$.ajax({
@@ -4276,6 +4271,20 @@
 						("#tdChk" + idchk).AsHTML("<span style='font-size: 11px' class='label label-success'><span class='glyphicon glyphicon-ok'></span> Cargado</span>");
 					} else {
 						("#tdChk" + idchk).AsHTML("<span style='font-size: 11px' class='label label-danger'><span class='glyphicon glyphicon-remove'></span> Cargado</span>");
+					}
+
+					if(nchkBox === ii){
+						setTimeout(function () {
+							cargado();
+							var ocultarModal = $('#confrontacion').is(':visible');
+							if (ocultarModal === false){
+								$("#confrontacion").modal({
+									show: true,
+									keyboard: false,
+									backdrop: "static"
+								});
+							}
+						}, 2000);
 					}
 
 				},
