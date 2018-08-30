@@ -2852,9 +2852,10 @@
 				success: function (result) {
 					var error = 0;
 
-					if (result === 'El UUID ingresado ya existe') {
+					if (result === 'El UUID ingresado ya existe' || result.indexOf('El UUID ingresado ya existe') > -1) {
 						error = 1;
-						$.notify('El Xml cargado ya existe en la base de datos,favor de verificar', { globalPosition: 'top center', className: 'error', autoHideDelay: 6000 });
+						var infReq = result.split(",");
+						$.notify(('El Xml cargado ya existe en la base de datos, favor de verificar: ' + $.trim(infReq[1])), { globalPosition: 'top center', className: 'error', autoHideDelay: 8000 });
 					};
 					
 					if (result === 'No se puede guardar el comprobante, el importe es igual o mayor a $ 2000.00 y la forma de pago es efectivo.') {

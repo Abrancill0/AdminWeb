@@ -130,6 +130,12 @@ namespace SCGESP.Controllers.EleAPI
 									}
 								}
 							}
+							else {
+								if (valXML[1] != "")
+								{
+									ValidacionEnviaComprobantes = valXML[1];
+								}
+							}
 						}
 						else
 						{

@@ -303,7 +303,7 @@ namespace SCGESP.Controllers.CGEAPI
 				{
 					Deletexml(Ruta);
 				}
-				if (Mensaje == "El UUID ingresado ya existe")
+				if (Mensaje == "El UUID ingresado ya existe" || Mensaje.Contains("El UUID ingresado ya existe"))
 				{
 					Deletexml(Ruta);
 				}
