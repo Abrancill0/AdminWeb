@@ -672,16 +672,27 @@
 							<li><a href="#tabCargaEdoCuenta" onclick="preparaCarga()">Carga Edo.Cuenta</a></li>
 						</ul>
 						<div id="tabConfrontacion">
-							<span id="msnmb"></span>
-							<button id="confrontarInforme" type="button" class="btn btn-primary centerxy"><i class="zmdi zmdi-thumb-up"></i>Confrontar Informe</button>
-							<button id="cancelarConfrontacion" type="button" class="btn btn-danger centerxy"><i class="zmdi zmdi-thumb-down"></i>Cancelar Confrontación</button>
-							<form id="frmMovBanco" name="frmMovBanco" class="form-inline" action="#" style="width: 100%;">
-								<input class="form-control reporte2" name="repde2" id="repde2" type="hidden" style="width: 80px;" />
-								<input class="form-control reporte2" name="repa2" id="repa2" type="hidden" style="width: 80px;" />
-								<input type="hidden" id="importede" name="importede" class="form-control text-right" style="width: 80px;" />
-								<input type="hidden" id="importea" name="importea" class="form-control text-right" style="width: 80px;" />
-								<a id="btnBuscarMovBanco" class="btn btn-primary" href="#" role="button"><i class="zmdi zmdi-refresh-alt"></i>Actualizar</a>
-							</form>
+							<table style="width:80%">
+								<tr>
+									<td><span id="msnmb"></span></td>
+									<td>
+										<form id="frmMovBanco" name="frmMovBanco" class="form-inline" action="#" style="width: 100%;">
+											<input class="form-control reporte2" name="repde2" id="repde2" type="hidden" style="width: 80px;" />
+											<input class="form-control reporte2" name="repa2" id="repa2" type="hidden" style="width: 80px;" />
+											<input type="hidden" id="importede" name="importede" class="form-control text-right" style="width: 80px;" />
+											<input type="hidden" id="importea" name="importea" class="form-control text-right" style="width: 80px;" />
+											<a id="btnBuscarMovBanco" class="btn btn-primary" href="#" role="button"><i class="zmdi zmdi-refresh-alt"></i> Actualizar</a>
+										</form>
+									</td>
+									<td>
+										<button id="confrontarInforme" type="button" class="btn btn-primary centerxy"><i class="zmdi zmdi-thumb-up"></i> Confrontar Informe</button>
+									</td>
+									<td>
+										<button id="cancelarConfrontacion" type="button" class="btn btn-danger centerxy"><i class="zmdi zmdi-thumb-down"></i> Cancelar Confrontación</button>
+									</td>
+								</tr>
+							</table>
+							
 							<div id="scrolltblMovBanco">
 								<table id="tblMovBanco" class="display browse" cellspacing="0" width="100%">
 									<thead>
@@ -4008,10 +4019,12 @@
 		function cargaBanco() {
 			var IdInforme = $("#idinforme").val() * 1;
 			var banco = $("#banco").val();
-			if (!valorVacio(banco)) {
+			var ConfBanco = $("#ConfBanco").val() * 1;
+			if (!valorVacio(banco) && ConfBanco === 0) {
 				$("#confrontacion").modal("hide");
 				cargando();
-				resetInformeConfrontado();
+				//resetInformeConfrontado();
+				//cancelarConfrontacion();
 				var file = $("#filebanco").get(0).files[0];
 				var r = new FileReader();
 				var nombre = file.name;
@@ -4029,11 +4042,44 @@
 				}
 
 			} else {
-				$("#banco").notify("Seleciona un banco.", { globalPosition: 'top center', className: 'error' });
+				if (ConfBanco === 1) {
+					Seguridad.alerta("No puedes cargar movimientos. El Informe ya esta confrontado.","#confrontacion");
+				} else {
+					$("#banco").notify("Seleciona un banco.", { globalPosition: 'top center', className: 'error' });
+				}
 				$("#filebanco").filestyle('clear');
 			}
 		}
 		function guardarExcelBanco(banco, nombre, extFile, binimage, IdInforme) {
+
+			var IdInforme = $("#idinforme").val() * 1;
+			$.ajax({
+				async: true,
+				type: "POST",
+				url: '/api/ResetInformeConfrontado',
+				data: JSON.stringify({ 'IdInforme': IdInforme }),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
+				cache: false,
+				beforeSend: function () {
+
+				},
+				success: function (result) {
+					//
+				},
+				complete: function () {
+					//consultaInfoGastos(IdInforme, 2, 1);
+					selectInforme(IdInforme);
+					browseGastos(IdInforme);				
+				},
+				error: function (result) {
+					//cargado();
+					console.log("error", result);
+					resultado = null;
+				}
+			});
+
+
 			var datos = {
 				'Usuario': encriptaDesencriptaEle(UsuarioActivo, 0),
 				'ArchivoNmb': nombre,
@@ -4201,10 +4247,10 @@
 			//resetInformeConfrontado();
 cargando();
 			var ocultarModal = $('#confrontacion').is(':visible');
-			setTimeout(function () {
+			//setTimeout(function () {
 				if (ocultarModal)
 					$("#confrontacion").modal("hide");
-			}, 2000);
+			//}, 2000);
 			
 			var nchkBox = $("input:checkbox[name=movBanco]").length;
 var ii=1;
@@ -4274,18 +4320,19 @@ ii++;
 					} else {
 						("#tdChk" + idchk).AsHTML("<span style='font-size: 11px' class='label label-danger'><span class='glyphicon glyphicon-remove'></span> Cargado</span>");
 					}
-
+					//console.log(nchkBox, ii, "modal es visible " + $('#confrontacion').is(':visible'));
 					if(nchkBox === ii){
 						setTimeout(function () {
 							cargado();
-							var ocultarModal = $('#confrontacion').is(':visible');
+							/*var ocultarModal = $('#confrontacion').is(':visible');
 							if (ocultarModal === false){
 								$("#confrontacion").modal({
 									show: true,
 									keyboard: false,
 									backdrop: "static"
 								});
-							}
+							}*/
+							BuscarMovBancariosParaConfrontar("");
 						}, 2000);
 					}
 
@@ -4330,30 +4377,31 @@ ii++;
 				dataType: 'json',
 				cache: false,
 				beforeSend: function () {
+					cargando();
 					var ocultarModal = $('#confrontacion').is(':visible');
 					if (ocultarModal)
 						$("#confrontacion").modal("hide");
-
-					cargado();
+					
 				},
 				success: function (result) {
 					//
+					$("#ConfBanco").val(0);
 				},
 				complete: function () {
 					//consultaInfoGastos(IdInforme, 2, 1);
 					selectInforme(IdInforme);
 					browseGastos(IdInforme);
-
+					$.notify("Confrontación Cancelada.", { position: "top center", className: 'success' });
 					setTimeout(function () {
-						var verModal = $('#confrontacion').is(':visible');
+						cargado();
+						/*var verModal = $('#confrontacion').is(':visible');
 						if (verModal === false)
 							$("#confrontacion").modal({
 								show: true,
 								keyboard: false,
 								backdrop: "static"
-							});
+							});*/
 						setTimeout(function () {
-							cargado();
 							BuscarMovBancariosParaConfrontar("");
 						}, 400);						
 					}, 1000);
