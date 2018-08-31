@@ -58,26 +58,26 @@ namespace SCGESP.Controllers.APP
 
         public List<ObtieneGastoResult> PostObtieneInformes(ParametrosGasto Datos)
         {
-            string dirotros = "";
-            try
-            {
+            //string dirotros = "";
+            //try
+            //{
 
 
-                if (Datos.fileotros != "" && Datos.fileotros != null)
-                {
-                    dirotros = PostSaveImage(Datos.fileotros);
-                }
-                else
-                {
-                    dirotros = "";
-                }
+            //    if (Datos.fileotros != "" && Datos.fileotros != null)
+            //    {
+            //        dirotros = PostSaveImage(Datos.fileotros);
+            //    }
+            //    else
+            //    {
+            //        dirotros = "";
+            //    }
 
-            }
-            catch (Exception ex)
-            {
+            //}
+            //catch (Exception ex)
+            //{
 
-                dirotros = ex.ToString();
-            }
+            //    dirotros = ex.ToString();
+            //}
 
 
             string obs = "";
@@ -168,7 +168,7 @@ namespace SCGESP.Controllers.APP
                 comando.Parameters["@idapp"].Value = "Web";
                 comando.Parameters["@dirxml"].Value = "";//Datos.dirxml;
                 comando.Parameters["@dirpdf"].Value = "";//Datos.dirpdf;
-                comando.Parameters["@dirotros"].Value = dirotros; //Datos.dirotros;
+                comando.Parameters["@dirotros"].Value = Datos.fileotros; //Datos.dirotros;
                 comando.Parameters["@observaciones"].Value = obs;
                 comando.Parameters["@estatus"].Value = Datos.estatus;
                 comando.Parameters["@rfc"].Value = rfc;

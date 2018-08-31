@@ -51,33 +51,33 @@ namespace SCGESP.Controllers
         {
             try
             {
-                string dir = "";
+                //string dir = "";
 
-                if  (Datos.Convierte == 1)
-                    {
-                    try
-                    {
-                        if (Datos.dirotros != "" && Datos.dirotros != null)
-                        {
-                            dir = PostSaveImage(Datos.dirotros);
-                        }
-                        else
-                        {
-                            dir = "";
-                        }
+                //if  (Datos.Convierte == 1)
+                //    {
+                //    try
+                //    {
+                //        if (Datos.dirotros != "" && Datos.dirotros != null)
+                //        {
+                //            dir = PostSaveImage(Datos.dirotros);
+                //        }
+                //        else
+                //        {
+                //            dir = "";
+                //        }
 
-                    }
-                    catch (Exception ex)
-                    {
+                //    }
+                //    catch (Exception ex)
+                //    {
 
-                        dir = ex.ToString();
-                    }
+                //        dir = ex.ToString();
+                //    }
 
-                }
-                else
-                {
-                    dir = Datos.dirotros;
-                }
+                //}
+                //else
+                //{
+                //    dir = Datos.dirotros;
+                //}
                 
          
                 SqlCommand comando = new SqlCommand("UpdateGastoApp");
@@ -129,7 +129,7 @@ namespace SCGESP.Controllers
                 comando.Parameters["@observaciones"].Value = Obs;
                 comando.Parameters["@nombreCategoria"].Value = Datos.nombreCategoria;
                 comando.Parameters["@ivaCategoria"].Value = Datos.ivaCategoria;
-                comando.Parameters["@dirotros"].Value = dir != null ? dir : "";
+                comando.Parameters["@dirotros"].Value = Datos.dirotros != null ? Datos.dirotros : "";
                 comando.Parameters["@rfc"].Value = Datos.rfc != null ? Datos.rfc : ""; 
                 comando.Parameters["@contacto"].Value = Datos.contacto != null ? Datos.contacto : ""; 
                 comando.Parameters["@telefono"].Value = Datos.telefono != null ? Datos.telefono : ""; 
