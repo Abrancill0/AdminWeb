@@ -164,7 +164,7 @@ namespace SCGESP.Controllers
                     {
                         ObtieneGastoResult ent = new ObtieneGastoResult
                         {
-                            ACTUALIZADO = dir, //Convert.ToString(row["ACTUALIZADO"]),
+                            ACTUALIZADO = Datos.dirotros, //Convert.ToString(row["ACTUALIZADO"]),
                             id = Convert.ToInt32(row["id"]),
                             idinforme = Convert.ToInt32(row["idinforme"]),
                             Ruta = Convert.ToString(row["Ruta"])

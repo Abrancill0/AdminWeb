@@ -1713,6 +1713,8 @@
 			$("#aexportarxls").show();
 			$("#aagregarg").hide();
 
+			var disAnticipo = $("#disAnticipo").val() * 1;
+
 			if (estatus <= 2) {
 
 				$("#aagregarg").show();
@@ -1758,8 +1760,12 @@
 				$("#aenvia").hide();
 			}
 			
-			if (($("#disAnticipo").val() * 1) === 0)
+			if (disAnticipo === 0) {
 				$("#aagregarg").hide();
+				$("#aconfrontar").removeClass("disabled");
+			} else {
+				$("#aconfrontar").addClass("disabled");
+			}
 		}
 		function verComprobante(dircomp, comprobante, idgasto) {
 
@@ -2187,6 +2193,25 @@
 				comensales = "";
 				ncomensales = 0;
 			}
+			if (IdGasto === 0) {
+				if (valorVacio($("#filexml").val()) &&
+					valorVacio($("#filepdf").val()) &&
+					valorVacio($("#fileotro").val())) {
+					$.notify("Es necesario agregar un comprobante (XML, PDF o Imagen).", { position: "top center" }, "error");
+					error = 1;
+				}
+			} else {
+				if (valorVacio(gasto.xml) &&
+					valorVacio(gasto.pdf) &&
+					valorVacio(gasto.img)) {
+					if (valorVacio($("#filexml").val()) &&
+						valorVacio($("#filepdf").val()) &&
+						valorVacio($("#fileotro").val())) {
+						$.notify("Es necesario agregar un comprobante (XML, PDF o Imagen).", { position: "top center" }, "error");
+						error = 1;
+					}
+				}
+			}
 			if (error === 1) {
 				return false;
 			}
@@ -2221,6 +2246,7 @@
 			};
 
 			var apiEjecutar = IdGasto > 0 ? "UpdateGasto" : "InsertGasto";
+			
 			$.ajax({
 				async: true,
 				type: "POST",

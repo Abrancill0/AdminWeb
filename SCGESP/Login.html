@@ -244,7 +244,7 @@
 		function cambiarContrasena() {
 			var contrasena_nueva = $.trim($("#contrasena_nueva").val());
 			var contrasena_confirmada = $.trim($("#contrasena_confirmada").val());
-			if (contrasena_nueva === contrasena_confirmada && contrasena_nueva !== "") {
+			if (contrasena_nueva === contrasena_confirmada && contrasena_nueva.toUpperCase() !== "POTOSI" && contrasena_nueva !== "") {
 				var usuario = $.trim($("#usuario").val());
 				var datos = {
 					'usuario': usuario,
@@ -288,6 +288,8 @@
 			} else {
 				if (contrasena_nueva === contrasena_confirmada && contrasena_nueva === "") {
 					alert('Los campos de contraseña son obligatorios.');
+				} else if(contrasena_nueva.toUpperCase() === "POTOSI"){
+					alert('La contraseña Nueva NO debe ser igual a la anterior.');
 				} else {
 					alert('La contraseña Nueva debe ser igual a la Contraseña de confirmación.');
 				}
@@ -298,10 +300,13 @@
 			var contrasena_confirmada = $.trim($("#contrasena_confirmada").val());
 			if (contrasena_nueva === contrasena_confirmada && contrasena_nueva !== "") {
 				$("#btn_cambia_pass").show();
+			} else if(contrasena_nueva.toUpperCase() === "POTOSI"){
+				$("#btn_cambia_pass").hide();
 			} else {
 				$("#btn_cambia_pass").hide();
 			}
 		});
+
 
 	</script>
 </body>
