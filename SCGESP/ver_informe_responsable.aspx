@@ -1714,6 +1714,7 @@
 			$("#aagregarg").hide();
 
 			var disAnticipo = $("#disAnticipo").val() * 1;
+			var decrementado = $("#decrementado").val() * 1;
 
 			if (estatus <= 2) {
 
@@ -1745,7 +1746,7 @@
 			}
 			else if (estatus === 2 && conciliacionOk === 0) {
 				$("#aenvia, #cancelarConfrontacion, #confrontarInforme").hide();
-				$("#aconfrontar").show();
+				//$("#aconfrontar").show();
 			}
 
 			if (conciliacionOk === 1) {
@@ -1762,9 +1763,15 @@
 			
 			if (disAnticipo === 0) {
 				$("#aagregarg").hide();
+			}
+
+			if(decrementado > 0){
 				$("#aconfrontar").removeClass("disabled");
-			} else {
+			}else{
 				$("#aconfrontar").addClass("disabled");
+				if (disAnticipo === 0) {
+					$("#aconfrontar").removeClass("disabled");
+				}
 			}
 		}
 		function verComprobante(dircomp, comprobante, idgasto) {
@@ -3316,10 +3323,11 @@
 					datos['NoInforme'] = informe.datos.i_ninforme;
 					datos['NmbSolicitante'] = informe.datos.responsable;
 					var requisicion = SelectRequisicionExcel(informe.datos.r_idrequisicion);
+					var empleado = SelectEmpleado(requisicion.datos.RmReqSolicitante);
 					if (requisicion.ok === true) {
 						datos['TipoReq'] = datoEle(requisicion.datos.RmReqTipoRequisicionNombre)
-						datos['Departamento'] = "";
-						datos['Puesto'] = "";
+						datos['Departamento'] = ""; //datoEle(empleado);
+						datos['Puesto'] = datoEle(empleado.GrEmpPuestoNombre);
 						datos['Area'] = "";
 						datos['Oficina'] = datoEle(requisicion.datos.RmReqOficinaNombre);
 						datos['Centro'] = datoEle(requisicion.datos.RmReqCentroNombre);
@@ -3335,6 +3343,42 @@
 			cargado();
 
 		});
+
+		function SelectEmpleado(GrEmpID) {
+			var resultado = [];
+//UsuarioActivo;EmpeladoActivo;
+			$.ajax({
+				async: false,
+				type: "POST",
+				url: '/api/ConsultaEmpleadoID',
+				data: JSON.stringify({ 'GrEmpID': GrEmpID, 'Usuario': UsuarioActivo }),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
+				cache: false,
+				beforeSend: function () {
+					//cargado();
+				},
+				success: function (result) {
+					//console.log(result);
+					var exito = result.Salida.Resultado * 1;
+					if (exito === 1) {
+						resultado = result.Salida.Tablas.Llave.NewDataSet.Llave;
+					} else {
+						$.notify("Error: Al consultar Empleado.", { globalPosition: 'top center', className: 'error' });
+					}
+
+				},
+				complete: function () {
+					//cargado();
+				},
+				error: function (result) {
+					//cargado();
+					console.log("error", result);
+				}
+			});
+			return resultado;
+		}
+
 		function selectInformeExcel(id) {
 			var datos = {
 				"id": id
