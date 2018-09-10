@@ -216,14 +216,15 @@ namespace SCGESP.Controllers.CGEAPI
             int nFilaEncabezados = 9;
             worksheet.Cell(nFilaEncabezados, 1).Value = "Fecha";
             worksheet.Cell(nFilaEncabezados, 2).Value = "Factura";
-            worksheet.Cell(nFilaEncabezados, 3).Value = "Justificacion de Gasto";
-            worksheet.Cell(nFilaEncabezados, 4).Value = "Comensales";
-			worksheet.Cell(nFilaEncabezados, 5).Value = "Total";
-			worksheet.Cell(nFilaEncabezados, 6).Value = "XML";
-			worksheet.Cell(nFilaEncabezados, 7).Value = "PDF";
-			worksheet.Cell(nFilaEncabezados, 8).Value = "IMG";
+			worksheet.Cell(nFilaEncabezados, 3).Value = "Categoría";
+			worksheet.Cell(nFilaEncabezados, 4).Value = "Justificacion de Gasto";
+            worksheet.Cell(nFilaEncabezados, 5).Value = "Comensales";
+			worksheet.Cell(nFilaEncabezados, 6).Value = "Total";
+			worksheet.Cell(nFilaEncabezados, 7).Value = "XML";
+			worksheet.Cell(nFilaEncabezados, 8).Value = "PDF";
+			worksheet.Cell(nFilaEncabezados, 9).Value = "IMG";
 
-			var Rango = worksheet.Range("A" + nFilaEncabezados + ":H" + nFilaEncabezados);
+			var Rango = worksheet.Range("A" + nFilaEncabezados + ":I" + nFilaEncabezados);
 
             Rango.Style.Fill.BackgroundColor = XLColor.FromArgb(128, 0, 0);
             Rango.Style.Font.Bold = true;
@@ -240,27 +241,34 @@ namespace SCGESP.Controllers.CGEAPI
                 {
                     worksheet.Cell(Contador, 1).Value = (row["Fecha"]);
                     worksheet.Cell(Contador, 2).Value = (Convert.ToString(row["Serie"]) + "-" + Convert.ToString(row["Folio"]));
-                    worksheet.Cell(Contador, 3).Value = (row["Justificacion"]);
-                    worksheet.Cell(Contador, 4).Value = (row["nmbcomensales"]);
-                    worksheet.Cell(Contador, 5)
+					worksheet.Cell(Contador, 3).Value = (row["DescripcionGasto"]); 
+					worksheet.Cell(Contador, 4).Value = (row["Justificacion"]);
+                    worksheet.Cell(Contador, 5).Value = (row["nmbcomensales"]);
+                    worksheet.Cell(Contador, 6)
                         .SetValue(row["importe"])
                         .Style.NumberFormat.SetFormat("$ #,##0.#00");
 					if (row["g_dirxml"].ToString() != "")
 					{
 						//XLHyperlink LINK = new XLHyperlink(strUrl + row["g_dirxml"].ToString(), "XML");
 						//worksheet.Hyperlinks.Add(LINK)
-						worksheet.Cell(Contador, 6)
-							.SetFormulaA1("=HYPERLINK(\"" + strUrl + row["g_dirxml"].ToString() + "\",\"Ver\")");
+						worksheet.Cell(Contador, 7)
+							.SetFormulaA1("=HYPERLINK(\"" + strUrl + row["g_dirxml"].ToString() + "\",\"Ver\")")
+							.Style
+								.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 					}
 					if (row["g_dirpdf"].ToString() != "")
 					{
-						worksheet.Cell(Contador, 7)
-							.SetFormulaA1("=HYPERLINK(\"" + strUrl + row["g_dirpdf"].ToString() + "\",\"Ver\")");
+						worksheet.Cell(Contador, 8)
+							.SetFormulaA1("=HYPERLINK(\"" + strUrl + row["g_dirpdf"].ToString() + "\",\"Ver\")")
+							.Style
+								.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 					}
 					if (row["g_dirotros"].ToString() != "")
 					{
-						worksheet.Cell(Contador, 8)
-							.SetFormulaA1("=HYPERLINK(\"" + strUrl + row["g_dirotros"].ToString() + "\",\"Ver\")");
+						worksheet.Cell(Contador, 9)
+							.SetFormulaA1("=HYPERLINK(\"" + strUrl + row["g_dirotros"].ToString() + "\",\"Ver\")")
+							.Style
+								.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 					}
 
 
@@ -271,14 +279,14 @@ namespace SCGESP.Controllers.CGEAPI
                 
             }
 
-            worksheet.Cell("D" + Contador).SetValue("Total");
-            worksheet.Cell("E" + Contador)
-                .SetFormulaA1("=SUM(E"+ ContadorIni + ":E" + (Contador - 1) + ")")
+            worksheet.Cell("E" + Contador).SetValue("Total");
+            worksheet.Cell("F" + Contador)
+                .SetFormulaA1("=SUM(F"+ ContadorIni + ":F" + (Contador - 1) + ")")
                 .Style
                     .Border.SetTopBorder(XLBorderStyleValues.Medium)
                     .NumberFormat.SetFormat("$ #,##0.#00");
 
-            worksheet.Range("D" + Contador + ":E" + Contador)
+            worksheet.Range("E" + Contador + ":F" + Contador)
                 .Style
                     .Fill.SetBackgroundColor(XLColor.FromArgb(128, 0, 0))
                     .Font.SetBold(true)
