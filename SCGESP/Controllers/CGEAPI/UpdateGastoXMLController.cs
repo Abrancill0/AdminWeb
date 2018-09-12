@@ -233,8 +233,22 @@ namespace SCGESP.Controllers.CGEAPI
 
 			if (FicfdTipoDocumento > 0 && FiCfdNumeroDocumento > 0) {
 				Deletexml(Ruta);
+				string tipoDoc = "";
+				switch (FicfdTipoDocumento)
+				{
+					case 95:
+						tipoDoc = "Gasto";
+						break;
+					case 96:
+						tipoDoc = "Recepción";
+						break;
+					case 97:
+						tipoDoc = "Requisición";
+						break;
+				}
 
-				return "El XML No se puede cargar, el comprobante " + FiCfdUuid + " ya existe en AdminERP. Documento : " + FiCfdNumeroDocumento.ToString();
+
+				return "El XML No se puede cargar, el comprobante " + FiCfdUuid + " ya existe en AdminERP. " + tipoDoc + ": " + FiCfdNumeroDocumento.ToString();
 			}
 
 			if (Receptor.ToUpper() != "SPO830427DQ1")
