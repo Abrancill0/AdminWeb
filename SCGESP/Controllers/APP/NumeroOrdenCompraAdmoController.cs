@@ -19,7 +19,7 @@ namespace SCGESP.Controllers.APP
 		public class NumeroOrdenesAdmoResult
 		{
 			public string Tipo { get; set; }
-			public int NumeroOrdenesVobo { get; set; }
+			public int NumeroOrdenesAdmo { get; set; }
 
 		}
 
@@ -55,7 +55,7 @@ namespace SCGESP.Controllers.APP
 				NumeroOrdenesAdmoResult ent = new NumeroOrdenesAdmoResult
 				{
 					Tipo = "Ordenes Admo Pendientes",
-					NumeroOrdenesVobo = NumOCVobo
+					NumeroOrdenesAdmo = NumOCVobo
 
 				};
 				lista.Add(ent);
@@ -69,7 +69,7 @@ namespace SCGESP.Controllers.APP
 				NumeroOrdenesAdmoResult ent = new NumeroOrdenesAdmoResult
 				{
 					Tipo = "Ordenes Admo Pendientes",
-					NumeroOrdenesVobo = 0
+					NumeroOrdenesAdmo = 0
 
 				};
 				lista.Add(ent);

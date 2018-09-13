@@ -52,7 +52,7 @@ namespace SCGESP.Controllers.APP
 
 				NumeroOrdenesVoboResult ent = new NumeroOrdenesVoboResult
 				{
-					Tipo = "Ordenes Vobo Pendientes",
+					Tipo = "Ordenes Vobo Pendientesif",
 					NumeroOrdenesVobo = NumOCVobo
 
 				};
@@ -66,7 +66,7 @@ namespace SCGESP.Controllers.APP
 
 				NumeroOrdenesVoboResult ent = new NumeroOrdenesVoboResult
 				{
-					Tipo = "Ordenes Vobo Pendientes",
+					Tipo = "Ordenes Vobo Pendienteselse",
 					NumeroOrdenesVobo = 0
 
 				};
