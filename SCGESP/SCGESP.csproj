@@ -4968,8 +4968,11 @@
     <Compile Include="Controllers\APP\DatosFiscalesController.cs" />
     <Compile Include="Controllers\APP\InsertGastoAppController.cs" />
     <Compile Include="Controllers\APP\LoginAPPController.cs" />
+    <Compile Include="Controllers\APP\NumeroOrdenCompraAdmoController.cs" />
+    <Compile Include="Controllers\APP\NumeroOrdenCompraVoboController.cs" />
     <Compile Include="Controllers\APP\QueryController.cs" />
     <Compile Include="Controllers\APP\RequisicionesPendientesAPPController.cs" />
+    <Compile Include="Controllers\APP\NumeroRequisicionesPendientesController.cs" />
     <Compile Include="Controllers\APP\RequisicionesPendientesAutorizarAppController.cs" />
     <Compile Include="Controllers\APP\RestablecePassController.cs" />
     <Compile Include="Controllers\APP\UpdateGastoAppController.cs" />
