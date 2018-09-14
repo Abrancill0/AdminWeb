@@ -1,4 +1,5 @@
-﻿using SCGESP.Clases;
+﻿using Ele.Generales;
+using SCGESP.Clases;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,6 +8,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Xml;
+
 
 namespace SCGESP.Controllers.EleAPI
 {
@@ -16,7 +19,10 @@ namespace SCGESP.Controllers.EleAPI
         {
             public string Usuario { get; set; }
             public string idinforme { get; set; }
+			public string idrequisicion { get; set; }
 			public string comentario { get; set; }
+			public string comentario_respuesta { get; set; }
+			public string usuario_fecha_responde { get; set; }
 		}
 
         public class ObtieneInformeResult
@@ -68,8 +74,16 @@ namespace SCGESP.Controllers.EleAPI
                     string mensaje = Convert.ToString(row["msn"]);
                     string titulo = Convert.ToString(row["titulo"]);
                     string autorizador = Convert.ToString(row["a_uautoriza"]);
-
-                    EnvioCorreosELE.Envio(usuariodesencripta, "", "", autorizador, "", titulo, mensaje, 0);
+					int autorizador_final = Convert.ToInt16(row["a_autorizador_final"]);
+					if (autorizador_final == 1) {
+						titulo = "Respuesta de solicitud para autorización para el descuento vía nómina de la requisición #" + Datos.idrequisicion;
+						string body_mensaje = Mensaje(autorizador, Datos.idrequisicion, Datos.comentario_respuesta, Datos.usuario_fecha_responde);
+						EnvioCorreosELE.Envio(usuariodesencripta, "", "", autorizador, "", titulo, body_mensaje, 0);
+					}
+					else
+					{
+						EnvioCorreosELE.Envio(usuariodesencripta, "", "", autorizador, "", titulo, mensaje, 0);
+					}
 
                 }
 
@@ -82,6 +96,73 @@ namespace SCGESP.Controllers.EleAPI
             return "";
         }
 
+		public static string Mensaje(string usuario_destino, string idrequisicion, string comentario, string usuario_responde)
+		{
+			string mensaje = "Buen día estimado, ";
+			mensaje += "En respuesta a tu petición de la requisición ";
+			mensaje += idrequisicion + " la cual se encuentra fuera de políticas, te comento que: ";
+			mensaje += comentario;
+			try
+			{
+				string msn = "";
+				string nombre = "";
+				DocumentoEntrada entrada = new DocumentoEntrada
+				{
+					Usuario = usuario_destino,
+					Origen = "Programa CGE",  //Datos.Origen; 
+					Transaccion = 100004,
+					Operacion = 6//verifica si existe una llave y regresa una tabla de un renglon con todos los campos de la tabla
+				};
+				entrada.agregaElemento("SgUsuId", usuario_destino);
 
-    }
+				DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
+
+				DataTable DTCorreo = new DataTable();
+
+				if (respuesta.Resultado == "1")
+				{
+					DTCorreo = respuesta.obtieneTabla("Llave");
+
+					for (int i = 0; i < DTCorreo.Rows.Count; i++)
+					{
+						nombre = Convert.ToString(DTCorreo.Rows[i]["SgUsuNombre"]);
+					}
+					
+					msn = "Buen día estimado " + nombre;
+					msn += "<br />";
+					msn += "<br />";
+					msn += "En respuesta a tu petición de la requisición ";
+					msn += "<b><u>&nbsp;" + idrequisicion + "&nbsp;</u></b>";
+					msn += ", la cual se encuentra fuera de políticas, te comento que: <br />";
+					msn += "<b><i>" + comentario + "</i></b><br />";
+					msn += "<br />";
+					msn += "Saludos cordiales";
+					msn += "<br /><br />";
+					msn += (usuario_responde.Replace("/ ","(") + ")");
+					return msn;
+				}
+				else
+				{
+					return mensaje;
+				}
+			}
+			catch (Exception)
+			{
+
+				return mensaje;
+			}
+
+		}
+		public static DocumentoSalida PeticionCatalogo(XmlDocument doc)
+		{
+			Localhost.Elegrp ws = new Localhost.Elegrp
+			{
+				Timeout = -1
+			};
+			string respuesta = ws.PeticionCatalogo(doc);
+			return new DocumentoSalida(respuesta);
+		}
+
+
+	}
 }

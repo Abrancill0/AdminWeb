@@ -1843,10 +1843,12 @@ $.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'erro
 		});
 		function regresarComentarioVoBo() {
 			var idinforme = $("#idinforme").val();
+			var idrequisicion = $("#RmRdeRequisicion").val();
 			var UsuarioActivo = localStorage.getItem("cosa");
 			var nmbemp = localStorage.getItem("nmbemp");
 			var datos = {
 				"idinforme": idinforme,
+				"idrequisicion": idrequisicion,
 				"Usuario": UsuarioActivo
 			};
 			var Comentarios = $.trim($("#comentarioVoBo").val());
@@ -1857,6 +1859,8 @@ $.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'erro
 			var fecha = fechaActual() + " " + horaActual("hh:mm");
 			var usuario_fecha = ". (Enviado por: " + nmbemp + " / " + fecha + ")";
 			datos['comentario'] = Comentarios + usuario_fecha;
+			datos['comentario_respuesta'] = Comentarios;
+			datos['usuario_fecha_responde'] = nmbemp + " / " + fecha;
 			$.ajax({
 				async: true,
 				type: "POST",

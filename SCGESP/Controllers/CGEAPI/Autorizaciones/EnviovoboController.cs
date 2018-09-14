@@ -1,8 +1,10 @@
 ﻿using System;
+using Ele.Generales;
 using SCGESP.Clases;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.Http;
+using System.Xml;
 
 namespace SCGESP.Controllers.CGEAPI.Autorizaciones
 {
@@ -56,7 +58,9 @@ namespace SCGESP.Controllers.CGEAPI.Autorizaciones
                         string usuariovobo = Convert.ToString(row["usuariovobo"]);
                         string correo = Convert.ToString(row["correo"]);
 
-                        EnvioCorreosELE.Envio(usuarioActual, correo, "", usuariovobo, "", titulo, mensaje, 0);
+						//Mensaje(usuariovobo);
+
+						EnvioCorreosELE.Envio(usuarioActual, correo, "", usuariovobo, "", titulo, mensaje, 0);
 
                     }
 
@@ -77,6 +81,56 @@ namespace SCGESP.Controllers.CGEAPI.Autorizaciones
           
         }
 
+		public static string Mensaje(string usuario_destino)
+		{
 
-    }
+			try
+			{
+				DocumentoEntrada entrada = new DocumentoEntrada
+				{
+					Usuario = usuario_destino,
+					Origen = "Programa CGE",  //Datos.Origen; 
+					Transaccion = 100004,
+					Operacion = 6//verifica si existe una llave y regresa una tabla de un renglon con todos los campos de la tabla
+				};
+				entrada.agregaElemento("SgUsuId", usuario_destino);
+
+				DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
+
+				DataTable DTCorreo = new DataTable();
+				string nombre = "";
+
+				if (respuesta.Resultado == "1")
+				{
+					DTCorreo = respuesta.obtieneTabla("Llave");
+
+					for (int i = 0; i < DTCorreo.Rows.Count; i++)
+					{
+						nombre = Convert.ToString(DTCorreo.Rows[i]["SgUsuNombre"]);
+					}
+
+					return "";
+				}
+				else
+				{
+					return "";
+				}
+			}
+			catch (Exception)
+			{
+
+				return "";
+			}
+
+		}
+		public static DocumentoSalida PeticionCatalogo(XmlDocument doc)
+		{
+			Localhost.Elegrp ws = new Localhost.Elegrp
+			{
+				Timeout = -1
+			};
+			string respuesta = ws.PeticionCatalogo(doc);
+			return new DocumentoSalida(respuesta);
+		}
+	}
 }

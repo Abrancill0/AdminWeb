@@ -70,17 +70,22 @@ namespace SCGESP.Controllers.CGEAPI.Autorizaciones
                 comando.Connection.Close();
                 DA.Fill(DT);
 
-                if (DT.Rows.Count > 0 && i == 1)
+                if (DT.Rows.Count > 0 && i == 2)
                 {
 
                     foreach (DataRow row in DT.Rows)
                     {
                         string mensaje = Convert.ToString(row["msn"]);
                         string titulo = Convert.ToString(row["titulo"]);
+						int idrequisicion = Convert.ToInt32(row["idrequisicion"]);
+						string responsable = Convert.ToString(row["responsable"]);
 
-                        EnvioCorreosELE.Envio(UsuarioDesencripta, "", "", autorizador, "", titulo, mensaje, 0);
+						//mensaje
+						string body_mensaje = Mensaje(autorizador, mensaje, idrequisicion, responsable, Datos.comentario);
 
-                    }
+						EnvioCorreosELE.Envio(UsuarioDesencripta, "", "", autorizador, "", titulo, body_mensaje, 0);//mensaje
+
+					}
 
                 }
 
@@ -89,8 +94,69 @@ namespace SCGESP.Controllers.CGEAPI.Autorizaciones
             return "OK";
         }
 
+		public static string Mensaje(string usuario_destino, string mensaje, int idrequisicion, string responsable, string comentario)
+		{
+			try
+			{
+				string msn = "";
+				string nombre = "";
+				DocumentoEntrada entrada = new DocumentoEntrada
+				{
+					Usuario = usuario_destino,
+					Origen = "Programa CGE",  //Datos.Origen; 
+					Transaccion = 100004,
+					Operacion = 6//verifica si existe una llave y regresa una tabla de un renglon con todos los campos de la tabla
+				};
+				entrada.agregaElemento("SgUsuId", usuario_destino);
 
-        public static DocumentoSalida PeticionCatalogo(XmlDocument doc)
+				DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
+
+				DataTable DTCorreo = new DataTable();
+				
+				if (respuesta.Resultado == "1")
+				{
+					DTCorreo = respuesta.obtieneTabla("Llave");
+
+					for (int i = 0; i < DTCorreo.Rows.Count; i++)
+					{
+						nombre = Convert.ToString(DTCorreo.Rows[i]["SgUsuNombre"]);
+					}
+
+					string buscar_str = "(Enviado por:";
+					int pos_str = comentario.IndexOf(buscar_str);
+					string body_str = comentario.Substring(0, pos_str);
+					msn = "Buen día estimado " + nombre;
+					msn += "<br />";
+					msn += "<br />";
+					msn += "Solicito por favor tu autorización para el descuento vía nómina de la requisición ";
+					msn += "<b><u>&nbsp;" + idrequisicion.ToString() + "&nbsp;</u></b>";
+					msn += ", la cual se encuentra fuera de políticas debido a la siguiente falta: <br />";
+					msn += "<b><i>" + body_str + "</i></b><br />";
+					msn += "<br />";
+					msn += "Empleado que salió de políticas: <b><u>&nbsp;" + responsable + "&nbsp;</u></b><br />";
+					msn += "<br />";
+					msn += "Por favor ingresar a la siguiente liga con tu usuario y contraseña, ";
+					msn += "<a href='https://gapp.elpotosi.com.mx'>&nbsp;https://gapp.elpotosi.com.mx&nbsp;</a> ";
+					msn += "(no utilizar internet Explorer), da clic en la opción de &quot;Autorizaciones de Requisiciones por comprobar&quot;, posteriormente en la opción de &quot;Ver&quot; e ingresa tu comentario en la opción de &quot;Regresar Comentario&quot;";
+					msn += "<br /><br />";
+					msn += "Saludos cordiales";
+					msn += "<br />";
+					return msn;
+				}
+				else
+				{
+					return mensaje;
+				}
+			}
+			catch (Exception)
+			{
+
+				return mensaje;
+			}
+
+		}
+
+		public static DocumentoSalida PeticionCatalogo(XmlDocument doc)
         {
             Localhost.Elegrp ws = new Localhost.Elegrp
             {
