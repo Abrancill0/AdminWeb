@@ -329,4 +329,8 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 *.csproj
+<<<<<<< HEAD
 SCGESP/Web.config
+=======
+*.config
+>>>>>>> a00b1c7ed90fb150f35abdca1b3eac4ee5e6d706
