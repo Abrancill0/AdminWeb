@@ -300,7 +300,7 @@
 			var contrasena = $("#contrasena").val();
 			var contrasena_nueva = $.trim($("#contrasena_nueva").val());
 			var contrasena_confirmada = $.trim($("#contrasena_confirmada").val());
-			if (contrasena_nueva === contrasena_confirmada && contrasena_nueva !== "") {
+			if (contrasena_nueva === contrasena_confirmada && contrasena_nueva !== "" && contrasena_nueva !== contrasena) {
 				$("#btn_cambia_pass").show();
 			} else if(contrasena_nueva === contrasena){
 				$("#btn_cambia_pass").hide();
