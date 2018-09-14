@@ -938,8 +938,8 @@
 	<!-- App functions and actions -->
 	<script src="js/app.min.js"></script>
 	<script src="js/js.js"></script>
-	<script src="js/informe.js?211211xxx"></script>
-	<script src="js/gastos.js?21111x1xx"></script>
+	<script src="js/informe.js?211211xx1x"></script>
+	<script src="js/gastos.js?21111x1xx1"></script>
 	<script>
 		$("#anuevo").click(function () {
 			$("#frmInforme").modal({

@@ -101,43 +101,6 @@ function ObtenerInformes() {
     $('#tblProyectos tbody').empty();
     if (!tablaInformes) {
         tablaInformes = crearTabla("#tblProyectos", 0, "desc");
-        /*
-        tablaInformes = $("#tblProyectos").DataTable({
-            "order": [[0, "desc"]],
-            "processing": true,
-            "scrollCollapse": true,
-            scrollX: true,
-            paging: false,
-            searching: false,
-            "language": {
-                "lengthMenu": "_MENU_ Registros Por Página",
-                "zeroRecords": "No se encontraron Registros",
-                "info": "Página _PAGE_ de _PAGES_ (_MAX_ Registros)",
-                "infoEmpty": "No hay registros para mostrar.",
-                "infoFiltered": "(_TOTAL_ Registros de _MAX_)",
-                "search": "Buscar:",
-                "processing": "Cargando Información",
-                "decimal": ".",
-                "thousands": ",",
-                "paginate": {
-                    "first": "Primera Página",
-                    "last": "Ultima Página",
-                    "next": "Siguiente",
-                    "sPrevious": "Anterior"
-                }
-            },
-            fixedColumns: {
-                leftColumns: 3//Le indico que deje fijas solo las 3 primeras columnas
-            },
-            initComplete: function (settings, json) {
-                setTimeout(function () { $("#tblProyectos").DataTable().draw(); }, 200);
-            },
-            "autoWidth": false,
-            "fixedHeader": {
-                "header": true,
-                "footer": true
-            }
-        });*/
     }
 
     var f = new Date();
@@ -184,8 +147,8 @@ function ObtenerInformes() {
                 //var ffin = valorVacio(value.i_ffin) ? "" : formatFecha(new Date(value.i_ffin), "dd/mm/yyyy");
 
                 estatus = rechazado === 1 ? "Rechazado" : estatus;
-                var just = (value.i_nmb).split("");
-                var njust = just.length;
+                //var just = (value.i_nmb).split("");
+                //var njust = just.length;
                 //var justificacion = "<p style='color:black; word-wrap: break-word !important; width: 200px !important;'>" + value.i_nmb + "</p>";
                 var justificacion = value.i_nmb;
                 /*if (njust >= 30) {
