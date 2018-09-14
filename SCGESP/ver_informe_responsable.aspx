@@ -1712,6 +1712,7 @@
 			$("#apago").hide();
 			$("#aexportarxls").show();
 			$("#aagregarg").hide();
+			$("#aconfrontar").show();
 
 			var disAnticipo = $("#disAnticipo").val() * 1;
 			var decrementado = $("#decrementado").val() * 1;
@@ -1736,13 +1737,9 @@
 			}
 			if (estatus === 2 && conciliacionOk === 1) {
 				$("#aenvia").show();
-
-				if (estatus === 2) {
-					$("#aconfrontar, #cancelarConfrontacion").show();
-					$("#confrontarInforme").hide();
-				} else {
-					$("#aconfrontar").hide();
-				}
+				
+				$("#aconfrontar, #cancelarConfrontacion").show();
+				$("#confrontarInforme").hide();
 			}
 			else if (estatus === 2 && conciliacionOk === 0) {
 				$("#aenvia, #cancelarConfrontacion, #confrontarInforme").hide();
