@@ -627,6 +627,24 @@ SMTP Port: 587
 			"</table>";
 			}
 
+			htmlBody += "<table class='wrapper' cellpadding='0' cellspacing='0' role='presentation' width='100%'>" +
+				"<tr>" +
+				"<td class='px-sm-8' bgcolor='#EEEEEE' style='padding: 0 24px;'>" +
+				"<div class='spacer line-height-sm-0 py-sm-8' style='line-height: 24px;'>&zwnj;</div>" +
+				"<table cellpadding = '0' cellspacing='0' role='presentation' width='100%'>" +
+				"<tr>" +
+				"<td class='col' align='center' width='100%' style='padding: 0 8px;'>" +
+				"<p style = 'color: #888888; margin: 0; font-weight: bold;' > " +
+				"No responder este e-mail, es un envío automático" +
+				"</p>" +
+				"</td>" +
+				"</tr>" +
+				"</table>" +
+				"<div class='spacer line-height-sm-0 py-sm-8' style='line-height: 24px;'>&zwnj;</div>" +
+				"</td>" +
+				"</tr>" +
+				"</table>";
+
 
 			htmlBody += "</body>" +
 "</html>";
