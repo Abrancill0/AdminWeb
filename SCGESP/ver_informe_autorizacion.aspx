@@ -131,6 +131,7 @@
 						<td style="vertical-align: middle; text-align: left; padding-left: 50px;">
 							<!--Opciones-->
 							<input id="HFUsuariovobo" type="hidden" />
+							<a id="aexportarxls" class="btn btn-primary btn-md" href="#" role="button" onclick=""><span class="glyphicon glyphicon-export"></span>&nbsp;Excel</a>
 							<a id="aenvia" class="btn btn-primary btn-md" href="#" role="button"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Enviar a Comprobación</a>
 							<a id="aautoriza" class="btn btn-primary btn-md" href="#" role="button"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Regresar Comentario</a>
 							<a id="arechaza" class="btn btn-primary btn-md" href="#" role="button"><span class="glyphicon glyphicon-remove"></span>&nbsp;Rechazar</a>
@@ -2287,6 +2288,178 @@ $.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'erro
 				}, 600)
 				$.notify("Se requiere seleccionar almenos a un usuario.", { globalPosition: 'top center', className: 'error' });
 			}
+		}
+
+//inicio excel
+		$("#aexportarxls").click(function () {
+			var idinforme = $("#idinforme").val() * 1;
+			var IdRequisicion = $("#RmRdeRequisicion").val();
+			cargando();
+			if (idinforme > 0) {
+				var datos = {
+					'IdInforme': idinforme,
+					'IdRequisicion': IdRequisicion
+				};
+
+				var informe = selectInformeExcel(datos.IdInforme);
+				if (informe.ok === true) {
+					datos['NoInforme'] = informe.datos.i_ninforme;
+					datos['NmbSolicitante'] = informe.datos.responsable;
+					var requisicion = SelectRequisicionExcel(informe.datos.r_idrequisicion);
+					var empleado = SelectEmpleado(requisicion.datos.RmReqSolicitante);
+					if (requisicion.ok === true) {
+						datos['TipoReq'] = datoEle(requisicion.datos.RmReqTipoRequisicionNombre)
+						datos['Departamento'] = ""; //datoEle(empleado);
+						datos['Puesto'] = datoEle(empleado.GrEmpPuestoNombre);
+						datos['Area'] = "";
+						datos['Oficina'] = datoEle(requisicion.datos.RmReqOficinaNombre);
+						datos['Centro'] = datoEle(requisicion.datos.RmReqCentroNombre);
+					}
+					generaExcel(datos);
+				} else {
+					console.log("error");
+					$.notify("Error al generar excel.", { globalPosition: 'top center', className: 'error', autoHideDelay: 3000 });
+				}
+			} else {
+				$.notify("Error al generar excel.", { globalPosition: 'top center', className: 'error', autoHideDelay: 3000 });
+			}
+			cargado();
+
+		});
+
+		function SelectEmpleado(GrEmpID) {
+			var resultado = [];
+//UsuarioActivo;EmpeladoActivo;
+			$.ajax({
+				async: false,
+				type: "POST",
+				url: '/api/ConsultaEmpleadoID',
+				data: JSON.stringify({ 'GrEmpID': GrEmpID, 'Usuario': UsuarioActivo }),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
+				cache: false,
+				beforeSend: function () {
+					//cargado();
+				},
+				success: function (result) {
+					//console.log(result);
+					var exito = result.Salida.Resultado * 1;
+					if (exito === 1) {
+						resultado = result.Salida.Tablas.Llave.NewDataSet.Llave;
+					} else {
+						$.notify("Error: Al consultar Empleado.", { globalPosition: 'top center', className: 'error' });
+					}
+
+				},
+				complete: function () {
+					//cargado();
+				},
+				error: function (result) {
+					//cargado();
+					console.log("error", result);
+				}
+			});
+			return resultado;
+		}
+
+		function selectInformeExcel(id) {
+			var datos = {
+				"id": id
+			};
+			var datosInf = [];
+			$.ajax({
+				async: false,
+				type: 'POST',
+				url: '/api/SelectInforme',
+				data: JSON.stringify(datos),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
+				success: function (result) {
+					datosInf['ok'] = true;
+					datosInf['datos'] = result[0];
+				},
+				error: function (result) {
+					console.log(result);
+					datosInf['ok'] = false;
+					datosInf['datos'] = "Error al consultar informe";
+				}
+			});
+			return datosInf;
+		}
+		function SelectRequisicionExcel(id) {
+			var datos = { 'Usuario': UsuarioActivo, 'RmReqId': id };
+			var datosReq = [];
+			$.ajax({
+				async: false,
+				type: "POST",
+				url: '/api/ConsultaRequisicionIDCabecera',
+				data: JSON.stringify(datos),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
+				cache: false,
+				success: function (result) {
+					var stResultado = result.Salida.Resultado;
+					if (stResultado === "1") {
+						var resultado = result.Salida.Tablas.Llave.NewDataSet.Llave;
+						datosReq['ok'] = true;
+						datosReq['datos'] = resultado;
+					} else {
+						datosReq['ok'] = false;
+						datosReq['datos'] = "Error al consultar requisicion";
+					}
+				},
+				error: function (result) {
+					console.log(result);
+					datosReq['ok'] = false;
+					datosReq['datos'] = "Error al consultar requisicion";
+				}
+			});
+			return datosReq;
+		}
+		function generaExcel(datos) {
+			var rutaEli = "";
+			; $.ajax({
+				async: false,
+				type: 'POST',
+				url: '/api/ExportarExcel',
+				data: JSON.stringify(datos),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
+				success: function (result) {
+					//console.log("SUCCESS", result)
+					var rutas = result.split(",");
+					var rutades1 = rutas[1];
+					var rDescarga = rutades1.replace("api/ExportarExcel", "temp/") + rutas[2];
+					rutaEli = rutas[0];
+					window.location = rDescarga;
+				},
+				complete: function () {
+					setTimeout(function () {
+						if (rutaEli !== "") {
+							eliminaExcel(rutaEli);
+						}
+					}, 4000);
+				},
+				error: function (result) {
+					console.log(result)
+				}
+			});
+		}
+		function eliminaExcel(rutaEli) {
+			$.ajax({
+				async: true,
+				type: 'POST',
+				url: '/api/EliminaExcel',
+				data: JSON.stringify({ 'RutaExcel': rutaEli }),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
+				success: function (result) {
+
+				},
+				error: function (result) {
+					console.log(result)
+				}
+			});
 		}
 
 	</script>
