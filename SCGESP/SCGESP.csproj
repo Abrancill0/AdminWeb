@@ -67,6 +67,9 @@
     <Reference Include="FastMember.Signed, Version=1.0.0.9, Culture=neutral, PublicKeyToken=9e8f22703bef9a29, processorArchitecture=MSIL">
       <HintPath>..\packages\FastMember.Signed.1.1.0\lib\net40\FastMember.Signed.dll</HintPath>
     </Reference>
+    <Reference Include="Firebase.NET, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Pantheon.Firebase.NET.1.1.0\lib\net452\Firebase.NET.dll</HintPath>
+    </Reference>
     <Reference Include="Firebase.Notification, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Firebase.Notification.1.0.0\lib\net45\Firebase.Notification.exe</HintPath>
     </Reference>
