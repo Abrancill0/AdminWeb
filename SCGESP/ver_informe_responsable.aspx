@@ -141,9 +141,6 @@
 						</td>
 						<td style="vertical-align: middle; text-align: left; padding-left: 50px;">
 							<!--Opciones-->
-							<!--a id="aedit" visible="0" class="btn btn-primary btn-md" href="#" role="button"><span class="glyphicon glyphicon-edit"></span>Editar</!--a>
-							<a id="acancela" class="btn btn-danger btn-md" href="#" role="button"><span class="glyphicon glyphicon-floppy-remove"></span>Cancela</a>
-							<a id="aguarda" class="btn btn-primary btn-md" href="#" role="button"><span class="glyphicon glyphicon-floppy-disk"></span>Guardar</a-->
 							<a id="aenvia" class="btn btn-primary btn-md" href="#" role="button"><span class="glyphicon glyphicon-send"></span>&nbsp;Enviar a Validación</a>
 							<a id="aexportarxls" class="btn btn-primary btn-md" href="#" role="button" onclick=""><span class="glyphicon glyphicon-export"></span>&nbsp;Excel</a>
 							<!--a id="averhorag" class="btn btn-primary btn-md" href="#" role="button" data-placement='top' data-html='true'
@@ -631,7 +628,7 @@
 						<div class="form-group" style="margin: 5px 0px">
 							<label class="col-lg-3 control-label bold">Comprobante:</label>
 							<div class="col-lg-9">
-								<div class="row" style="margin-top: 0px; padding-top: 0px;">
+								<div id="file_comprobantes" class="row" style="margin-top: 0px; padding-top: 0px;">
 									<div class="col-md-4">
 										<label for="monto" class="col-1 control-label bold">XML:</label>
 										<input id='filexml' accept='.xml' name='filexml' type='file' />
@@ -841,6 +838,7 @@
 		<input type="hidden" id="RmRdeRequisicion" value="{{ r_idrequisicion }}" />
 		<input type="hidden" id="idinforme" name="idinforme" value="{{ i_id }}" />
 		<input type="hidden" id="estatus" name="estatus" value="{{ i_estatus }}" />
+		<input type="hidden" id="nmbEstatus" name="estatus" value="{{ e_estatus }}" />
 		<input type="hidden" id="ConfBanco" name="ConfBanco" value="{{ i_conciliacionbancos }}" />
 		<input type="hidden" id="formaPagoInforme" name="formaPagoInforme" value="{{ i_tarjetatoka }}" />
 		<input type="hidden" id="usuResponsable" name="usuResponsable" value="{{ i_uresponsable }}" />
@@ -1043,7 +1041,7 @@
 					<a class="btn btn-primary btn-sm" onclick="editar_gasto('{{ gasto }}')" role="button"><span class="glyphicon glyphicon-edit"></span></a>
 				{{/if}}
 			</td>
-			<td class="text-center" style='width: 50px;'>{{#if btnEditar}}
+			<td class="text-center" style='width: 50px;'>{{#if btnEliminar}}
 					<a class="btn btn-danger btn-sm" onclick="eliminar_gasto('{{ gasto }}')" role="button"><span class="glyphicon glyphicon-trash"></span></a>
 				{{/if}}
 			</td>
@@ -1257,6 +1255,7 @@
 			};
 			var estatus = $("#estatus").val() * 1;
 			var ConfBanco = $("#ConfBanco").val() * 1;
+			var nmbEstatus = $("#nmbEstatus").val();
 			$("#tblGastos tbody").empty();
 			var total = 0, totalmonto = 0, totalaceptable = 0, totalnoaceptable = 0, totalnodeducible = 0;
 			var listGastos = [];
@@ -1311,8 +1310,18 @@
 						}
 
 						var btnEditar = true;
-						if (estatus > 2 || ConfBanco === 1)
+						var btnEliminar = true;
+
+						if (estatus > 2 || ConfBanco === 1) {
 							btnEditar = false;
+							btnEliminar = false;
+						}
+
+						if (ConfBanco === 1 && nmbEstatus === "Rechazado") {
+							btnEditar = true;
+							btnEliminar = false;
+						}
+
 						var result_justificacion = conceptos_adicionales(value.g_concepto, value.g_nombreCategoria, tipoajuste);
 
 						var justificacion_text_1 = "";
@@ -1346,6 +1355,7 @@
 							num_no_deducible: importenodeducible,
 							gasto: "",
 							btnEditar: btnEditar,
+							btnEliminar: btnEliminar,
 							classTr: colorRow,
 							btnAdicional: btnAdicional,
 							tipoajuste: tipoajuste,
@@ -1385,6 +1395,7 @@
 									num_no_deducible: 0,
 									gasto: "",
 									btnEditar: false,
+									btnEliminar: false,
 									classTr: colorRow,
 									btnAdicional: false,
 									tipoajuste: tipoajuste,
@@ -1419,6 +1430,7 @@
 									num_no_deducible: 0,
 									gasto: "",
 									btnEditar: false,
+									btnEliminar: false,
 									classTr: colorRow,
 									btnAdicional: false,
 									tipoajuste: tipoajuste,
@@ -2027,6 +2039,10 @@
 			$(":file").filestyle('clear');
 			menucategorias();
 			var disponible = $("#disAnticipo").val() * 1;
+			
+			var ConfBanco = $("#ConfBanco").val() * 1;
+			var nmbEstatus = $("#nmbEstatus").val();
+
 			$("#mEditarGastoInf").modal({
 				show: true,
 				keyboard: false,
@@ -2071,6 +2087,15 @@
 			$("#monto").val(gasto.num_monto);
 			$("#monto").attr("max", (gasto.num_monto + disponible).toFixed(2));
 			$("#monto").attr("valueOld", gasto.num_monto);
+
+			if (ConfBanco === 1 && nmbEstatus === "Rechazado") {
+				$("#monto").addClass("disabled")
+					.attr("disabled", true);
+				$("#file_comprobantes").hide();
+			} else {
+				$("#monto").removeClass("disabled").removeAttr("disabled");
+				$("#file_comprobantes").show();
+			}
 
 		}
 		function eliminar_gasto(datos_gasto) {
@@ -3309,10 +3334,12 @@
 		//inicio excel
 		$("#aexportarxls").click(function () {
 			var idinforme = $("#idinforme").val() * 1;
+			var IdRequisicion = $("#RmRdeRequisicion").val();
 			cargando();
 			if (idinforme > 0) {
 				var datos = {
-					'IdInforme': idinforme
+					'IdInforme': idinforme,
+					'IdRequisicion': IdRequisicion
 				};
 
 				var informe = selectInformeExcel(datos.IdInforme);

@@ -17,7 +17,9 @@ namespace SCGESP.Controllers.CGEAPI
             //Datos informe
             public int IdInforme { get; set; }
             public int NoInforme { get; set; }
-            public string NmbSolicitante { get; set; }
+			public int IdRequisicion { get; set; }
+
+			public string NmbSolicitante { get; set; }
             //Datos requisicion
             public string Puesto { get; set; }
             public string TipoReq { get; set; }
@@ -68,7 +70,7 @@ namespace SCGESP.Controllers.CGEAPI
             var worksheet = workbook.Worksheets.Add("Comprobacion de Gastos");
 
             //encabezado
-            worksheet.Range("A2:H2").SetValue("Formato de Comprobación de Gastos")
+            worksheet.Range("A2:I2").SetValue("Formato de Comprobación de Gastos")
                 .Merge()
                 .Style
                     .Font.SetFontSize(16)
@@ -116,7 +118,23 @@ namespace SCGESP.Controllers.CGEAPI
                     .Font.SetBold(true)
                     .Font.SetFontColor(XLColor.Black)
                     .Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
-            worksheet.Range("C6:D6").SetValue(Datos.TipoReq)
+			worksheet.Range("C6:D6").SetValue(Datos.TipoReq)
+				.Merge()
+				.Style
+					.Font.SetFontSize(11)
+					.Font.SetFontColor(XLColor.Black)
+					.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
+					.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
+					.Border.SetOutsideBorder(XLBorderStyleValues.Thin);
+
+			worksheet.Range("A7:B7").SetValue("Requisición:")
+				.Merge()
+				.Style
+					.Font.SetFontSize(11)
+					.Font.SetBold(true)
+					.Font.SetFontColor(XLColor.Black)
+					.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+			worksheet.Range("C7:D7").SetValue(Datos.IdRequisicion)
                 .Merge()
                 .Style
                     .Font.SetFontSize(11)
@@ -125,7 +143,7 @@ namespace SCGESP.Controllers.CGEAPI
                     .Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
                     .Border.SetOutsideBorder(XLBorderStyleValues.Thin);
 
-            worksheet.Range("F1:H1").SetValue((DateTime.Now.ToString("dddd, dd De MMMM De yyyy", System.Globalization.CultureInfo.CreateSpecificCulture("es-MX"))).ToLower())
+            worksheet.Range("F1:I1").SetValue((DateTime.Now.ToString("dddd, dd De MMMM De yyyy", System.Globalization.CultureInfo.CreateSpecificCulture("es-MX"))).ToLower())
                 .Merge()
                 .Style
                     .Font.SetFontSize(11)
@@ -139,7 +157,7 @@ namespace SCGESP.Controllers.CGEAPI
                     .Font.SetBold(true)
                     .Font.SetFontColor(XLColor.Black)
                     .Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
-            worksheet.Range("G3:H3").SetValue(Datos.NoInforme)
+            worksheet.Range("G3:I3").SetValue(Datos.NoInforme)
                 .Merge()
                 .Style
                     .Font.SetFontSize(11)
@@ -155,7 +173,7 @@ namespace SCGESP.Controllers.CGEAPI
                     .Font.SetBold(true)
                     .Font.SetFontColor(XLColor.Black)
                     .Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
-            worksheet.Range("G4:H4").SetValue(Datos.Departamento)
+            worksheet.Range("G4:I4").SetValue(Datos.Departamento)
                 .Merge()
                 .Style
                     .Font.SetFontSize(11)
@@ -171,7 +189,7 @@ namespace SCGESP.Controllers.CGEAPI
                     .Font.SetBold(true)
                     .Font.SetFontColor(XLColor.Black)
                     .Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
-            worksheet.Range("G5:H5").SetValue(Datos.Area)
+            worksheet.Range("G5:I5").SetValue(Datos.Area)
                 .Merge()
                 .Style
                     .Font.SetFontSize(11)
@@ -187,7 +205,7 @@ namespace SCGESP.Controllers.CGEAPI
                     .Font.SetBold(true)
                     .Font.SetFontColor(XLColor.Black)
                     .Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
-            worksheet.Range("G6:H6").SetValue(Datos.Oficina)
+            worksheet.Range("G6:I6").SetValue(Datos.Oficina)
                 .Merge()
                 .Style
                     .Font.SetFontSize(11)
@@ -203,7 +221,7 @@ namespace SCGESP.Controllers.CGEAPI
                     .Font.SetBold(true)
                     .Font.SetFontColor(XLColor.Black)
                     .Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
-            worksheet.Range("G7:H7").SetValue(Datos.Centro)
+            worksheet.Range("G7:I7").SetValue(Datos.Centro)
                 .Merge()
                 .Style
                     .Font.SetFontSize(11)
