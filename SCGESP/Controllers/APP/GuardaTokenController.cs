@@ -33,15 +33,15 @@ namespace SCGESP.Controllers
             try
             {
 
-                SqlCommand comando = new SqlCommand("[TokenNotification]");
+                SqlCommand comando = new SqlCommand("TokenNotification");
                 comando.CommandType = CommandType.StoredProcedure;
 
                 comando.Parameters.Add("@neq_equipo", SqlDbType.VarChar);
                 comando.Parameters.Add("@neq_id_usuario", SqlDbType.Int);
                 comando.Parameters.Add("@neq_dispositivo", SqlDbType.VarChar);
                 comando.Parameters.Add("@neq_app_id", SqlDbType.Int);
-                comando.Parameters.Add("@neq_fecha_hora_creo", SqlDbType.DateTime);
-                comando.Parameters.Add("@neq_fecha_hora_modifico", SqlDbType.DateTime);
+                comando.Parameters.Add("@neq_fecha_hora_creo", SqlDbType.VarChar);
+                comando.Parameters.Add("@neq_fecha_hora_modifico", SqlDbType.VarChar);
 
                 //Asignacion de valores a parametros
                 comando.Parameters["@neq_equipo"].Value = Datos.neq_equipo;
