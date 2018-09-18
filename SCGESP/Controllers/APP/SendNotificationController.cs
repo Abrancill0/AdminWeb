@@ -5,6 +5,9 @@ using Firebase.NET.Notifications;
 using Firebase.NET;
 using System.Threading.Tasks;
 using System;
+using System.Data.SqlClient;
+using System.Data;
+using SCGESP.Clases;
 
 namespace SCGESP.Controllers.APP
 {
@@ -13,7 +16,6 @@ namespace SCGESP.Controllers.APP
         public class datos
         {
             public string usuario { get; set; }
-            public string TokenID { get; set; }
             public string Titulo { get; set; }
             public string Mensaje { get; set; }
 
@@ -21,37 +23,71 @@ namespace SCGESP.Controllers.APP
 
         public async Task<string> Post(datos Datos)
         {
-            try
+            string TokenID = "";
+
+            SqlCommand comando = new SqlCommand("TokenNotification");
+            comando.CommandType = CommandType.StoredProcedure;
+
+            comando.Parameters.Add("@Usuario", SqlDbType.VarChar);
+
+            comando.Parameters["@Usuario"].Value = Datos.usuario;
+
+            comando.Connection = new SqlConnection(VariablesGlobales.CadenaConexion);
+            comando.CommandTimeout = 0;
+            comando.Connection.Open();
+
+            DataTable DT = new DataTable();
+            SqlDataAdapter DA = new SqlDataAdapter(comando);
+            comando.Connection.Close();
+            DA.Fill(DT);
+
+            if (DT.Rows.Count > 0)
             {
-                string[] ids = {
-                Datos.TokenID
-                };
-
-                var requestMessage = new RequestMessage
+                foreach (DataRow row in DT.Rows)
                 {
-                    Body =
-                {
-                RegistrationIds = ids,
-                Notification = new CrossPlatformNotification
-                {
-                Title = Datos.Titulo,
-                Body = Datos.Mensaje
+                    TokenID = Convert.ToString(row["Token"]);
                 }
-
-                }
-                };
-
-                var pushService = new PushNotificationService("AAAASvHYA78:APA91bEYxMsqdhV-7h-DdDGORTinWDc8G_JEYmOBhMA7FVNfNNpbrsviDW0BNK0etgD2l6QEMiiQHz3Of_Kv2YMEwQHVl6kvoStC0SBucb9nSGP6XGWG-6IAN48WBtb4Te2QPG1jWzMx");
-                var responseMessage = await pushService.PushMessage(requestMessage);
-
             }
-            catch (Exception ex)
+            else
             {
-
-                return ex.ToString();
+                TokenID = "";
             }
 
-            return "OK";
+            if (TokenID != "")
+            {
+                try
+                {
+                    string[] ids = { TokenID };
+
+                    var requestMessage = new RequestMessage
+                    {
+                        Body =
+                { RegistrationIds = ids,
+                  Notification = new CrossPlatformNotification
+                { Title = Datos.Titulo,
+                  Body = Datos.Mensaje }
+                }
+                    };
+
+                    var pushService = new PushNotificationService("AAAASvHYA78:APA91bEYxMsqdhV-7h-DdDGORTinWDc8G_JEYmOBhMA7FVNfNNpbrsviDW0BNK0etgD2l6QEMiiQHz3Of_Kv2YMEwQHVl6kvoStC0SBucb9nSGP6XGWG-6IAN48WBtb4Te2QPG1jWzMx");
+                    var responseMessage = await pushService.PushMessage(requestMessage);
+
+                    return "Notificacion Enviada Exitosamente";
+
+                }
+                catch (Exception ex)
+                {
+
+                    return ex.ToString();
+                }
+            }
+            else
+            {
+                return "Usuario no cuenta con token asignado";
+            }
+            
+
+            
 
             //    try
             //    {
