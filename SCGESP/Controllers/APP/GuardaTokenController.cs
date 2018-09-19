@@ -13,7 +13,7 @@ namespace SCGESP.Controllers
         public class ParametrosEntrada
         {
             public string neq_equipo { get; set; }
-            public int neq_id_usuario { get; set; }
+            public string neq_id_usuario { get; set; }
             public string neq_dispositivo { get; set; }
             public string neq_app_id { get; set; }
             public string neq_fecha_hora_creo { get; set; }
@@ -37,7 +37,7 @@ namespace SCGESP.Controllers
                 comando.CommandType = CommandType.StoredProcedure;
 
                 comando.Parameters.Add("@neq_equipo", SqlDbType.VarChar);
-                comando.Parameters.Add("@neq_id_usuario", SqlDbType.Int);
+                comando.Parameters.Add("@neq_id_usuario", SqlDbType.VarChar);
                 comando.Parameters.Add("@neq_dispositivo", SqlDbType.VarChar);
                 comando.Parameters.Add("@neq_app_id", SqlDbType.VarChar);
                 comando.Parameters.Add("@neq_fecha_hora_creo", SqlDbType.VarChar);
