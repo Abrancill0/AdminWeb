@@ -50,8 +50,8 @@ namespace SCGESP.Controllers.APP
             {
                 var errores = respuesta.Errores;
 
-                return null;
-            }
+				return respuesta.Documento;
+			}
 
         }
        
