@@ -2957,6 +2957,10 @@
 						Seguridad.alerta(result);
 						error = 1;
 					};
+					if (result.indexOf('gasto debe estar en estatus') > -1) {
+						Seguridad.alerta(result);
+						error = 1;
+					};
 
 					$("#filexml").filestyle('clear');
 
