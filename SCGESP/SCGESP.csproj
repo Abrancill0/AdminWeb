@@ -67,6 +67,9 @@
     <Reference Include="FastMember.Signed, Version=1.0.0.9, Culture=neutral, PublicKeyToken=9e8f22703bef9a29, processorArchitecture=MSIL">
       <HintPath>..\packages\FastMember.Signed.1.1.0\lib\net40\FastMember.Signed.dll</HintPath>
     </Reference>
+    <Reference Include="Firebase.NET, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Pantheon.Firebase.NET.1.1.0\lib\net452\Firebase.NET.dll</HintPath>
+    </Reference>
     <Reference Include="Firebase.Notification, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Firebase.Notification.1.0.0\lib\net45\Firebase.Notification.exe</HintPath>
     </Reference>
@@ -4961,11 +4964,13 @@
     <Compile Include="confrontacion.aspx.designer.cs">
       <DependentUpon>confrontacion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\APP\BajaAlternoController.cs" />
     <Compile Include="Controllers\APP\GuardaTokenController.cs" />
     <Compile Include="Controllers\APP\BrowseGastoAppController.cs" />
     <Compile Include="Controllers\APP\BrowseInformeAppController.cs" />
     <Compile Include="Controllers\APP\BrowseInformeTodoController.cs" />
     <Compile Include="Controllers\APP\CambioPasswordEleController.cs" />
+    <Compile Include="Controllers\APP\AltaAlternoController.cs" />
     <Compile Include="Controllers\APP\SendNotificationController.cs" />
     <Compile Include="Controllers\APP\CargaImagenController.cs" />
     <Compile Include="Controllers\APP\ConsultaMaterialesAppController.cs" />
@@ -5067,6 +5072,8 @@
     <Compile Include="Controllers\EleAPI\CatalogoSubRamos\ConsultaSubramoIDController.cs" />
     <Compile Include="Controllers\EleAPI\CatalogoTipoGasto\ConsultaCatalogoTipoGastoController.cs" />
     <Compile Include="Controllers\EleAPI\CatalogoTipoGasto\ConsultaTipoGastoIDController.cs" />
+    <Compile Include="Controllers\EleAPI\CatalogoUsuarios\ListaUsuariosAlternosAppController.cs" />
+    <Compile Include="Controllers\EleAPI\CatalogoUsuarios\ListaUsuariosCentroAppController.cs" />
     <Compile Include="Controllers\EleAPI\CatalogoUsuarios\ConsultaCatalogoUsuariosController.cs" />
     <Compile Include="Controllers\EleAPI\CatalogoUsuarios\ConsultaUsuarioIDController.cs" />
     <Compile Include="Controllers\EleAPI\ComprobacionController.cs" />
