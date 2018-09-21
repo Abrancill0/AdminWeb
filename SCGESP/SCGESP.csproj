@@ -4964,11 +4964,13 @@
     <Compile Include="confrontacion.aspx.designer.cs">
       <DependentUpon>confrontacion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\APP\BajaAlternoController.cs" />
     <Compile Include="Controllers\APP\GuardaTokenController.cs" />
     <Compile Include="Controllers\APP\BrowseGastoAppController.cs" />
     <Compile Include="Controllers\APP\BrowseInformeAppController.cs" />
     <Compile Include="Controllers\APP\BrowseInformeTodoController.cs" />
     <Compile Include="Controllers\APP\CambioPasswordEleController.cs" />
+    <Compile Include="Controllers\APP\AltaAlternoController.cs" />
     <Compile Include="Controllers\APP\SendNotificationController.cs" />
     <Compile Include="Controllers\APP\CargaImagenController.cs" />
     <Compile Include="Controllers\APP\ConsultaMaterialesAppController.cs" />
@@ -5070,6 +5072,8 @@
     <Compile Include="Controllers\EleAPI\CatalogoSubRamos\ConsultaSubramoIDController.cs" />
     <Compile Include="Controllers\EleAPI\CatalogoTipoGasto\ConsultaCatalogoTipoGastoController.cs" />
     <Compile Include="Controllers\EleAPI\CatalogoTipoGasto\ConsultaTipoGastoIDController.cs" />
+    <Compile Include="Controllers\EleAPI\CatalogoUsuarios\ListaUsuariosAlternosAppController.cs" />
+    <Compile Include="Controllers\EleAPI\CatalogoUsuarios\ListaUsuariosCentroAppController.cs" />
     <Compile Include="Controllers\EleAPI\CatalogoUsuarios\ConsultaCatalogoUsuariosController.cs" />
     <Compile Include="Controllers\EleAPI\CatalogoUsuarios\ConsultaUsuarioIDController.cs" />
     <Compile Include="Controllers\EleAPI\ComprobacionController.cs" />
