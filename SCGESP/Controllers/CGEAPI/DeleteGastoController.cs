@@ -1,9 +1,11 @@
-﻿using SCGESP.Clases;
+﻿using Ele.Generales;
+using SCGESP.Clases;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.Http;
+using System.Xml;
 
 namespace SCGESP.Controllers.CGEAPI
 {
@@ -56,7 +58,33 @@ namespace SCGESP.Controllers.CGEAPI
                 // DataRow row = DT.Rows[0];
                 foreach (DataRow row in DT.Rows)
                 {
-                    ObtieneInformeResult ent = new ObtieneInformeResult
+					string UUID = Convert.ToString(row["xuuid"]);
+					string idGasto = Convert.ToString(row["idgasto"]);
+					string uResponsable = Convert.ToString(row["uresponsable"]);
+
+					if (UUID.Trim() != "") {
+						try
+						{
+							DocumentoEntrada entradadoc = new DocumentoEntrada
+							{
+								Usuario = uResponsable,//Variables.usuario;
+								Origen = "AdminWEB",
+								Transaccion = 120092,
+								Operacion = 22
+							};//21:Agregar XML, 22:Eliminar XML
+							entradadoc.agregaElemento("FiGfaGasto", idGasto);
+							entradadoc.agregaElemento("FiGfaUuid", UUID);
+
+							DocumentoSalida respuesta = PeticionCatalogo(entradadoc.Documento);
+						}
+						catch (Exception)
+						{
+
+							throw;
+						}
+					}
+
+					ObtieneInformeResult ent = new ObtieneInformeResult
                     {
                         mensaje = Convert.ToString(row["ELIMINADO"]),
                     };
@@ -70,6 +98,13 @@ namespace SCGESP.Controllers.CGEAPI
             {
                 return null;
             }
-        }
-    }
+		}
+		public static DocumentoSalida PeticionCatalogo(XmlDocument doc)
+		{
+			Localhost.Elegrp ws = new Localhost.Elegrp();
+			ws.Timeout = -1;
+			string respuesta = ws.PeticionCatalogo(doc);
+			return new DocumentoSalida(respuesta);
+		}
+	}
 }

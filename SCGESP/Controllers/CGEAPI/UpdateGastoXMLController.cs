@@ -185,7 +185,7 @@ namespace SCGESP.Controllers.CGEAPI
 				// DataRow row = DT.Rows[0];
 				foreach (DataRow row in DT1.Rows)
 				{
-					usuarioxml = Convert.ToString(row["i_uresponsable"]);
+					usuarioxml = Convert.ToString(row["i_uresponsable"]).Trim();
 					idrequisicion = Convert.ToInt32(row["r_idrequisicion"]);
 					idgasto = Convert.ToInt32(row["r_idgasto"]);
 				}
@@ -194,7 +194,7 @@ namespace SCGESP.Controllers.CGEAPI
 			{
 				usuarioxml = "fjsolis";
 			}
-
+			/*
 			DocumentoEntrada entradadoc = new DocumentoEntrada
 			{
 				Usuario = usuarioxml,//Variables.usuario;
@@ -209,6 +209,7 @@ namespace SCGESP.Controllers.CGEAPI
 			int FicfdTipoDocumento = 0;
 			int FiCfdNumeroDocumento = 0;
 			string FiCfdUuid = "";
+			int existeAdminERP = 0;
 
 			try
 			{
@@ -231,25 +232,180 @@ namespace SCGESP.Controllers.CGEAPI
 				throw;
 			}
 
-			if (FicfdTipoDocumento > 0 && FiCfdNumeroDocumento > 0) {
-				Deletexml(Ruta);
+			if (FicfdTipoDocumento > 0 && FiCfdNumeroDocumento > 0)
+			{
 				string tipoDoc = "";
+				string msn = "";
 				switch (FicfdTipoDocumento)
 				{
 					case 95:
 						tipoDoc = "Gasto";
+						if (idgasto != FiCfdNumeroDocumento)
+							existeAdminERP = 1;
+						else
+							mismoDocAdminERP = 1;
 						break;
 					case 96:
 						tipoDoc = "Recepción";
+						existeAdminERP = 1;
 						break;
 					case 97:
 						tipoDoc = "Requisición";
+						if (idrequisicion != FiCfdNumeroDocumento)
+							existeAdminERP = 1;
+						else
+							mismoDocAdminERP = 1;
 						break;
 				}
+				if (existeAdminERP == 1)
+				{
+					msn = "El XML No se puede cargar, el comprobante " + FiCfdUuid + " ya existe en AdminERP. " + tipoDoc + ": " + FiCfdNumeroDocumento.ToString();
+					Deletexml(Ruta);
+				}
 
-
-				return "El XML No se puede cargar, el comprobante " + FiCfdUuid + " ya existe en AdminERP. " + tipoDoc + ": " + FiCfdNumeroDocumento.ToString();
+				if (msn != "")
+					return msn;
 			}
+			*/
+			//****************agregar xml a AdminERP****************//
+			int cUuid = 0;
+			string xuuid = "";
+			string msnError = "";
+
+			DT1 = new DataTable();
+			consulta = "SELECT g_dirxml, x_urlxml, ISNULL(x_uuid, '') AS x_uuid, ISNULL(LEN(x_uuid),0) AS cUuid " +
+					"FROM gastos INNER JOIN " +
+						"xmlinforme ON x_idinforme = g_idinforme AND x_idgasto = g_id " +
+					"WHERE g_idinforme = " + Datos.idinforme + " AND g_id = " + Datos.id + "; ";
+
+			DA1 = new SqlDataAdapter(consulta, Conexion);
+			DA1.Fill(DT1);
+
+			if (DT1.Rows.Count > 0)
+			{
+				int st_respuesta = 1;
+				foreach (DataRow row in DT1.Rows)
+				{
+					cUuid = Convert.ToInt16(row["cUuid"]);
+					xuuid = Convert.ToString(row["x_uuid"]);
+				}
+
+				if (cUuid == 36)
+				{
+					DocumentoEntrada entradadoc = new DocumentoEntrada
+					{
+						Usuario = usuarioxml,//Variables.usuario;
+						Origen = "AdminWEB",
+						Transaccion = 120092,
+						Operacion = 22
+					};//21:Agregar XML, 22:Eliminar XML
+					entradadoc.agregaElemento("FiGfaGasto", idgasto);
+					entradadoc.agregaElemento("FiGfaUuid", xuuid);
+
+					DocumentoSalida respuesta = PeticionCatalogo(entradadoc.Documento);
+					st_respuesta = Convert.ToInt16(respuesta.Resultado);
+					if (st_respuesta == 1)
+					{
+						entradadoc = new DocumentoEntrada
+						{
+							Usuario = usuarioxml,//Variables.usuario;
+							Origen = "AdminWEB",
+							Transaccion = 120092,
+							Operacion = 21
+						};//21:Agregar XML, 22:Eliminar XML
+						entradadoc.agregaElemento("FiGfaGasto", idgasto);
+						entradadoc.agregaElemento("FiGfaUuid", UUID);
+						respuesta = PeticionCatalogo(entradadoc.Documento);
+
+						try
+						{
+							if (respuesta.Resultado == "0")
+							{
+								msnError = "";
+
+								XmlDocument xmErrores = new XmlDocument();
+								xmErrores.LoadXml(respuesta.Errores.InnerXml);
+
+								XmlNodeList elemList = xmErrores.GetElementsByTagName("Descripcion");
+								for (int i = 0; i < elemList.Count; i++)
+								{
+									msnError += elemList[i].InnerXml;
+								}
+								if (msnError != "")
+								{
+									Deletexml(Ruta);
+									return msnError;
+								}
+							}
+						}
+						catch (Exception)
+						{
+							throw;
+						}
+					}
+					else
+					{
+						msnError = "";
+						XmlDocument xmErrores = new XmlDocument();
+						xmErrores.LoadXml(respuesta.Errores.InnerXml);
+						XmlNodeList elemList = xmErrores.GetElementsByTagName("Descripcion");
+						for (int i = 0; i < elemList.Count; i++)
+						{
+							msnError += elemList[i].InnerXml;
+						}
+						if (msnError != "")
+						{
+							Deletexml(Ruta);
+							return msnError;
+						}
+					}
+				}
+				else
+				{
+					Deletexml(Ruta);
+					return "El UUID " + xuuid + " es invalido.";
+				}
+			}
+			else
+			{
+				DocumentoEntrada entradadoc = new DocumentoEntrada
+				{
+					Usuario = usuarioxml,//Variables.usuario;
+					Origen = "AdminWEB",
+					Transaccion = 120092,
+					Operacion = 21
+				};//21:Agregar XML, 22:Eliminar XML
+				entradadoc.agregaElemento("FiGfaGasto", idgasto);
+				entradadoc.agregaElemento("FiGfaUuid", UUID);
+
+				DocumentoSalida respuesta = PeticionCatalogo(entradadoc.Documento);
+				try
+				{
+					if (respuesta.Resultado == "0")
+					{
+						msnError = "";
+						XmlDocument xmErrores = new XmlDocument();
+						xmErrores.LoadXml(respuesta.Errores.InnerXml);
+
+						XmlNodeList elemList = xmErrores.GetElementsByTagName("Descripcion");
+						for (int i = 0; i < elemList.Count; i++)
+						{
+							msnError += elemList[i].InnerXml;
+						}
+						if (msnError != "")
+						{
+							Deletexml(Ruta);
+							return msnError;
+						}
+					}
+				}
+				catch (Exception)
+				{
+					throw;
+				}
+			}
+
+			//***********fin agregar XML en AdminERP**********//
 
 			if (Receptor.ToUpper() != "SPO830427DQ1")
 			{

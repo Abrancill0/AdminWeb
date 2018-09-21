@@ -2944,11 +2944,19 @@
 					};
 
 					if (result.indexOf('ya existe en AdminERP. Documento') > -1) {
-						//$.notify(result, { globalPosition: 'top center', className: 'error', autoHideDelay: 6000 });
 						Seguridad.alerta(result);
 						error = 1;
 					};
 
+					if (result.indexOf('es invalido.') > -1) {
+						error = 1;
+						var infReq = result.split(",");
+						$.notify(result, { globalPosition: 'top center', className: 'error', autoHideDelay: 8000 });
+					};
+					if (result.indexOf('Comprobante fiscal ya integrado') > -1) {
+						Seguridad.alerta(result);
+						error = 1;
+					};
 
 					$("#filexml").filestyle('clear');
 

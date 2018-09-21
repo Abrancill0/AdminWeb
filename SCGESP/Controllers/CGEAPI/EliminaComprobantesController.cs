@@ -1,4 +1,5 @@
-﻿using SCGESP.Clases;
+﻿using Ele.Generales;
+using SCGESP.Clases;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,6 +10,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using System.Xml;
 
 namespace SCGESP.Controllers.CGEAPI
 {
@@ -71,9 +73,12 @@ namespace SCGESP.Controllers.CGEAPI
 
                 var RutaXML = row[0].ToString();
                 var RutaPDF = row[1].ToString();
-                var RutaComprobantes = row[2].ToString();
+				var RutaComprobantes = row[2].ToString();
+				string UUID = row[3].ToString();
+				int idGasto = Convert.ToInt16(row[4].ToString());
+				string uResponsable = row[5].ToString();
 
-                if (Datos.comprobante == "OTRO")
+				if (Datos.comprobante == "OTRO")
                 {
                     Deletexml(RutaComprobantes);
                 }
@@ -85,6 +90,28 @@ namespace SCGESP.Controllers.CGEAPI
 
                 if (Datos.comprobante == "XML")
                 {
+					if (UUID.Trim() != "") {
+						try
+						{
+							DocumentoEntrada entradadoc = new DocumentoEntrada
+							{
+								Usuario = uResponsable,//Variables.usuario;
+								Origen = "AdminWEB",
+								Transaccion = 120092,
+								Operacion = 22
+							};//21:Agregar XML, 22:Eliminar XML
+							entradadoc.agregaElemento("FiGfaGasto", idGasto);
+							entradadoc.agregaElemento("FiGfaUuid", UUID);
+
+							DocumentoSalida respuesta = PeticionCatalogo(entradadoc.Documento);
+						}
+						catch (Exception)
+						{
+
+							throw;
+						}
+					}
+
                     Deletexml(RutaXML);
                 }
 
@@ -125,10 +152,15 @@ namespace SCGESP.Controllers.CGEAPI
             {
                 return "Error";
             }
-
-
         }
+		public static DocumentoSalida PeticionCatalogo(XmlDocument doc)
+		{
+			Localhost.Elegrp ws = new Localhost.Elegrp();
+			ws.Timeout = -1;
+			string respuesta = ws.PeticionCatalogo(doc);
+			return new DocumentoSalida(respuesta);
+		}
 
-    }
+	}
 }
 
