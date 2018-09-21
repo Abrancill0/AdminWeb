@@ -57,7 +57,7 @@ namespace SCGESP.Controllers.CGEAPI
             {
                 // DataRow row = DT.Rows[0];
                 foreach (DataRow row in DT.Rows)
-                {
+                {//
 					string UUID = Convert.ToString(row["xuuid"]);
 					string idGasto = Convert.ToString(row["idgasto"]);
 					string uResponsable = Convert.ToString(row["uresponsable"]);
