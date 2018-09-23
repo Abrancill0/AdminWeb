@@ -29,6 +29,7 @@ namespace SCGESP.Controllers
             try
             {
                 string UsuarioDesencripta = Seguridad.DesEncriptar(Datos.Usuario);
+                string EmpleadoDesencripta = Seguridad.DesEncriptar(Datos.Empleado);
 
                 DocumentoEntrada entrada = new DocumentoEntrada
                 {
@@ -38,7 +39,7 @@ namespace SCGESP.Controllers
                     Operacion = 17
                 };
 
-                entrada.agregaElemento("GrEmpId", Datos.Empleado);
+                entrada.agregaElemento("GrEmpId", EmpleadoDesencripta);
 
                 DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 
@@ -46,7 +47,7 @@ namespace SCGESP.Controllers
 
                 if (respuesta.Resultado == "1")
                 {
-                    DTRequisiciones = respuesta.obtieneTabla("Catalogo");
+                    DTRequisiciones = respuesta.obtieneTabla("Alternos");
 
                     List<ParametrosSalidaResult> lista = new List<ParametrosSalidaResult>();
 
