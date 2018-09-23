@@ -14,6 +14,7 @@ namespace SCGESP.Controllers
         {
             public string Usuario { get; set; }
             public string Origen { get; set; }
+            public string Empleado { get; set; }
         }
 
         public class ParametrosSalidaResult
@@ -36,6 +37,8 @@ namespace SCGESP.Controllers
                     Transaccion = 120037,
                     Operacion = 17
                 };
+
+                entrada.agregaElemento("GrEmpId", Datos.Empleado);
 
                 DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 
@@ -60,7 +63,7 @@ namespace SCGESP.Controllers
                 }
                 else
                 {
-                    var errores = respuesta.Errores;
+                    var errores = respuesta.Errores.InnerText;
 
                     List<ParametrosSalidaResult> lista = new List<ParametrosSalidaResult>();
 
