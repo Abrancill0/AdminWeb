@@ -5072,7 +5072,9 @@
     <Compile Include="Controllers\EleAPI\CatalogoSubRamos\ConsultaSubramoIDController.cs" />
     <Compile Include="Controllers\EleAPI\CatalogoTipoGasto\ConsultaCatalogoTipoGastoController.cs" />
     <Compile Include="Controllers\EleAPI\CatalogoTipoGasto\ConsultaTipoGastoIDController.cs" />
+    <Compile Include="Controllers\EleAPI\CatalogoUsuarios\ListaUsuariosAlternosApp2Controller.cs" />
     <Compile Include="Controllers\EleAPI\CatalogoUsuarios\ListaUsuariosAlternosAppController.cs" />
+    <Compile Include="Controllers\EleAPI\CatalogoUsuarios\ListaUsuariosCentroApp2Controller.cs" />
     <Compile Include="Controllers\EleAPI\CatalogoUsuarios\ListaUsuariosCentroAppController.cs" />
     <Compile Include="Controllers\EleAPI\CatalogoUsuarios\ConsultaCatalogoUsuariosController.cs" />
     <Compile Include="Controllers\EleAPI\CatalogoUsuarios\ConsultaUsuarioIDController.cs" />

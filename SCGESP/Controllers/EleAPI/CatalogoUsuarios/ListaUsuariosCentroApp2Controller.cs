@@ -8,7 +8,7 @@ using System;
 
 namespace SCGESP.Controllers
 {
-    public class ListaUsuariosCentroAppController : ApiController
+    public class ListaUsuariosCentroApp2Controller : ApiController
     {
         public class Datos
         {
@@ -24,8 +24,9 @@ namespace SCGESP.Controllers
             
         }
 
-        public List<ParametrosSalidaResult> Post(Datos Datos)
+        public DocumentoSalida Post(Datos Datos)
         {
+
             try
             {
                 string UsuarioDesencripta = Seguridad.DesEncriptar(Datos.Usuario);
@@ -38,65 +39,31 @@ namespace SCGESP.Controllers
                     Transaccion = 120037,
                     Operacion = 17
                 };
-
                 entrada.agregaElemento("GrEmpId", EmpleadoDesencripta);
+                //
 
                 DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 
-                DataTable DTRequisiciones = new DataTable();
-
                 if (respuesta.Resultado == "1")
                 {
-                    DTRequisiciones = respuesta.obtieneTabla("Empleados");
-
-                    List<ParametrosSalidaResult> lista = new List<ParametrosSalidaResult>();
-
-                    foreach (DataRow row in DTRequisiciones.Rows)
-                    {
-                        ParametrosSalidaResult ent = new ParametrosSalidaResult
-                        {
-                            Empleado = Convert.ToString(row["Empleado"]),
-                            Nombre = Convert.ToString(row["Nombre"]),
-                        };
-                        lista.Add(ent);
-                    }
-                    return lista;
+                    return respuesta;
                 }
                 else
                 {
-                    var errores = respuesta.Errores.InnerText;
+                  //  var errores = respuesta;
 
-                    List<ParametrosSalidaResult> lista = new List<ParametrosSalidaResult>();
-
-                    ParametrosSalidaResult ent = new ParametrosSalidaResult
-                    {
-                        Empleado = "Error",
-                        Nombre = Convert.ToString(errores),
-                    };
-
-                    lista.Add(ent);
-
-                    return lista;
+                    return respuesta;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
-                List<ParametrosSalidaResult> lista = new List<ParametrosSalidaResult>();
-
-                ParametrosSalidaResult ent = new ParametrosSalidaResult
-                {
-                    Empleado = "Error ex",
-                    Nombre = ex.ToString(),
-                };
-
-                lista.Add(ent);
-
-                return lista;
+                return null;
             }
-            
 
-        }
+                
+
+
+            }
 
             public static DocumentoSalida PeticionCatalogo(XmlDocument doc)
         {

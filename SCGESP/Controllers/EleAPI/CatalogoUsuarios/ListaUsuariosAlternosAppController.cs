@@ -45,7 +45,7 @@ namespace SCGESP.Controllers
 
                 if (respuesta.Resultado == "1")
                 {
-                    DTRequisiciones = respuesta.obtieneTabla("Catalogo");
+                    DTRequisiciones = respuesta.obtieneTabla("Alternos");
 
                     List<ParametrosSalidaResult> lista = new List<ParametrosSalidaResult>();
 

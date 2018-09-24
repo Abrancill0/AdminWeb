@@ -108,33 +108,33 @@ namespace SCGESP.Controllers.EleAPI
 						x_uuid = Convert.ToString(row["x_uuid"]);
 						r_idrequisicion = Convert.ToInt32(row["r_idrequisicion"]);
 
-						string[] valXML = ValidaXML(x_uuid, usuariodesencripta, r_idrequisicion, RmReqGasto, g_id, idinforme);
+						//string[] valXML = ValidaXML(x_uuid, usuariodesencripta, r_idrequisicion, RmReqGasto, g_id, idinforme);
 
 						if (ValidacionEnviaComprobantes == "")
 						{
-							int gastoCargado = xmlcargado + pdfcargado + otroscargado + Convert.ToInt32(valXML[2]);
+							int gastoCargado = xmlcargado + pdfcargado + otroscargado; // + Convert.ToInt32(valXML[2]);
 							if (gastoCargado == 0)
 							{
 
-								if (valXML[0] == "ENTRA")
-								{
+								//if (valXML[0] == "ENTRA")
+								//{
 									ValidacionEnviaComprobantes = EnviaComprobantes(g_id, idinforme, RmReqGasto, g_dirpdf, g_dirxml, usuariodesencripta,
 																xmlcargado, pdfcargado, g_fgasto, g_concepto, g_negocio, g_formaPago, g_categoria, g_total,
 																g_importenodeducible, g_dirotros, g_importenoaceptable, otroscargado);
-								}
-								else
-								{
-									if (valXML[1] != "")
-									{
-										ValidacionEnviaComprobantes = valXML[1];
-									}
-								}
-							}
-							else {
-								if (valXML[1] != "")
-								{
-									ValidacionEnviaComprobantes = valXML[1];
-								}
+								//}
+								//else
+								//{
+								//	if (valXML[1] != "")
+								//	{
+								//		ValidacionEnviaComprobantes = valXML[1];
+								//	}
+								//}
+							//}
+							//else {
+							//	if (valXML[1] != "")
+							//	{
+							//		ValidacionEnviaComprobantes = valXML[1];
+							//	}
 							}
 						}
 						else
