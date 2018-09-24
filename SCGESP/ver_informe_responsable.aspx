@@ -3361,7 +3361,9 @@
 					var requisicion = SelectRequisicionExcel(informe.datos.r_idrequisicion);
 					var empleado = SelectEmpleado(requisicion.datos.RmReqSolicitante);
 					if (requisicion.ok === true) {
-						datos['TipoReq'] = datoEle(requisicion.datos.RmReqTipoRequisicionNombre)
+						datos['TipoReq'] = datoEle(requisicion.datos.RmReqTipoRequisicionNombre);
+						datos['RmReqCentro'] = datoEle(requisicion.datos.RmReqCentro);
+						datos['RmReqUsuarioAlta'] = $.trim(datoEle(requisicion.datos.RmReqUsuarioAlta));
 						datos['Departamento'] = ""; //datoEle(empleado);
 						datos['Puesto'] = datoEle(empleado.GrEmpPuestoNombre);
 						datos['Area'] = "";

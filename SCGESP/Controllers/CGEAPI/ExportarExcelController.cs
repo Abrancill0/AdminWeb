@@ -1,4 +1,5 @@
-﻿using ClosedXML.Excel;
+﻿using Ele.Generales;
+using ClosedXML.Excel;
 using SCGESP.Clases;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Web;
 using System.Web.Http;
+using System.Xml;
 
 namespace SCGESP.Controllers.CGEAPI
 {
@@ -27,8 +29,11 @@ namespace SCGESP.Controllers.CGEAPI
             public string Area { get; set; }
             public string Oficina { get; set; }
             public string Centro { get; set; }
+			public int RmReqCentro { get; set; }
+			public string RmReqUsuarioAlta { get; set; }
 
-        }
+
+		}
 
         public class ObtieneInformeResult
         {
@@ -66,7 +71,35 @@ namespace SCGESP.Controllers.CGEAPI
 
             List<ObtieneInformeResult> lista = new List<ObtieneInformeResult>();
 
-            var workbook = new XLWorkbook();
+
+			DocumentoEntrada entrada = new DocumentoEntrada
+			{
+				Usuario = Datos.RmReqUsuarioAlta,
+				Origen = "AdminWEB",
+				Transaccion = 120872,
+				Operacion = 16
+
+			};
+
+
+			entrada.agregaElemento("FiCenId", Datos.RmReqCentro);
+
+			DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
+
+			DataTable DTDepto = new DataTable();
+			string NombreDepartamento = "";
+			string NombreArea = "";
+			if (respuesta.Resultado == "1")
+			{
+				DTDepto = respuesta.obtieneTabla("Departamento");
+				for (int i = 0; i < DTDepto.Rows.Count; i++)
+				{
+					NombreDepartamento = Convert.ToString(DTDepto.Rows[i]["NombreDepartamento"]);
+					NombreArea = Convert.ToString(DTDepto.Rows[i]["NombreArea"]);
+				}
+			}
+
+			var workbook = new XLWorkbook();
             var worksheet = workbook.Worksheets.Add("Comprobacion de Gastos");
 
             //encabezado
@@ -173,7 +206,7 @@ namespace SCGESP.Controllers.CGEAPI
                     .Font.SetBold(true)
                     .Font.SetFontColor(XLColor.Black)
                     .Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
-            worksheet.Range("G4:I4").SetValue(Datos.Departamento)
+            worksheet.Range("G4:I4").SetValue(NombreDepartamento)
                 .Merge()
                 .Style
                     .Font.SetFontSize(11)
@@ -189,7 +222,7 @@ namespace SCGESP.Controllers.CGEAPI
                     .Font.SetBold(true)
                     .Font.SetFontColor(XLColor.Black)
                     .Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
-            worksheet.Range("G5:I5").SetValue(Datos.Area)
+            worksheet.Range("G5:I5").SetValue(NombreArea)
                 .Merge()
                 .Style
                     .Font.SetFontSize(11)
@@ -320,5 +353,12 @@ namespace SCGESP.Controllers.CGEAPI
 
             return RutaCompleta + "," + url + "," + nmbExcel;
         }
-    }
+		public static DocumentoSalida PeticionCatalogo(XmlDocument doc)
+		{
+			Localhost.Elegrp ws = new Localhost.Elegrp();
+			ws.Timeout = -1;
+			string respuesta = ws.PeticionCatalogo(doc);
+			return new DocumentoSalida(respuesta);
+		}
+	}
 }
