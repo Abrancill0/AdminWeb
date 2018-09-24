@@ -48,9 +48,24 @@ namespace SCGESP.Controllers.APP
             }
             else
             {
-                var errores = respuesta.Errores;
 
-				return respuesta.Documento;
+				string msnError = "";
+				XmlDocument xmErrores = new XmlDocument();
+				XmlDocument xmError = new XmlDocument();
+				xmErrores.LoadXml(respuesta.Errores.InnerXml);
+
+				XmlNodeList elemList = xmErrores.GetElementsByTagName("Descripcion");
+				for (int i = 0; i < elemList.Count; i++)
+				{
+					msnError += elemList[i].InnerXml;
+				}
+
+				xmError.LoadXml("<Salida><Resultado>0</Resultado><Error>" + msnError + "</Error></Salida>");
+
+				return xmError;
+				//var errores = respuesta.Errores;
+
+				//return respuesta.Documento;
 			}
 
         }

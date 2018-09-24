@@ -304,7 +304,20 @@
 								}, 2000);
 							}, 500);
 						} else {
-							alert('Error al cambiar contrseaña.\nIntentarlo de nuevo.');
+							//alert('Error al cambiar contrseaña.\nIntentarlo de nuevo.');
+							setTimeout(function () {
+								cargado();
+								$("#modal_cambia_contrasena").modal({
+									show: true,
+									keyboard: false,
+									backdrop: "static"
+								});
+								$("#contrasena_nueva, #contrasena_confirmada").val("");
+								setTimeout(function () {
+									$("#contrasena_nueva").focus();
+								}, 500);
+								alert(result.Salida.Error);
+							}, 500);
 						}
 					}
 				});
