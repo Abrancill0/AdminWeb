@@ -1707,7 +1707,7 @@ cargando();
 				success: function (result) {
 					//var stResultado = result.Salida.Resultado * 1;
 					//if (stResultado === 1) {
-cargado();
+
 					var stResultado = result;
 					if (stResultado === 'OK') {
 						respuesta = {
@@ -1715,6 +1715,10 @@ cargado();
 							'descripcion': 'El informe se envio a comprobación.'
 						};
 $.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'success' });
+setTimeout(function () {
+						window.location.href = "/Autorizaciones?" + fh;
+cargado();
+					}, 2000);
 					} else {
 						var error = stResultado; //datoEle(result.Salida.Errores.Error.Descripcion);
 						if (valorVacio(error)) {
