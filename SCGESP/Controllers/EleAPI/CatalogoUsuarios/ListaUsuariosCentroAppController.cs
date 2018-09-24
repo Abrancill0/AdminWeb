@@ -21,7 +21,8 @@ namespace SCGESP.Controllers
         {
             public string Empleado { get; set; }
             public string Nombre { get; set; }
-            
+            public string Usuario { get; set; }
+
         }
 
         public List<ParametrosSalidaResult> Post(Datos Datos)
@@ -57,6 +58,7 @@ namespace SCGESP.Controllers
                         {
                             Empleado = Convert.ToString(row["Empleado"]),
                             Nombre = Convert.ToString(row["Nombre"]),
+                            Usuario = Convert.ToString(row["Usuario"]),
                         };
                         lista.Add(ent);
                     }
