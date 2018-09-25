@@ -92,6 +92,7 @@ namespace SCGESP.Controllers.EleAPI
                     };
 
                     lista.Add(ent);
+                    
                 }
                 else
                 {
@@ -102,14 +103,12 @@ namespace SCGESP.Controllers.EleAPI
                     };
 
                     lista.Add(ent);
+
                 }
 
-                return lista;
-               // List<ObtieneInformeResult> lista = new List<ObtieneInformeResult>();
 
-                //if (DT.Rows.Count > 0)
-                //{ }
-               
+                return lista;
+
             }
             catch (Exception ex)
             {
@@ -176,13 +175,13 @@ namespace SCGESP.Controllers.EleAPI
 				}
 				else
 				{
-					return mensaje + "Error enviar correo Adminerp";
+					return mensaje;
 				}
 			}
 			catch (Exception ex)
 			{
 
-				return mensaje + ex.ToString();
+				return mensaje;
 			}
 
 		}

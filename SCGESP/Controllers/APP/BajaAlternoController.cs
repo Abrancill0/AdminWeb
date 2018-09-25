@@ -14,7 +14,7 @@ namespace SCGESP.Controllers
         //Parametros Entrada
         public class ParametrosEntrada
         {
-            public string RmUaaUsuario { get; set; }
+            public string Usuario { get; set; }
             public string RmUaaUsuarioAlterno { get; set; }
         }
 
@@ -23,8 +23,8 @@ namespace SCGESP.Controllers
         {
             DocumentoEntrada entrada = new DocumentoEntrada
             {
-                Usuario = Datos.RmUaaUsuario,
-                Origen = "AdminAPP",
+                Usuario = Datos.Usuario,
+                Origen = "CGE",
                 Transaccion = 120795,
                 Operacion = 9,
             };
