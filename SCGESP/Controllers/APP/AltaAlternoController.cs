@@ -22,7 +22,7 @@ namespace SCGESP.Controllers
         }
 
         //public List<ObtieneParametrosSalida> Post(ParametrosEntrada Datos)
-        public XmlDocument Post(ParametrosEntrada Datos)
+        public DocumentoSalida Post(ParametrosEntrada Datos)
         {
             DocumentoEntrada entrada = new DocumentoEntrada
             {
@@ -42,13 +42,13 @@ namespace SCGESP.Controllers
 
             if (respuesta.Resultado == "1")
             {
-                return respuesta.Documento;
+                return respuesta;
             }
             else
             {
-                var errores = respuesta.Errores;
+                //var errores = respuesta.Errores;
 
-                return null;
+                return respuesta;
             }
         }
 
