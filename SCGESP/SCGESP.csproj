@@ -4964,6 +4964,7 @@
     <Compile Include="confrontacion.aspx.designer.cs">
       <DependentUpon>confrontacion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\APP\AutorizaInformeAppController.cs" />
     <Compile Include="Controllers\APP\BajaAlternoController.cs" />
     <Compile Include="Controllers\APP\GuardaTokenController.cs" />
     <Compile Include="Controllers\APP\BrowseGastoAppController.cs" />
