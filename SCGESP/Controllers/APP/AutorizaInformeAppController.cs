@@ -13,7 +13,7 @@ using System.Xml;
 
 namespace SCGESP.Controllers.EleAPI
 {
-    public class AutorizaInformeController : ApiController
+    public class AutorizaInformeAppController : ApiController
     {
         public class datos
         {
@@ -27,11 +27,11 @@ namespace SCGESP.Controllers.EleAPI
 
         public class ParametrosSalidaResult
         {
-            int Resultado { get; set; }
-            string Mensaje { get; set; }
+            public int Resultado { get; set; }
+            public string Mensaje { get; set; }
         }
 
-        public string Post(datos Datos)
+        public List<ParametrosSalidaResult> Post(datos Datos)
         {
             try
             {
@@ -62,6 +62,8 @@ namespace SCGESP.Controllers.EleAPI
                 comando.Connection.Close();
                 DA.Fill(DT);
 
+                List<ParametrosSalidaResult> lista = new List<ParametrosSalidaResult>();
+
                 if (DT.Rows.Count > 0)
                 {
 
@@ -81,21 +83,47 @@ namespace SCGESP.Controllers.EleAPI
                         {
                             EnvioCorreosELE.Envio(usuariodesencripta, "", "", autorizador, "", titulo, mensaje, 0);
                         }
-
+                        
                     }
+                    ParametrosSalidaResult ent = new ParametrosSalidaResult
+                    {
+                        Resultado = 1,
+                        Mensaje = "OK"
+                    };
 
+                    lista.Add(ent);
+                }
+                else
+                {
+                    ParametrosSalidaResult ent = new ParametrosSalidaResult
+                    {
+                        Resultado = 0,
+                        Mensaje = "Error al autorizar Informe"
+                    };
+
+                    lista.Add(ent);
                 }
 
+                return lista;
                // List<ObtieneInformeResult> lista = new List<ObtieneInformeResult>();
 
                 //if (DT.Rows.Count > 0)
                 //{ }
-                return "OK";
+               
             }
             catch (Exception ex)
             {
+                List<ParametrosSalidaResult> lista = new List<ParametrosSalidaResult>();
 
-                return ex.ToString();
+                ParametrosSalidaResult ent = new ParametrosSalidaResult
+                {
+                    Resultado = 0,
+                    Mensaje = ex.ToString()
+                };
+
+                lista.Add(ent);
+
+                return lista;
             }
 
             
