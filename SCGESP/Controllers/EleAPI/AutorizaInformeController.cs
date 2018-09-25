@@ -154,13 +154,13 @@ namespace SCGESP.Controllers.EleAPI
 				}
 				else
 				{
-					return mensaje;
+					return mensaje + "Error enviar correo Adminerp";
 				}
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
 
-				return mensaje;
+				return mensaje + ex.ToString();
 			}
 
 		}
