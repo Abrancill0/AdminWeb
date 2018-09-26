@@ -133,7 +133,7 @@
 							<input id="HFUsuariovobo" type="hidden" />
 							<a id="aexportarxls" class="btn btn-primary btn-md" href="#" role="button" onclick=""><span class="glyphicon glyphicon-export"></span>&nbsp;Excel</a>
 							<a id="aenvia" class="btn btn-primary btn-md" href="#" role="button"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Enviar a Comprobación</a>
-							<a id="aautoriza" class="btn btn-primary btn-md" href="#" role="button"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Regresar Comentario</a>
+							<a id="aautoriza" class="btn btn-primary btn-md" href="#" role="button"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Autorizar</a><!--Regresar Comentario-->
 							<a id="arechaza" class="btn btn-primary btn-md" href="#" role="button"><span class="glyphicon glyphicon-remove"></span>&nbsp;Rechazar</a>
 							<a id="autorizadores" class="btn btn-primary btn-md" href="#" role="button"><span class="glyphicon glyphicon-user"></span>&nbsp;Enviar a VoBo</a>
 

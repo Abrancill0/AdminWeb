@@ -137,7 +137,7 @@ namespace SCGESP.Controllers.CGEAPI.Autorizaciones
 					msn += "<br />";
 					msn += "Por favor ingresar a la siguiente liga con tu usuario y contraseña, ";
 					msn += "<a href='https://gapp.elpotosi.com.mx'>&nbsp;https://gapp.elpotosi.com.mx&nbsp;</a> ";
-					msn += "(no utilizar internet Explorer), da clic en la opción de &quot;Autorizaciones de Requisiciones por comprobar&quot;, posteriormente en la opción de &quot;Ver&quot; e ingresa tu comentario en la opción de &quot;Regresar Comentario&quot;";
+					msn += "(no utilizar internet Explorer), da clic en la opción de &quot;Autorizaciones de Requisiciones por comprobar&quot;, posteriormente en la opción de &quot;Ver&quot; e ingresa tu comentario en la opción de &quot;Autorizar&quot;";
 					msn += "<br /><br />";
 					msn += "Saludos cordiales";
 					msn += "<br />";
