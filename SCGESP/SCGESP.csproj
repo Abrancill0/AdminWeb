@@ -4997,6 +4997,7 @@
     <Compile Include="Controllers\CGEAPI\ActualizarTotalesInformeController.cs" />
     <Compile Include="Controllers\CGEAPI\AgregarAjusteGastoController.cs" />
     <Compile Include="Controllers\CGEAPI\Autorizaciones\ActualizaUsuAdminController.cs" />
+    <Compile Include="Controllers\CGEAPI\Autorizaciones\BrowseInformeAutorizaVoBoAppController .cs" />
     <Compile Include="Controllers\CGEAPI\Autorizaciones\BrowseInformeAutorizaController.cs" />
     <Compile Include="Controllers\CGEAPI\Autorizaciones\ConsultaTipoAdminAutorizadorController.cs" />
     <Compile Include="Controllers\CGEAPI\Autorizaciones\EnviaAutorizadoresController.cs" />

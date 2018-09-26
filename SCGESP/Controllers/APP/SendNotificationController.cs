@@ -67,7 +67,9 @@ namespace SCGESP.Controllers.APP
                 { RegistrationIds = ids,
                   Notification = new CrossPlatformNotification
                 { Title = Datos.Titulo,
-                  Body = Datos.Mensaje }
+                  Body = Datos.Mensaje,
+                  Badge = "1"
+                  }
                 }
                         };
 
