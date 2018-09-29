@@ -4966,6 +4966,7 @@
     </Compile>
     <Compile Include="Controllers\APP\AutorizaInformeAppController.cs" />
     <Compile Include="Controllers\APP\BajaAlternoController.cs" />
+    <Compile Include="Controllers\APP\CuentaNumeroInformesAppController.cs" />
     <Compile Include="Controllers\APP\GuardaTokenController.cs" />
     <Compile Include="Controllers\APP\BrowseGastoAppController.cs" />
     <Compile Include="Controllers\APP\BrowseInformeAppController.cs" />
@@ -5055,11 +5056,13 @@
     <Compile Include="Controllers\CGEAPI\ValidarJustificacionController.cs" />
     <Compile Include="Controllers\CGEAPI\VistoBuenoController.cs" />
     <Compile Include="Controllers\CGEAPI\VOBOController.cs" />
+    <Compile Include="Controllers\EleAPI\AnalisisPresupuestoFinalController.cs" />
     <Compile Include="Controllers\EleAPI\AnalisisPresupuesto3Controller.cs" />
     <Compile Include="Controllers\EleAPI\AnalisisPresupuesto4Controller.cs" />
     <Compile Include="Controllers\EleAPI\AnalisisPresupuestoController.cs" />
     <Compile Include="Controllers\EleAPI\AutorizaInformeController.cs" />
     <Compile Include="Controllers\EleAPI\AutorizaRequisicionController.cs" />
+    <Compile Include="Controllers\EleAPI\Avisos\CountPendientesController.cs" />
     <Compile Include="Controllers\EleAPI\Avisos\ConsultaPendientesUsuarioController.cs" />
     <Compile Include="Controllers\EleAPI\Avisos\ConsultaTareasPendientesController.cs" />
     <Compile Include="Controllers\EleAPI\CatalogoCentros\ConsultaCatalogoCentrosController.cs" />

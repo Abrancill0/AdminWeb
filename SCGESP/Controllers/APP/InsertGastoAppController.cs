@@ -168,7 +168,7 @@ namespace SCGESP.Controllers.APP
                 comando.Parameters["@idapp"].Value = "Web";
                 comando.Parameters["@dirxml"].Value = "";//Datos.dirxml;
                 comando.Parameters["@dirpdf"].Value = "";//Datos.dirpdf;
-                comando.Parameters["@dirotros"].Value = Datos.fileotros; //Datos.dirotros;
+                comando.Parameters["@dirotros"].Value = Datos.fileotros != null ? Datos.fileotros : ""; ; //Datos.dirotros;
                 comando.Parameters["@observaciones"].Value = obs;
                 comando.Parameters["@estatus"].Value = Datos.estatus;
                 comando.Parameters["@rfc"].Value = rfc;
