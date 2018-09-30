@@ -3,6 +3,7 @@ using SCGESP.Clases;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Web.Http;
 using System.Xml;
 
@@ -27,6 +28,71 @@ namespace SCGESP.Controllers.APP
         {
             string UsuarioDesencripta = Seguridad.DesEncriptar(Datos.Usuario);
 
+            List<NUmeroRequisicionesResult> lista = new List<NUmeroRequisicionesResult>();
+
+            try
+            {
+                SqlCommand comando = new SqlCommand("CountInformeApp");
+                comando.CommandType = CommandType.StoredProcedure;
+
+                //Declaracion de parametros
+                comando.Parameters.Add("@uconsulta", SqlDbType.VarChar);
+                //comando.Parameters.Add("@idempresa", SqlDbType.Int);
+
+                //Asignacion de valores a parametros
+                comando.Parameters["@uconsulta"].Value = UsuarioDesencripta;
+
+                comando.Connection = new SqlConnection(VariablesGlobales.CadenaConexion);
+                comando.CommandTimeout = 0;
+                comando.Connection.Open();
+                //DA.SelectCommand = comando;
+                //comando.ExecuteNonQuery();
+
+                DataTable DT = new DataTable();
+                SqlDataAdapter DA = new SqlDataAdapter(comando);
+                comando.Connection.Close();
+                DA.Fill(DT);
+                
+                if (DT.Rows.Count > 0)
+                {
+
+                    foreach (DataRow row in DT.Rows)
+                    {
+                        NUmeroRequisicionesResult ent = new NUmeroRequisicionesResult
+                        {
+                            Tipo = "Informes Pendientes",
+                            NumeroRequisiciones = Convert.ToInt32(row["NumeroInformes"])
+                        };
+
+                        lista.Add(ent);
+                        
+                    };
+                    
+                }
+                else
+                {
+                    NUmeroRequisicionesResult ent = new NUmeroRequisicionesResult
+                    {
+                        Tipo = "Informes Pendientes",
+                        NumeroRequisiciones =0
+                    };
+
+                    lista.Add(ent);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                NUmeroRequisicionesResult ent = new NUmeroRequisicionesResult
+                {
+                    Tipo = "Informes Pendientes",
+                    NumeroRequisiciones = 0
+                };
+
+                lista.Add(ent);
+            }
+
+            
             DocumentoEntrada entrada = new DocumentoEntrada
             {
                 Usuario = UsuarioDesencripta,
@@ -46,8 +112,6 @@ namespace SCGESP.Controllers.APP
                 DTRequisiciones = respuesta.obtieneTabla("Catalogo");
 
 				int NumReq = DTRequisiciones.Rows.Count;
-
-                List<NUmeroRequisicionesResult> lista = new List<NUmeroRequisicionesResult>();
 				
 					NUmeroRequisicionesResult ent = new NUmeroRequisicionesResult
 					{
@@ -61,8 +125,7 @@ namespace SCGESP.Controllers.APP
             }
             else
             {
-				List<NUmeroRequisicionesResult> lista = new List<NUmeroRequisicionesResult>();
-
+				
 				NUmeroRequisicionesResult ent = new NUmeroRequisicionesResult
 				{
 					Tipo = "Requisiciones Pendientes",
