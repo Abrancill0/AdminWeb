@@ -1,4 +1,5 @@
-﻿using SCGESP.Clases;
+﻿using Ele.Generales;
+using SCGESP.Clases;
 using System;
 using System.Data;
 using System.Data.SqlClient;
@@ -221,12 +222,38 @@ namespace SCGESP.Controllers.CGEAPI
                     {
                         try
                         {
-
+							
                             int error = Convert.ToInt16(row["Error"]);
 
                             if (error == 0)
                             {
-                                resultado.AgregadoOk = true;
+								if ((ArcCdfi.UUID).Trim() != "")
+								{
+									int IdGastoAdminERP = Convert.ToInt16(row["IdGastoAdminERP"]);
+									if (IdGastoAdminERP > 0) {
+										try
+										{
+											DocumentoEntrada entradadoc = new DocumentoEntrada
+											{
+												Usuario = Datos.UGasto,//Variables.usuario;
+												Origen = "AdminWEB",
+												Transaccion = 120092,
+												Operacion = 21
+											};//21:Agregar XML, 22:Eliminar XML
+											entradadoc.agregaElemento("FiGfaGasto", IdGastoAdminERP);
+											entradadoc.agregaElemento("FiGfaUuid", (ArcCdfi.UUID).Trim());
+
+											DocumentoSalida respuesta = PeticionCatalogo(entradadoc.Documento);
+										}
+										catch (Exception)
+										{
+
+											throw;
+										}
+									}
+								}
+
+								resultado.AgregadoOk = true;
                                 resultado.Descripcion = Datos.Tipo == 1 ? "Gasto Adicinal / Propina Agregada al Gasto. " : "Comprobante (CFDI) adicional agregado. ";
                                 resultado.IdInforme = Convert.ToInt16(row["idinforme"]);
                                 resultado.IdGasto = Convert.ToInt16(row["idgasto"]);
@@ -533,5 +560,14 @@ namespace SCGESP.Controllers.CGEAPI
 
 
         }
-    }
+
+		public static DocumentoSalida PeticionCatalogo(XmlDocument doc)
+		{
+			Localhost.Elegrp ws = new Localhost.Elegrp();
+			ws.Timeout = -1;
+			string respuesta = ws.PeticionCatalogo(doc);
+			return new DocumentoSalida(respuesta);
+		}
+
+	}
 }

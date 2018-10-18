@@ -280,7 +280,9 @@ namespace SCGESP.Controllers.CGEAPI
 
 			DA1 = new SqlDataAdapter(consulta, Conexion);
 			DA1.Fill(DT1);
-
+			DocumentoEntrada entradadoc = new DocumentoEntrada();
+			DocumentoSalida respuesta;
+			string[] xmlBorrado;
 			if (DT1.Rows.Count > 0)
 			{
 				int st_respuesta = 1;
@@ -292,7 +294,10 @@ namespace SCGESP.Controllers.CGEAPI
 
 				if (cUuid == 36)
 				{
-					DocumentoEntrada entradadoc = new DocumentoEntrada
+
+					xmlBorrado =  BorrarUUIDAdminERP(usuarioxml, idgasto, xuuid);
+
+					/*DocumentoEntrada entradadoc = new DocumentoEntrada
 					{
 						Usuario = usuarioxml,//Variables.usuario;
 						Origen = "AdminWEB",
@@ -302,9 +307,9 @@ namespace SCGESP.Controllers.CGEAPI
 					entradadoc.agregaElemento("FiGfaGasto", idgasto);
 					entradadoc.agregaElemento("FiGfaUuid", xuuid);
 
-					DocumentoSalida respuesta = PeticionCatalogo(entradadoc.Documento);
-					st_respuesta = Convert.ToInt16(respuesta.Resultado);
-					if (st_respuesta == 1)
+					DocumentoSalida respuesta = PeticionCatalogo(entradadoc.Documento);*/
+					st_respuesta = Convert.ToInt16(xmlBorrado[0]);//(respuesta.Resultado);
+					if (st_respuesta == 1 || st_respuesta == 0)
 					{
 						entradadoc = new DocumentoEntrada
 						{
@@ -345,14 +350,14 @@ namespace SCGESP.Controllers.CGEAPI
 					}
 					else
 					{
-						msnError = "";
-						XmlDocument xmErrores = new XmlDocument();
+						msnError = xmlBorrado[1];
+						/*XmlDocument xmErrores = new XmlDocument();
 						xmErrores.LoadXml(respuesta.Errores.InnerXml);
 						XmlNodeList elemList = xmErrores.GetElementsByTagName("Descripcion");
 						for (int i = 0; i < elemList.Count; i++)
 						{
 							msnError += elemList[i].InnerXml;
-						}
+						}*/
 						if (msnError != "")
 						{
 							Deletexml(Ruta);
@@ -368,7 +373,7 @@ namespace SCGESP.Controllers.CGEAPI
 			}
 			else
 			{
-				DocumentoEntrada entradadoc = new DocumentoEntrada
+				entradadoc = new DocumentoEntrada
 				{
 					Usuario = usuarioxml,//Variables.usuario;
 					Origen = "AdminWEB",
@@ -378,7 +383,7 @@ namespace SCGESP.Controllers.CGEAPI
 				entradadoc.agregaElemento("FiGfaGasto", idgasto);
 				entradadoc.agregaElemento("FiGfaUuid", UUID);
 
-				DocumentoSalida respuesta = PeticionCatalogo(entradadoc.Documento);
+				respuesta = PeticionCatalogo(entradadoc.Documento);
 				try
 				{
 					if (respuesta.Resultado == "0")
@@ -409,6 +414,11 @@ namespace SCGESP.Controllers.CGEAPI
 
 			if (Receptor.ToUpper() != "SPO830427DQ1")
 			{
+				if (UUID.Trim() != "")
+				{
+					xmlBorrado = BorrarUUIDAdminERP(usuarioxml, idgasto, UUID);
+				}
+
 				Deletexml(Ruta);
 
 				return "El RFC es invalido.";
@@ -471,14 +481,29 @@ namespace SCGESP.Controllers.CGEAPI
 				//}
 				if (Mensaje == "No se puede guardar el comprobante, el importe es igual o mayor a $ 2000.00 y la forma de pago es efectivo.")
 				{
+					if (UUID.Trim() != "")
+					{
+						xmlBorrado = BorrarUUIDAdminERP(usuarioxml, idgasto, UUID);
+					}
+
 					Deletexml(Ruta);
 				}
 				if (Mensaje == "El UUID ingresado ya existe" || Mensaje.Contains("El UUID ingresado ya existe"))
 				{
+					if (UUID.Trim() != "")
+					{
+						xmlBorrado = BorrarUUIDAdminERP(usuarioxml, idgasto, UUID);
+					}
+
 					Deletexml(Ruta);
 				}
 				if (Mensaje == "El RFC es invalido.")
 				{
+					if (UUID.Trim() != "")
+					{
+						xmlBorrado = BorrarUUIDAdminERP(usuarioxml, idgasto, UUID);
+					}
+
 					Deletexml(Ruta);
 				}
 
@@ -486,6 +511,11 @@ namespace SCGESP.Controllers.CGEAPI
 			}
 			else
 			{
+				if (UUID.Trim() != "")
+				{
+					xmlBorrado = BorrarUUIDAdminERP(usuarioxml, idgasto, UUID);
+				}
+
 				Deletexml(Ruta);
 
 				return null;
@@ -551,6 +581,61 @@ namespace SCGESP.Controllers.CGEAPI
 			}
 
 
+		}
+
+		public string[] BorrarUUIDAdminERP(string usuarioxml, int idgasto, string xuuid) {
+			string st_respuesta = "0";
+			string msnError = "";
+			string[] resultado = new string[2];
+			try
+			{
+				DocumentoEntrada entradadoc = new DocumentoEntrada
+				{
+					Usuario = usuarioxml,//Variables.usuario;
+					Origen = "AdminWEB",
+					Transaccion = 120092,
+					Operacion = 22
+				};//21:Agregar XML, 22:Eliminar XML
+				entradadoc.agregaElemento("FiGfaGasto", idgasto);
+				entradadoc.agregaElemento("FiGfaUuid", xuuid);
+
+				DocumentoSalida respuesta = PeticionCatalogo(entradadoc.Documento);
+				st_respuesta = Convert.ToString(respuesta.Resultado);
+
+				if (st_respuesta == "1")
+				{
+					resultado[0] = st_respuesta;
+					resultado[1] = "UUID borrado de AdminERP.";
+				}
+				else {
+					resultado[0] = st_respuesta;
+					XmlDocument xmErrores = new XmlDocument();
+					xmErrores.LoadXml(respuesta.Errores.InnerXml);
+					XmlNodeList elemList = xmErrores.GetElementsByTagName("Descripcion");
+					for (int i = 0; i < elemList.Count; i++)
+					{
+						msnError += elemList[i].InnerXml;
+					}
+					if (msnError.Trim() != "")
+					{
+						resultado[1] = msnError.Trim();
+					}
+					else {
+						resultado[1] = "Error al borrar UUID a AdminERP.";
+					}
+				}
+
+			}
+			catch (Exception e)
+			{
+				st_respuesta = "0";
+				msnError = e.ToString();
+
+				resultado[0] = st_respuesta;
+				resultado[1] = msnError.Trim();
+			}
+
+			return resultado;
 		}
 
 		public static DocumentoSalida PeticionCatalogo(XmlDocument doc)
