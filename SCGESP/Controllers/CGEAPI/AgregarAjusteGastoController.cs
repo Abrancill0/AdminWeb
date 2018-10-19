@@ -227,7 +227,7 @@ namespace SCGESP.Controllers.CGEAPI
 
                             if (error == 0)
                             {
-								if ((ArcCdfi.UUID).Trim() != "")
+								if ((ArcCdfi.UUID ?? "").Trim() != "")
 								{
 									int IdGastoAdminERP = Convert.ToInt16(row["IdGastoAdminERP"]);
 									if (IdGastoAdminERP > 0) {
