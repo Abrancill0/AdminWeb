@@ -28,9 +28,9 @@ namespace SCGESP.Controllers.EleAPI
 
             DocumentoEntrada entrada = new DocumentoEntrada();
             entrada.Usuario = UsuarioDesencripta;  
-            entrada.Origen = "Programa CGE";  //Datos.Origen; 
+            entrada.Origen = "AdminWEB";  //Datos.Origen; 
             entrada.Transaccion = 120760;
-            entrada.Operacion = 4;
+			entrada.Operacion = 11; // ya no se eliminan el registro solo se cancela;
 
             entrada.agregaElemento("RmReqId", Datos.RmReqId);
 
@@ -42,10 +42,26 @@ namespace SCGESP.Controllers.EleAPI
             }
             else
             {
-                var errores = respuesta.Errores;
 
-                return null;
-            }
+				string msnError = "";
+				XmlDocument xmErrores = new XmlDocument();
+				XmlDocument xmError = new XmlDocument();
+				xmErrores.LoadXml(respuesta.Errores.InnerXml);
+
+				XmlNodeList elemList = xmErrores.GetElementsByTagName("Descripcion");
+				for (int i = 0; i < elemList.Count; i++)
+				{
+					msnError += (elemList[i].InnerXml) + " ";
+				}
+
+				xmError.LoadXml("<Salida><Resultado>0</Resultado><Error>" + msnError + "</Error></Salida>");
+
+				return xmError;
+
+				//var errores = respuesta.Errores;
+
+				//return null;
+			}
 
         }
 

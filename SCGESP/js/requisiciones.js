@@ -218,7 +218,7 @@ function newRowRequisiciones(datos, nrow) {
 
         var btnEli = "";
         if (RmReqEstatus === "1" || RmReqEstatusNombre === "Captura")
-            btnEli = "<button type='button' class='btn btn-danger btn-sm' onclick='confEliminarRequisiciones(" + RmReqId + ", \"" + (RmReqId + ".- " + RmReqJustificacion) + "\")'><span class='glyphicon glyphicon-trash'></span> Eliminar</button>";
+            btnEli = "<button type='button' class='btn btn-danger btn-sm' onclick='confCancelarRequisiciones(" + RmReqId + ", \"" + (RmReqId + ".- " + RmReqJustificacion) + "\")'><span class='glyphicon glyphicon-ban-circle'></span> Cancelar</button>";
 
         var newrow = [
             RmReqId,
@@ -244,20 +244,20 @@ $("#tblRequisiciones").on("click, mouseenter", "tbody tr", function () {
         $(this).addClass('selected');
     }
 });
-function confEliminarRequisiciones(id, nombre) {
+function confCancelarRequisiciones(id, nombre) {
     var datos = { 'Usuario': UsuarioActivo, 'RmReqId': id, 'Empleado': EmpeladoActivo };
     var botones = [];
     botones[0] = {
         text: "Si", click: function () {
             var permite = permitirAjustarReq(id);
             if (permite.actualizaOk === false) {
-                var msnError = "No puedes eliminar la requisición cuando el estatus es: ";
+                var msnError = "No puedes cancelar la requisición cuando el estatus es: ";
                 msnError += permite.idestatus + ".- " + permite.nmbestatus + ".";
                 $.notify(msnError, { position: "top center", autoHideDelay: 4000, className: "error" });
                 return false;
             } else {
                 $(this).dialog("close");
-                eliminarRequisiciones(datos, nombre);
+                CancelarRequisiciones(datos, nombre);
             }
         }
     };
@@ -266,13 +266,13 @@ function confEliminarRequisiciones(id, nombre) {
             $(this).dialog("close");
         }
     };
-    Seguridad.confirmar("Eliminar Requisicion:<br /><b>" + nombre + "</b>?", botones, " Eliminar Requisicion.");
+    Seguridad.confirmar("Cancelar Requisicion:<br /><b>" + nombre + "</b>?", botones, " Eliminar Requisicion.");
 
 }
-function eliminarRequisiciones(datos, nombre) {
+function CancelarRequisiciones(datos, nombre) {
     //var monto = $("#monto").val() * 1;
     var datosd = { 'RmRdeRequisicion': datos.RmReqId, 'Usuario': UsuarioActivo, 'Empleado': EmpeladoActivo };
-    //if (monto > 0) {
+    if (1 === 2) {
     $.ajax({
         async: false,
         type: "POST",
@@ -312,8 +312,8 @@ function eliminarRequisiciones(datos, nombre) {
             console.log("error", result);
         }
     });
-    //}
-
+    }
+//la operacion del API EliminaRequisicionCabecera cambio a solo cancelar
     $.ajax({
         async: false,
         type: "POST",
@@ -322,13 +322,22 @@ function eliminarRequisiciones(datos, nombre) {
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         cache: false,
-        success: function () {
-            ObtenerRequisiciones();
-            $("#tblRequisiciones").notify("Requisicion " + nombre + " Eliminado.", { position: "top center", autoHideDelay: 3000 }, "success");
+        success: function (result) {
+
+            var stResultado = result.Salida.Resultado * 1;
+
+            if(stResultado === 1){
+                ObtenerRequisiciones();
+                $("#tblRequisiciones").notify("Requisicion " + nombre + " Cancelada.", { position: "top center", autoHideDelay: 3000 }, "success");
+            }else{
+                $("#tblRequisiciones").notify("Error al Cancelar Requisicion " + nombre + ".", { position: "top center", autoHideDelay: 2000 }, "error");
+                Seguridad.alerta(result.Salida.Error, "#tblRequisiciones");
+                //
+            }
         },
         error: function (result) {
             console.log(result);
-            $("#tblRequisiciones").notify("Error al Eliminar Requisicion.", { position: "top center", autoHideDelay: 2000 }, "error");
+            $("#tblRequisiciones").notify("Error al Cancelar Requisicion.", { position: "top center", autoHideDelay: 2000 }, "error");
         }
     });
 }
