@@ -256,8 +256,16 @@ function confCancelarRequisiciones(id, nombre) {
                 $.notify(msnError, { position: "top center", autoHideDelay: 4000, className: "error" });
                 return false;
             } else {
-                $(this).dialog("close");
-                CancelarRequisiciones(datos, nombre);
+                var RmReqComentarios = $.trim($("#RmReqComentarios").val());
+                //if (RmReqComentarios !== "") {
+                    datos['RmReqComentarios'] = RmReqComentarios;
+                    $(this).dialog("close");
+                    CancelarRequisiciones(datos, nombre);
+                /*} else {
+                    var msnError = "No puedes cancelar la requisición, se requiere un motivo.";
+                    $.notify(msnError, { position: "top center", autoHideDelay: 4000, className: "error" });
+                    return false;
+                }*/                
             }
         }
     };
@@ -266,7 +274,15 @@ function confCancelarRequisiciones(id, nombre) {
             $(this).dialog("close");
         }
     };
-    Seguridad.confirmar("Cancelar Requisicion:<br /><b>" + nombre + "</b>?", botones, " Eliminar Requisicion.");
+    //
+    var msn = "Cancelar Requisicion: <b>" + nombre + "</b>?<br />";
+    //msn += "Motivo:<br />";
+    
+    //msn += "<div class='input-group'><div class='input-group-prepend'><div class='input-group-text'>Motivo: </div></div>";
+    //msn += "<input type='text' id='RmReqComentarios' name='RmReqComentarios' style='width: 100%' class='form- control' placeholder='Motivo de cancelación'>";
+    //msn += "</div>";
+
+    Seguridad.confirmar(msn, botones, " Cancelar Requisicion.");
 
 }
 function CancelarRequisiciones(datos, nombre) {
@@ -323,17 +339,18 @@ function CancelarRequisiciones(datos, nombre) {
         dataType: 'json',
         cache: false,
         success: function (result) {
-
             var stResultado = result.Salida.Resultado * 1;
 
-            if(stResultado === 1){
-                ObtenerRequisiciones();
-                $("#tblRequisiciones").notify("Requisicion " + nombre + " Cancelada.", { position: "top center", autoHideDelay: 3000 }, "success");
+            if (stResultado === 1) {
+                $.notify("Requisicion " + nombre + " Cancelada.", {position: "top center", autoHideDelay: 3000, className: "success" });
             }else{
                 $("#tblRequisiciones").notify("Error al Cancelar Requisicion " + nombre + ".", { position: "top center", autoHideDelay: 2000 }, "error");
                 Seguridad.alerta(result.Salida.Error, "#tblRequisiciones");
                 //
             }
+        },
+        complete: function () {
+            ObtenerRequisiciones();
         },
         error: function (result) {
             console.log(result);

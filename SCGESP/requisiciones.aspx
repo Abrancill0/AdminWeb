@@ -303,6 +303,6 @@
     <!-- App functions and actions -->
     <script type="text/javascript" src="js/app.min.js"></script>
     <script type="text/javascript" src="js/js.js"></script>
-    <script type="text/javascript" src="js/requisiciones.js?v.11"></script>
+    <script type="text/javascript" src="js/requisiciones.js?v.19"></script>
 
 </asp:Content>
