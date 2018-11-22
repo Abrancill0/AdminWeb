@@ -26,6 +26,7 @@ namespace SCGESP.Controllers.APP
             try
             {
                 string TokenID = "";
+                int Pendientes = 0;
 
                 SqlCommand comando = new SqlCommand("ObtieneUsuariosToken");
                 comando.CommandType = CommandType.StoredProcedure;
@@ -48,11 +49,13 @@ namespace SCGESP.Controllers.APP
                     foreach (DataRow row in DT.Rows)
                     {
                         TokenID = Convert.ToString(row["Token"]);
+                        Pendientes = Convert.ToInt32(row["Pendientes"]);
                     }
                 }
                 else
                 {
                     TokenID = "";
+                    Pendientes = 0;
                 }
 
                 if (TokenID != "")
@@ -68,12 +71,13 @@ namespace SCGESP.Controllers.APP
                   Notification = new CrossPlatformNotification
                 { Title = Datos.Titulo,
                   Body = Datos.Mensaje,
-                  Badge = "1"
-                  }
+                  Badge = Convert.ToString(Pendientes)}
                 }
                         };
 
-                        var pushService = new PushNotificationService("AAAASvHYA78:APA91bEYxMsqdhV-7h-DdDGORTinWDc8G_JEYmOBhMA7FVNfNNpbrsviDW0BNK0etgD2l6QEMiiQHz3Of_Kv2YMEwQHVl6kvoStC0SBucb9nSGP6XGWG-6IAN48WBtb4Te2QPG1jWzMx");
+                        var pushService = new PushNotificationService("AAAAhj1oXWM:APA91bFKxoagtjhXM8o1alJCPlQsAvDtaEKM6TyfN7HaLwqqq95KapxHc73Dgq5tVSdJU7fbbSAxaxQJ56OFEK6ft6mOAoh01ZBJxhe108WX5CT4EimDYz_nAslLFcqiVJ4jxJAErCJ3");
+                        //AAAAhj1oXWM:APA91bFKxoagtjhXM8o1alJCPlQsAvDtaEKM6TyfN7HaLwqqq95KapxHc73Dgq5tVSdJU7fbbSAxaxQJ56OFEK6ft6mOAoh01ZBJxhe108WX5CT4EimDYz_nAslLFcqiVJ4jxJAErCJ3
+                        // clave anterior AAAASvHYA78:APA91bEYxMsqdhV-7h-DdDGORTinWDc8G_JEYmOBhMA7FVNfNNpbrsviDW0BNK0etgD2l6QEMiiQHz3Of_Kv2YMEwQHVl6kvoStC0SBucb9nSGP6XGWG-6IAN48WBtb4Te2QPG1jWzM
                         var responseMessage = await pushService.PushMessage(requestMessage);
 
                         return "Notificacion Enviada Exitosamente";

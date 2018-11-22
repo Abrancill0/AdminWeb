@@ -40,7 +40,7 @@
                 </div>
                 <!--a onclick="Login();" class="btn btn--icon login__block__btn"><i class="zmdi zmdi-long-arrow-right"></i></a-->
                 <button class="btn btn-lg btn-primary btn-block" type="button" onclick="Login();"><span class="zmdi zmdi-lock-open zmdi-hc-2x"></span>  Entrar</button>
-                <!--<button class="btn btn-lg btn-primary btn-block" type="button" onclick="Pruebas();"><span class="zmdi zmdi-lock-open zmdi-hc-2x"></span>  probar</button>-->
+               <button class="btn btn-lg btn-primary btn-block" type="button" onclick="Pruebas();"><span class="zmdi zmdi-lock-open zmdi-hc-2x"></span>  probar</button>
 
             </div>
         </div>
@@ -144,22 +144,23 @@
                 <script>
                     localStorage.clear();
 
-                     //function Pruebas() {
-                     //    var datos = {
-                     //        "Usuario": 'maalmendar',
+                     function Pruebas() {
+                         var datos = {
+                             "Usuario": 'maalmendar',
+                             "Titulo": 'prueba sin badget',
+                             "Mensaje": 'mensaje prueba'
+                         };
 
-                     //    };
+                         $.ajax({
+                             async: true,
+                            type: 'POST',
+                             url: '/api/SendNotification',
+                             data: JSON.stringify(datos),
+                            contentType: 'application/json; charset=utf-8',
+                             dataType: 'json',
 
-                     //    $.ajax({
-                     //        async: true,
-                     //       type: 'POST',
-                     //        url: '/api/CuentaNumeroInformesApp',
-                     //        data: JSON.stringify(datos),
-                     //       contentType: 'application/json; charset=utf-8',
-                     //        dataType: 'json',
-
-                     //    });
-                     //}
+                         });
+                     }
 
 
                     function Login() {
