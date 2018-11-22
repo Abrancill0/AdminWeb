@@ -78,7 +78,7 @@ namespace SCGESP.Controllers
 
                 ObtieneParametrosSalida ent = new ObtieneParametrosSalida
                 {
-                    Responsible = Convert.ToString("no encontro ningun registro"),
+                    Responsable = Convert.ToString("no encontro ningun registro"),
                     
                 };
                 lista.Add(ent);
@@ -94,7 +94,7 @@ namespace SCGESP.Controllers
                 ObtieneParametrosSalida ent = new ObtieneParametrosSalida
                 {
 
-                    Responsible = ex.ToString()
+                    Responsable = ex.ToString()
 
                 };
                 lista.Add(ent);
