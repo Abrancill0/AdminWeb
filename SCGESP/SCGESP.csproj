@@ -4965,12 +4965,14 @@
       <DependentUpon>confrontacion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\APP\AutorizarTraspasoController.cs" />
+    <Compile Include="Controllers\APP\PendientesEle.cs" />
     <Compile Include="Controllers\APP\RechazarTraspasoController.cs" />
     <Compile Include="Controllers\APP\RechazarSolicitudCambioCentroController.cs" />
     <Compile Include="Controllers\APP\AutorizarSolicitudCambioCentroController.cs" />
     <Compile Include="Controllers\APP\FlujoProcesoSolicitudController.cs" />
     <Compile Include="Controllers\APP\DetalleTraspasoController.cs" />
     <Compile Include="Controllers\APP\FlujoProcesoTraspasoController.cs" />
+    <Compile Include="Controllers\APP\EnvioNotificacionesController.cs" />
     <Compile Include="Controllers\APP\TraspasosAutorizarController.cs" />
     <Compile Include="Controllers\APP\SolicitudescambioCentroAutorizarController.cs" />
     <Compile Include="Controllers\APP\AutorizaInformeAppController.cs" />
@@ -5260,6 +5262,7 @@
     <Folder Include="vendors\bower_components\jqvmap\create\source\" />
     <Folder Include="vendors\bower_components\select2\docs\dist\" />
     <Folder Include="Views\ConsultaMaterial\" />
+    <Folder Include="Views\EnvioNotificaciones\" />
     <Folder Include="XML\" />
   </ItemGroup>
   <ItemGroup>

@@ -36,7 +36,7 @@ namespace SCGESP.Controllers
             public string FiCscEstatusSiguienteNombre { get; set; } //nombre del estatus siguiente de la solicitud
             public string FiCscEmpleadoObligado { get; set; }//empleado obligado a autorizar
             public string FiCscEmpleadoObligadoNombre { get; set; }//nombre del empleado obligado a autorizar
-            public string FiCenResponsable { get; set; }//responsible actual
+            public string FiCscUsuarioAlta { get; set; }//responsible actual
             public string FiCenMontoMinimo { get; set; }//monto mínimo actual
             public string FiCenMontoMaximo { get; set; } //monto máximo actual
         }
@@ -75,7 +75,7 @@ namespace SCGESP.Controllers
                 {
                     ObtieneParametrosSalida ent = new ObtieneParametrosSalida
                     {
-                        FiCscSolicitud = Convert.ToString(row["RmOcoId"]),
+                        FiCscSolicitud = Convert.ToString(row["FiCscSolicitud"]),
                         FiCscTipo = Convert.ToString(row["FiCscTipo"]),
                         FiCscEstatus = Convert.ToString(row["FiCscEstatus"]),
                         FiCscEstatusNombre = Convert.ToString(row["FiCscEstatusNombre"]),
@@ -85,15 +85,15 @@ namespace SCGESP.Controllers
                         FiCscNombre = Convert.ToString(row["FiCscNombre"]),
                         FiCscResponsable = Convert.ToString(row["FiCscResponsable"]),
                         FiCscResponsableNombre = Convert.ToString(row["FiCscResponsableNombre"]),
-                        FiCscMontoMinimo = Convert.ToString(row["FiCscMontoMinimo"]),
-                        FiCscMontoMaximo = Convert.ToString(row["FiCscMontoMaximo"]),
+                        FiCscMontoMinimo = string.IsNullOrEmpty(Convert.ToString(row["FiCscMontoMinimo"])) ? "0" : Convert.ToString(row["FiCscMontoMinimo"]),
+                        FiCscMontoMaximo = string.IsNullOrEmpty(Convert.ToString(row["FiCscMontoMaximo"])) ? "0" : Convert.ToString(row["FiCscMontoMaximo"]),
                         FiCscEstatusSiguiente = Convert.ToString(row["FiCscEstatusSiguiente"]),
                         FiCscEstatusSiguienteNombre = Convert.ToString(row["FiCscEstatusSiguienteNombre"]),
                         FiCscEmpleadoObligado = Convert.ToString(row["FiCscEmpleadoObligado"]),
                         FiCscEmpleadoObligadoNombre = Convert.ToString(row["FiCscEmpleadoObligadoNombre"]),
-                        FiCenResponsable = Convert.ToString(row["FiCenResponsable"]),
-                        FiCenMontoMinimo = Convert.ToString(row["FiCenMontoMinimo"]),
-                        FiCenMontoMaximo = Convert.ToString(row["FiCenMontoMaximo"]),
+                        FiCscUsuarioAlta = Convert.ToString(row["FiCscUsuarioAlta"]),
+                        FiCenMontoMinimo = string.IsNullOrEmpty(Convert.ToString(row["FiCenMontoMinimo"])) ? "0" : Convert.ToString(row["FiCenMontoMinimo"]),
+                        FiCenMontoMaximo = string.IsNullOrEmpty(Convert.ToString(row["FiCenMontoMaximo"])) ? "0" : Convert.ToString(row["FiCenMontoMaximo"]),
 
                     };
                     lista.Add(ent);

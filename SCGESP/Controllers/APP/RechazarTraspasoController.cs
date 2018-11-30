@@ -32,12 +32,12 @@ namespace SCGESP.Controllers
                 Usuario = Datos.Usuario,
                 Origen = "AdminAPP",
                 Transaccion = 120402,
-                Operacion = 11,
+                Operacion = 14,
             };
 
             entrada.agregaElemento("PrTraId", Datos.PrTraId);
             entrada.agregaElemento("PrTraEstatus", Datos.PrTraEstatus);
-            entrada.agregaElemento("PrTraMotivoRechazo", Datos.PrTraMotivoRechazo);
+            entrada.agregaElemento("MotivoRechazo", Datos.PrTraMotivoRechazo);
 
             DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 

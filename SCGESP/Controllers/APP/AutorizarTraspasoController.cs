@@ -30,7 +30,7 @@ namespace SCGESP.Controllers
                 Usuario = Datos.Usuario,
                 Origen = "AdminAPP",
                 Transaccion = 120697,
-                Operacion = 10,
+                Operacion = 13,
             };
 
             entrada.agregaElemento("PrTraId", Datos.PrTraId);

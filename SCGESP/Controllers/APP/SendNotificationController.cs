@@ -71,7 +71,9 @@ namespace SCGESP.Controllers.APP
                   Notification = new CrossPlatformNotification
                 { Title = Datos.Titulo,
                   Body = Datos.Mensaje,
-                  Badge = Convert.ToString(Pendientes)}
+                  Badge = Convert.ToString(Pendientes),
+                  Sound = "true",
+                 }
                 }
                         };
 
