@@ -146,15 +146,13 @@
 
                      function Pruebas() {
                          var datos = {
-                             "usuario": 'maalmendar',
-                             "Titulo": 'Prueba IOS',
-                             "Mensaje": 'mensaje de pruebita',
+                             "Usuario": 'fjsolis'
                          };
 
                          $.ajax({
                              async: true,
                             type: 'POST',
-                             url: '/api/SendNotification',
+                             url: '/api/SolicitudesCambioCentroAutorizar',
                              data: JSON.stringify(datos),
                             contentType: 'application/json; charset=utf-8',
                              dataType: 'json',

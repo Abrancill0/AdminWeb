@@ -16,6 +16,7 @@ namespace SCGESP.Controllers
         public class ParametrosEntrada
         {
             public string Usuario { get; set; }
+            public string PrTraId { get; set; }
         }
 
         public class ObtieneParametrosSalida
@@ -40,6 +41,8 @@ namespace SCGESP.Controllers
                 Transaccion = 120697,
                 Operacion = 17,
             };
+
+            entrada.agregaElemento("PrTraId", Datos.PrTraId);
             
             DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 
@@ -50,7 +53,7 @@ namespace SCGESP.Controllers
 
                 if (respuesta.Resultado == "1")
             {
-                DTLista = respuesta.obtieneTabla("Catalogo");
+                DTLista = respuesta.obtieneTabla("FlujoTraspaso");
 
                 int NumOCVobo = DTLista.Rows.Count;
 
