@@ -31,7 +31,7 @@ namespace SCGESP.Controllers
             {
                 Usuario = Datos.Usuario,
                 Origen = "AdminAPP",
-                Transaccion = 120402,
+                Transaccion = 120697,
                 Operacion = 14,
             };
 
