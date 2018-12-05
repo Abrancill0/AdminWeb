@@ -1630,7 +1630,13 @@
 					var campo = valorVacio(value[2]) ? "" : value[2];
 					var valor = value[1];
 					var valores = "{\"" + campo + "\": \"" + valor + "\"}";
-					valores = JSON.parse(valores);
+					
+					try {
+						valores = JSON.parse(valores);
+					} catch (e) {
+						valores = [valor];
+					}
+
 					datos.push(valores);
 				});
 			}
@@ -2050,7 +2056,9 @@
 			});
 			$("span.buttonText").empty();
 			"#mEditarGastoInf .modal-header.titulo-modal span".AsHTML("Editar Gasto");
-			var gasto = JSON.parse(datos_gasto);
+			var gasto = [];
+			gasto = StrToJSON(datos_gasto);
+			
 			var valores_justificacion = gasto.valores_justificacion;
 			$("input[id*='justificacion']").val("");
 			$("#comensales_gasto").hide();
@@ -2098,8 +2106,42 @@
 			}
 
 		}
+		function StrToJSON(strJson) {
+			var JsonStr = [];
+			try {
+				JsonStr = JSON.parse(strJson);
+			} catch (e) {
+				try {
+					var gJson = JSON.stringify(eval('(' + strJson + ')'));
+					var JSONObj=JSON.parse(gJson);
+					JsonStr = JSONObj;
+				} catch (e) {
+					try {
+						JsonStr = JSONize(strJson);
+					} catch (e) {
+						try {
+							JsonStr = JSON.parse(JSONize(strJson)) 
+						} catch (e) {
+							var errorString= strJson;
+							var jsonValidString = JSON.stringify(eval("(" + errorString+ ")"));
+ 							var JSONObj=JSON.parse(jsonValidString);
+							JsonStr = JSONObj;
+						}
+					}
+				}
+			}
+			return JsonStr;
+		}
+function JSONize(str) {
+  return str
+    // wrap keys without quote with valid double quote
+    .replace(/([\$\w]+)\s*:/g, function(_, $1){return '"'+$1+'":'})    
+    // replacing single quote wrapped ones to double quote 
+    .replace(/'([^']+)'/g, function(_, $1){return '"'+$1+'"'})         
+}
+
 		function eliminar_gasto(datos_gasto) {
-			var gasto = JSON.parse(datos_gasto);
+			var gasto = StrToJSON(datos_gasto);
 			var ConfBanco = $("#ConfBanco").val() * 1;
 			var IdInforme = $("#idinforme").val() * 1;
 			if (ConfBanco === 1) {
