@@ -224,13 +224,16 @@ namespace SCGESP.Controllers.CGEAPI
                         {
 							
                             int error = Convert.ToInt16(row["Error"]);
+							int IdGastoAdminERP_2 = 0;
 
-                            if (error == 0)
+							if (error == 0)
                             {
 								if ((ArcCdfi.UUID ?? "").Trim() != "")
 								{
 									int IdGastoAdminERP = Convert.ToInt16(row["IdGastoAdminERP"]);
-									if (IdGastoAdminERP > 0) {
+									if (IdGastoAdminERP > 0)
+									{
+										IdGastoAdminERP_2 = IdGastoAdminERP;
 										try
 										{
 											DocumentoEntrada entradadoc = new DocumentoEntrada
@@ -244,6 +247,62 @@ namespace SCGESP.Controllers.CGEAPI
 											entradadoc.agregaElemento("FiGfaUuid", (ArcCdfi.UUID).Trim());
 
 											DocumentoSalida respuesta = PeticionCatalogo(entradadoc.Documento);
+											if (respuesta.Resultado == "0")
+											{
+												string msnError = "";
+
+												XmlDocument xmErrores = new XmlDocument();
+												xmErrores.LoadXml(respuesta.Errores.InnerXml);
+
+												XmlNodeList elemList = xmErrores.GetElementsByTagName("Descripcion");
+												for (int i = 0; i < elemList.Count; i++)
+												{
+													msnError += elemList[i].InnerXml;
+												}
+												if (msnError != "")
+												{
+													string path = HttpContext.Current.Server.MapPath("/");
+													string urlXML = path + (archivo.Ruta ?? "");
+													Deletexml(urlXML);
+												}
+												resultado.AgregadoOk = false;
+												resultado.Descripcion = (Datos.Tipo == 1 ? "Gasto Adicinal / Propina NO Agregada al Gasto. " : "Comprobante (CFDI) adicional NO agregado. ") + msnError;
+												resultado.IdInforme = Convert.ToInt16(row["idinforme"]);
+												resultado.IdGasto = Convert.ToInt16(row["idgasto"]);
+												resultado.IdGastoOrigen = Convert.ToInt16(row["idgastoorigen"]);
+
+												//borrar xml
+												try
+												{
+													SqlConnection Conexion = new SqlConnection
+													{
+														ConnectionString = VariablesGlobales.CadenaConexion
+													};
+
+													string query = "UPDATE gastos SET g_dirxml = '', g_xmlcargado = 0, g_valor = g_total " + 
+																	" WHERE g_idinforme = " + resultado.IdInforme + " AND g_id = " + resultado.IdGasto + "; " +
+																	" DELETE FROM xmlinforme WHERE x_idinforme = " + resultado.IdInforme + " AND x_idgasto = " + resultado.IdGasto + "; " +
+																	" EXEC UpdateTotalInforme " + resultado.IdInforme + ";";
+													SqlDataAdapter DA2;
+													DataTable DT2 = new DataTable();
+													DA2 = new SqlDataAdapter(query, Conexion);
+													DA.Fill(DT2);
+
+												}
+												catch (Exception)
+												{
+
+													throw;
+												}
+
+											}
+											else {
+												resultado.AgregadoOk = true;
+												resultado.Descripcion = Datos.Tipo == 1 ? "Gasto Adicinal / Propina Agregada al Gasto. " : "Comprobante (CFDI) adicional agregado. ";
+												resultado.IdInforme = Convert.ToInt16(row["idinforme"]);
+												resultado.IdGasto = Convert.ToInt16(row["idgasto"]);
+												resultado.IdGastoOrigen = Convert.ToInt16(row["idgastoorigen"]);
+											}
 										}
 										catch (Exception)
 										{
@@ -251,13 +310,21 @@ namespace SCGESP.Controllers.CGEAPI
 											throw;
 										}
 									}
+									else {
+										resultado.AgregadoOk = true;
+										resultado.Descripcion = Datos.Tipo == 1 ? "Gasto Adicinal / Propina Agregada al Gasto. " : "Comprobante (CFDI) adicional agregado. ";
+										resultado.IdInforme = Convert.ToInt16(row["idinforme"]);
+										resultado.IdGasto = Convert.ToInt16(row["idgasto"]);
+										resultado.IdGastoOrigen = Convert.ToInt16(row["idgastoorigen"]);
+									}
 								}
-
-								resultado.AgregadoOk = true;
-                                resultado.Descripcion = Datos.Tipo == 1 ? "Gasto Adicinal / Propina Agregada al Gasto. " : "Comprobante (CFDI) adicional agregado. ";
-                                resultado.IdInforme = Convert.ToInt16(row["idinforme"]);
-                                resultado.IdGasto = Convert.ToInt16(row["idgasto"]);
-                                resultado.IdGastoOrigen = Convert.ToInt16(row["idgastoorigen"]);
+								else {
+									resultado.AgregadoOk = true;
+									resultado.Descripcion = Datos.Tipo == 1 ? "Gasto Adicinal / Propina Agregada al Gasto. " : "Comprobante (CFDI) adicional agregado. ";
+									resultado.IdInforme = Convert.ToInt16(row["idinforme"]);
+									resultado.IdGasto = Convert.ToInt16(row["idgasto"]);
+									resultado.IdGastoOrigen = Convert.ToInt16(row["idgastoorigen"]);
+								}
                             }
                             else {
                                 resultado.AgregadoOk = false;
