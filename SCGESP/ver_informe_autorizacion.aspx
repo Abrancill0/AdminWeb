@@ -1091,7 +1091,7 @@
 					var campo = valorVacio(value[2]) ? "" : value[2];
 					var valor = value[1];
 					var valores = "{\"" + campo + "\": \"" + valor + "\"}";
-					valores = JSON.parse(valores);
+					valores = StrToJSON(valores);//JSON.parse(valores);
 					datos.push(valores);
 				});
 			}
@@ -1221,6 +1221,32 @@
 			}
 			return list_justificacion;
 		}
+		function StrToJSON(strJson) {
+			var JsonStr = [];
+			try {
+				JsonStr = JSON.parse(strJson);
+			} catch (e) {
+				try {
+					var gJson = JSON.stringify(eval('(' + strJson + ')'));
+					var JSONObj=JSON.parse(gJson);
+					JsonStr = JSONObj;
+				} catch (e) {
+					try {
+						JsonStr = JSONize(strJson);
+					} catch (e) {
+						try {
+							JsonStr = JSON.parse(JSONize(strJson)) 
+						} catch (e) {
+							var errorString= strJson;
+							var jsonValidString = JSON.stringify(eval("(" + errorString+ ")"));
+ 							var JSONObj=JSON.parse(jsonValidString);
+							JsonStr = JSONObj;
+						}
+					}
+				}
+			}
+			return JsonStr;
+		}
 		function quitar_punto_final(cadena) {
 			var cadena_final = $.trim(cadena);
 			if (cadena_final.substr(-1) === ".") {
@@ -1238,7 +1264,7 @@
 					var campo = valorVacio(value[2]) ? "" : value[2];
 					var valor = value[1];
 					var valores = "{\"" + campo + "\": \"" + valor + "\"}";
-					valores = JSON.parse(valores);
+					valores = StrToJSON(valores);//JSON.parse(valores);
 					datos.push(valores);
 				});
 			}
@@ -1430,7 +1456,7 @@
 				keyboard: false,
 				backdrop: "static"
 			});
-			var gasto = JSON.parse(datos_gasto);
+			var gasto = StrToJSON(datos_gasto);//JSON.parse(datos_gasto);
 			console.log(gasto);
 
 			"#inpustGasto .dia".AsHTML(gasto.dia);
@@ -1904,7 +1930,7 @@ $.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'erro
 		$("#btnGuardaGasto").click(function () {
 			var IdGasto = $("#idGasto").val();
 			var IdInforme = $("#idinforme").val();
-			var gasto = JSON.parse($("#gasto").val());
+			var gasto = StrToJSON($("#gasto").val());//JSON.parse($("#gasto").val());
 			var catActualizada = actualizarCtaGasto(IdGasto, IdInforme);
 			var noAcepActualizada = CambioNoAceptable(IdInforme, IdGasto, gasto);
 			var noDecActualizada = CambioNoDeducible(IdInforme, IdGasto, gasto);
@@ -2118,7 +2144,7 @@ $.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'erro
 			if (!localStorage.getItem('autOpcInf')) {
 				localStorage.setItem('autOpcInf', []);
 			} else {
-				autOpc = JSON.parse(localStorage.getItem('autOpcInf'));
+				autOpc = StrToJSON(localStorage.getItem('autOpcInf'));//JSON.parse(localStorage.getItem('autOpcInf'));
 			}
 			var usuValido = validaUsuarioSel(usuario, autOpc);
 			if (usuValido.ok === true) {
@@ -2155,7 +2181,7 @@ $.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'erro
 				text: "Si", click: function () {
 					$(this).dialog("close");
 					$("#tblAutOpcional tbody").empty();
-					var autOpc = JSON.parse(localStorage.getItem('autOpcInf'));
+					var autOpc = StrToJSON(localStorage.getItem('autOpcInf'));//JSON.parse(localStorage.getItem('autOpcInf'));
 					$.each(autOpc, function (key, value) {
 						if (value.usuario === usuario) {
 							autOpc[key] = { 'usuario': '', 'nombre': '' };
