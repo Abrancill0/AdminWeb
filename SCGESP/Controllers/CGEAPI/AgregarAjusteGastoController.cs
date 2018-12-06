@@ -279,7 +279,8 @@ namespace SCGESP.Controllers.CGEAPI
 														ConnectionString = VariablesGlobales.CadenaConexion
 													};
 
-													string query = "UPDATE gastos SET g_dirxml = '', g_xmlcargado = 0, g_valor = g_total " + 
+													string query = "UPDATE gastos " + 
+																	" SET g_dirxml = '', g_xmlcargado = 0, g_valor = g_total, g_deducible = 0, g_importenodeducible = g_total " + 
 																	" WHERE g_idinforme = " + resultado.IdInforme + " AND g_id = " + resultado.IdGasto + "; " +
 																	" DELETE FROM xmlinforme WHERE x_idinforme = " + resultado.IdInforme + " AND x_idgasto = " + resultado.IdGasto + "; " +
 																	" EXEC UpdateTotalInforme " + resultado.IdInforme + ";";
