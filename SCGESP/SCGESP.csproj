@@ -4964,17 +4964,22 @@
     <Compile Include="confrontacion.aspx.designer.cs">
       <DependentUpon>confrontacion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\APP\AutorizarTraspasoController.cs" />
+    <Compile Include="Controllers\APP\Cambios Presupuesto\AutorizaCambioPrespupuestoController.cs" />
+    <Compile Include="Controllers\APP\Cambios Presupuesto\DetalleCambioPresupuestoController.cs" />
+    <Compile Include="Controllers\APP\Cambios Presupuesto\FlujoProcesoCambioPresupuestoController.cs" />
+    <Compile Include="Controllers\APP\Cambios Presupuesto\RechazarCambioPresupuestoController.cs" />
+    <Compile Include="Controllers\APP\Cambios Presupuesto\SolicitudCambioPresupuestoController.cs" />
+    <Compile Include="Controllers\APP\Solicitudes de Traspaso\AutorizarTraspasoController.cs" />
     <Compile Include="Controllers\APP\PendientesEle.cs" />
-    <Compile Include="Controllers\APP\RechazarTraspasoController.cs" />
-    <Compile Include="Controllers\APP\RechazarSolicitudCambioCentroController.cs" />
-    <Compile Include="Controllers\APP\AutorizarSolicitudCambioCentroController.cs" />
-    <Compile Include="Controllers\APP\FlujoProcesoSolicitudController.cs" />
-    <Compile Include="Controllers\APP\DetalleTraspasoController.cs" />
-    <Compile Include="Controllers\APP\FlujoProcesoTraspasoController.cs" />
+    <Compile Include="Controllers\APP\Solicitudes de Traspaso\RechazarTraspasoController.cs" />
+    <Compile Include="Controllers\APP\Solicutudes Cambio Centro\RechazarSolicitudCambioCentroController.cs" />
+    <Compile Include="Controllers\APP\Solicutudes Cambio Centro\AutorizarSolicitudCambioCentroController.cs" />
+    <Compile Include="Controllers\APP\Solicutudes Cambio Centro\FlujoProcesoSolicitudController.cs" />
+    <Compile Include="Controllers\APP\Solicitudes de Traspaso\DetalleTraspasoController.cs" />
+    <Compile Include="Controllers\APP\Solicitudes de Traspaso\FlujoProcesoTraspasoController.cs" />
     <Compile Include="Controllers\APP\EnvioNotificacionesController.cs" />
-    <Compile Include="Controllers\APP\TraspasosAutorizarController.cs" />
-    <Compile Include="Controllers\APP\SolicitudescambioCentroAutorizarController.cs" />
+    <Compile Include="Controllers\APP\Solicitudes de Traspaso\TraspasosAutorizarController.cs" />
+    <Compile Include="Controllers\APP\Solicutudes Cambio Centro\SolicitudescambioCentroAutorizarController.cs" />
     <Compile Include="Controllers\APP\AutorizaInformeAppController.cs" />
     <Compile Include="Controllers\APP\BajaAlternoController.cs" />
     <Compile Include="Controllers\APP\CuentaNumeroInformesAppController.cs" />

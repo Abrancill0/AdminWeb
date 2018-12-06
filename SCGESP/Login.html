@@ -143,16 +143,20 @@
 
                 <script>
                     localStorage.clear();
-
+                    
                      function Pruebas() {
                          var datos = {
-                             "Usuario": 'fjsolis'
+                             "Usuario": 'apdelagarz',
+                             "PrPtiAnio": '2018',
+                             "PrPtiFolio": '612',
+                             "PrPtiEstatus": '3',
+                             "MotivoRechazo": 'prueba de rechazo app',
                          };
 
                          $.ajax({
                              async: true,
                             type: 'POST',
-                             url: '/api/SolicitudesCambioCentroAutorizar',
+                             url: '/api/RechazarCambioPresupuesto',
                              data: JSON.stringify(datos),
                             contentType: 'application/json; charset=utf-8',
                              dataType: 'json',

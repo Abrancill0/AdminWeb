@@ -4,12 +4,13 @@ using System.Web.Http;
 using System.Xml;
 using System.Collections.Generic;
 using System;
+using System.Data;
 
 namespace SCGESP.Controllers.APP
 {
     public class LoginEleController : ApiController
     {
-        public class ListResult
+        public class ParametrosSalida
         {
             // public int i_uresponsable { get; set; }
             public string cosa { get; set; }
@@ -35,63 +36,86 @@ namespace SCGESP.Controllers.APP
             public int SgUsuEmpleado { get; set; }
         }
 
-        public IEnumerable<ListResult> Post(datos Datos)
+        public List<ParametrosSalida> Post(datos Datos)
         {
-
-        // EnvioCorreosELE.Envio("", "hector.ramos@trascenti.com", "", "", "", "prueba", "mensaje prueba", 0);
-
-            DocumentoEntrada entrada = new DocumentoEntrada
+            try
             {
-                Usuario = Datos.usuario,
-                Origen = "Programa CGE",  //Datos.Origen; 
-                Transaccion = 100004,
-                Operacion = 17
-            };
-            entrada.agregaElemento("SgUsuId", Datos.usuario);
-            entrada.agregaElemento("SgUsuClaveAcceso", Datos.contrasena);
-
-
-            DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
-
-            if (respuesta.Resultado == "1")//&& idUsuario.Trim() != ""
-            {
-                XmlElement tabla = respuesta.Tablas;
-                string SgUsuId = ConsultaValorRow("SgUsuId", tabla);
-                string SgUsuEmpleado = ConsultaValorRow("SgUsuEmpleado", tabla);
-                string GrEmpCentro = ConsultaValorRow("GrEmpCentro", tabla);
-                string GrEmpOficina = ConsultaValorRow("GrEmpOficina", tabla);
-                string GrEmpTipoGasto = ConsultaValorRow("GrEmpTipoGasto", tabla);
-                string SgUsuNombre = ConsultaValorRow("SgUsuNombre", tabla);
-                string GrEmpTarjetaToka = ConsultaValorRow("GrEmpTarjetaToka", tabla);
-                string SgUsuFechaVencimiento = ConsultaValorRow("SgUsuFechaVencimiento", tabla); //este campo lo acabo de agregar
-                string SgUsuMostrarGraficaAlAutorizar = ConsultaValorRow("SgUsuMostrarGraficaAlAutorizar ", tabla);
-                
-                string cosa = Seguridad.Encriptar(SgUsuId);
-                string cosa2 = Seguridad.Encriptar(Convert.ToString(SgUsuEmpleado));
-
-                List<ListResult> lista = new List<ListResult>();
-
-                ListResult ent = new ListResult
+                DocumentoEntrada entrada = new DocumentoEntrada
                 {
-                    cosa = cosa,
-                    cosa2 = cosa2,
-                    cosa3 = SgUsuNombre,
-                    GrEmpCentro = GrEmpCentro,
-                    GrEmpOficina = GrEmpOficina,
-                    GrEmpTipoGasto = GrEmpTipoGasto,
-                    GrEmpTarjetaToka = GrEmpTarjetaToka,
-                    SgUsuMostrarGraficaAlAutorizar = SgUsuMostrarGraficaAlAutorizar,
-                    SgUsuFechaVencimiento =SgUsuFechaVencimiento
+                    Usuario = Datos.usuario,
+                    Origen = "Programa CGE",  //Datos.Origen; 
+                    Transaccion = 100004,
+                    Operacion = 17
                 };
-                lista.Add(ent);
+                entrada.agregaElemento("SgUsuId", Datos.usuario);
+                entrada.agregaElemento("SgUsuClaveAcceso", Datos.contrasena);
+
+                DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
+
+                DataTable DTLista = new DataTable();
+
+                if (respuesta.Resultado == "1")//&& idUsuario.Trim() != ""
+                {
+                    DTLista = respuesta.obtieneTabla("Catalogo");
+
+                    List<ParametrosSalida> lista = new List<ParametrosSalida>();
+
+                    foreach (DataRow row in DTLista.Rows)
+                    {
+                        ParametrosSalida ent = new ParametrosSalida
+                        {
+                            cosa = Convert.ToString(row["FiCscSolicitud"]),
+                            cosa2 = Convert.ToString(row["FiCscSolicitud"]),
+                            GrEmpCentro = Convert.ToString(row["FiCscSolicitud"]),
+                            GrEmpOficina = Convert.ToString(row["FiCscSolicitud"]),
+                            GrEmpTipoGasto = Convert.ToString(row["FiCscSolicitud"]),
+                            cosa3 = Convert.ToString(row["FiCscSolicitud"]),
+                            GrEmpTarjetaToka = Convert.ToString(row["FiCscSolicitud"]),
+                            SgUsuFechaVencimiento = Convert.ToString(row["FiCscSolicitud"]),
+                            SgUsuMostrarGraficaAlAutorizar = Convert.ToString(row["FiCscSolicitud"]),
+
+                        };
+                        lista.Add(ent);
+                    }
+
+
+                    return lista;
+
+                }
+                else
+                {
+                    DTLista = respuesta.obtieneTabla("Catalogo");
+                    
+                    string resultado = respuesta.Documento.InnerText;
+                    List<ParametrosSalida> lista = new List<ParametrosSalida>();
+
+                   
+                        ParametrosSalida ent = new ParametrosSalida
+                        {
+                            cosa = resultado,
+
+                        };
+                        lista.Add(ent);
+                 
+                    return lista;
+                }
+            }
+            catch (Exception ex)
+            {
+             
+                List<ParametrosSalida> lista = new List<ParametrosSalida>();
+                
+                    ParametrosSalida ent = new ParametrosSalida
+                    {
+                        cosa = ex.ToString()
+
+                    };
+                    lista.Add(ent);
+             
 
                 return lista;
-
             }
-            else
-            {
-                return null;
-            }
+            
 
         }
 
