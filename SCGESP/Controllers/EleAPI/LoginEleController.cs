@@ -9,7 +9,7 @@ using System;
 
 namespace SCGESP.Controllers.EleAPI
 {
-    public class LoginAppController : ApiController
+    public class LoginEleController : ApiController
     {
         public class ListResult
         {

@@ -24,9 +24,13 @@ namespace SCGESP.Controllers
             public string PrTdeTraspaso { get; set; } //No Traspaso
             public string PrTdeLinea { get; set; } //Línea
             public string PrTdeCentro { get; set; } //Departameneto
+            public string PrTdeCentroNombre { get; set; } //Departamento Nombre
             public string PrTdeOficina { get; set; } // Oficina
+            public string PrTdeOficinaNombre { get; set; } //Oficina Nombre
             public string PrTdeSubramo { get; set; } // Subramo
+            public string  PrTdeSubramoNombre { get; set; } //Subramo Nombre
             public string PrTdeCuenta { get; set; } //Cuenta
+            public string PrTdeCuentaNombre { get; set; } //Cuenta Nombre
             public string PrTdeCargo { get; set; } //Disminuciones
             public string PrTdeAbono { get; set; } //Aumentos
         }
@@ -67,9 +71,13 @@ namespace SCGESP.Controllers
                         PrTdeTraspaso = Convert.ToString(row["PrTdeTraspaso"]),
                         PrTdeLinea = Convert.ToString(row["PrTdeLinea"]),
                         PrTdeCentro = Convert.ToString(row["PrTdeCentro"]),
+                        PrTdeCentroNombre = Convert.ToString(row["PrTdeCentroNombre"]),
                         PrTdeOficina = Convert.ToString(row["PrTdeOficina"]),
+                        PrTdeOficinaNombre = Convert.ToString(row["PrTdeOficinaNombre"]),
                         PrTdeSubramo = Convert.ToString(row["PrTdeSubramo"]),
+                        PrTdeSubramoNombre = Convert.ToString(row["PrTdeSubramoNombre"]),
                         PrTdeCuenta = Convert.ToString(row["PrTdeCuenta"]),
+                        PrTdeCuentaNombre = Convert.ToString(row["PrTdeCuentaNombre"]),
                         PrTdeCargo = Convert.ToString(row["PrTdeCargo"]),
                         PrTdeAbono = Convert.ToString(row["PrTdeAbono"]),
                     };

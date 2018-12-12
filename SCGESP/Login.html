@@ -143,20 +143,21 @@
 
                 <script>
                     localStorage.clear();
-                    
+
+                    var tipolog = 1;
+                    var origen = "login";
+
                      function Pruebas() {
                          var datos = {
-                             "Usuario": 'apdelagarz',
-                             "PrPtiAnio": '2018',
-                             "PrPtiFolio": '612',
-                             "PrPtiEstatus": '3',
-                             "MotivoRechazo": 'prueba de rechazo app',
+                             "usuario": 'fjsolis',
+                             "Token": 'fjsolis',
+                             "Pendientes": 'fjsolis',
                          };
 
                          $.ajax({
                              async: true,
                             type: 'POST',
-                             url: '/api/RechazarCambioPresupuesto',
+                             url: '/api/ActualizaPendientesNotificaciones',
                              data: JSON.stringify(datos),
                             contentType: 'application/json; charset=utf-8',
                              dataType: 'json',

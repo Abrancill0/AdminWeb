@@ -8,7 +8,7 @@ using System.Data;
 
 namespace SCGESP.Controllers.APP
 {
-    public class LoginEleController : ApiController
+    public class LoginAppController : ApiController
     {
         public class ParametrosSalida
         {
@@ -56,23 +56,32 @@ namespace SCGESP.Controllers.APP
 
                 if (respuesta.Resultado == "1")//&& idUsuario.Trim() != ""
                 {
-                    DTLista = respuesta.obtieneTabla("Catalogo");
+                    DTLista = respuesta.obtieneTabla("Llave");
 
                     List<ParametrosSalida> lista = new List<ParametrosSalida>();
-
+                    
                     foreach (DataRow row in DTLista.Rows)
                     {
+                        string cadenaCosa = Convert.ToString(row["SgUsuId"]);
+                        string cadenaCosa2 = Convert.ToString(row["SgUsuEmpleado"]);
+
+                        cadenaCosa = cadenaCosa.Replace(" ", "");
+                        cadenaCosa2 = cadenaCosa2.Replace(" ", "");
+
+                        string cosa = Seguridad.Encriptar(cadenaCosa);
+                        string cosa2 = Seguridad.Encriptar(cadenaCosa2);
+
                         ParametrosSalida ent = new ParametrosSalida
                         {
-                            cosa = Convert.ToString(row["FiCscSolicitud"]),
-                            cosa2 = Convert.ToString(row["FiCscSolicitud"]),
-                            GrEmpCentro = Convert.ToString(row["FiCscSolicitud"]),
-                            GrEmpOficina = Convert.ToString(row["FiCscSolicitud"]),
-                            GrEmpTipoGasto = Convert.ToString(row["FiCscSolicitud"]),
-                            cosa3 = Convert.ToString(row["FiCscSolicitud"]),
-                            GrEmpTarjetaToka = Convert.ToString(row["FiCscSolicitud"]),
-                            SgUsuFechaVencimiento = Convert.ToString(row["FiCscSolicitud"]),
-                            SgUsuMostrarGraficaAlAutorizar = Convert.ToString(row["FiCscSolicitud"]),
+                            cosa = cosa,
+                            cosa2 = cosa2,
+                            GrEmpCentro = Convert.ToString(row["GrEmpCentro"]),
+                            GrEmpOficina = Convert.ToString(row["GrEmpOficina"]),
+                            GrEmpTipoGasto = Convert.ToString(row["GrEmpTipoGasto"]),
+                            cosa3 = Convert.ToString(row["SgUsuNombre"]),
+                            GrEmpTarjetaToka = Convert.ToString(row["GrEmpTarjetaToka"]),
+                            SgUsuFechaVencimiento = Convert.ToString(row["SgUsuFechaVencimiento"]),
+                            SgUsuMostrarGraficaAlAutorizar = Convert.ToString(row["SgUsuMostrarGraficaAlAutorizar"]),
 
                         };
                         lista.Add(ent);
@@ -93,6 +102,7 @@ namespace SCGESP.Controllers.APP
                         ParametrosSalida ent = new ParametrosSalida
                         {
                             cosa = resultado,
+                            SgUsuFechaVencimiento=Convert.ToString(DateTime.Today)
 
                         };
                         lista.Add(ent);

@@ -4969,6 +4969,7 @@
     <Compile Include="Controllers\APP\Cambios Presupuesto\FlujoProcesoCambioPresupuestoController.cs" />
     <Compile Include="Controllers\APP\Cambios Presupuesto\RechazarCambioPresupuestoController.cs" />
     <Compile Include="Controllers\APP\Cambios Presupuesto\SolicitudCambioPresupuestoController.cs" />
+    <Compile Include="Controllers\APP\ActualizaPendientesAppController.cs" />
     <Compile Include="Controllers\APP\Solicitudes de Traspaso\AutorizarTraspasoController.cs" />
     <Compile Include="Controllers\APP\PendientesEle.cs" />
     <Compile Include="Controllers\APP\Solicitudes de Traspaso\RechazarTraspasoController.cs" />
