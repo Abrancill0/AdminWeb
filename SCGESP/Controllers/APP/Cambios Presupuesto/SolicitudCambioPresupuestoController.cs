@@ -26,6 +26,7 @@ namespace SCGESP.Controllers
             public string PrPtiFechaAlta { get; set; } // Fecha de alta del cambio
             public string PrPtiReferencia { get; set; } // Referencia del cambio
             public string PrPtiComentario { get; set; } // Comentarios del cambio
+            public string PrPtiTotal { get; set; }
             
         }
 
@@ -69,6 +70,7 @@ namespace SCGESP.Controllers
                         PrPtiFechaAlta = Convert.ToString(row["PrPtiFechaAlta"]),
                         PrPtiReferencia = Convert.ToString(row["PrPtiReferencia"]),
                         PrPtiComentario = Convert.ToString(row["PrPtiComentario"]),
+                        PrPtiTotal = string.IsNullOrEmpty(Convert.ToString(row["PrPtiTotal"])) ? "0" : Convert.ToString(row["PrPtiTotal"])
                     };
                     lista.Add(ent);
                 }

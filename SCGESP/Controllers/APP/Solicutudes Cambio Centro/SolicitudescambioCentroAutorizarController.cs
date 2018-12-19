@@ -36,7 +36,8 @@ namespace SCGESP.Controllers
             public string FiCscEstatusSiguienteNombre { get; set; } //nombre del estatus siguiente de la solicitud
             public string FiCscEmpleadoObligado { get; set; }//empleado obligado a autorizar
             public string FiCscEmpleadoObligadoNombre { get; set; }//nombre del empleado obligado a autorizar
-            public string FiCscUsuarioAlta { get; set; }//responsible actual
+            public string FICenResponsable { get; set; }//responsible actual
+            public string FiCenResponsableNombre { get; set; }//responsible actual
             public string FiCenMontoMinimo { get; set; }//monto mínimo actual
             public string FiCenMontoMaximo { get; set; } //monto máximo actual
         }
@@ -89,9 +90,9 @@ namespace SCGESP.Controllers
                         FiCscMontoMaximo = string.IsNullOrEmpty(Convert.ToString(row["FiCscMontoMaximo"])) ? "0" : Convert.ToString(row["FiCscMontoMaximo"]),
                         FiCscEstatusSiguiente = Convert.ToString(row["FiCscEstatusSiguiente"]),
                         FiCscEstatusSiguienteNombre = Convert.ToString(row["FiCscEstatusSiguienteNombre"]),
-                       // FiCscEmpleadoObligado = Convert.ToString(row["FiCscEmpleadoObligado"]),
-                       // FiCscEmpleadoObligadoNombre = Convert.ToString(row["FiCscEmpleadoObligadoNombre"]),
-                        FiCscUsuarioAlta = Convert.ToString(row["FiCscUsuarioAlta"]),
+                        FiCenResponsableNombre = string.IsNullOrEmpty(Convert.ToString(row["FiCenResponsableNombre"])) ? "N/A" : Convert.ToString(row["FiCenResponsableNombre"]),
+                        // FiCscEmpleadoObligadoNombre = Convert.ToString(row["FiCscEmpleadoObligadoNombre"]),
+                        FICenResponsable = Convert.ToString(row["FICenResponsable"]),
                         FiCenMontoMinimo = string.IsNullOrEmpty(Convert.ToString(row["FiCenMontoMinimo"])) ? "0" : Convert.ToString(row["FiCenMontoMinimo"]),
                         FiCenMontoMaximo = string.IsNullOrEmpty(Convert.ToString(row["FiCenMontoMaximo"])) ? "0" : Convert.ToString(row["FiCenMontoMaximo"]),
 

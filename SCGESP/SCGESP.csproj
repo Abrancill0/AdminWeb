@@ -4967,12 +4967,14 @@
     <Compile Include="Controllers\APP\Cambios Presupuesto\AutorizaCambioPrespupuestoController.cs" />
     <Compile Include="Controllers\APP\Cambios Presupuesto\DetalleCambioPresupuestoController.cs" />
     <Compile Include="Controllers\APP\Cambios Presupuesto\FlujoProcesoCambioPresupuestoController.cs" />
+    <Compile Include="Controllers\APP\Cambios Presupuesto\ObtieneCambioPresupuestoPDFController.cs" />
     <Compile Include="Controllers\APP\Cambios Presupuesto\RechazarCambioPresupuestoController.cs" />
     <Compile Include="Controllers\APP\Cambios Presupuesto\SolicitudCambioPresupuestoController.cs" />
     <Compile Include="Controllers\APP\ActualizaPendientesAppController.cs" />
     <Compile Include="Controllers\APP\Solicitudes de Traspaso\AutorizarTraspasoController.cs" />
     <Compile Include="Controllers\APP\PendientesEle.cs" />
     <Compile Include="Controllers\APP\Solicitudes de Traspaso\RechazarTraspasoController.cs" />
+    <Compile Include="Controllers\APP\Solicitudes de Traspaso\ObtieneTraspasoPDFController.cs" />
     <Compile Include="Controllers\APP\Solicutudes Cambio Centro\RechazarSolicitudCambioCentroController.cs" />
     <Compile Include="Controllers\APP\Solicutudes Cambio Centro\AutorizarSolicitudCambioCentroController.cs" />
     <Compile Include="Controllers\APP\Solicutudes Cambio Centro\FlujoProcesoSolicitudController.cs" />

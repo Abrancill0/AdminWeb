@@ -3,11 +3,9 @@ using Ele.Generales;
 using System.Web.Http;
 using System.Xml;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Data;
 using System;
 
-namespace SCGESP.Controllers.EleAPI
+namespace SCGESP.Controllers.APP
 {
     public class LoginEleController : ApiController
     {
@@ -21,6 +19,8 @@ namespace SCGESP.Controllers.EleAPI
             public string GrEmpOficina { get; set; }
             public string GrEmpTipoGasto { get; set; }
             public string GrEmpTarjetaToka { get; set; }
+            public string SgUsuMostrarGraficaAlAutorizar { get; set; }
+            public string SgUsuFechaVencimiento { get; set; }
             //public string responsable { get; set; }
         }
 
@@ -38,94 +38,60 @@ namespace SCGESP.Controllers.EleAPI
         public IEnumerable<ListResult> Post(datos Datos)
         {
 
-            try
+            // EnvioCorreosELE.Envio("", "hector.ramos@trascenti.com", "", "", "", "prueba", "mensaje prueba", 0);
+
+            DocumentoEntrada entrada = new DocumentoEntrada
             {
-			//	EnvioCorreosELE.Envio("", "hector.ramos@trascenti.com", "", "", "", "prueba", "mensaje prueba", 0);
-
-				DocumentoEntrada entrada = new DocumentoEntrada
-                {
-                    Usuario = Datos.usuario,
-                    Origen = "Programa CGE",  //Datos.Origen; 
-                    Transaccion = 100004,
-                    Operacion = 17
-                };
-                entrada.agregaElemento("SgUsuId", Datos.usuario);
-                entrada.agregaElemento("SgUsuClaveAcceso", Datos.contrasena);
+                Usuario = Datos.usuario,
+                Origen = "Programa CGE",  //Datos.Origen; 
+                Transaccion = 100004,
+                Operacion = 17
+            };
+            entrada.agregaElemento("SgUsuId", Datos.usuario);
+            entrada.agregaElemento("SgUsuClaveAcceso", Datos.contrasena);
 
 
-                DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
+            DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 
-                if (respuesta.Resultado == "1")//&& idUsuario.Trim() != ""
-                {
-                    XmlElement tabla = respuesta.Tablas;
-                    string SgUsuId = ConsultaValorRow("SgUsuId", tabla);
-                    string SgUsuEmpleado = ConsultaValorRow("SgUsuEmpleado", tabla);
-                    string GrEmpCentro = ConsultaValorRow("GrEmpCentro", tabla);
-                    string GrEmpOficina = ConsultaValorRow("GrEmpOficina", tabla);
-                    string GrEmpTipoGasto = ConsultaValorRow("GrEmpTipoGasto", tabla);
-                    string SgUsuNombre = ConsultaValorRow("SgUsuNombre", tabla);
-                    string GrEmpTarjetaToka = ConsultaValorRow("GrEmpTarjetaToka", tabla);
-
-
-                    string cosa = Seguridad.Encriptar(SgUsuId);
-                    string cosa2 = Seguridad.Encriptar(Convert.ToString(SgUsuEmpleado));
-
-                    List<ListResult> lista = new List<ListResult>();
-
-                    ListResult ent = new ListResult
-                    {
-                        cosa = cosa,
-                        cosa2 = cosa2,
-                        cosa3 = SgUsuNombre,
-                        GrEmpCentro = GrEmpCentro,
-                        GrEmpOficina = GrEmpOficina,
-                        GrEmpTipoGasto = GrEmpTipoGasto,
-                        GrEmpTarjetaToka = GrEmpTarjetaToka
-                    };
-                    lista.Add(ent);
-
-                    return lista;
-
-                }
-                else
-                {
-                    List<ListResult> lista = new List<ListResult>();
-
-                    ListResult ent = new ListResult
-                    {
-                        cosa = "error",
-                        cosa2 = "",
-                        cosa3 = "",
-                        GrEmpCentro = "",
-                        GrEmpOficina = "",
-                        GrEmpTipoGasto = "",
-                        GrEmpTarjetaToka = ""
-                    };
-                    lista.Add(ent);
-
-                    return lista;
-                }
-            }
-            catch (Exception ex)
+            if (respuesta.Resultado == "1")//&& idUsuario.Trim() != ""
             {
+                XmlElement tabla = respuesta.Tablas;
+                string SgUsuId = ConsultaValorRow("SgUsuId", tabla);
+                string SgUsuEmpleado = ConsultaValorRow("SgUsuEmpleado", tabla);
+                string GrEmpCentro = ConsultaValorRow("GrEmpCentro", tabla);
+                string GrEmpOficina = ConsultaValorRow("GrEmpOficina", tabla);
+                string GrEmpTipoGasto = ConsultaValorRow("GrEmpTipoGasto", tabla);
+                string SgUsuNombre = ConsultaValorRow("SgUsuNombre", tabla);
+                string GrEmpTarjetaToka = ConsultaValorRow("GrEmpTarjetaToka", tabla);
+                string SgUsuFechaVencimiento = ConsultaValorRow("SgUsuFechaVencimiento", tabla); //este campo lo acabo de agregar
+                string SgUsuMostrarGraficaAlAutorizar = ConsultaValorRow("SgUsuMostrarGraficaAlAutorizar ", tabla);
+
+                string cosa = Seguridad.Encriptar(SgUsuId);
+                string cosa2 = Seguridad.Encriptar(Convert.ToString(SgUsuEmpleado));
 
                 List<ListResult> lista = new List<ListResult>();
 
                 ListResult ent = new ListResult
                 {
-                    cosa = ex.ToString(),
-                    cosa2 = "",
-                    cosa3 = "",
-                    GrEmpCentro = "",
-                    GrEmpOficina = "",
-                    GrEmpTipoGasto = "",
-                    GrEmpTarjetaToka = ""
+                    cosa = cosa,
+                    cosa2 = cosa2,
+                    cosa3 = SgUsuNombre,
+                    GrEmpCentro = GrEmpCentro,
+                    GrEmpOficina = GrEmpOficina,
+                    GrEmpTipoGasto = GrEmpTipoGasto,
+                    GrEmpTarjetaToka = GrEmpTarjetaToka,
+                    SgUsuMostrarGraficaAlAutorizar = SgUsuMostrarGraficaAlAutorizar,
+                    SgUsuFechaVencimiento = SgUsuFechaVencimiento
                 };
                 lista.Add(ent);
 
                 return lista;
+
             }
-            
+            else
+            {
+                return null;
+            }
 
         }
 
@@ -137,7 +103,8 @@ namespace SCGESP.Controllers.EleAPI
             return new DocumentoSalida(respuesta);
         }
 
-        public string ConsultaValorRow(string dato, XmlElement tablarow) {
+        public string ConsultaValorRow(string dato, XmlElement tablarow)
+        {
             XmlElement TablaRow = tablarow;
             XmlNode valor = TablaRow.SelectSingleNode("Llave/NewDataSet/Llave/" + dato);
 
@@ -159,4 +126,3 @@ namespace SCGESP.Controllers.EleAPI
         }
     }
 }
-

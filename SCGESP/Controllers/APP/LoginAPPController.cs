@@ -21,7 +21,7 @@ namespace SCGESP.Controllers.APP
             public string GrEmpTipoGasto { get; set; }
             public string GrEmpTarjetaToka { get; set; }
             public string SgUsuMostrarGraficaAlAutorizar { get; set; }
-            public string SgUsuFechaVencimiento { get; set; }
+            public bool CambiaContrasena { get; set; }
             //public string responsable { get; set; }
         }
 
@@ -71,6 +71,21 @@ namespace SCGESP.Controllers.APP
                         string cosa = Seguridad.Encriptar(cadenaCosa);
                         string cosa2 = Seguridad.Encriptar(cadenaCosa2);
 
+                        DateTime dt = DateTime.Today;
+
+                        DateTime FechaVencimiento = Convert.ToDateTime(Convert.ToString(row["SgUsuFechaVencimiento"]));
+
+                        bool CambiaContrasena = false;
+
+                        if (FechaVencimiento <= DateTime.Today.Date)
+                         {
+                            CambiaContrasena = true;
+                         }
+                        else
+                        {
+                            CambiaContrasena = false;
+                        }
+                        
                         ParametrosSalida ent = new ParametrosSalida
                         {
                             cosa = cosa,
@@ -80,7 +95,7 @@ namespace SCGESP.Controllers.APP
                             GrEmpTipoGasto = Convert.ToString(row["GrEmpTipoGasto"]),
                             cosa3 = Convert.ToString(row["SgUsuNombre"]),
                             GrEmpTarjetaToka = Convert.ToString(row["GrEmpTarjetaToka"]),
-                            SgUsuFechaVencimiento = Convert.ToString(row["SgUsuFechaVencimiento"]),
+                            CambiaContrasena = CambiaContrasena,
                             SgUsuMostrarGraficaAlAutorizar = Convert.ToString(row["SgUsuMostrarGraficaAlAutorizar"]),
 
                         };
@@ -93,16 +108,18 @@ namespace SCGESP.Controllers.APP
                 }
                 else
                 {
-                    DTLista = respuesta.obtieneTabla("Catalogo");
+                    //DTLista = respuesta.obtieneTabla("Catalogo");
                     
-                    string resultado = respuesta.Documento.InnerText;
-                    List<ParametrosSalida> lista = new List<ParametrosSalida>();
+                   // string resultado = respuesta.Errores.InnerXml;
+                    string resultado2 = respuesta.Errores.InnerText;
+                   // string resultado3 = respuesta.Errores.OuterXml.;
 
-                   
+                    List<ParametrosSalida> lista = new List<ParametrosSalida>();
+                    
                         ParametrosSalida ent = new ParametrosSalida
                         {
-                            cosa = resultado,
-                            SgUsuFechaVencimiento=Convert.ToString(DateTime.Today)
+                            cosa = resultado2,
+                            CambiaContrasena=false
 
                         };
                         lista.Add(ent);

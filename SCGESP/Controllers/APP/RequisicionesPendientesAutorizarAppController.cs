@@ -33,6 +33,7 @@ namespace SCGESP.Controllers.APP
             public string RmReqCentroNombre { get; set; }
             public string RmReqEmpleadoObligado  {get; set; }
             public string RmReqEmpleadoObligadoNombre { get; set; }
+            public string RmReqTipoRequisicionNombre { get; set; }
         }
 
         public List<RequisicionesPorAutorizarResult> Post(Datos Datos)
@@ -78,6 +79,7 @@ namespace SCGESP.Controllers.APP
                         RmReqSubramo = Convert.ToString(row["RmReqSubramo"]),
                         RmReqEmpleadoObligado = Convert.ToString(row["RmReqEmpleadoObligado"]),
                         RmReqEmpleadoObligadoNombre = Convert.ToString(row["RmReqEmpleadoObligadoNombre"]),
+                        RmReqTipoRequisicionNombre = Convert.ToString(row["RmReqTipoRequisicionNombre"])
                     };
                     lista.Add(ent);
                 }

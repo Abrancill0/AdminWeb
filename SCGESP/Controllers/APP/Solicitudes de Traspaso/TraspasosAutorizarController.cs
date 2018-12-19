@@ -25,6 +25,7 @@ namespace SCGESP.Controllers
             public string PrTraFecha { get; set; } //Fecha del Traspaso
             public string PrTraReferencia { get; set; } //Referencia del Traspaso
             public string PrTraComentario { get; set; } //Comentarios del Traspaso
+            public string PrTraTotal { get; set; } // Total
         }
 
 
@@ -65,7 +66,9 @@ namespace SCGESP.Controllers
                         PrTraFecha = Convert.ToString(row["PrTraFecha"]), 
                         PrTraReferencia = Convert.ToString(row["PrTraReferencia"]),
                         PrTraComentario = Convert.ToString(row["PrTraComentario"]),
+                        PrTraTotal = string.IsNullOrEmpty(Convert.ToString(row["PrTraTotal"])) ? "0" : Convert.ToString(row["PrTraTotal"])
                     };
+
                     lista.Add(ent);
                 }
                 return lista;
