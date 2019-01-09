@@ -1326,7 +1326,7 @@
 
 						var justificacion_text_1 = "";
 						try {
-							justificacion_text_1 = result_justificacion[0][1];
+							justificacion_text_1 = (result_justificacion[0][1]);//.replace(/\"/g,'&quot;');
 						} catch (e) {
 							justificacion_text_1 = value.g_concepto;
 						}
@@ -1468,6 +1468,7 @@
 			$("#tblGastos tfoot").append(totalGastosInformeTemplate(totalesGasto));
 		}
 		function conceptos_adicionales(justificacion, categoria, tipoajuste) {
+			justificacion = justificacion.replace(/\"/g, "");
 			var list_justificacion = [];
 			if (tipoajuste > 0) {
 				list_justificacion.push(["", $.trim(justificacion), "justificacion"]);
@@ -2108,28 +2109,39 @@
 		}
 		function StrToJSON(strJson) {
 			var JsonStr = [];
+			//strJson = strJson.replace(/\"/g,'&quot;');
 			try {
 				JsonStr = JSON.parse(strJson);
+				console.log("JSON.parse(strJson)");
 			} catch (e) {
+				console.log("falla, JSON.parse(strJson)");
 				try {
-					var gJson = JSON.stringify(eval('(' + strJson + ')'));
-					var JSONObj=JSON.parse(gJson);
+					var gJson = JSON.stringify(eval('(' + JSONize(strJson) + ')'));
+					var JSONObj = JSON.parse(gJson);
+					console.log(" JSON.stringify(eval('(' + strJson + ')'))");
 					JsonStr = JSONObj;
 				} catch (e) {
+					console.log("falla JSON.stringify(eval('(' + strJson + ')'))");
 					try {
 						JsonStr = JSONize(strJson);
+						console.log("JSONize(strJson)");
 					} catch (e) {
+						console.log("falla JSONize(strJson)");
 						try {
-							JsonStr = JSON.parse(JSONize(strJson)) 
+							JsonStr = JSON.parse(JSONize(strJson));
+							console.log("JSON.parse(JSONize(strJson))");
 						} catch (e) {
+							console.log("falla JSON.parse(JSONize(strJson))");
 							var errorString= strJson;
 							var jsonValidString = JSON.stringify(eval("(" + errorString+ ")"));
  							var JSONObj=JSON.parse(jsonValidString);
 							JsonStr = JSONObj;
+							console.log("JSON.stringify(eval(( + errorString+ )))");
 						}
 					}
 				}
 			}
+			console.log(JsonStr);
 			return JsonStr;
 		}
 function JSONize(str) {

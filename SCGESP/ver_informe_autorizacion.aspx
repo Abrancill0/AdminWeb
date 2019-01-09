@@ -1098,6 +1098,7 @@
 			return datos;
 		}
 		function conceptos_adicionales(justificacion, categoria, tipoajuste) {
+			justificacion = justificacion.replace(/\"/g, "");
 			var list_justificacion = [];
 			if (tipoajuste > 0) {
 				list_justificacion.push(["", $.trim(justificacion), "justificacion"]);
@@ -1223,6 +1224,7 @@
 		}
 		function StrToJSON(strJson) {
 			var JsonStr = [];
+			strJson = strJson.replace(/\\/g,'\\');
 			try {
 				JsonStr = JSON.parse(strJson);
 			} catch (e) {
@@ -1247,6 +1249,13 @@
 			}
 			return JsonStr;
 		}
+function JSONize(str) {
+  return str
+    // wrap keys without quote with valid double quote
+    .replace(/([\$\w]+)\s*:/g, function(_, $1){return '"'+$1+'":'})    
+    // replacing single quote wrapped ones to double quote 
+    .replace(/'([^']+)'/g, function(_, $1){return '"'+$1+'"'})         
+}
 		function quitar_punto_final(cadena) {
 			var cadena_final = $.trim(cadena);
 			if (cadena_final.substr(-1) === ".") {
