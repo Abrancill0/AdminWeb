@@ -1451,7 +1451,10 @@
 					localStorage.setItem('listGastos', JSON.stringify(listGastos));
 				},
 				complete: function () {
-
+					$("#tblGastos tbody tr td").each(function (key, value) {
+						if (!valorVacio(value['innerText']))
+							value['innerText'] = (value['innerText']).replace(/\\"/g, '\"');
+					});
 				},
 				error: function (result) {
 					console.log(result);
@@ -1468,7 +1471,7 @@
 			$("#tblGastos tfoot").append(totalGastosInformeTemplate(totalesGasto));
 		}
 		function conceptos_adicionales(justificacion, categoria, tipoajuste) {
-			justificacion = justificacion.replace(/\"/g, "");
+			justificacion = justificacion.replace(/\"/g, '\\"');
 			var list_justificacion = [];
 			if (tipoajuste > 0) {
 				list_justificacion.push(["", $.trim(justificacion), "justificacion"]);

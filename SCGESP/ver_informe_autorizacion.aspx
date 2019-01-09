@@ -1065,7 +1065,10 @@
 					});
 				},
 				complete: function () {
-
+					$("#tblGastos tbody tr td").each(function (key, value) {
+						if (!valorVacio(value['innerText']))
+							value['innerText'] = (value['innerText']).replace(/\\"/g, '\"');
+					});
 				},
 				error: function (result) {
 					console.log(result);

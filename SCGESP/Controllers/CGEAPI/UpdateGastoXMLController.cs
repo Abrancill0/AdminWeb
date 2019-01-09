@@ -38,6 +38,7 @@ namespace SCGESP.Controllers.CGEAPI
 			string Folio = "";
 			string Serie = "";
 			string NmbEmisor = "";
+			int ValPosNeg = 1;
 
 			if (Ruta != "")
 			{
@@ -111,6 +112,10 @@ namespace SCGESP.Controllers.CGEAPI
 									if (reader.Name == "folio" || reader.Name == "Folio")
 									{
 										Folio = Convert.ToString(reader.Value);
+									}
+									if (reader.Name == "TipoDeComprobante")
+									{
+										TipoDeComprobante = Convert.ToString(reader.Value);
 									}
 								}
 
@@ -192,7 +197,7 @@ namespace SCGESP.Controllers.CGEAPI
 			}
 			else
 			{
-				usuarioxml = "fjsolis";
+				usuarioxml = "imartinez";
 			}
 			/*
 			DocumentoEntrada entradadoc = new DocumentoEntrada
@@ -425,6 +430,20 @@ namespace SCGESP.Controllers.CGEAPI
 			}
 			//FIN valida xml en AdminERP
 
+			//validar tipo de comprobante
+
+			if ((TipoDeComprobante.Substring(0,1)).ToUpper() != "I")
+			{
+				ValPosNeg = -1;
+				//if (UUID.Trim() != "")
+				//{
+				//	xmlBorrado = BorrarUUIDAdminERP(usuarioxml, idgasto, UUID);
+				//}
+				//Deletexml(Ruta);
+				//return "XML no cargado documento no es un ingreso.";
+			}
+			//fin valida tipo de comprobante
+
 
 			SqlCommand comando = new SqlCommand("UpdateGastoXML");
 			comando.CommandType = CommandType.StoredProcedure;
@@ -447,7 +466,7 @@ namespace SCGESP.Controllers.CGEAPI
 			comando.Parameters["@id"].Value = Datos.id;
 			comando.Parameters["@idinforme"].Value = Datos.idinforme;
 			comando.Parameters["@dir"].Value = Ruta;
-			comando.Parameters["@Monto"].Value = Total;
+			comando.Parameters["@Monto"].Value = (Total * ValPosNeg);
 			comando.Parameters["@Emisor"].Value = Emisor;
 			comando.Parameters["@Receptor"].Value = Receptor;
 			comando.Parameters["@UUID"].Value = UUID;
