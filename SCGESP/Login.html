@@ -149,13 +149,14 @@
 
                      function Pruebas() {
                          var datos = {
-                             "Usuario": 'fjsolis',
+                             "Usuario": 'jrodriguez',
+                             "RmReqId":"17286"
                          };
 
                          $.ajax({
                              async: true,
                             type: 'POST',
-                             url: '/api/TraspasosAutorizar',
+                             url: '/api/ObtieneAnalisisPDF',
                              data: JSON.stringify(datos),
                             contentType: 'application/json; charset=utf-8',
                              dataType: 'json',
