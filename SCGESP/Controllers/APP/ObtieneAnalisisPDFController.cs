@@ -47,15 +47,17 @@ namespace SCGESP.Controllers
 
                 if (respuesta.Resultado == "1")
             {
-                
-                List<ObtieneParametrosSalida> lista = new List<ObtieneParametrosSalida>();
+                   
+                    string pdf= respuesta.obtieneValor("ArchivoPdf"); 
+                    
+                    List<ObtieneParametrosSalida> lista = new List<ObtieneParametrosSalida>();
 
                     string result = "";
                     string format = ".pdf";
                     string path = HttpContext.Current.Server.MapPath("/PDF/Analisis/");
                     string name = DateTime.Now.ToString("yyyyMMddhhmmss");
 
-                    byte[] data = Convert.FromBase64String(respuesta.Valores.InnerText);
+                    byte[] data = Convert.FromBase64String(pdf);
 
                     MemoryStream ms = new MemoryStream(data, 0, data.Length);
                     ms.Write(data, 0, data.Length);
