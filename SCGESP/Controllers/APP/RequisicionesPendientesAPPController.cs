@@ -32,6 +32,7 @@ namespace SCGESP.Controllers.APP
             public string RmReqProveedorNombre { get; set; }
             public string RmReqCentroNombre { get; set; }
             public string RmReqMonedaNombre { get; set; }
+            public string RmCuenta { get; set; }
         }
 
         public List<RequisicionesPorAutorizarResult> Post(datos Datos)
@@ -49,7 +50,7 @@ namespace SCGESP.Controllers.APP
                 entrada.Operacion = 1;
                 //entrada.agregaElemento("proceso", 9);
                 entrada.agregaElemento("RmReqSolicitante", Convert.ToInt32(EmpleadoDesencripta));
-                
+
                 DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 
                 DataTable DTRequisiciones = new DataTable();
@@ -62,6 +63,9 @@ namespace SCGESP.Controllers.APP
 
                     foreach (DataRow row in DTRequisiciones.Rows)
                     {
+
+                       //string Cuenta= ObtieneCuenta(UsuarioDesencripta, Convert.ToString(row["RmReqId"]));
+                        
                         RequisicionesPorAutorizarResult ent = new RequisicionesPorAutorizarResult
                         {
                             RmReqId = Convert.ToString(row["RmReqId"]), //OK
@@ -77,10 +81,11 @@ namespace SCGESP.Controllers.APP
                             RmReqTipoRequisicion = Convert.ToString(row["RmReqTipoRequisicion"]),
                             RmReqSubramo = Convert.ToString(row["RmReqSubramo"]),
                             RmReqMonedaNombre = Convert.ToString(row["RmReqMonedaNombre"])
+                            
                         };
                         lista.Add(ent);
                     }
-                    
+
                     return lista;
                 }
                 else
@@ -106,16 +111,72 @@ namespace SCGESP.Controllers.APP
                     RmReqCentroNombre = Convert.ToString("0"),
                     RmReqTipoRequisicion = Convert.ToString("0"),
                     RmReqSubramo = Convert.ToString("Error Ex"),
+                    RmCuenta =""
                 };
                 lista.Add(ent);
-                
+
                 return lista;
 
             }
-            
+
         }
 
+        public string ObtieneCuenta(string Usuario, string RmRdeRequisicion)
+        {
+            try
+            {
+                DocumentoEntrada entrada = new DocumentoEntrada();
+                entrada.Usuario = Usuario;
+                entrada.Origen = "Programa CGE";  //Datos.Origen; 
+                entrada.Transaccion = 120762;
+                entrada.Operacion = 1;
 
+                entrada.agregaElemento("RmRdeRequisicion", RmRdeRequisicion);
+
+                DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
+
+                if (respuesta.Resultado == "1")
+                {
+                    DataTable DTRequisiciones = new DataTable();
+
+                    DTRequisiciones = respuesta.obtieneTabla("Catalogo");
+
+                    double MontoActual = 0;
+                    string Cuenta = "";
+
+                    foreach (DataRow row in DTRequisiciones.Rows)
+                    {
+                        if ((Convert.ToDouble(row["RmRdeSubtotal"]) + Convert.ToDouble(row["RmRdeIva"])) > MontoActual){
+
+                            Cuenta = Convert.ToString(row["RmRdeCuentaNombre"]);
+
+                            MontoActual = Convert.ToDouble(row["RmRdeSubtotal"]) + Convert.ToDouble(row["RmRdeIva"]);
+                        }
+                       
+                    }
+
+                    return Cuenta;
+
+
+                }
+                else
+                {
+                    var errores = respuesta.Errores;
+
+                    return "";
+                }
+            }
+            catch (Exception)
+            {
+
+                return "";
+            }
+
+            
+
+
+            
+        }
         public static DocumentoSalida PeticionCatalogo(XmlDocument doc)
         {
             Localhost.Elegrp ws = new Localhost.Elegrp

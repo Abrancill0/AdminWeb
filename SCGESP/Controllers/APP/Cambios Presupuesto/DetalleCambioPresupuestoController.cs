@@ -28,6 +28,7 @@ namespace SCGESP.Controllers
             public string PrPdeOficinaNombre { get; set; } //Oficina
             public string PrPdeSubramoNombre { get; set; } //Subramo
             public string PrPdeCuentaNombre { get; set; } //Cuenta
+            public string PrPdeCuenta { get; set; }
             public string PrPdeAfectacion { get; set; } //tipo de afectación( 1= aumenta, -1 = desminuye)
             public string PrPdeValorTotal { get; set; } //Total del movimiento en el año(Te muestra además una columna por cada mes pero yo creo que con sólo mostrar la anual es suficiente)
         }
@@ -72,6 +73,7 @@ namespace SCGESP.Controllers
                         PrPdeOficinaNombre = Convert.ToString(row["PrPdeOficinaNombre"]),
                         PrPdeSubramoNombre = Convert.ToString(row["PrPdeSubramoNombre"]),
                         PrPdeCuentaNombre = Convert.ToString(row["PrPdeCuentaNombre"]),
+                        PrPdeCuenta = Convert.ToString(row["PrPdeCuenta"]),
                         PrPdeAfectacion = Convert.ToString(row["PrPdeAfectacion"]),
                         PrPdeValorTotal = Convert.ToString(row["PrPdeValorTotal"]),  
                     };

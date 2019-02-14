@@ -34,6 +34,8 @@ namespace SCGESP.Controllers.APP
             public string RmReqEmpleadoObligado  {get; set; }
             public string RmReqEmpleadoObligadoNombre { get; set; }
             public string RmReqTipoRequisicionNombre { get; set; }
+
+            public string RMCuenta { get; set; }
         }
 
         public List<RequisicionesPorAutorizarResult> Post(Datos Datos)
@@ -62,6 +64,9 @@ namespace SCGESP.Controllers.APP
 
                 foreach (DataRow row in DTRequisiciones.Rows)
                 {
+
+                    string Cuenta = ObtieneCuenta(UsuarioDesencripta, Convert.ToString(row["RmReqId"]));
+
                     RequisicionesPorAutorizarResult ent = new RequisicionesPorAutorizarResult
                     {
                         RmReqId = Convert.ToString(row["RmReqId"]), //OK
@@ -79,7 +84,8 @@ namespace SCGESP.Controllers.APP
                         RmReqSubramo = Convert.ToString(row["RmReqSubramo"]),
                         RmReqEmpleadoObligado = Convert.ToString(row["RmReqEmpleadoObligado"]),
                         RmReqEmpleadoObligadoNombre = Convert.ToString(row["RmReqEmpleadoObligadoNombre"]),
-                        RmReqTipoRequisicionNombre = Convert.ToString(row["RmReqTipoRequisicionNombre"])
+                        RmReqTipoRequisicionNombre = Convert.ToString(row["RmReqTipoRequisicionNombre"]),
+                        RMCuenta = Cuenta
                     };
                     lista.Add(ent);
                 }
@@ -96,6 +102,61 @@ namespace SCGESP.Controllers.APP
 
         }
 
+
+        public string ObtieneCuenta(string Usuario, string RmRdeRequisicion)
+        {
+            try
+            {
+                DocumentoEntrada entrada = new DocumentoEntrada();
+                entrada.Usuario = Usuario;
+                entrada.Origen = "Programa CGE";  //Datos.Origen; 
+                entrada.Transaccion = 120762;
+                entrada.Operacion = 1;
+
+                entrada.agregaElemento("RmRdeRequisicion", RmRdeRequisicion);
+
+                DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
+
+                if (respuesta.Resultado == "1")
+                {
+                    DataTable DTRequisiciones = new DataTable();
+
+                    DTRequisiciones = respuesta.obtieneTabla("Catalogo");
+
+                    double MontoActual = 0;
+                    string Cuenta = "";
+
+                    foreach (DataRow row in DTRequisiciones.Rows)
+                    {
+                        if ((Convert.ToDouble(row["RmRdeSubtotal"]) + Convert.ToDouble(row["RmRdeIva"])) > MontoActual)
+                        {
+
+                            Cuenta = Convert.ToString(row["RmRdeCuentaNombre"]);
+
+                            MontoActual = Convert.ToDouble(row["RmRdeSubtotal"]) + Convert.ToDouble(row["RmRdeIva"]);
+                        }
+
+                    }
+
+                    return Cuenta;
+
+
+                }
+                else
+                {
+                    var errores = respuesta.Errores;
+
+                    return "";
+                }
+            }
+            catch (Exception)
+            {
+
+                return "";
+            }
+            
+
+        }
 
         public static DocumentoSalida PeticionCatalogo(XmlDocument doc)
         {
