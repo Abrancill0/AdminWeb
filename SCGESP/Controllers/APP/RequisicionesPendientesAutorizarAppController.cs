@@ -131,7 +131,7 @@ namespace SCGESP.Controllers.APP
                         if ((Convert.ToDouble(row["RmRdeSubtotal"]) + Convert.ToDouble(row["RmRdeIva"])) > MontoActual)
                         {
 
-                            Cuenta = Convert.ToString(row["RmRdeCuentaNombre"]);
+                            Cuenta = Convert.ToString(row["RmRdeCuenta"]) + " - " + Convert.ToString(row["RmRdeCuentaNombre"]);
 
                             MontoActual = Convert.ToDouble(row["RmRdeSubtotal"]) + Convert.ToDouble(row["RmRdeIva"]);
                         }
@@ -149,7 +149,7 @@ namespace SCGESP.Controllers.APP
                     return "";
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 return "";
