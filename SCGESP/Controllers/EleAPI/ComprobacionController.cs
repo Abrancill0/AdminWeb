@@ -15,8 +15,9 @@ namespace SCGESP.Controllers.EleAPI
 		public class datos
 		{
 			public string Usuario { get; set; }
-			public string idinforme { get; set; }
-		}
+            public string idinforme { get; set; }
+            public string comentariosValidacion { get; set; }
+        }
 
 		public class ObtieneInformeResult
 		{
@@ -147,7 +148,7 @@ namespace SCGESP.Controllers.EleAPI
 
 				if (ValidacionEnviaComprobantes == "")
 				{
-					string Resultado = DetalleGasto(usuariodesencripta, Convert.ToInt32(Datos.idinforme), RmReqGasto);
+					string Resultado = DetalleGasto(usuariodesencripta, Convert.ToInt32(Datos.idinforme), RmReqGasto, Datos.comentariosValidacion);
 					if (Resultado == "OK")
 					{
 						return "OK";
@@ -428,7 +429,7 @@ namespace SCGESP.Controllers.EleAPI
 			return Resultado;
 		}
 
-		public static string DetalleGasto(string usuario, int _informe, int _RmReqGasto)
+		public static string DetalleGasto(string usuario, int _informe, int _RmReqGasto, string comentariosValidacion)
 		{
 			string resultado = null;
 
@@ -445,7 +446,7 @@ namespace SCGESP.Controllers.EleAPI
 			DocumentoSalida salida = PeticionCatalogo(entradaComp.Documento);
 			if (salida.Resultado == "1")
 			{
-				AutorizaInformeFinal(_informe, usuario);
+				AutorizaInformeFinal(_informe, usuario, comentariosValidacion);
 
 				resultado = "OK";
 			}
@@ -459,7 +460,7 @@ namespace SCGESP.Controllers.EleAPI
 
 		}
 
-		public static string AutorizaInformeFinal(int informe, string usuario)
+		public static string AutorizaInformeFinal(int informe, string usuario, string comentariosValidacion)
 		{
 			SqlCommand comando1 = new SqlCommand("TerminaInforme");
 			comando1.CommandType = CommandType.StoredProcedure;
@@ -467,12 +468,14 @@ namespace SCGESP.Controllers.EleAPI
 			//Declaracion de parametros
 			comando1.Parameters.Add("@i_id", SqlDbType.Int);
 			comando1.Parameters.Add("@Usuario", SqlDbType.VarChar);
+            comando1.Parameters.Add("@comentariosValidacion", SqlDbType.VarChar);
 
-			//Asignacion de valores a parametros
-			comando1.Parameters["@i_id"].Value = informe;
+            //Asignacion de valores a parametros
+            comando1.Parameters["@i_id"].Value = informe;
 			comando1.Parameters["@Usuario"].Value = usuario;
+            comando1.Parameters["@comentariosValidacion"].Value = comentariosValidacion;
 
-			comando1.Connection = new SqlConnection(VariablesGlobales.CadenaConexion);
+            comando1.Connection = new SqlConnection(VariablesGlobales.CadenaConexion);
 			comando1.CommandTimeout = 0;
 			comando1.Connection.Open();
 			//DA.SelectCommand = comando;
