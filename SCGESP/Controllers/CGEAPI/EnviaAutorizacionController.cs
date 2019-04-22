@@ -7,8 +7,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Ele.Generales;
-using System.Xml;
 
 namespace SCGESP.Controllers.CGEAPI
 {
@@ -53,29 +51,8 @@ namespace SCGESP.Controllers.CGEAPI
                     string usuarioAutoriza = Convert.ToString(row["usuarioAutoriza"]);
                     string mensaje = Convert.ToString(row["msn"]);
                     string titulo = Convert.ToString(row["titulo"]);
-                    int idgasto = Convert.ToInt32(row["idgasto"]);
-
+                    
                     EnvioCorreosELE.Envio(usuarioResponsable, "", "", usuarioAutoriza, "", titulo, mensaje, 0);
-
-                    try
-                    {
-                        DocumentoEntrada entrada = new DocumentoEntrada
-                        {
-                            Usuario = usuarioResponsable,
-                            Origen = "AdminWeb", 
-                            Transaccion = 120090,
-                            Operacion = 13
-                        };
-                        entrada.agregaElemento("FiGasId", idgasto);
-                        entrada.agregaElemento("Accion", 5);//5 = envio (validacion/aprobación)
-
-                        DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
-
-                    }
-                    catch (Exception)
-                    {
-                        //throw;
-                    }
 
                 }
 
@@ -85,14 +62,6 @@ namespace SCGESP.Controllers.CGEAPI
             {
                 return null;
             }
-        }
-
-        public static DocumentoSalida PeticionCatalogo(XmlDocument doc)
-        {
-            Localhost.Elegrp ws = new Localhost.Elegrp();
-            ws.Timeout = -1;
-            string respuesta = ws.PeticionCatalogo(doc);
-            return new DocumentoSalida(respuesta);
         }
 
 
