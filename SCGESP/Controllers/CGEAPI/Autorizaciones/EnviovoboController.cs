@@ -15,7 +15,6 @@ namespace SCGESP.Controllers.CGEAPI.Autorizaciones
             public string @usuarioActual { get; set; }
             public string @usuariovobo { get; set; }
             public string @idinforme { get; set; }
-            public string @comentariosValidacion { get; set; }            
         }
 
 
@@ -30,7 +29,6 @@ namespace SCGESP.Controllers.CGEAPI.Autorizaciones
                 comando.Parameters.Add("@usuarioActual", SqlDbType.VarChar);
                 comando.Parameters.Add("@usuariovobo", SqlDbType.VarChar);
                 comando.Parameters.Add("@idinforme", SqlDbType.VarChar);
-                comando.Parameters.Add("@comentariosValidacion", SqlDbType.VarChar);
 
                 string ususariodesencripta = Seguridad.DesEncriptar(Datos.usuarioActual);
 
@@ -38,7 +36,6 @@ namespace SCGESP.Controllers.CGEAPI.Autorizaciones
                 comando.Parameters["@usuarioActual"].Value = ususariodesencripta;
                 comando.Parameters["@usuariovobo"].Value = Datos.usuariovobo;
                 comando.Parameters["@idinforme"].Value = Datos.idinforme;
-                comando.Parameters["@comentariosValidacion"].Value = Datos.comentariosValidacion;
 
 
                 comando.Connection = new SqlConnection(VariablesGlobales.CadenaConexion);
