@@ -620,6 +620,24 @@
 					</td>
 				</tr>
 				{{/if}}
+
+				{{#if comentario_3}}
+				<tr>
+					<td style="vertical-align: top">Comentario<span style="color:#ffffff;">_</span>Validación:</td>
+					<td>
+						<p class="valor">{{ comentario_3 }}</p>
+					</td>
+				</tr>
+				{{/if}}
+                {{#if comentario_4}}
+				<tr>
+					<td style="vertical-align: top">Comentario<span style="color:#ffffff;">_</span>Autorización:</td>
+					<td>
+						<p class="valor">{{ comentario_4 }}</p>
+					</td>
+				</tr>
+				{{/if}}
+            
 				<tr>
 					<td>Confrontación:</td>
 					<td>
@@ -746,6 +764,23 @@
 				</label>
 			</div>
 		</script>
+        
+		<script id="modal-confirma-comprobacion-msn" type="text/x-handlebars-template">
+            <div class="form-group">
+                <label>Comentarios:
+                </label>
+                <input type="text" id="comentariosValidacion" name="comentariosValidacion" style="width: 100%" class="form-control">
+                <i class="form-group__bar"></i>
+            </div>
+			<div id='divChkVoBo' style="color: black">
+				<label class='custom-control custom-checkbox'>
+					<input type='checkbox' id='ChkVoBo' class='custom-control-input'>
+					<span class='custom-control-indicator'></span>
+					<span class='custom-control-description'>Enviar a revisión.</span>
+				</label>
+			</div>
+		</script>
+
 		<script id="modal-confirma-rechazo" type="text/x-handlebars-template">
 			<table cellpadding='0' style="width: 100%" cellspacing='0' border='0'>
 				<tr>
@@ -866,7 +901,7 @@
 					}
 					informe.esSesion = esSesion;
 					informe.esViaje = esViaje;
-					informe.esOtros = esOtros;
+                    informe.esOtros = esOtros;
 
 					$('#cabeceraInforme').append(cabeceraInformeTemplate(informe));
 
@@ -1574,7 +1609,7 @@ function JSONize(str) {
 
 		});
 		function confEnviarAAutorizacion(datos) {
-			let confirmaComprobacion = Handlebars.compile($("#modal-confirma-comprobacion").html());
+			let confirmaComprobacion = Handlebars.compile($("#modal-confirma-comprobacion-msn").html());
 			let alertaTitulo = Handlebars.compile($("#modal-alerta-titulo").html());
 			let botones = Handlebars.compile($("#modal-botones").html());
 
@@ -1596,18 +1631,25 @@ function JSONize(str) {
 				show: true,
 				keyboard: false,
 				backdrop: "static"
-			});
-
+            });
+            setTimeout(function () { $("#comentariosValidacion").focus(); }, 500);
 			habilitaChkVoBo();
 		}
 		function enviarComprobarRevisar() {
 			var idinforme = $("#idinforme").val();
-			var req = DatosRequisicion();
+            var req = DatosRequisicion();
+            var comentariosValidacion = $.trim($("#comentariosValidacion").val());
+            var nmbemp = localStorage.getItem("nmbemp");
+            var fecha = fechaActual() + " " + horaActual("hh:mm");
+            var comentariode = ". (Validado por: " + nmbemp + " / " + fecha + ")";
+            comentariosValidacion += comentariosValidacion !== "" ? comentariode : "";
+
 			var datos =
 				{
 					"idinforme": idinforme,
+					"comentariosValidacion": comentariosValidacion,
 					"Usuario": UsuarioActivo
-				};
+            };
 			if ($("#ChkVoBo").is(":checked")) {
 				//console.log("enviado a vobo");
 				enviarVoBo();
@@ -1674,12 +1716,18 @@ function JSONize(str) {
 		function enviarVoBo() {
 			var usuarioActual = localStorage.getItem("cosa");;
 			var usuariovobo = $("#HFUsuariovobo").val();
-			var idinforme = $("#idinforme").val();
+            var idinforme = $("#idinforme").val();
+            var comentariosValidacion = $.trim($("#comentariosValidacion").val());
+            var nmbemp = localStorage.getItem("nmbemp");
+            var fecha = fechaActual() + " " + horaActual("hh:mm");
+            var comentariode = ". (Validado por: " + nmbemp + " / " + fecha + ")";
+            comentariosValidacion += comentariosValidacion !== "" ? comentariode : "";
 
 			var datos = {
 				"usuarioActual": usuarioActual,
 				"usuariovobo": usuariovobo,
-				"idinforme": idinforme,
+                "idinforme": idinforme,
+                "comentariosValidacion": comentariosValidacion
 			};
 
 			$.ajax({
@@ -1696,16 +1744,16 @@ function JSONize(str) {
 					cargando();
 				},
 				success: function (result) {
-
+                    console.log(result);
 					$.notify("Se ha enviado correctamente a revisión.", { globalPosition: 'top center', className: 'success' });
 					//$("#verInformeGastos").modal("hide");
 					setTimeout(function () {
-						window.location.href = "/Autorizaciones?" + fh;
+						//window.location.href = "/Autorizaciones?" + fh;
 					}, 1000);
 				},
 				error: function (result) {
 					cargado();
-					$.notify("Error al enviar Visto Bueno.", { globalPosition: 'top center', className: 'error' });
+					$.notify("Error al enviar a revisión.", { globalPosition: 'top center', className: 'error' });
 					console.log(result);
 				}
 			});
@@ -1726,7 +1774,7 @@ cargando();
 				}
 				cargado();
 */
-			var respuesta = [];
+            var respuesta = [];
 			$.ajax({
 				async: true,
 				type: "POST",

@@ -3,6 +3,8 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.Http;
+using Ele.Generales;
+using System.Xml;
 
 namespace SCGESP.Controllers.CGEAPI
 {
@@ -55,6 +57,30 @@ namespace SCGESP.Controllers.CGEAPI
                     string titulo = Convert.ToString(row["titulo"]);
                     string usuarioResponsable = Convert.ToString(row["usuarioResponsable"]);
                     string autorizador = Convert.ToString(row["autorizador"]);
+                    int idgasto = Convert.ToInt32(row["idgasto"]);
+                    int estatus = Convert.ToInt32(row["estatus"]);
+
+                    try
+                    {
+                        if (estatus == 2) {
+                            DocumentoEntrada entrada = new DocumentoEntrada
+                            {
+                                Usuario = usuarioResponsable,
+                                Origen = "AdminWeb",
+                                Transaccion = 120090,
+                                Operacion = 13
+                            };
+                            entrada.agregaElemento("FiGasId", idgasto);
+                            entrada.agregaElemento("Accion", 6);//6 = rechazo
+
+                            DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
+                        }                        
+                    }
+                    catch (Exception)
+                    {
+
+                        //throw;
+                    }
 
                     if (autorizador != "")
                     {
@@ -69,6 +95,13 @@ namespace SCGESP.Controllers.CGEAPI
             }
 
             return "";
+        }
+        public static DocumentoSalida PeticionCatalogo(XmlDocument doc)
+        {
+            Localhost.Elegrp ws = new Localhost.Elegrp();
+            ws.Timeout = -1;
+            string respuesta = ws.PeticionCatalogo(doc);
+            return new DocumentoSalida(respuesta);
         }
     }
 }
