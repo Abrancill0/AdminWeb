@@ -251,9 +251,9 @@ namespace SCGESP.Clases
 
 				objSmtp.Port = 587;
 
-				objSmtp.Credentials = new System.Net.NetworkCredential("adminerp-notificaciones@elpotosi.com.mx", "Ham61041");
+				objSmtp.Credentials = new System.Net.NetworkCredential("adminerp-notificaciones@elpotosi.com.mx", "Mur76017");// "Ham61041"
 
-				try
+                try
 				{
 					objSmtp.Send(objMail);
 					return true;
