@@ -69,7 +69,7 @@ namespace SCGESP.Controllers
 
             DocumentoEntrada entrada = new DocumentoEntrada();
             entrada.Usuario = UsuarioDesencripta; //Datos.Usuario;  
-            entrada.Origen = "Programa CGE";  //Datos.Origen; 
+            entrada.Origen = "AdminWEB";  //Datos.Origen; 
             entrada.Transaccion = 120760;
             entrada.Operacion = 1;
 
@@ -86,6 +86,7 @@ namespace SCGESP.Controllers
             {
 
                 DataTable DTRequisiciones = new DataTable();
+                DataTable DTUsuarios = new DataTable();
 
 
                 if (respuesta.Resultado == "1")
@@ -96,7 +97,25 @@ namespace SCGESP.Controllers
                 }
 
 
-                SqlCommand comando = new SqlCommand("BrowseInforme");
+                DocumentoEntrada entradaUsuarios = new DocumentoEntrada
+                {
+                    Usuario = UsuarioDesencripta,
+                    Origen = "Programa CGE",  //Datos.Origen; 
+                    Transaccion = 100004,
+                    Operacion = 1//regresa una tabla con todos los campos de la tabla ( La cantidad de registros depende del filtro enviado)
+                };
+
+                string usuSolicitante = "";
+                DocumentoSalida respuestaUsuarios = PeticionCatalogo(entradaUsuarios.Documento);
+                if (respuestaUsuarios.Resultado == "1")
+                {
+                    DTUsuarios = respuestaUsuarios.obtieneTabla("Catalogo");
+
+                }
+
+                
+
+                    SqlCommand comando = new SqlCommand("BrowseInforme");
                 comando.CommandType = CommandType.StoredProcedure;
 
                 //Declaracion de parametros
@@ -125,6 +144,7 @@ namespace SCGESP.Controllers
                 int CreaInforme = 0;
                 int Req = 0;
                 string usu = "";
+                string RmReqSolicitante = "";
                 string motivo = "";
                 string TarjetaToka = "";
                 string NombreEmpleado = "";
@@ -160,6 +180,20 @@ namespace SCGESP.Controllers
                         NombreEmpleado = Convert.ToString(DTRequisiciones.Rows[i]["RmReqSolicitanteNombre"]);
                         motivo = Convert.ToString(DTRequisiciones.Rows[i]["RmReqJustificacion"]);
                         usu = Convert.ToString(DTRequisiciones.Rows[i]["RmReqUsuarioAlta"]);
+                        RmReqSolicitante = Convert.ToString(DTRequisiciones.Rows[i]["RmReqSolicitante"]);//UsuarioDesencripta;//Convert.ToString(DTRequisiciones.Rows[i]["RmReqSolicitante"]);
+
+                        //if (EmpleadoDesencripta != RmReqSolicitante) {
+
+                            for (int ii = 0; ii < DTUsuarios.Rows.Count; ii++)
+                            {
+                            string SgUsuEmpleado = Convert.ToString(DTUsuarios.Rows[ii]["SgUsuEmpleado"]);
+                                if (SgUsuEmpleado == RmReqSolicitante) {
+                                    usu = Convert.ToString(DTUsuarios.Rows[ii]["SgUsuId"]);
+                                }
+                            }
+                        //}
+                        
+
                         MontoRequisicion = Convert.ToDouble(DTRequisiciones.Rows[i]["RmReqTotal"]);
                         Gastorequisicion = Convert.ToInt32(DTRequisiciones.Rows[i]["RmReqGasto"]);
                         TarjetaToka = Convert.ToString(DTRequisiciones.Rows[i]["RmReqTarjetaToka"]);

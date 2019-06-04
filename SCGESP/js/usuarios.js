@@ -39,6 +39,7 @@ function ObtenerCatalogoUsuarios() {
                     .clear()
                     .draw();
                 var resultado = result.Salida.Tablas.Catalogo.NewDataSet.Catalogo;
+                console.log(resultado);
                 var nsubramos = 0;
                 try {
                     nsubramos = resultado.length;
