@@ -3068,22 +3068,33 @@ function JSONize(str) {
 			r.readAsDataURL(file);
 
 		}
-		function RecuperaDatos(id, idinforme, binimagePDF) {
+		function RecuperaDatos(id, idinforme, binimagePDF, file) {
+
 			var datos = {
 				"id": id,
 				"idinforme": idinforme,
 				"dir": binimagePDF,
-				"Valida": "1"
+				"Valida": "1",
+				"FilePDF": file
 			};
+
+			var aDatos = new FormData();
+			aDatos.append("id", id);
+			aDatos.append("idinforme", idinforme);
+			aDatos.append("dir", binimagePDF);
+			aDatos.append("Valida", 1);
+			aDatos.append("FilePDF", file);
 
 			$.ajax({
 				async: false,
 				type: "POST",
 				url: "/api/UpdateGastoPDFOtros",
-				data: JSON.stringify(datos),
-				contentType: 'application/json; charset=utf-8',
-				dataType: 'json',
+				data: aDatos,
+				//dataType: "json",
+				contentType: false,
+				processData: false,
 				cache: false,
+				dataType: "json",
 				success: function (result) {
 					$.notify("Gasto Actualizado [Comprobante PDF Cargado].", { globalPosition: 'top center', className: 'success' });
 				},
@@ -3135,15 +3146,13 @@ function JSONize(str) {
 			var binimagePDF;
 
 			var file = $('#filepdf').get(0).files[0];
+
 			var r = new FileReader();
 			r.onload = function () {
 				binimagePDF = r.result;
-				RecuperaDatos(id, idinforme, binimagePDF)
-
+				RecuperaDatos(id, idinforme, binimagePDF, file);
 			};
 			r.readAsDataURL(file);
-
-
 		}
 		function recuperadatosotros(id, idinforme, bitImg) {
 
@@ -3151,17 +3160,27 @@ function JSONize(str) {
 				"id": id,
 				"idinforme": idinforme,
 				"dir": bitImg,
-				"Valida": "0"
+				"Valida": "0",
+				"FilePDF": null
 			};
+
+			var aDatos = new FormData();
+			aDatos.append("id", id);
+			aDatos.append("idinforme", idinforme);
+			aDatos.append("dir", bitImg);
+			aDatos.append("Valida", 0);
+			aDatos.append("FilePDF", null);
 
 			$.ajax({
 				async: false,
 				type: "POST",
 				url: "/api/UpdateGastoPDFOtros",
-				data: JSON.stringify(datos),
-				contentType: 'application/json; charset=utf-8',
-				dataType: 'json',
+				data: aDatos,
+				//dataType: "json",
+				contentType: false,
+				processData: false,
 				cache: false,
+				dataType: "json",
 				success: function () {
 					$.notify("Gasto Actualizado [Comprobante Cargado].", { globalPosition: 'top center', className: 'success' });
 				},

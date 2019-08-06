@@ -1,17 +1,17 @@
 ﻿using SCGESP.Clases;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
-using System.Net;
-using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace SCGESP.Controllers.CGEAPI
 {
-    public class UpdateGastoPDFOtrosController : ApiController
+	public class UpdateGastoPDFOtrosController : ApiController
     {
         public class ParametrosGastos
         {
@@ -19,7 +19,7 @@ namespace SCGESP.Controllers.CGEAPI
             public int idinforme { get; set; }
             public string dir { get; set; }
             public string Valida { get; set; }
-        }
+		}
 
         public class Resultado
         {
@@ -27,24 +27,43 @@ namespace SCGESP.Controllers.CGEAPI
             public string UrlDisco { get; set; }
         }
 
-        public Resultado Post(ParametrosGastos Datos)
-        {
+		[HttpPost]
+
+		public async Task<Resultado> Post()
+		{
             try
             {
                 Resultado Ruta;
             string ruta2 = HttpContext.Current.Server.MapPath("/");
                 string ruta3 = System.Web.Hosting.HostingEnvironment.MapPath("/");
-                if (Datos.Valida == "1")
+
+				HttpRequest httpRequest = HttpContext.Current.Request;
+
+				ParametrosGastos Datos = new ParametrosGastos
+				{
+					id = Convert.ToInt16(httpRequest.Params["id"]),
+					idinforme = Convert.ToInt32(httpRequest.Params["idinforme"]),
+					dir = httpRequest.Params["dir"],
+					Valida = httpRequest.Params["Valida"]
+				};
+
+
+				if (Datos.Valida == "1")
                 {
-                    Ruta = PostSave(Datos.dir);
+                    Ruta = PostSave(Datos.dir, httpRequest);
                 }
                 else
                 {
                     Ruta = PostSaveImage(Datos.dir);
                 }
 
+				if (Ruta.UrlWeb.Contains("Error"))
+				{
+					Ruta.UrlWeb = "";
+				}
 
-                SqlCommand comando = new SqlCommand("UpdateGastoPDFOtros");
+
+				SqlCommand comando = new SqlCommand("UpdateGastoPDFOtros");
                 comando.CommandType = CommandType.StoredProcedure;
 
                 //Declaracion de parametros
@@ -64,12 +83,12 @@ namespace SCGESP.Controllers.CGEAPI
                 comando.Connection.Open();
                 //DA.SelectCommand = comando;
                 comando.ExecuteNonQuery();
-
-                DataTable DT = new DataTable();
-                SqlDataAdapter DA = new SqlDataAdapter(comando);
-                comando.Connection.Close();
-                DA.Fill(DT);
-
+				
+				DataTable DT = new DataTable();
+				SqlDataAdapter DA = new SqlDataAdapter(comando);
+				comando.Connection.Close();
+				DA.Fill(DT);
+				
 
                 if (DT.Rows.Count > 0)
                 {
@@ -91,7 +110,7 @@ namespace SCGESP.Controllers.CGEAPI
 
         }
 
-        public Resultado PostSave(string Based64BinaryString)
+        public Resultado PostSave(string Based64BinaryString, HttpRequest FilePDF)
         {
             string result = "";
             try
@@ -99,31 +118,61 @@ namespace SCGESP.Controllers.CGEAPI
                 string format = "";
                 string path = HttpContext.Current.Server.MapPath("/PDF/");
                 string name = DateTime.Now.ToString("yyyyMMddhhmmss");
+				format = "pdf";
+				string rutacompleta = path + name + "." + format;
+				result = "PDF/" + name + "." + format;
+				try
+				{
+					//FilePDF.Request.Files[0].SaveAs(rutacompleta);
+					//FilePDF.SaveAs(rutacompleta);
+					if (FilePDF.Files.Count > 0)
+					{
+						foreach (string file in FilePDF.Files)
+						{
+							var postedFile = FilePDF.Files[file];
 
+							postedFile.SaveAs(rutacompleta);
+						}
+					}
 
-                if (Based64BinaryString.Contains("data:application/pdf;base64,"))
-                {
-                    format = "pdf";
-                }
-                
-                string str = Based64BinaryString.Replace("data:application/pdf;base64,", " ");//jpg check
+					Resultado rutas = new Resultado
+					{
+						UrlDisco = rutacompleta,
+						UrlWeb = result
+					};
+					return rutas;
+				}
+				catch (Exception)
+				{
+					if (Based64BinaryString.Contains("data:application/pdf;base64,"))
+					{
+						string str = Based64BinaryString.Replace("data:application/pdf;base64,", " ");//jpg check
 
-                byte[] data = Convert.FromBase64String(str);
+						byte[] data = Convert.FromBase64String(str);
 
-                MemoryStream ms = new MemoryStream(data, 0, data.Length);
-                ms.Write(data, 0, data.Length);
-                //System.Drawing.Image image = System.Drawing.Image.FromStream(ms, true);
-                string rutacompleta = path +  name + "." + format;
-                File.WriteAllBytes(rutacompleta, data);
-                //image.Save(rutacompleta);
-                result = "PDF/" + name + "." + format;
+						MemoryStream ms = new MemoryStream(data, 0, data.Length);
+						ms.Write(data, 0, data.Length);
+						//System.Drawing.Image image = System.Drawing.Image.FromStream(ms, true);
+						File.WriteAllBytes(rutacompleta, data);
+						//image.Save(rutacompleta);
 
-                Resultado rutas = new Resultado
-                {
-                    UrlDisco = rutacompleta,
-                    UrlWeb = result
-                };
-                return rutas;
+						Resultado rutas = new Resultado
+						{
+							UrlDisco = rutacompleta,
+							UrlWeb = result
+						};
+						return rutas;
+					}
+					else
+					{
+						Resultado rutas = new Resultado
+						{
+							UrlDisco = "Error : Formato no valido.",
+							UrlWeb = "Error : Formato no valido."
+						};
+						return rutas;
+					}
+				}
             }
             catch (Exception ex)
             {
