@@ -14,12 +14,12 @@
 
                 <div id="tabsConfiguracion">
                     <ul>
-                        <li><a href="#tabVoBo">VoBo</a></li>
+                        <li><a href="#tabVoBo">Revisar Informe</a></li>
                         <li><a href="#tabAutorizadores">Autorizadores de Requisiciones de Viaje</a></li>
                     </ul>
                     <div id="tabVoBo">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Usuario Visto Bueno</div>
+                            <div class="panel-heading">Usuario que Revisa</div>
                             <div class="panel-body">
                                 <table>
                                     <tr>

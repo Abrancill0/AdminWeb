@@ -42,7 +42,7 @@ namespace SCGESP.Clases
 				DocumentoEntrada entrada = new DocumentoEntrada
 				{
 					Usuario = UsuarioDesencripta,
-					Origen = "Programa CGE",
+					Origen = "AdminWEB",
 					Transaccion = 3
 				};
 
