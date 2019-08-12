@@ -939,7 +939,7 @@
 			<tr>
 				<td>Estatus:</td>
 				<td>
-					<p class="valor">{{ e_estatus }}</p>
+					<p class="valor">{{ e_estatus }} / {{ bandeja_usuario }} / {{ a_fsolicitud }}</p>
 				</td>
 			</tr>
 		</table>
