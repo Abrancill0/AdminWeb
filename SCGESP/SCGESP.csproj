@@ -59,7 +59,7 @@
       <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
     <Reference Include="Ele.Generales">
-      <HintPath>..\..\..\..\Downloads\Ele.Generales.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\Ele.Generales.dll</HintPath>
     </Reference>
     <Reference Include="ExcelNumberFormat, Version=1.0.3.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
       <HintPath>..\packages\ExcelNumberFormat.1.0.3\lib\net20\ExcelNumberFormat.dll</HintPath>
@@ -4972,10 +4972,22 @@
     <Compile Include="Controllers\APP\Cambios Presupuesto\SolicitudCambioPresupuestoController.cs" />
     <Compile Include="Controllers\APP\ActualizaPendientesAppController.cs" />
     <Compile Include="Controllers\APP\ObtieneAnalisisPDFController.cs" />
+    <Compile Include="Controllers\APP\Ordenes de compra\AutorizaOCController.cs" />
+    <Compile Include="Controllers\APP\Ordenes de compra\OCDetalleController.cs" />
+    <Compile Include="Controllers\APP\Ordenes de compra\ObtieneAnalisisPDFOCController.cs" />
+    <Compile Include="Controllers\APP\Ordenes de compra\OrdenCompraV2Controller.cs" />
+    <Compile Include="Controllers\APP\Ordenes de compra\RechazaOCController.cs" />
+    <Compile Include="Controllers\APP\Ordenes de compra\OrdenesCompraController.cs" />
     <Compile Include="Controllers\APP\Solicitudes de Traspaso\AutorizarTraspasoController.cs" />
     <Compile Include="Controllers\APP\PendientesEle.cs" />
     <Compile Include="Controllers\APP\Solicitudes de Traspaso\RechazarTraspasoController.cs" />
     <Compile Include="Controllers\APP\Solicitudes de Traspaso\ObtieneTraspasoPDFController.cs" />
+    <Compile Include="Controllers\APP\Solicitudes Movimiento Activo Fijo\RechazarSolicitudMovimientoActivoFijoController.cs" />
+    <Compile Include="Controllers\APP\Solicitudes Movimiento Activo Fijo\AutorizarSolicitudMovimientoActivoFijoController.cs" />
+    <Compile Include="Controllers\APP\Solicitudes Movimiento Activo Fijo\FlujoProcesoSolicitudActivoController.cs" />
+    <Compile Include="Controllers\APP\Solicitudes Movimiento Activo Fijo\ActivosAsociadosSolicitudController.cs" />
+    <Compile Include="Controllers\APP\Solicitudes Movimiento Activo Fijo\SolicitudMovimientoActivoFijo2Controller.cs" />
+    <Compile Include="Controllers\APP\Solicitudes Movimiento Activo Fijo\SolicitudMovimientoActivoFijoController.cs" />
     <Compile Include="Controllers\APP\Solicutudes Cambio Centro\RechazarSolicitudCambioCentroController.cs" />
     <Compile Include="Controllers\APP\Solicutudes Cambio Centro\AutorizarSolicitudCambioCentroController.cs" />
     <Compile Include="Controllers\APP\Solicutudes Cambio Centro\FlujoProcesoSolicitudController.cs" />
@@ -5272,6 +5284,7 @@
     <Folder Include="vendors\bower_components\select2\docs\dist\" />
     <Folder Include="Views\ConsultaMaterial\" />
     <Folder Include="Views\EnvioNotificaciones\" />
+    <Folder Include="Views\OrdenCompraV2\" />
     <Folder Include="XML\" />
   </ItemGroup>
   <ItemGroup>
