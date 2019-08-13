@@ -63,6 +63,9 @@ namespace SCGESP.Controllers
 			public int idinforme_2 { get; set; }
 			public int autorizador_final { get; set; }
 
+			public string bandeja_usuario { get; set; }
+			public string a_fsolicitud { get; set; }
+
 
 		}
 
@@ -102,7 +105,8 @@ namespace SCGESP.Controllers
                 // DataRow row = DT.Rows[0];
                 string FechaInicio = "";
                 string FechaFin = "";
-                foreach (DataRow row in DT.Rows)
+				string FechaSolicitudAut = "";
+				foreach (DataRow row in DT.Rows)
                 {
 
                     if (row["del"] != null && Convert.ToString(row["del"]) != "")
@@ -122,9 +126,18 @@ namespace SCGESP.Controllers
                     {
                         FechaFin = "";
                     }
-                    
-                    
-                    ListResult ent = new ListResult
+
+					if (row["a_fsolicitud"] != null && Convert.ToString(row["a_fsolicitud"]) != "")
+					{
+						FechaSolicitudAut = Convert.ToDateTime(row["a_fsolicitud"]).ToShortDateString() + " " + Convert.ToDateTime(row["a_fsolicitud"]).ToShortTimeString();
+					}
+					else
+					{
+						FechaSolicitudAut = "";
+					}
+
+
+					ListResult ent = new ListResult
                     {
                          i_id = Convert.ToInt32(row["i_id"]),
                          i_ninforme = Convert.ToInt32(row["i_ninforme"]),
@@ -167,7 +180,9 @@ namespace SCGESP.Controllers
 						esvobo = Convert.ToInt16(row["esvobo"]),
 						esvobo_2 = Convert.ToInt16(row["esvobo_2"]),
 						idinforme_2 = Convert.ToInt16(row["idinforme_2"]),
-						autorizador_final = Convert.ToInt16(row["autorizador_final"])
+						autorizador_final = Convert.ToInt16(row["autorizador_final"]),
+						bandeja_usuario = Convert.ToString(row["bandeja_usuario"]),
+						a_fsolicitud = Convert.ToString(FechaSolicitudAut)
 					};
 
                     lista.Add(ent);

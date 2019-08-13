@@ -1168,6 +1168,32 @@ function encriptaDesencriptaEle(valor, ed) {
     });
     return resultado;
 }
+function jsonParseC(valor) {
+    var resultado = "";
+    $.ajax({
+        async: false,
+        type: "POST",
+        url: '/api/ConvertirStrToJSON',
+        data: { 'Cadena': valor },
+        dataType: "json",
+        cache: false,
+        beforeSend: function () {
+            //cargado();
+        },
+        success: function (result) {
+            resultado = result;
+        },
+        complete: function () {
+            //cargado();
+        },
+        error: function (result) {
+            //cargado();
+            resultado = "";
+            console.log("error", result);
+        }
+    });
+    return resultado;
+}
 $.fn.clearFields = $.fn.clearInputs = function (includeHidden) {
     var re = /^(?:color|date|datetime|email|month|number|password|range|search|tel|text|time|url|week)$/i; // 'hidden' is not in this list
     return this.each(function () {

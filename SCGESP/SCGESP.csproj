@@ -4946,9 +4946,11 @@
     <Compile Include="centros.aspx.designer.cs">
       <DependentUpon>centros.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Clases\BlogSite.cs" />
     <Compile Include="Clases\EnvioCorreosELE.cs" />
     <Compile Include="Clases\PruebaConexion.cs" />
     <Compile Include="Clases\Seguridad.cs" />
+    <Compile Include="Clases\StrToJson.cs" />
     <Compile Include="Clases\VariablesGlobales.cs" />
     <Compile Include="configuracion.aspx.cs">
       <DependentUpon>configuracion.aspx</DependentUpon>
@@ -5052,6 +5054,7 @@
     <Compile Include="Controllers\CGEAPI\Confrontacion\MovBancoEsDuplicadoController.cs" />
     <Compile Include="Controllers\CGEAPI\Confrontacion\RelacionaGastoMovBancoController.cs" />
     <Compile Include="Controllers\CGEAPI\Confrontacion\ResetInformeConfrontadoController.cs" />
+    <Compile Include="Controllers\CGEAPI\ConvertirStrToJSONController.cs" />
     <Compile Include="Controllers\CGEAPI\EliminaExcelController.cs" />
     <Compile Include="Controllers\CGEAPI\ExportarExcelController.cs" />
     <Compile Include="Controllers\CGEAPI\EnviaAutorizacionController.cs" />

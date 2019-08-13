@@ -75,43 +75,6 @@ function ObtenerInformes() {
 
     if (!tablaInformes) {
         tablaInformes = crearTabla("#tblProyectos", 0, "desc");
-        /*tablaInformes = $("#tblProyectos").DataTable({
-            "order": [[0, "desc"]],
-            "processing": true,
-            "scrollCollapse": false,
-            scrollX: false,
-            paging: false,
-            searching: false,
-            "ordering": false,
-            "language": {
-                "lengthMenu": "_MENU_ Registros Por Página",
-                "zeroRecords": "No se encontraron Registros",
-                "info": "",
-                "infoEmpty": "No hay registros para mostrar.",
-                "infoFiltered": "(_TOTAL_ Registros de _MAX_)",
-                "search": "Buscar:",
-                "processing": "Cargando Información",
-                "decimal": ".",
-                "thousands": ",",
-                "paginate": {
-                    "first": "Primera Página",
-                    "last": "Ultima Página",
-                    "next": "Siguiente",
-                    "sPrevious": "Anterior"
-                }
-            },
-            fixedColumns: {
-                leftColumns: 3//Le indico que deje fijas solo las 3 primeras columnas
-            },
-            initComplete: function (settings, json) {
-                setTimeout(function () { $("#tblProyectos").DataTable().draw(); }, 200);
-            },
-            "autoWidth": false,
-            "fixedHeader": {
-                "header": true,
-                "footer": true
-            }
-        });*/
     }
     var f = new Date();
     var fh = f.getDate() + '' + f.getMonth() + '' + f.getFullYear() + '' + f.getHours() + '' + f.getMinutes() + '' + f.getSeconds();
@@ -132,7 +95,7 @@ function ObtenerInformes() {
              * 1: todos
              * 2: solo 1 (login)
              */
-
+            console.log(result);
             tablaInformes
                 .clear()
                 .draw();
@@ -140,8 +103,6 @@ function ObtenerInformes() {
             $.each(result, function (i, value) {
                 //console.log(value);
                 var btnEdit = "";
-                //var finicio = valorVacio(value.i_finicio) ? "" : formatFecha(new Date(value.i_finicio), "dd/mm/yyyy");
-                //var ffin = valorVacio(value.i_ffin) ? "" : formatFecha(new Date(value.i_ffin), "dd/mm/yyyy");
 
                 btnEdit = "<button type='button' class='btn btn-success btn-sm' onclick='verInformeGastos(" + value.i_id + ", " + 0 + ", " + value.i_estatus + ")' data-dismiss='modal'><i class='zmdi zmdi-eye zmdi-hc-lg' style='padding: 3px 0px'></i> Ver</button>";
                 var btnVer = "<a href='/ver_informe_autorizacion?" + fh + "&item=" + value.i_id + "' class='btn btn-success btn-sm'><i class='zmdi zmdi-eye zmdi-hc-lg' style='padding: 3px 0px'></i> Ver</a>";
@@ -150,22 +111,6 @@ function ObtenerInformes() {
                 var njust = just.length;
                 //var justificacion = "";
                 var justificacion = value.i_nmb;
-                /*if (njust >= 30) {
-                    var ll = 0;
-                    for (var jj = 0; jj <= njust; jj++) {
-                        if (just[jj]) {
-                            justificacion += just[jj];
-                            if (ll === 30) {
-                                justificacion += "<br />";
-                                ll = 0;
-                            } else {
-                                ll++;
-                            }
-                        }
-                    }
-                } else {
-                    justificacion = value.i_nmb;
-                }*/
 
                 tablaInformes.row.add([
                     value.r_idrequisicion,
