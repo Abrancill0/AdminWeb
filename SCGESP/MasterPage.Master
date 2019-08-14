@@ -64,7 +64,7 @@
             </div>
 
             <div class="header__logo hidden-sm-down">
-                <img src="img/logo.png" width="170" height="70" class="logoEmp" alt="Empresa">
+                <img src="img/logo.png" style="max-width:220px;height:auto;padding:0px 0px 2px 0px" class="logoEmp" alt="Empresa">
             </div>
 
             <div class="top top-nav__notifications hidden-xs-down" style="width: 70%">
@@ -78,42 +78,7 @@
             </div>
 
             <ul class="top-nav">
-                <li class="dropdown hidden-xs-down">
-                    <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
 
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <div class="dropdown-item theme-switch" style="width: 200px; height: 100px">
-                            Color ToolBar
-                                <div class="btn-group btn-group--colors mt-2" data-toggle="buttons">
-                                    <label class="btn bg-green active">
-                                        <input type="radio" value="green" autocomplete="off" checked></label>
-                                    <label class="btn bg-blue">
-                                        <input type="radio" value="blue" autocomplete="off"></label>
-                                    <label class="btn bg-red">
-                                        <input type="radio" value="red" autocomplete="off"></label>
-                                    <label class="btn bg-orange">
-                                        <input type="radio" value="orange" autocomplete="off"></label>
-                                    <label class="btn bg-teal">
-                                        <input type="radio" value="teal" autocomplete="off"></label>
-
-                                    <br>
-
-                                    <label class="btn bg-cyan">
-                                        <input type="radio" value="cyan" autocomplete="off"></label>
-                                    <label class="btn bg-blue-grey">
-                                        <input type="radio" value="blue-grey" autocomplete="off"></label>
-                                    <label class="btn bg-purple">
-                                        <input type="radio" value="purple" autocomplete="off"></label>
-                                    <label class="btn bg-indigo">
-                                        <input type="radio" value="indigo" autocomplete="off"></label>
-                                    <label class="btn bg-lime">
-                                        <input type="radio" value="lime" autocomplete="off"></label>
-                                </div>
-                        </div>
-                        <a href="" class="dropdown-item" data-ma-action="fullscreen">Fullscreen</a>
-                        <!--a href="" class="dropdown-item" data-ma-action="clear-localstorage">Clear Local Storage</a-->
-                    </div>
-                </li>
 
                 <li class="hidden-xs-down">
                     <a id="verMsn" href="" onclick="browseAvisos()" data-ma-action="aside-open" data-ma-target=".chat" class="top-nav__notify" msnnuevos="">
@@ -128,12 +93,13 @@
                 <div class='s-profile user'>
                     <a href='#' onclick="abreMenuPerfil(this)">
                         <img class='profile-img img-perfil' src='img/usuarios/default.png?20171211083605' alt=''>
-                        <div class='sp-info'>
+                        <div class='sp-info' >
                             <span id="lblNmbEmp">Usuario SP</span>
                             <i class='zmdi zmdi-caret-down'></i>
                         </div>
                     </a>
-                    <ul class='main-menu navigation'>
+                    
+                                    <ul class='main-menu navigation'>
                         <li class='navigation__sub'>
                             <a href='/perfil'><i class='zmdi zmdi-account'></i>Mi Perfil</a>
                         </li>
@@ -191,7 +157,6 @@
             </div>
             <div class="listview listview--hover chat__buddies scrollbar-inner">
                 <hr />
-                <hr />
                 <div id="msnAvisos">
                 </div>
             </div>
@@ -207,7 +172,7 @@
         <script type="text/javascript" src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js?"></script>
 
         <script type="text/javascript" src='js/js.js?12'></script>
-        <script type='text/javascript' src='js/seguridad.js?'></script>
+        <script type='text/javascript' src='js/seguridad.js?fghgvdsd'></script>
         <!-- Vendors: Data tables -->
         <script type="text/javascript" src="vendors/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="vendors/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
@@ -258,8 +223,18 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header titulo-modal">
+                        					<table width="100%">
+                                <tr>
+                                    <td style="text-align:right">
                         <h4 class="modal-title" id="ModalLabelManual">Manual</h4>
-                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close"><i class="zmdi zmdi-close"></i>Cerrar</button>
+                                    </td>
+                                    <td style="text-align:right">
+                                        <a  href="#" data-dismiss="modal" aria-label="Close" style="color:#FFF;border-left:1px solid #FFF ">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a> 
+
+                                    </td>
+                                </tr>
+                            </table>
+
                     </div>
                     <div class="modal-body">
 
@@ -303,10 +278,10 @@
             var direccionManual = "";
             if(manual === "adminweb"){
                 direccionManual = "/manuales/manual_de_usuario_admin_web.pdf";
-$("#ModalLabelManual").empty().append("Manual AdminWeb");
+$("#ModalLabelManual").empty().append('<a style="color:#FFF"> Manual AdminWeb </a>');
             }else if(manual === "adminapp"){
                 direccionManual = "/manuales/manual_de_usuario_admin_app.pdf";
-$("#ModalLabelManual").empty().append("Manual AdminApp");
+$("#ModalLabelManual").empty().append('<a style="color:#FFF"> Manual AdminApp </a>');
             }
 $("#manualUsuario").removeAttr("data");
 $("#manualUsuario").attr("data", direccionManual);

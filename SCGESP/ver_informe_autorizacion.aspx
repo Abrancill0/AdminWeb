@@ -8,6 +8,7 @@
 			vertical-align: top;
 		}
 
+
 		#tblCabeceraInforme {
 			vertical-align: top;
 		}
@@ -47,14 +48,14 @@
 		}
 
 			table.tblGastos thead {
-				background: #337AB7;
+				background: #706259;
 				font-size: 12px;
 				color: #ffffff;
 				font-weight: bold;
 			}
 
 				table.tblGastos thead tr th {
-					background: #337AB7;
+					background: #706259;
 					padding: 5px 5px;
 					font-size: 12px;
 					font-weight: bold;
@@ -119,16 +120,16 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				Requisición / Informe de gastos por autorizar
-        <a href="#" onclick='cerrarPanel(".panel")' class='btn btn-danger btn-xs'><i class="zmdi zmdi-close"></i>Cerrar</a>
+        <a href="#" onclick='cerrarPanel(".panel")' style="color:#FFF;border-left:1px solid #FFF " ><i class="zmdi zmdi-close"></i>Cerrar</a>
 			</div>
 			<div class="panel-body">
 				<table>
 					<tr>
 						<td style="width: 130px">
-							<a class="btn btn-primary btn-md" href="/autorizaciones" role="button"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Regresar</a>
+							<a class="btn btn-primary btn-md" href="/autorizaciones" style="background-color:#6b5c4f" role="button"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Regresar</a>
 							<!--<a class="btn btn-primary btn-md" href="#" onclick="location.reload();" role="button"><span class="zmdi zmdi-refresh"></span>&nbsp;Actualizar</a-->
 						</td>
-						<td style="vertical-align: middle; text-align: left; padding-left: 50px;">
+						<td style="vertical-align: middle; text-align: right; padding-left: 50px;">
 							<!--Opciones-->
 							<input id="HFUsuariovobo" type="hidden" />
 							<a id="aexportarxls" class="btn btn-primary btn-md" href="#" role="button" onclick=""><span class="glyphicon glyphicon-export"></span>&nbsp;Excel</a>
@@ -140,6 +141,7 @@
 						</td>
 					</tr>
 				</table>
+                </br>
 				<div class="card" style="margin: 0px; padding: 0px;">
 					<div class="card-header card-info" role="tab" style="margin: 0px; padding: 2px 5px;">
 					</div>
@@ -192,8 +194,17 @@
 			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
 					<div class="modal-header titulo-modal">
-						<h4 class="modal-title" id="ModalLabelComprobante">Ver</h4>
-						<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close"><i class="zmdi zmdi-close"></i>Cerrar</button>
+                        <table width="100%">
+                                <tr>
+                                    <td style="text-align:right">
+                                        <h4 style="padding: 5px 0px !important;color: #FFF!important;"> Ver </h4>
+                                    </td>
+                                    <td style="text-align:right">
+                                        <a  href="#" data-dismiss="modal" aria-label="Close" style="color:#FFF;border-left:1px solid #FFF ">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a> 
+
+                                    </td>
+                                </tr>
+                            </table>
 					</div>
 					<div class="modal-body">
 
@@ -400,9 +411,18 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header titulo-modal">
+					<table width="100%">
+                                <tr>
+                                    <td style="text-align:right">
 						Editar Gasto
-                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close"><i class="zmdi zmdi-close"></i>Cerrar</button>
-					</div>
+                                    </td>
+                                    <td style="text-align:right">
+                                        <a  href="#" data-dismiss="modal" aria-label="Close" style="color:#FFF;border-left:1px solid #FFF ">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a> 
+
+                                    </td>
+                                </tr>
+                            </table>
+                    </div>
 					<div class="modal-body">
 						<input type="hidden" id="idGasto" value="" />
 						<input type="hidden" id="gasto" value="" />
@@ -459,8 +479,18 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header titulo-modal">
-						VoBo
-                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close"><i class="zmdi zmdi-close"></i>Cerrar</button>
+                        <table width="100%">
+                                <tr>
+                                    <td style="text-align:right">
+                                        VoBo
+                                    </td>
+                                    <td style="text-align:right">
+                                        <a  href="#" data-dismiss="modal" aria-label="Close" style="color:#FFF;border-left:1px solid #FFF ">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a> 
+
+                                    </td>
+                                </tr>
+                            </table>
+				
 					</div>
 					<div class="modal-body">
 						<label id="lblAutOpcional">
@@ -493,10 +523,18 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header titulo-modal">
-						<div id="titulo_modal_alert" style="width: 100%; padding: 1px 10px;">
-						</div>
-						<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close"><i class="zmdi zmdi-close"></i>Cerrar</button>
-					</div>
+						
+<table width="100%">
+                                <tr>
+                                    <td style="text-align:right">
+<div id="titulo_modal_alert" style="width: 100%; padding: 1px 10px;">
+						</div>                                    </td>
+                                    <td style="text-align:right">
+                                        <a  href="#" data-dismiss="modal" aria-label="Close" style="color:#FFF;border-left:1px solid #FFF ">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a> 
+
+                                    </td>
+                                </tr>
+                            </table>					</div>
 					<div class="modal-body">
 						<div id="contenido_modal_alert" style="width: 100%; color: black">
 						</div>

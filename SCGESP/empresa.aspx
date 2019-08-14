@@ -26,8 +26,8 @@
                             </div>
 
                             <div class="pmo-stat">
-                                <h2 class="m-0 c-white SgUsuId">1562</h2>
-                                <span class="SgUsuNombre"></span>
+                                <h4 class="c-white SgUsuNombre" style="color:white"></h4>
+                                <b><span class="m-0 SgUsuId" style="color:darkgray;">1562</span></b>     
                             </div>
                         </div>
 
@@ -53,7 +53,7 @@
                     <div class="pm-body clearfix">
                         <ul class="tab-nav tn-justified">
                             <li><a href="/perfil">Mi Perfil</a></li>
-                            <li class="active alert-success"><a>Mi Empresa</a></li>
+                            <li class="alert-success-pm"><a>Mi Empresa</a></li>
                         </ul>
 
                         <div class="pmb-block">

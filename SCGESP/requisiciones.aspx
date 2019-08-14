@@ -6,22 +6,26 @@
         <div class="panel panel-primary">
             <div class="panel-heading">
                 Mis Requisiciones
-                <a href="#" id="refreshTbl" style="margin: 0px 68px 0px 0px; height:25px" class="btn btn-primary btn-sm actions__item zmdi zmdi-refresh"></a>
-        <a href="#" onclick='cerrarPanel(".panel")' class='btn btn-danger btn-xs'><i class="zmdi zmdi-close"></i>Cerrar</a>
+        <a href="#" onclick='cerrarPanel(".panel")' style="color:#FFF;border-left:1px solid #FFF "  ><i class="zmdi zmdi-close"></i>Cerrar</a>
             </div>
             <div class="panel-body">
                 <form id="frmFiltrosRequsiciones" name="frmFiltrosRequsiciones" class="form-inline" action="#">
-                    <table id="filtro">
+                    <table width="100%" id="filtro">
                         <tr>
-                            <td>&nbsp;
-                        <a id="anuevoa" class="btn btn-success" href="#" role="button"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a>
+                            <td >&nbsp;
+                        <a id="anuevoa" class="btn btn-success" href="#" role="button"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Nuevo</a>
                             </td>
-                            <td>&nbsp;
-                        <a id="btnReqPorAut" href="/requisicionesporautorizar" role="button" class="btn btn-primary" data-toggle='tooltip' data-placement='top' data-html='true' 
+                            <td style="text-align:right" >  
+                                                                               <a id="btnReqPorAut" href="/requisicionesporautorizar" role="button" class="btn btn-primary" data-toggle='tooltip' data-placement='top' data-html='true' 
                                                   title='<div style=\"width: 170px;\">Requisiciones que requieren mi autorización</div>' aria-hidden='true'>
                             <i class="zmdi zmdi-search"></i> Ir a Requisiciones por autorizar
                         </a>
-                            </td>
+                                &nbsp;
+                                    <a  id="refreshTbl"  class="btn btn-success" href="#" role="button"   style="color:#FFF"><i class="zmdi zmdi-refresh-alt"></i>&nbsp;Actualizar</a>
+
+
+                                </td>
+
                         </tr>
                     </table>
                 </form>
@@ -54,9 +58,22 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <!--style="width: 700px"-->
-                    <div class="modal-header titulo-modal">
-                        Requisiciones
-                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close"><i class="zmdi zmdi-close"></i>Cerrar</button>
+                    <div class="modal-header titulo-modal">                         
+                            <table width="100%">
+                                <tr>
+                                    <td style="text-align:right">
+                                        Requisiciones
+                                    </td>
+                                    <td>
+                                        &nbsp;&nbsp;
+                                    </td>
+                                    <td style="text-align:right">
+                                        <a  href="#" data-dismiss="modal" aria-label="Close" style="color:#FFF;border-left:1px solid #FFF ">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a> 
+
+                                    </td>
+                                </tr>
+                            </table>
+
                     </div>
                     <div class="modal-body">
                         <div id="btnAux"></div>
@@ -303,6 +320,6 @@
     <!-- App functions and actions -->
     <script type="text/javascript" src="js/app.min.js"></script>
     <script type="text/javascript" src="js/js.js"></script>
-    <script type="text/javascript" src="js/requisiciones.js?v.19"></script>
+    <script type="text/javascript" src="js/requisiciones.js?v.hnvghg19"></script>
 
 </asp:Content>

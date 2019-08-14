@@ -1,14 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="configuracion.aspx.cs" Inherits="SCGESP.configuracion" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <style>
 
+
+    </style>
 
     <section class="content">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 Configuración
-                            <a href="#" id="refreshTbl" style="margin: 0px 68px 0px 0px; height: 25px" class="btn btn-primary btn-sm actions__item zmdi zmdi-refresh"></a>
-                <a href="#" onclick='cerrarPanel(".panel")' class='btn btn-danger btn-xs'><i class="zmdi zmdi-close"></i>Cerrar</a>
+                <a href="#" onclick='cerrarPanel(".panel")' style="color:#FFF;border-left:1px solid #FFF "><i class="zmdi zmdi-close"></i>Cerrar</a>
             </div>
             <div class="panel-body">
 
@@ -21,7 +23,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">Usuario Visto Bueno</div>
                             <div class="panel-body">
-                                <table>
+                                <table width="100%">
                                     <tr>
                                         <td>Usuario:</td>
                                         <td colspan="3">
@@ -71,7 +73,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="4">
+                                        <td colspan="4" style="text-align:right">
                                             <button id="btnGuardaVoBo" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-saved"></span>Guardar</button>
                                         </td>
                                     </tr>
@@ -80,8 +82,21 @@
                         </div>
                     </div>
                     <div id="tabAutorizadores">
+                        <table id="filtro" width="100%" >
+						    <tr>
+							    <td style="text-align:left"> &nbsp;
+                                     <a id="btnUsu" href="/usuarios" role="button" class="btn btn-primary"  aria-hidden='true'>Ver Lista de Usuarios</a>
 
-                        <a id="btnUsu" href="/usuarios" role="button" class="btn btn-primary" aria-hidden='true'>Ver Lista de Usuarios</a>
+							
+                                <%--<a class="btn btn-primary" href="#" role="button" onclick="Historico()"><i class="zmdi zmdi-refresh-alt"></i>Historico</a>--%>
+                                </td>
+                                <td style="text-align:right" >  
+                                    <a  id="refreshTbl"  class="btn btn-success" href="#" role="button"   style="color:#FFF"><i class="zmdi zmdi-refresh-alt"></i>&nbsp;Actualizar</a>
+
+
+                                </td>
+                                </tr>
+  					    </table>
                         <table id="tblUsuarios" class="display browse" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
@@ -116,7 +131,7 @@
     <script type="text/javascript" src="js/app.min.js"></script>
     <script type="text/javascript" src="js/js.js"></script>
     <script type="text/javascript" src="js/vobo.js?11"></script>
-    <script type="text/javascript" src="js/usuariosAutInforme.js"></script>
+    <script type="text/javascript" src="js/usuariosAutInforme.js?kjh"></script>
 
     <script type="text/javascript">
         $("#tabsConfiguracion").tabs()

@@ -11,7 +11,7 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				Mis Requisiciones por Comprobar
-        <a href="#" onclick='cerrarPanel(".panel")' class='btn btn-danger btn-xs'><i class="zmdi zmdi-close"></i>Cerrar</a>
+        <a href="#" onclick='cerrarPanel(".panel")' style="color:#FFF;border-left:1px solid #FFF " ><i class="zmdi zmdi-close"></i>&nbsp;Cerrar</a>
 			</div>
 			<div class="panel-body">
 
@@ -22,17 +22,16 @@
 				</div>
 
 				<form id="frmFiltrosInforme" name="informes" class="form-inline" action="#">
-					<table id="filtro">
+					<table id="filtro" width="100%" >
 						<tr>
-							<td>&nbsp;
-                                <a id="btnBuscar" class="btn btn-primary" href="#" role="button" onclick="ObtenerInformes()"><i class="zmdi zmdi-refresh-alt"></i>Actualizar</a>
+							<td style="text-align:right"> &nbsp;
+                                <a id="btnBuscar" class="btn btn-success" href="#" role="button" onclick="ObtenerInformes()"  ><i class="zmdi zmdi-refresh-alt"></i>&nbsp;Actualizar</a>
 							
                                 <%--<a class="btn btn-primary" href="#" role="button" onclick="Historico()"><i class="zmdi zmdi-refresh-alt"></i>Historico</a>--%>
                             </td>
 
 					</table>
 				</form>
-				<br />
 					<table id="tblProyectos" class="display browse" cellspacing="0" width="100%" data-page-length="-1">
 						<thead>
 							<tr>
@@ -574,7 +573,7 @@
 									<input class="form-control reporte2" name="repa2" id="repa2" type="hidden" style="width: 80px;" />
 									<input type="hidden" id="importede" name="importede" class="form-control text-right" style="width: 80px;" />
 									<input type="hidden" id="importea" name="importea" class="form-control text-right" style="width: 80px;" />
-									<a id="btnBuscarMovBanco" class="btn btn-primary" href="#" role="button" onclick="ObtenerInformes()"><i class="zmdi zmdi-refresh-alt"></i>Actualizar</a>
+									<a id="btnBuscarMovBanco" class="btn btn-primary" href="#" role="button" onclick="ObtenerInformes()"><i class="zmdi zmdi-refresh-alt"></i>&nbsp;Actualizar</a>
 								</form>
 								<div id="scrolltblMovBanco">
 									<table id="tblMovBanco" class="display browse" cellspacing="0" width="100%">

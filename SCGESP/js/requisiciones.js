@@ -248,6 +248,11 @@ function confCancelarRequisiciones(id, nombre) {
     var datos = { 'Usuario': UsuarioActivo, 'RmReqId': id, 'Empleado': EmpeladoActivo };
     var botones = [];
     botones[0] = {
+        text: "No", click: function () {
+            $(this).dialog("close");
+        }
+    };
+    botones[1] = {
         text: "Si", click: function () {
             var permite = permitirAjustarReq(id);
             if (permite.actualizaOk === false) {
@@ -258,20 +263,15 @@ function confCancelarRequisiciones(id, nombre) {
             } else {
                 var RmReqComentarios = $.trim($("#RmReqComentarios").val());
                 //if (RmReqComentarios !== "") {
-                    datos['RmReqComentarios'] = RmReqComentarios;
-                    $(this).dialog("close");
-                    CancelarRequisiciones(datos, nombre);
+                datos['RmReqComentarios'] = RmReqComentarios;
+                $(this).dialog("close");
+                CancelarRequisiciones(datos, nombre);
                 /*} else {
                     var msnError = "No puedes cancelar la requisición, se requiere un motivo.";
                     $.notify(msnError, { position: "top center", autoHideDelay: 4000, className: "error" });
                     return false;
-                }*/                
+                }*/
             }
-        }
-    };
-    botones[1] = {
-        text: "No", click: function () {
-            $(this).dialog("close");
         }
     };
     //
@@ -1213,6 +1213,11 @@ function actualizaDetalleReq(datos) {
 function confEliminarDetalleReq(RmRdeRequisicion, RmReqDetalleId, RmRdeMaterialNombre) {
     var botones = [];
     botones[0] = {
+        text: "No", click: function () {
+            $(this).dialog("close");
+        }
+    };
+    botones[1] = {
         text: "Si", click: function () {
             var permite = permitirAjustarReq(RmRdeRequisicion);
             if (permite.actualizaOk === false) {
@@ -1224,15 +1229,10 @@ function confEliminarDetalleReq(RmRdeRequisicion, RmReqDetalleId, RmRdeMaterialN
                 $(this).dialog("close");
                 eliminarDetalleReq(RmRdeRequisicion, RmReqDetalleId, RmRdeMaterialNombre, 1);
             }
-            
+
         }
     };
-    botones[1] = {
-        text: "No", click: function () {
-            $(this).dialog("close");
-        }
-    };
-    Seguridad.confirmar("Eliminar Categoria [" + RmRdeMaterialNombre + "] de la Requisición [" + RmRdeRequisicion + "]?", botones, " Eliminar Requisicion.", "#tblDetalleRequisicion");
+    Seguridad.confirmar("Eliminar Categoria [" + RmRdeMaterialNombre + "] de la Requisición [" + RmRdeRequisicion + "]?", botones, " Eliminar Requisicion.", "#verRequisiciones");
 }
 function eliminarDetalleReq(RmRdeRequisicion, RmReqDetalleId, RmRdeMaterialNombre, valida) {
     $.ajax({
@@ -1324,6 +1324,7 @@ function browseDetalleRequisicion() {
                 row += "<td></td>";
                 $("#tblDetalleRequisicion tfoot").empty()
                     .append(row);
+                $("#tblDetalleRequisicion tfoot").append("</table>");
 
                 if (RmReqEstatus === 1) {
                     $("#monto").val(RmReqTotalIVA.toFixed(2));
@@ -1446,14 +1447,15 @@ $("#GeneraRequisicion").click(function () {
     if (RmReqId > 0) {
         var botones = [];
         botones[0] = {
+            text: "No", click: function () {
+                $(this).dialog("close");
+            }
+        };
+
+        botones[1] = {
             text: "Si", click: function () {
                 $(this).dialog("close");
                 GeneraRequisicion(RmReqId);
-            }
-        };
-        botones[1] = {
-            text: "No", click: function () {
-                $(this).dialog("close");
             }
         };
         Seguridad.confirmar("Generar Requisición [" + RmReqId + "]?", botones, " Generar Requisición.", "#verRequisiciones");
@@ -1569,7 +1571,13 @@ function CrearRequisicionPeticionTraspaso(strError) {
         }
 
         var botones = [];
+
         botones[0] = {
+            text: "No", click: function () {
+                $(this).dialog("close");
+            }
+        };
+        botones[1] = {
             text: "Si", click: function () {
                 $(this).dialog("close");
                 $.ajax({
@@ -1602,11 +1610,6 @@ function CrearRequisicionPeticionTraspaso(strError) {
                         console.log("error", result);
                     }
                 });
-            }
-        };
-        botones[1] = {
-            text: "No", click: function () {
-                $(this).dialog("close");
             }
         };
         setTimeout(function () {
@@ -1763,14 +1766,15 @@ function SelectProcesosRequisicion() {
 function confAutorizarRequisicion(datos) {
     var botones = [];
     botones[0] = {
+        text: "No", click: function () {
+            $(this).dialog("close");
+        }
+    };
+
+    botones[1] = {
         text: "Si", click: function () {
             $(this).dialog("close");
             autorizarRequisicion(datos);
-        }
-    };
-    botones[1] = {
-        text: "No", click: function () {
-            $(this).dialog("close");
         }
     };
     Seguridad.confirmar("Autorizar Requisición: " + datos.RmReqId + "?", botones, " Autorizar Requisicion.", "#verRequisiciones");
@@ -1815,6 +1819,12 @@ function autorizarRequisicion(datos) {
 function confRechazarRequisicion(datos) {
     var botones = [];
     botones[0] = {
+        text: "No", click: function () {
+            $(this).dialog("close");
+        }
+    };
+
+    botones[1] = {
         text: "Si", click: function () {
             var RmReqComentarios = $("#RmReqComentarios").val();
             if (valorVacio(RmReqComentarios)) {
@@ -1824,11 +1834,6 @@ function confRechazarRequisicion(datos) {
                 $(this).dialog("close");
                 rechazarRequisicion(datos);
             }
-        }
-    };
-    botones[1] = {
-        text: "No", click: function () {
-            $(this).dialog("close");
         }
     };
     var msn = "Rechazar Requisición: " + datos.RmReqId + "?<br />";

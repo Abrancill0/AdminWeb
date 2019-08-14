@@ -8,7 +8,7 @@
         <div class="panel panel-primary">
             <div class="panel-heading">
                 Autorizaciones Requisición por Comprobar
-        <a href="#" onclick='cerrarPanel(".panel")' class='btn btn-danger btn-xs'><i class="zmdi zmdi-close"></i>Cerrar</a>
+        <a href="#" onclick='cerrarPanel(".panel")' style="color:#FFF;border-left:1px solid #FFF "><i class="zmdi zmdi-close"></i>Cerrar</a>
             </div>
             <div class="panel-body">
 

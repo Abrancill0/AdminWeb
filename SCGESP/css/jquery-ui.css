@@ -581,10 +581,13 @@ button.ui-button::-moz-focus-inner {
 	padding: .2em;
 	outline: 0;
 }
-.ui-dialog .ui-dialog-titlebar {
-	padding: .4em 1em;
-	position: relative;
-}
+    .ui-dialog .ui-dialog-titlebar {
+        padding: .4em 1em;
+        position: relative;
+        background: #CF142B !important;
+        color: #FFF !important;
+    }
+
 .ui-dialog .ui-dialog-title {
 	float: left;
 	margin: .1em 0;
@@ -616,9 +619,17 @@ button.ui-button::-moz-focus-inner {
 	margin-top: .5em;
 	padding: .3em 1em .5em .4em;
 }
-.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
-	float: right;
+    .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset button {
+        float: right;
+        background: #6B5C4F;
+        color: #FFF;
+        border: 1px solid #6B5C4F;
+    }
+
+.no-close .ui-dialog-titlebar-close {
+    display: none;
 }
+
 .ui-dialog .ui-dialog-buttonpane button {
 	margin: .5em .4em .5em 0;
 	cursor: pointer;

@@ -17,18 +17,13 @@
 
                         <div class="pmo-pic">
                             <div class="p-relative">
-                                    <img class="img-perfil img-responsive" src="img/usuarios/default.png" alt="">
+                                    <img class="img-perfil" src="img/usuarios/default.png" alt="">
 
-                                <label for="fileFotoUsuario" class="pmop-edit">
-                                    <i class="zmdi zmdi-camera"></i><span
-                                        class="hidden-xs">Actualizar Foto</span>
-                                    <input id="fileFotoUsuario" name="fileFotoUsuario" class="hidden" type="file" accept="image/*"/>
-                                </label>
                             </div>
 
                             <div class="pmo-stat">
-                                <h2 class="m-0 c-white SgUsuId">1562</h2>
-                                <span class="SgUsuNombre"></span>
+                                <h4 class="c-white SgUsuNombre" style="color:white"></h4>
+                                <b><span class="m-0 SgUsuId" style="color:darkgray;">1562</span></b>                                
                             </div>
                         </div>
 
@@ -53,7 +48,7 @@
 
                     <div class="pm-body clearfix">
                         <ul class="tab-nav tn-justified">
-                            <li class="active alert-success"><a>Mi Perfil</a></li>
+                            <li class="alert-success-pm"><a>Mi Perfil</a></li>
                             <li><a href="/empresa">Mi Empresa</a></li>
                         </ul>
 

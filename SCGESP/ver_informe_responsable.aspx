@@ -32,6 +32,8 @@
 			word-wrap: break-word !important;
 		}
 
+   
+
 		#tblGastos td p.valor {
 			font-size: 12px;
 			border: none;
@@ -58,14 +60,14 @@
 		}
 
 			table.tblGastos thead {
-				background: #337AB7;
+				background: #6B5C4F;
 				font-size: 12px;
 				color: #ffffff;
 				font-weight: bold;
 			}
 
 				table.tblGastos thead tr th {
-					background: #337AB7;
+					background: #6B5C4F;
 					padding: 5px 5px;
 					font-size: 12px;
 					font-weight: bold;
@@ -94,6 +96,7 @@
 
 			table.tblGastos tbody tr {
 				border-right: #000 solid 1px;
+                border-left: #000 solid 1px;
 			}
 
 			table.tblGastos tfoot {
@@ -113,7 +116,6 @@
 		}
 
 			#tblGastos thead th {
-				border: 1px solid black;
 				text-align: center;
 			}
 
@@ -131,15 +133,15 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				Requisición / Informe de gastos
-        <a href="#" onclick='cerrarPanel(".panel")' class='btn btn-danger btn-xs'><i class="zmdi zmdi-close"></i>Cerrar</a>
+        <a href="#" onclick='cerrarPanel(".panel")' style="color:#FFF;border-left:1px solid #FFF " ><i class="zmdi zmdi-close"></i>Cerrar</a>
 			</div>
 			<div class="panel-body">
 				<table>
 					<tr>
 						<td style="width: 130px">
-							<a class="btn btn-primary btn-md" href="/Informes" role="button"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Regresar</a>
+							<a class="btn btn-primary btn-md" href="/Informes" style="background-color:#706259" role="button"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Regresar</a>
 						</td>
-						<td style="vertical-align: middle; text-align: left; padding-left: 50px;">
+						<td style="vertical-align: middle; text-align:right; padding-left: 50px;">
 							<!--Opciones-->
 							<a id="aenvia" class="btn btn-primary btn-md" href="#" role="button"><span class="glyphicon glyphicon-send"></span>&nbsp;Enviar a Validación</a>
 							<a id="aexportarxls" class="btn btn-primary btn-md" href="#" role="button" onclick=""><span class="glyphicon glyphicon-export"></span>&nbsp;Excel</a>
@@ -147,10 +149,11 @@
 								title="<div style='width: 170px;'>Ver la hora en que se realizo el Gasto.</div>" aria-hidden='true'><span class="zmdi zmdi-time"></span>Ver Hora Gasto</a-->
 							<a id="aagregarg" class="btn btn-primary btn-md" href="#" role="button"><span class="glyphicon glyphicon-plus"></span>&nbsp;Agregar Gasto</a>
 							<a id="aconfrontar" class="btn btn-primary btn-md" href="#" role="button"><i class="zmdi zmdi-swap"></i>&nbsp;Confrontar</a>
-							<a id="arefresh" class="btn btn-primary btn-md" href="#" role="button"><i class="zmdi zmdi-refresh"></i>&nbsp;Actualizar</a>
+							<a id="arefresh" class="btn btn-success btn-md" href="#" role="button"><i class="zmdi zmdi-refresh"></i>&nbsp;Actualizar</a>
 						</td>
 					</tr>
 				</table>
+                </br>
 				<div class="card" style="margin: 0px; padding: 0px;">
 					<div class="card-header card-info" role="tab" style="margin: 0px; padding: 2px 5px;">
 					</div>
@@ -201,8 +204,9 @@
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header titulo-modal">
-					<h4 class="modal-title" id="ModalLabelComprobante">Ver</h4>
-					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close"><i class="zmdi zmdi-close"></i>Cerrar</button>
+                    <a class="center-block	"> Ver </a>
+                   <a  href="#" data-dismiss="modal" aria-label="Close" style="color:#FFF;border-left:1px solid #FFF ">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a> 
+
 				</div>
 				<div class="modal-body">
 
@@ -399,9 +403,6 @@
 					</div>
 
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="zmdi zmdi-close"></i>Cerrar</button>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -411,8 +412,8 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header titulo-modal">
-					<span>Editar Gasto</span>
-					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close"><i class="zmdi zmdi-close"></i>Cerrar</button>
+                   <a class="center-block	"> Editar gasto. </a>
+                   <a  href="#" data-dismiss="modal" aria-label="Close" style="color:#FFF;border-left:1px solid #FFF ">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a>                             
 				</div>
 				<div class="modal-body">
 					<input type="hidden" id="idGasto" value="" />
@@ -654,18 +655,27 @@
 		</div>
 	</div>
 	<!-- Modal Confrontacion -->
-	<div class="modal fade" data-modal-color="bluegray" id="confrontacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="confrontacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header titulo-modal">
-					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close"><i class="zmdi zmdi-close"></i>Cerrar</button>
-					Confrontaci&oacute;n
+					<table width="100%">
+                        <tr>
+                            <td style="text-align:right">
+				Confrontación
+                            </td>
+                            <td style="text-align:right">
+                                <a  href="#" data-dismiss="modal" aria-label="Close" style="color:#FFF;border-left:1px solid #FFF ">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a> 
+                            </td>
+                        </tr>
+                    </table>
+
 				</div>
 				<div class="modal-body">
 
 					<div id="tabsConfrontar">
 						<ul>
-							<li><a href="#tabConfrontacion">Confrontacion</a></li>
+							<li><a href="#tabConfrontacion">Confrontación</a></li>
 							<li><a href="#tabCargaEdoCuenta" onclick="preparaCarga()">Carga Edo.Cuenta</a></li>
 						</ul>
 						<div id="tabConfrontacion">
@@ -678,7 +688,8 @@
 											<input class="form-control reporte2" name="repa2" id="repa2" type="hidden" style="width: 80px;" />
 											<input type="hidden" id="importede" name="importede" class="form-control text-right" style="width: 80px;" />
 											<input type="hidden" id="importea" name="importea" class="form-control text-right" style="width: 80px;" />
-											<a id="btnBuscarMovBanco" class="btn btn-primary" href="#" role="button"><i class="zmdi zmdi-refresh-alt"></i> Actualizar</a>
+                                            <a  id="btnBuscarMovBanco"  class="btn btn-success" href="#" role="button"   style="color:#FFF"><i class="zmdi zmdi-refresh-alt"></i>&nbsp;Actualizar</a>
+
 										</form>
 									</td>
 									<td>
@@ -816,9 +827,19 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header titulo-modal">
-					<div id="titulo_modal_alert" style="width: 100%; padding: 1px 10px;">
+					
+                    					<table width="100%">
+                        <tr>
+                            <td style="text-align:right">
+				<div id="titulo_modal_alert" style="width: 100%; padding: 1px 10px;">
 					</div>
-					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close"><i class="zmdi zmdi-close"></i>&nbsp;Cerrar</button>
+                            </td>
+                            <td>&nbsp;&nbsp;</td>
+                            <td style="text-align:right">
+                    <a  href="#" data-dismiss="modal" aria-label="Close" style="color:#FFF;border-left:1px solid #FFF ">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a> 
+                            </td>
+                        </tr>
+                    </table>
 				</div>
 				<div class="modal-body">
 					<div id="contenido_modal_alert" style="width: 100%; color: black">
@@ -831,7 +852,7 @@
 			</div>
 		</div>
 	</div>
-
+    </br>
 	<!--Informe cabecera-->
 	<script id="informe-cabecera-template" type="text/x-handlebars-template">
 
@@ -961,26 +982,26 @@
 			<tr>
 				<td class="concepto-importe">Autorizado: </td>
 				<td>
-					<span style='font-size: 16px; display: block;' class='label label-primary text-right'>{{ montoRequisicion }}
+					<span style='font-size: 16px; display: block; background-color: #007aff !important;' class='label label-primary text-right'>{{ montoRequisicion }}
 					</span>
 				</td>
 			</tr>
 			<tr>
 				<td class="concepto-importe">Gastado: </td>
 				<td>
-					<span style='font-size: 16px; display: block;' class='label label-danger text-right'>{{ montoGastado }}
+					<span style='font-size: 16px; display: block; background-color: #ffa000 !important;' class='label label-danger text-right'>{{ montoGastado }}
 					</span></td>
 			</tr>
 			<tr>
 				<td class="concepto-importe">Por Comprobar: </td>
 				<td>
-					<span style='font-size: 16px; display: block;' class='label label-success text-right'>{{ disponible }}
+					<span style='font-size: 16px; display: block; background-color: transparent !important; color:#000; ' class='label label-success text-right'>{{ disponible }}
 					</span>
 				</td>
 			</tr>
 			<tr>
 				<td class="concepto-importe">Decrementado: </td>
-				<td><span style='font-size: 16px; display: block;' class='label label-warning text-right'>{{ decrementado }}
+				<td><span style='font-size: 16px; display: block; background-color: transparent !important; color:#000; ' class='label label-warning text-right'>{{ decrementado }}
 				</span></td>
 			</tr>
 		</table>
@@ -992,7 +1013,7 @@
 				{{#if btnAdicional}}
 				
 					<div class='dropdown'>
-						<button type='button' class='btn btn-info' data-toggle='dropdown'><i class='zmdi zmdi-more-vert'></i></button>
+						<button type='button' class='btn btn-success' data-toggle='dropdown'><i class='zmdi zmdi-more-vert'></i></button>
 						<div class='dropdown-menu' style='padding: 5px;'>
 							<a href="#" onclick="gastoAjuste(1, '{{ datosGastoAdi }}')" class='dropdown-item' style='margin: 0px; padding: 10px 0px;'>Agregar otros gastos y/o propina al Gasto</a>
 
@@ -1123,7 +1144,8 @@
 							<span class="{{ icono3 }}"></span>&nbsp;{{ label3 }}</button>
 		{{/if}}
 						<button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
-							<i class="zmdi zmdi-close"></i>&nbsp;Cerrar</button>
+							<i class="zmdi zmdi-close"></i>&nbsp;Cerrar
+						</button>
 	</script>
 
 
@@ -1810,7 +1832,7 @@
 			var ConfBanco = $("#ConfBanco").val() * 1;
 			var btnEliCom = "";
 			if (ConfBanco === 0) {
-				btnEliCom = "&nbsp;<a type='button' class='btn btn-danger btn-xs' href='#' onclick='eliminarGastoCom(\"" + comprobante + "\", " + IdInforme + ", " + idgasto + ")'><i class='zmdi zmdi-delete zmdi-hc-2x'></i> </a>";
+				btnEliCom = "&nbsp;<a type='button' class='btn btn-primary btn-xs' href='#' onclick='eliminarGastoCom(\"" + comprobante + "\", " + IdInforme + ", " + idgasto + ")'><i class='zmdi zmdi-delete zmdi-hc-2x'></i> </a>";
 			};
 
 			if (comprobante === "XML") {
@@ -1825,9 +1847,9 @@
 						//console.log(response);
 						$("#verComprobante").modal('show');
 						var controles = "";
-						controles = "&nbsp;<a type='button' class='btn btn-warning btn-xs' href='#' onclick='imprimirXML()'><i class='zmdi zmdi-print zmdi-hc-2x'></i> </a>";
+						controles = "&nbsp;<a type='button' class='btn btn-primary btn-xs' href='#' onclick='imprimirXML()'><i class='zmdi zmdi-print zmdi-hc-2x'></i> </a>";
 						controles += btnEliCom;
-						controles += "&nbsp;<a type='button' class='btn btn-warning btn-xs' href='" + dircomp + "' target='_blank'><i class='zmdi zmdi-download zmdi-hc-2x'></i> </a>";
+						controles += "&nbsp;<a type='button' class='btn btn-primary btn-xs' href='" + dircomp + "' target='_blank'><i class='zmdi zmdi-download zmdi-hc-2x'></i> </a>";
 						$("#controles_compXML").append(controles);
 
 						var xmljson = xmlToJson(response);
@@ -1855,11 +1877,11 @@
 				$("#verComprobante").modal('show');
 				dircomp = "/" + dircomp;
 				var controles = "";
-				controles += "&nbsp;<a type='button' class='btn btn-warning btn-xs' href='#' dir='" + dircomp + "' onclick='imprimirImg()'><i class='zmdi zmdi-print zmdi-hc-2x'></i> </a>";
+				controles += "&nbsp;<a type='button' class='btn btn-primary btn-xs' href='#' dir='" + dircomp + "' onclick='imprimirImg()'><i class='zmdi zmdi-print zmdi-hc-2x'></i> </a>";
 				controles += btnEliCom;
 				controles += "&nbsp;<a type='button' class='btn btn-primary btn-xs' href='#' dir='" + dircomp + "' onclick='rotarImg(\"" + dircomp + "\", -90)'><i class='zmdi zmdi-rotate-left zmdi-hc-2x'></i> </a>";
 				controles += "&nbsp;<a type='button' class='btn btn-primary btn-xs' href='#' onclick='rotarImg(\"" + dircomp + "\", 90)'><i class='zmdi zmdi-rotate-right zmdi-hc-2x'></i> </a>";
-				controles += "&nbsp;<a type='button' class='btn btn-warning btn-xs' href='" + dircomp + "' target='_blank'><i class='zmdi zmdi-download zmdi-hc-2x'></i> </a>";
+				controles += "&nbsp;<a type='button' class='btn btn-primary btn-xs' href='" + dircomp + "' target='_blank'><i class='zmdi zmdi-download zmdi-hc-2x'></i> </a>";
 				var f = new Date();
 				var fh = f.getDate() + '' + f.getMonth() + '' + f.getFullYear() + '' + f.getHours() + '' + f.getMinutes() + '' + f.getSeconds();
 				$("#controles_compOTRO").append(controles);
@@ -1940,7 +1962,7 @@
 					$(this).dialog("close");
 				}
 			};
-			Seguridad.confirmar("Eliminar Comprobante?", botones, "Eliminar Comprobante.", "#verComprobante");
+			Seguridad.confirmar("¿Eliminar Comprobante?", botones, "Eliminar Comprobante.", "#verComprobante");
 		}
 		function imprimirImg() {
 			$("#print_compOTRO").printArea({
@@ -2196,9 +2218,12 @@ function JSONize(str) {
 					$(this).dialog("close");
 				}
 			};
-			Seguridad.confirmar("Eliminar Gasto:<br /><b>" + nombre + "</b>?", botones, "Eliminar Gasto.");
+            Seguridad.confirmar("Eliminar Gasto:<br /><b>¿" + nombre + "</b>?", botones, "Eliminar Gasto.");
 
-		}
+               
+        }
+
+
 		$("#btnGuardaGasto").click(function () {
 			var gasto = JSON.parse($("#gasto").val());
 			var tipoajuste = gasto.tipoajuste * 1;
@@ -2801,8 +2826,14 @@ function JSONize(str) {
 				var extFile = (nombre.substring(nombre.lastIndexOf(".") + 1)).toLowerCase();
 				if (extFile === "xml") {
 
-					var botones = [];
-					botones[0] = {
+                    var botones = [];
+                    botones[0] = {
+						text: "No", click: function () {
+							$(this).dialog("close");
+							$("#fileXmlAdicional" + datos.IdGasto).clearInputs();
+						}
+					};
+					botones[1] = {
 						text: "Si", click: function () {
 							$(this).dialog("close");
 
@@ -2837,12 +2868,7 @@ function JSONize(str) {
 
 						}
 					};
-					botones[1] = {
-						text: "No", click: function () {
-							$(this).dialog("close");
-							$("#fileXmlAdicional" + datos.IdGasto).clearInputs();
-						}
-					};
+
 					var gasto = datos.Concepto + " / " + formatNumber.new((datos.TGastado * 1).toFixed(2), "$ ");
 
 					var chkAfectaa = "<div id='chkAfectaImpFac' class='hidden'>";

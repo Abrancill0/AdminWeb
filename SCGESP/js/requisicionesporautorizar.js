@@ -459,14 +459,14 @@ function diasViaje() {
 function confAutorizarRequisicionVer(datos) {
     var botones = [];
     botones[0] = {
-        text: "Si", click: function () {
+        text: "No", click: function () {
             $(this).dialog("close");
-            autorizarRequisicionVer(datos);
         }
     };
     botones[1] = {
-        text: "No", click: function () {
+        text: "Si", click: function () {
             $(this).dialog("close");
+            autorizarRequisicionVer(datos);
         }
     };
     Seguridad.confirmar("Autorizar Requisición: " + datos.RmReqId + "?", botones, " Autorizar Requisicion.", "#verRequisiciones");
@@ -513,6 +513,11 @@ function autorizarRequisicionVer(datos) {
 function confRechazarRequisicionVer(datos) {
     var botones = [];
     botones[0] = {
+        text: "No", click: function () {
+            $(this).dialog("close");
+        }
+    };
+    botones[1] = {
         text: "Si", click: function () {
             var RmReqComentarios = $("#RmReqComentarios").val();
             if (valorVacio(RmReqComentarios)) {
@@ -522,11 +527,6 @@ function confRechazarRequisicionVer(datos) {
                 $(this).dialog("close");
                 rechazarRequisicionVer(datos);
             }
-        }
-    };
-    botones[1] = {
-        text: "No", click: function () {
-            $(this).dialog("close");
         }
     };
     var msn = "Rechazar Requisición: " + datos.RmReqId + "?<br />";
@@ -713,6 +713,11 @@ $("#aAutoriza").click(function () {
     var resultadoAut = [], nautorizaciones = 0, textError;
     var botones = [];
     botones[0] = {
+        text: "No", click: function () {
+            $(this).dialog("close");
+        }
+    };
+    botones[1] = {
         text: "Si", click: function () {
             $(this).dialog("close");
             for (var ii = 0; ii < i; ii++) {
@@ -724,21 +729,16 @@ $("#aAutoriza").click(function () {
                 if (ok === 0) {
                     var error = datoEle(resultadoAut['error']);
                     textError += valorVacio(error) ? "" : (" " + error);
-                }   
+                }
             }
 
             if (nautorizaciones === i) {
                 Seguridad.alerta("Se Autorizaron <b> " + i + "</b> Requisiciones.");
             } else {
-                var errores = valorVacio(textError) ? "." : ("<br />Errores: <br/>" + textError+".");
+                var errores = valorVacio(textError) ? "." : ("<br />Errores: <br/>" + textError + ".");
                 Seguridad.alerta("Se Autorizaron <b> " + nautorizaciones + "</b> Requisiciones de <b> " + i + "</b>" + errores);
             }
             ObtenerRequisiciones();
-        }
-    };
-    botones[1] = {
-        text: "No", click: function () {
-            $(this).dialog("close");
         }
     };
     Seguridad.confirmar("Autorizar <b>" + i + "</b> Requisiciones<br />por un importe total de: <b>" + (formatNumber.new(total.toFixed(2), "$ ")) + "</b>?", botones, " Autorizar Requisiciones.");
@@ -747,14 +747,14 @@ $("#aAutoriza").click(function () {
 function confAutorizarRequisicion(datos) {
     var botones = [];
     botones[0] = {
-        text: "Si", click: function () {
+        text: "No", click: function () {
             $(this).dialog("close");
-            autorizarRequisicion(datos, 1);
         }
     };
     botones[1] = {
-        text: "No", click: function () {
+        text: "Si", click: function () {
             $(this).dialog("close");
+            autorizarRequisicion(datos, 1);
         }
     };
     Seguridad.confirmar("Autorizar Requisición: <b>" + datos.RmReqId + "</b><br />por un importe de: <b>" + (formatNumber.new((datos.RmReqTotal).toFixed(2), "$ ")) + "</b>?", botones, " Autorizar Requisicion.");
@@ -829,6 +829,11 @@ $("#aRechazar").click(function () {
     var resultadoRec = [], nrechazos = 0, textError = "";
     var botones = [];
     botones[0] = {
+        text: "No", click: function () {
+            $(this).dialog("close");
+        }
+    };
+    botones[1] = {
         text: "Si", click: function () {
             var RmReqComentarios = $("#RmReqComentariosTodos").val();
             if (valorVacio(RmReqComentarios)) {
@@ -857,12 +862,7 @@ $("#aRechazar").click(function () {
                 ObtenerRequisiciones();
 
             }
-            
-        }
-    };
-    botones[1] = {
-        text: "No", click: function () {
-            $(this).dialog("close");
+
         }
     };
     var msn = "Rechazar <b>" + i + "</b> Requisiciones<br />por un importe total de: <b>" + (formatNumber.new(total.toFixed(2), "$ ")) + "</b>?<br />";
@@ -876,6 +876,11 @@ $("#aRechazar").click(function () {
 function confRechazarRequisicion(datos) {
     var botones = [];
     botones[0] = {
+        text: "No", click: function () {
+            $(this).dialog("close");
+        }
+    };
+    botones[1] = {
         text: "Si", click: function () {
             var RmReqComentarios = $("#RmReqComentarios").val();
             if (valorVacio(RmReqComentarios)) {
@@ -885,11 +890,6 @@ function confRechazarRequisicion(datos) {
                 $(this).dialog("close");
                 rechazarRequisicion(datos, 1);
             }
-        }
-    };
-    botones[1] = {
-        text: "No", click: function () {
-            $(this).dialog("close");
         }
     };
     var msn = "Rechazar Requisición: <b>" + datos.RmReqId + "</b><br />por un importe de: <b>" + (formatNumber.new((datos.RmReqTotal).toFixed(2), "$ ")) + "</b>?<br />";

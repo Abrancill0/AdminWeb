@@ -5,17 +5,18 @@
         <div class="panel panel-primary">
             <div class="panel-heading">
                 Requisiciones Que Requieren Mi Autorización
-                <a href="#" id="refreshTbl" style="margin: 0px 68px 0px 0px; height:25px" class="btn btn-primary btn-sm actions__item zmdi zmdi-refresh"></a>
-        <a href="#" onclick='cerrarPanel(".panel")' class='btn btn-danger btn-xs'><i class="zmdi zmdi-close"></i>Cerrar</a>
+        <a href="#" onclick='cerrarPanel(".panel")' style="color:#FFF;border-left:1px solid #FFF " ><i class="zmdi zmdi-close"></i>Cerrar</a>
             </div>
             <div class="panel-body">
                 
-                    <table id="filtro">
+                    <table id="filtro" width="100%">
                         <tr>
-                            <td>
-                                <a id="btnRequisiciones" href="/requisiciones" role="button" class="btn btn-primary" >
+                            <td style="text-align:right">
+                                <a id="btnRequisiciones" href="/requisiciones" style="background-color:#6b5c4f" role="button" class="btn btn-primary" >
                             <i class="zmdi zmdi-search"></i> Ir a Requisiciones
                         </a>
+                           <a id="refreshTbl" class="btn btn-success btn-md" href="#" role="button"><i class="zmdi zmdi-refresh"></i>&nbsp;Actualizar</a>
+
                             </td>
                             <td><a id='aAutoriza' class='btn btn-success' aria-disabled='false' href='#' role='button'><span class='glyphicon glyphicon-ok'></span> Autorizar</a></td>
                             <td><a id='aRechazar' class='btn btn-danger' aria-disabled='false' href='#' role='button'><span class='glyphicon glyphicon-repeat'></span> Rechazar</a></td>
@@ -55,8 +56,19 @@
                 <div class="modal-content">
                     <!--style="width: 700px"-->
                     <div class="modal-header titulo-modal">
-                        Requisiciones
-                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close"><i class="zmdi zmdi-close"></i>Cerrar</button>
+
+                        <table width="100%">
+                                <tr>
+                                    <td style="text-align:right">
+                                        Requisiciones&nbsp;
+                                    </td>
+                                    <td style="text-align:right">
+                                        <a  href="#" data-dismiss="modal" aria-label="Close" style="color:#FFF;border-left:1px solid #FFF ">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a> 
+
+                                    </td>
+                                </tr>
+                            </table>
+                        
                     </div>
                     <div class="modal-body">
                         <div id="btnAux"></div>
@@ -306,6 +318,6 @@
     <!-- App functions and actions -->
     <script type="text/javascript" src="js/app.min.js"></script>
     <script type="text/javascript" src="js/js.js"></script>
-    <script type="text/javascript" src="js/requisicionesporautorizar.js?v.1"></script>
+    <script type="text/javascript" src="js/requisicionesporautorizar.js?v.12"></script>
 
 </asp:Content>

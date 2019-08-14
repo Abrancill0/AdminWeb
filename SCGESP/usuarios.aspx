@@ -5,10 +5,17 @@
         <div class="panel panel-primary">
             <div class="panel-heading">
                 Usuarios
-                            <a href="#" id="refreshTbl" style="margin: 0px 68px 0px 0px; height:25px" class="btn btn-primary btn-sm actions__item zmdi zmdi-refresh"></a>
-        <a href="#" onclick='cerrarPanel(".panel")' class='btn btn-danger btn-xs'><i class="zmdi zmdi-close"></i>Cerrar</a>
+        <a href="#" onclick='cerrarPanel(".panel")' style="color:#FFF;border-left:1px solid #FFF "  ><i class="zmdi zmdi-close"></i>Cerrar</a>
             </div>
+
             <div class="panel-body">
+                <table id="filtro" width="100%" >
+			    	<tr>
+                       <td style="text-align:right" >  
+                            <a  id="refreshTbl"  class="btn btn-success" href="#" role="button"  style="color:#FFF"><i class="zmdi zmdi-refresh-alt"></i>&nbsp;Actualizar</a>
+                        </td>
+                    </tr>
+  			    </table>
                 <!--a id="btnUsuAut" href="/usuariosAutorizadoresInforme" role="button" class="btn btn-primary" aria-hidden='true'>Ver Lista de Usuarios Autorizadores de Informe</a-->
                 <table id="tblUsuarios" class="display browse" cellspacing="0" width="100%" data-page-length="10">
                     <thead>
@@ -33,8 +40,17 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header titulo-modal">
-                        Usuario
-                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close"><i class="zmdi zmdi-close"></i>Cerrar</button>
+                                                    <table width="100%">
+                                <tr>
+                                    <td style="text-align:right">
+                                        Usuario
+                                    </td>
+                                    <td style="text-align:right">
+                                        <a  href="#" data-dismiss="modal" aria-label="Close" style="color:#FFF;border-left:1px solid #FFF ">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a> 
+
+                                    </td>
+                                </tr>
+                            </table>
                     </div>
                     <div class="modal-body">
 

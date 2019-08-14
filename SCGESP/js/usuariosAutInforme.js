@@ -160,7 +160,14 @@ function confActualizaUsuAdmin(elemento) {
     if ($(elemento).is(':checked')) {
         if (datos.StAdministrador === 0 && datos.SgUsuIdAdm === "") {
             var botones = [];
+            
             botones[0] = {
+                text: "No", click: function () {
+                    $(this).dialog("close");
+                    ObtenerCatalogoUsuarios();
+                }
+            };
+            botones[1] = {
                 text: "Si", click: function () {
                     $(this).dialog("close");
                     datos['StAdministrador'] = 1;
@@ -170,16 +177,16 @@ function confActualizaUsuAdmin(elemento) {
                     $.notify("Se agrego nuevo usuario autorizador principal.", { globalPosition: 'top center', className: 'success' });
                 }
             };
-            botones[1] = {
+            Seguridad.confirmar("Agregar al usuario <b>" + datos.SgUsuEmpleadoNombre + "</b> como administrador?", botones, " Marcar como Administrador.");
+        } else if (datos.StAdministrador === 0 && datos.SgUsuIdAdm !== "") {
+            var botones = [];
+            botones[0] = {
                 text: "No", click: function () {
                     $(this).dialog("close");
                     ObtenerCatalogoUsuarios();
                 }
             };
-            Seguridad.confirmar("Agregar al usuario <b>" + datos.SgUsuEmpleadoNombre + "</b> como administrador?", botones, " Marcar como Administrador.");
-        } else if (datos.StAdministrador === 0 && datos.SgUsuIdAdm !== "") {
-            var botones = [];
-            botones[0] = {
+            botones[1] = {
                 text: "Si", click: function () {
                     $(this).dialog("close");
                     datos['StAdministrador'] = 1;
@@ -189,18 +196,18 @@ function confActualizaUsuAdmin(elemento) {
                     $.notify("Se agrego nuevo usuario autorizador principal.", { globalPosition: 'top center', className: 'success' });
                 }
             };
-            botones[1] = {
-                text: "No", click: function () {
-                    $(this).dialog("close");
-                    ObtenerCatalogoUsuarios();
-                }
-            };
             Seguridad.confirmar("Agregar al usuario <b>" + datos.SgUsuEmpleadoNombre + "</b> como administrador y quitar a <b>" + datos.SgUsuEmpleadoNombreAdm + "</b>?", botones, " Marcar como Administrador.");
         }
     } else {
         if (datos.StAdministrador === 1) {
             var botones = [];
             botones[0] = {
+                text: "No", click: function () {
+                    $(this).dialog("close");
+                    ObtenerCatalogoUsuarios();
+                }
+            };
+            botones[1] = {
                 text: "Si", click: function () {
                     $(this).dialog("close");
                     datos['StAdministrador'] = 0;
@@ -208,12 +215,6 @@ function confActualizaUsuAdmin(elemento) {
                     datos['ExistiaUnAdm'] = 1;
                     actualizaUsuAdmin(datos);
                     $.notify("Se quito usuario autorizador principal.", { globalPosition: 'top center', className: 'success' });
-                }
-            };
-            botones[1] = {
-                text: "No", click: function () {
-                    $(this).dialog("close");
-                    ObtenerCatalogoUsuarios();
                 }
             };
             Seguridad.confirmar("Quitar el usuario <b>" + datos.SgUsuEmpleadoNombre + "</b> como administrador?", botones, " Desmarcar como Administrador.");
@@ -244,6 +245,12 @@ function confActualizaUsuSub(elemento) {
         if (datos.StAdministrador === 1 && datos.StSuplente === 0) {
             var botones = [];
             botones[0] = {
+                text: "No", click: function () {
+                    $(this).dialog("close");
+                    ObtenerCatalogoUsuarios();
+                }
+            };
+            botones[1] = {
                 text: "Si", click: function () {
                     $(this).dialog("close");
                     datos['StAdministrador'] = 0;
@@ -253,16 +260,16 @@ function confActualizaUsuSub(elemento) {
                     $.notify("Se quito usuario autorizador suplente.", { globalPosition: 'top center', className: 'success' });
                 }
             };
-            botones[1] = {
+            Seguridad.confirmar("Quitar al usuario <b>" + datos.SgUsuEmpleadoNombre + "</b> como administrador y agregarlo como suplente?", botones, " Marcar como Suplente.");
+        } else if (datos.StAdministrador === 0 && datos.StSuplente === 0) {
+            var botones = [];
+            botones[0] = {
                 text: "No", click: function () {
                     $(this).dialog("close");
                     ObtenerCatalogoUsuarios();
                 }
             };
-            Seguridad.confirmar("Quitar al usuario <b>" + datos.SgUsuEmpleadoNombre + "</b> como administrador y agregarlo como suplente?", botones, " Marcar como Suplente.");
-        } else if (datos.StAdministrador === 0 && datos.StSuplente === 0) {
-            var botones = [];
-            botones[0] = {
+            botones[1] = {
                 text: "Si", click: function () {
                     $(this).dialog("close");
                     datos['StAdministrador'] = 0;
@@ -272,17 +279,18 @@ function confActualizaUsuSub(elemento) {
                     $.notify("Se agrego nuevo usuario autorizador suplente.", { globalPosition: 'top center', className: 'success' });
                 }
             };
-            botones[1] = {
-                text: "No", click: function () {
-                    $(this).dialog("close");
-                    ObtenerCatalogoUsuarios();
-                }
-            };
+
             Seguridad.confirmar("Agregar al usuario <b>" + datos.SgUsuEmpleadoNombre + "</b> como suplente?", botones, " Marcar como Suplente.");
         }
     } else {
         var botones = [];
         botones[0] = {
+            text: "No", click: function () {
+                $(this).dialog("close");
+                ObtenerCatalogoUsuarios();
+            }
+        };
+        botones[1] = {
             text: "Si", click: function () {
                 $(this).dialog("close");
                 datos['StAdministrador'] = 0;
@@ -290,12 +298,6 @@ function confActualizaUsuSub(elemento) {
                 datos['ExistiaUnAdm'] = 1;
                 actualizaUsuSub(datos);
                 $.notify("Se quito usuario autorizador suplente.", { globalPosition: 'top center', className: 'success' });
-            }
-        };
-        botones[1] = {
-            text: "No", click: function () {
-                $(this).dialog("close");
-                ObtenerCatalogoUsuarios();
             }
         };
         Seguridad.confirmar("Quitar al usuario <b>" + datos.SgUsuEmpleadoNombre + "</b> como suplente?", botones, " Desmarcar como Suplente.");

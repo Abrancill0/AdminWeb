@@ -2,6 +2,8 @@
 var PCentros = [];// Seguridad.permisos(3);
 var UsuarioActivo = localStorage.getItem("cosa");
 var EmpeladoActivo = localStorage.getItem("cosa2");
+$(".ui-dialog-titlebar-close").addClass("ui-icon-close");
+
 $(function () {
     try {
         cargaInicialAvisos();
