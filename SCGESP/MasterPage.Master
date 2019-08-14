@@ -128,7 +128,7 @@
                     <li><a href='/requisicionesporautorizar'><i class='zmdi zmdi-check-all'></i>Requisiciones por Autorizar</a></li>
                     <li><a href='/Informes'><i class='zmdi zmdi-assignment'></i>Mis Requisiciones por Comprobar</a></li>
                     <li><a href='/Autorizaciones'><i class='zmdi zmdi-assignment-account'></i>Autorizaciones de Requisiciones por Comprobar</a></li>
-					<li><a href='/rep_estatus_informes'><i class='zmdi zmdi-format-list-bulleted'></i>Resporte Estatus Informes</a></li>
+					<li><a href='/rep_estatus_informes'><i class='zmdi zmdi-format-list-bulleted'></i>Reporte Estatus Informes</a></li>
                     <li class='navigation__sub sp-info'>
                         <a href='#' onclick="abreMenuModulo(this)"><i class='zmdi zmdi-help'></i> Ayuda</a>
                         <ul class='main-menu'>
