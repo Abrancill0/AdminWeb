@@ -97,7 +97,7 @@ namespace SCGESP.Controllers
                             AfInvAsignacionCentroNombre = Convert.ToString(row["AfInvAsignacionCentroNombre"]),
                             Utilidad = Convert.ToString(row["Utilidad"]) == "" ? "0" : Convert.ToString(row["Utilidad"]),
                             Perdida = Convert.ToString(row["Perdida"]) == "" ? "0" : Convert.ToString(row["Perdida"]),
-                            AfInvDeprContAcumulada = Convert.ToString(row["AfInvDeprContAcumulada"]),
+                            AfInvDeprContAcumulada = Convert.ToString(row["AfInvDeprContAcumulada"]) == "" ? "0" : Convert.ToString(row["AfInvDeprContAcumulada"]),
 
                         };
                         lista.Add(ent);

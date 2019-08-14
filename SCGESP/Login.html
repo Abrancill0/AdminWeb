@@ -148,14 +148,13 @@
 
             var datos = {
                 "Usuario": "mlacebo",
-                "RmOcoId": "14762",
-                "RmOcoComentario" : "Prueba de rechazo oc"
+                
             };
 
             $.ajax({
                 async: true,
                 type: 'POST',
-                url: '/api/RechazaOC',
+                url: '/api/SolicitudMovimientoActivoFijo',
                 data: JSON.stringify(datos),
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
