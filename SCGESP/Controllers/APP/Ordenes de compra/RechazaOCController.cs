@@ -27,7 +27,7 @@ namespace SCGESP.Controllers
 
             DocumentoEntrada entrada = new DocumentoEntrada
             {
-                Usuario = Datos.Usuario,
+                Usuario = UsuarioDesencripta,
                 Origen = "AdminApp",  //Datos.Origen; 
                 Transaccion = 120768,
                 Operacion = 14 //rechazar requisiciones
