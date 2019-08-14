@@ -2,31 +2,31 @@
 
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<title>AdminWeb - LogIn</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>AdminWeb - LogIn</title>
 
-	<meta http-equiv="Expires" content="0" />
-	<meta http-equiv="Last-Modified" content="0" />
-	<meta http-equiv="Cache-Control" content="no-cache, mustrevalidate" />
-	<meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Last-Modified" content="0" />
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
 
-	<!-- Vendor styles -->
-	<link rel="stylesheet" href="vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" />
-	<link rel="stylesheet" href="vendors/bower_components/animate.css/animate.min.css" />
-	<!-- App styles -->
-	<link rel="stylesheet" href="css/app.css" />
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" />
+    <link rel="stylesheet" href="vendors/bower_components/animate.css/animate.min.css" />
+    <!-- App styles -->
+    <link rel="stylesheet" href="css/app.css" />
 </head>
 <body data-ma-theme="blue">
-	<div class="login bold">
-		<!-- Login -->
-		<div class="login__block active" id="l-login">
-			<img src="img/SPapp_Icons_AdminWeb.png" class="img-responsive login__block__img" border="0" width="150" title="Seguros El Potos&iacute;" />
+    <div class="login bold">
+        <!-- Login -->
+        <div class="login__block active" id="l-login">
+            <img src="img/SPapp_Icons_AdminWeb.png" class="img-responsive login__block__img" border="0" width="150" title="Seguros El Potos&iacute;" />
 
-			<!--div class="login__block__header">
-				<img src="img/SPapp_Icons_AdminWeb.png" class="img-responsive" border="0" width="150" title="Seguros El Potos&iacute;" />
-				LogIn AdminWEB
-			</div-->
+            <!--div class="login__block__header">
+                <img src="img/SPapp_Icons_AdminWeb.png" class="img-responsive" border="0" width="150" title="Seguros El Potos&iacute;" />
+                LogIn AdminWEB
+            </div-->
             <div class="login__block__body">
                 <div class="form-group form-group--float form-group--centered">
                     <input type="text" class="form-control" id="usuario" maxlength="10" />
@@ -40,311 +40,310 @@
                 </div>
                 <!--a onclick="Login();" class="btn btn--icon login__block__btn"><i class="zmdi zmdi-long-arrow-right"></i></a-->
                 <button class="btn btn-lg btn-primary btn-block" type="button" onclick="Login();"><span class="zmdi zmdi-lock-open zmdi-hc-2x"></span>  Entrar</button>
-                <!--<button class="btn btn-lg btn-primary btn-block" type="button" onclick="Pruebas();"><span class="zmdi zmdi-lock-open zmdi-hc-2x"></span>  probar</button>-->
+                <button class="btn btn-lg btn-primary btn-block" type="button" onclick="Pruebas();"><span class="zmdi zmdi-lock-open zmdi-hc-2x"></span>  probar</button>
 
             </div>
         </div>
     </div>
 
     <!-- Modal confirmar -->
-                <!--data-modal-color="bluegray"-->
-                <div class="modal fade" id="modal_cambia_contrasena" data-modal-color="gray" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header titulo-modal">
-                                <div style="width: 100%; padding: 1px 10px;">
-                                    Cambiar Contraseña
-                                </div>
-                            </div>
-                            <div class="modal-body">
-                                <table cellpadding='0' style="width: 100%; color: black" cellspacing='0' border='0'>
-                                    <tr>
-                                        <td colspan="2" class="nombre_usuario">
-                                            Usuario
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Nueva Contraseña:
-                                        </td>
-                                        <td>
-                                            <div class='input-group'>
-                                                <div class='form-group'>
-                                                    <input type='password' id='contrasena_nueva' name='contrasena_nueva' style="padding:8px 5px" class='form-control' placeholder="Escribe tu nueva contraseña">
-                                                    <i class='form-group__bar'></i>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr><td colspan="2" style="padding:5px;"></td></tr>
-                                    <tr>
-                                        <td style="width:140px">
-                                            Confirmar Contraseña:
-                                        </td>
-                                        <td>
-                                            <div class='input-group'>
-                                                <div class='form-group'>
-                                                    <input type='password' id='contrasena_confirmada' name='contrasena_confirmada' style="padding:8px 5px" class='form-control' placeholder="Confirma tu nueva contraseña">
-                                                    <i class='form-group__bar'></i>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" id="btn_cambia_pass" class="btn btn-primary" onclick="cambiarContrasena()">
-                                    <span class="zmdi zmdi-lock-open"></span>&nbsp;Cambiar y Entrar
-                                </button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
-                                    <i class="zmdi zmdi-close"></i>&nbsp;Cerrar
-                                </button>
-
-                            </div>
-                        </div>
+    <!--data-modal-color="bluegray"-->
+    <div class="modal fade" id="modal_cambia_contrasena" data-modal-color="gray" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header titulo-modal">
+                    <div style="width: 100%; padding: 1px 10px;">
+                        Cambiar Contraseña
                     </div>
                 </div>
-
-                <div class="modal fade" id="modal_cambia_contrasena_ok" data-modal-color="gray" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header titulo-modal">
-                                <div style="width: 100%; padding: 1px 10px;">
-                                    Cambiar Contraseña
+                <div class="modal-body">
+                    <table cellpadding='0' style="width: 100%; color: black" cellspacing='0' border='0'>
+                        <tr>
+                            <td colspan="2" class="nombre_usuario">
+                                Usuario
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Nueva Contraseña:
+                            </td>
+                            <td>
+                                <div class='input-group'>
+                                    <div class='form-group'>
+                                        <input type='password' id='contrasena_nueva' name='contrasena_nueva' style="padding:8px 5px" class='form-control' placeholder="Escribe tu nueva contraseña">
+                                        <i class='form-group__bar'></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="modal-body">
-                                <table cellpadding='0' style="width: 100%; color: black" cellspacing='0' border='0'>
-                                    <tr>
-                                        <td class="nombre_usuario" style="text-align:center">
-                                            Usuario
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center">
-                                            <i class="zmdi zmdi-check-circle text-success" style="font-size:100px"></i>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
+                            </td>
+                        </tr>
+                        <tr><td colspan="2" style="padding:5px;"></td></tr>
+                        <tr>
+                            <td style="width:140px">
+                                Confirmar Contraseña:
+                            </td>
+                            <td>
+                                <div class='input-group'>
+                                    <div class='form-group'>
+                                        <input type='password' id='contrasena_confirmada' name='contrasena_confirmada' style="padding:8px 5px" class='form-control' placeholder="Confirma tu nueva contraseña">
+                                        <i class='form-group__bar'></i>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btn_cambia_pass" class="btn btn-primary" onclick="cambiarContrasena()">
+                        <span class="zmdi zmdi-lock-open"></span>&nbsp;Cambiar y Entrar
+                    </button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
+                        <i class="zmdi zmdi-close"></i>&nbsp;Cerrar
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal_cambia_contrasena_ok" data-modal-color="gray" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header titulo-modal">
+                    <div style="width: 100%; padding: 1px 10px;">
+                        Cambiar Contraseña
                     </div>
                 </div>
+                <div class="modal-body">
+                    <table cellpadding='0' style="width: 100%; color: black" cellspacing='0' border='0'>
+                        <tr>
+                            <td class="nombre_usuario" style="text-align:center">
+                                Usuario
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center">
+                                <i class="zmdi zmdi-check-circle text-success" style="font-size:100px"></i>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <!-- Javascript -->
-                <script type="text/javascript" src="vendors/bower_components/Waves/dist/waves.min.js"></script>
-                <script type="text/javascript" src="vendors/bower_components/tether/dist/js/tether.min.js"></script>
-                <script type="text/javascript" src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
-                <script type="text/javascript" src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-                <!-- App functions and actions -->
-                <script type="text/javascript" src="js/app.min.js"></script>
-                <script type="text/javascript" src="js/js.js"></script>
-                <script type="text/javascript" src="js/plugins/jquery.blockUI.js"></script>
+    <!-- Javascript -->
+    <script type="text/javascript" src="vendors/bower_components/Waves/dist/waves.min.js"></script>
+    <script type="text/javascript" src="vendors/bower_components/tether/dist/js/tether.min.js"></script>
+    <script type="text/javascript" src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- App functions and actions -->
+    <script type="text/javascript" src="js/app.min.js"></script>
+    <script type="text/javascript" src="js/js.js"></script>
+    <script type="text/javascript" src="js/plugins/jquery.blockUI.js"></script>
 
-                <script>
-                    localStorage.clear();
+    <script>
+        localStorage.clear();
 
-                    // var tipolog = 1;
-                    // var origen = "login";
+        function Pruebas() {
 
-                    //function Pruebas() {
-                   //      var datos = {
-                   //          "Usuario": 'YQBwAGQAZQBsAGEAZwBhAHIAegA=',
-                   //          "Origen": 'AdminApp',
-                  //      };
+            var datos = {
+                "Usuario": "mlacebo",
+                "RmOcoId": "14762",
+                "RmOcoComentario" : "Prueba de rechazo oc"
+            };
 
-                  //       $.ajax({
-                  //           async: true,
-                 //          type: 'POST',
-                 //            url: '/api/RequisicionesPendientesAutorizarApp',
-                 //           data: JSON.stringify(datos),
-                //            contentType: 'application/json; charset=utf-8',
-                //            dataType: 'json',
-                //         });
-                //     }
+            $.ajax({
+                async: true,
+                type: 'POST',
+                url: '/api/RechazaOC',
+                data: JSON.stringify(datos),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+            });
+        }
 
 
-                    function Login() {
+        function Login() {
 
-                        jQuery.support.cors = true;
-                        var tipolog = 1;
-                        var origen = "login";
-                        var usuario = $("#usuario").val();
-                        var contrasena = $("#contrasena").val();
+            jQuery.support.cors = true;
+            var tipolog = 1;
+            var origen = "login";
+            var usuario = $("#usuario").val();
+            var contrasena = $("#contrasena").val();
 
-                        if (usuario == '' || usuario == null) {
-                            alert('Campo usuario obligatorio');
+            if (usuario == '' || usuario == null) {
+                alert('Campo usuario obligatorio');
 
-                            return;
-                        }
+                return;
+            }
 
-                        if (contrasena == '' || contrasena == null) {
-                            alert('Campo contraseña obligatorio');
+            if (contrasena == '' || contrasena == null) {
+                alert('Campo contraseña obligatorio');
 
-                            return;
-                        }
+                return;
+            }
 
-                        var datos = {
-                            "usuario": usuario,
-                            "contrasena": contrasena,
-                            "origen": origen,
-                            "tipo": tipolog
-                        };
+            var datos = {
+                "usuario": usuario,
+                "contrasena": contrasena,
+                "origen": origen,
+                "tipo": tipolog
+            };
 
-                        $.ajax({
-                            async: true,
-                            type: 'POST',
-                            url: '/api/LoginEle',
-                            data: JSON.stringify(datos),
-                            contentType: 'application/json; charset=utf-8',
-                            dataType: 'json',
-                            beforeSend: cargando,
-                            success: OnSuccess,
-                            error: OnError
+            $.ajax({
+                async: true,
+                type: 'POST',
+                url: '/api/LoginEle',
+                data: JSON.stringify(datos),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                beforeSend: cargando,
+                success: OnSuccess,
+                error: OnError
+            });
+        }
+
+        function OnSuccess(data) {
+            console.log(data);
+            if (data != null) {
+
+                localStorage.setItem("cosa", data[0].cosa);
+                localStorage.setItem("cosa2", data[0].cosa2);
+                localStorage.setItem("nmbemp", data[0].cosa3);
+
+                var valDefault = {
+                    'GrEmpCentro': data[0].GrEmpCentro,
+                    'GrEmpOficina': data[0].GrEmpOficina,
+                    'GrEmpTipoGasto': data[0].GrEmpTipoGasto,
+                    'GrEmpTarjetaToka': data[0].GrEmpTarjetaToka,
+                    'SgUsuFechaVencimiento': data[0].SgUsuFechaVencimiento
+                };
+                var FechaV = (valDefault.SgUsuFechaVencimiento).split("T");
+                var SgUsuFechaVencimiento = $.trim(FechaV[0]);
+                localStorage.setItem("default", JSON.stringify(valDefault));
+
+                if (SgUsuFechaVencimiento !== "") {
+                    var hoy = new Date();
+                    var fechaVencimiento = new Date(SgUsuFechaVencimiento + " 00:00:00");//
+                    // Comparamos solo las fechas => no las horas!!
+                    hoy.setHours(0, 0, 0, 0); // Lo iniciamos a 00:00 horas
+                    fechaVencimiento.setHours(0, 0, 0, 0); // Lo iniciamos a 00:00 horas
+                    if (hoy >= fechaVencimiento) {
+                        cargado();
+                        $("#modal_cambia_contrasena").modal({
+                            show: true,
+                            keyboard: false,
+                            backdrop: "static"
                         });
+                        $("#contrasena_nueva, #contrasena_confirmada").val("");
+                        ".nombre_usuario".AsHTML("Hola: <b>" + data[0].cosa3 + "</b>.<br /><span style='color:red'>*Tu contraseña ha expirado, es necesario cambiarla.</span>");
+                    } else {
+                        //console.log("Ir a informes.", hoy, fechaVencimiento);
+                        //aqui pones el puerto que te de tu iss express
+                        location.href = "Informes.aspx?" + String(new Date().getTime()); //"/Informes.aspx";
                     }
+                } else {
+                    //console.log("Ir a informes.", fechaVencimiento);
+                    //aqui pones el puerto que te de tu iss express
+                    location.href = "Informes.aspx?" + String(new Date().getTime()); //"/Informes.aspx";
+                }
+            }
+            else {
+                alert('Usuario o contraseña incorrecta');
+                cargado();
+            }
+        }
 
-                    function OnSuccess(data) {
-                        console.log(data);
-                        if (data != null) {
+        function OnError(data) {
 
-                            localStorage.setItem("cosa", data[0].cosa);
-                            localStorage.setItem("cosa2", data[0].cosa2);
-                            localStorage.setItem("nmbemp", data[0].cosa3);
+            var logerror = data.responseJSON;
+            var error = logerror.ExceptionMessage;
+            alert(error);
+            cargado();
+        }
 
-                            var valDefault = {
-                                'GrEmpCentro': data[0].GrEmpCentro,
-                                'GrEmpOficina': data[0].GrEmpOficina,
-                                'GrEmpTipoGasto': data[0].GrEmpTipoGasto,
-                                'GrEmpTarjetaToka': data[0].GrEmpTarjetaToka,
-                                'SgUsuFechaVencimiento': data[0].SgUsuFechaVencimiento
-                            };
-                            var FechaV = (valDefault.SgUsuFechaVencimiento).split("T");
-                            var SgUsuFechaVencimiento = $.trim(FechaV[0]);
-                            localStorage.setItem("default", JSON.stringify(valDefault));
+        function cambiarContrasena() {
+            var contrasena = $("#contrasena").val();
+            var contrasena_nueva = $.trim($("#contrasena_nueva").val());
+            var contrasena_confirmada = $.trim($("#contrasena_confirmada").val());
+            if (contrasena_nueva === contrasena_confirmada && contrasena_nueva !== contrasena && contrasena_nueva !== "") {
+                var usuario = $.trim($("#usuario").val());
+                var datos = {
+                    'usuario': usuario,
+                    'contrasena': contrasena_nueva
+                };
 
-                            if (SgUsuFechaVencimiento !== "") {
-                                var hoy = new Date();
-                                var fechaVencimiento = new Date(SgUsuFechaVencimiento + " 00:00:00");//
-                                // Comparamos solo las fechas => no las horas!!
-                                hoy.setHours(0, 0, 0, 0); // Lo iniciamos a 00:00 horas
-                                fechaVencimiento.setHours(0, 0, 0, 0); // Lo iniciamos a 00:00 horas
-                                if (hoy >= fechaVencimiento) {
-                                    cargado();
-                                    $("#modal_cambia_contrasena").modal({
-                                        show: true,
-                                        keyboard: false,
-                                        backdrop: "static"
-                                    });
-                                    $("#contrasena_nueva, #contrasena_confirmada").val("");
-                                    ".nombre_usuario".AsHTML("Hola: <b>" + data[0].cosa3 + "</b>.<br /><span style='color:red'>*Tu contraseña ha expirado, es necesario cambiarla.</span>");
-                                } else {
-                                    //console.log("Ir a informes.", hoy, fechaVencimiento);
+                $.ajax({
+                    async: true,
+                    type: "POST",
+                    url: '/api/CambioPasswordEle',
+                    data: JSON.stringify(datos),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    cache: false,
+                    beforeSend: function () {
+                        cargando();
+                    },
+                    success: function (result) {
+                        console.log(result);
+                        var resultado = result.Salida.Resultado * 1;
+                        $("#modal_cambia_contrasena").modal('hide');
+                        if (resultado === 1) {
+                            setTimeout(function () {
+                                var nombre = localStorage.getItem("nmbemp");
+                                $("#modal_cambia_contrasena_ok").modal({
+                                    show: true,
+                                    keyboard: false,
+                                    backdrop: "static"
+                                });
+                                ".nombre_usuario".AsHTML("Hola: <b>" + nombre + "</b>.<br /><span class='h3'><b>*Tu contraseña fue modificada.</b></span>");
+                                setTimeout(function () {
                                     //aqui pones el puerto que te de tu iss express
                                     location.href = "Informes.aspx?" + String(new Date().getTime()); //"/Informes.aspx";
-                                }
-                            } else {
-                                //console.log("Ir a informes.", fechaVencimiento);
-                                //aqui pones el puerto que te de tu iss express
-                                location.href = "Informes.aspx?" + String(new Date().getTime()); //"/Informes.aspx";
-                            }
-                        }
-                        else {
-                            alert('Usuario o contraseña incorrecta');
-                            cargado();
-                        }
-                    }
-
-                    function OnError(data) {
-
-                        var logerror = data.responseJSON;
-                        var error = logerror.ExceptionMessage;
-                        alert(error);
-                        cargado();
-                    }
-
-                    function cambiarContrasena() {
-                        var contrasena = $("#contrasena").val();
-                        var contrasena_nueva = $.trim($("#contrasena_nueva").val());
-                        var contrasena_confirmada = $.trim($("#contrasena_confirmada").val());
-                        if (contrasena_nueva === contrasena_confirmada && contrasena_nueva !== contrasena && contrasena_nueva !== "") {
-                            var usuario = $.trim($("#usuario").val());
-                            var datos = {
-                                'usuario': usuario,
-                                'contrasena': contrasena_nueva
-                            };
-
-                            $.ajax({
-                                async: true,
-                                type: "POST",
-                                url: '/api/CambioPasswordEle',
-                                data: JSON.stringify(datos),
-                                contentType: 'application/json; charset=utf-8',
-                                dataType: 'json',
-                                cache: false,
-                                beforeSend: function () {
-                                    cargando();
-                                },
-                                success: function (result) {
-                                    console.log(result);
-                                    var resultado = result.Salida.Resultado * 1;
-                                    $("#modal_cambia_contrasena").modal('hide');
-                                    if (resultado === 1) {
-                                        setTimeout(function () {
-                                            var nombre = localStorage.getItem("nmbemp");
-                                            $("#modal_cambia_contrasena_ok").modal({
-                                                show: true,
-                                                keyboard: false,
-                                                backdrop: "static"
-                                            });
-                                            ".nombre_usuario".AsHTML("Hola: <b>" + nombre + "</b>.<br /><span class='h3'><b>*Tu contraseña fue modificada.</b></span>");
-                                            setTimeout(function () {
-                                                //aqui pones el puerto que te de tu iss express
-                                                location.href = "Informes.aspx?" + String(new Date().getTime()); //"/Informes.aspx";
-                                            }, 2000);
-                                        }, 500);
-                                    } else {
-                                        //alert('Error al cambiar contrseaña.\nIntentarlo de nuevo.');
-                                        setTimeout(function () {
-                                            cargado();
-                                            $("#modal_cambia_contrasena").modal({
-                                                show: true,
-                                                keyboard: false,
-                                                backdrop: "static"
-                                            });
-                                            $("#contrasena_nueva, #contrasena_confirmada").val("");
-                                            setTimeout(function () {
-                                                $("#contrasena_nueva").focus();
-                                            }, 500);
-                                            alert(result.Salida.Error);
-                                        }, 500);
-                                    }
-                                }
-                            });
+                                }, 2000);
+                            }, 500);
                         } else {
-                            if (contrasena_nueva === contrasena_confirmada && contrasena_nueva === "") {
-                                alert('Los campos de contraseña son obligatorios.');
-                            } else if (contrasena_nueva === contrasena) {
-                                alert('La contraseña Nueva NO debe ser igual a la anterior.');
-                            } else {
-                                alert('La contraseña Nueva debe ser igual a la Contraseña de confirmación.');
-                            }
+                            //alert('Error al cambiar contrseaña.\nIntentarlo de nuevo.');
+                            setTimeout(function () {
+                                cargado();
+                                $("#modal_cambia_contrasena").modal({
+                                    show: true,
+                                    keyboard: false,
+                                    backdrop: "static"
+                                });
+                                $("#contrasena_nueva, #contrasena_confirmada").val("");
+                                setTimeout(function () {
+                                    $("#contrasena_nueva").focus();
+                                }, 500);
+                                alert(result.Salida.Error);
+                            }, 500);
                         }
                     }
-                    $("#contrasena_nueva, #contrasena_confirmada").keyup(function () {
-                        var contrasena = $("#contrasena").val();
-                        var contrasena_nueva = $.trim($("#contrasena_nueva").val());
-                        var contrasena_confirmada = $.trim($("#contrasena_confirmada").val());
-                        if (contrasena_nueva === contrasena_confirmada && contrasena_nueva !== "" && contrasena_nueva !== contrasena) {
-                            $("#btn_cambia_pass").show();
-                        } else if (contrasena_nueva === contrasena) {
-                            $("#btn_cambia_pass").hide();
-                        } else {
-                            $("#btn_cambia_pass").hide();
-                        }
-                    });
+                });
+            } else {
+                if (contrasena_nueva === contrasena_confirmada && contrasena_nueva === "") {
+                    alert('Los campos de contraseña son obligatorios.');
+                } else if (contrasena_nueva === contrasena) {
+                    alert('La contraseña Nueva NO debe ser igual a la anterior.');
+                } else {
+                    alert('La contraseña Nueva debe ser igual a la Contraseña de confirmación.');
+                }
+            }
+        }
+        $("#contrasena_nueva, #contrasena_confirmada").keyup(function () {
+            var contrasena = $("#contrasena").val();
+            var contrasena_nueva = $.trim($("#contrasena_nueva").val());
+            var contrasena_confirmada = $.trim($("#contrasena_confirmada").val());
+            if (contrasena_nueva === contrasena_confirmada && contrasena_nueva !== "" && contrasena_nueva !== contrasena) {
+                $("#btn_cambia_pass").show();
+            } else if (contrasena_nueva === contrasena) {
+                $("#btn_cambia_pass").hide();
+            } else {
+                $("#btn_cambia_pass").hide();
+            }
+        });
 
 
-                </script>
+    </script>
 </body>
 </html>
