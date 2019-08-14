@@ -334,3 +334,6 @@ SCGESP/Web.config
 =======
 *.config
 >>>>>>> a00b1c7ed90fb150f35abdca1b3eac4ee5e6d706
+SCGESP/SCGESP.csproj
+SCGESP/Web.config
+desktop.ini
