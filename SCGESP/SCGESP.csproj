@@ -523,6 +523,7 @@
     <Content Include="Login.html" />
     <Content Include="oficinas.aspx" />
     <Content Include="perfil.aspx" />
+    <Content Include="rep_estatus_informes.aspx" />
     <Content Include="requisiciones.aspx" />
     <Content Include="requisicionesporautorizar.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -5037,6 +5038,7 @@
     <Compile Include="Controllers\CGEAPI\Autorizaciones\ConsultaTipoAdminAutorizadorController.cs" />
     <Compile Include="Controllers\CGEAPI\Autorizaciones\EnviaAutorizadoresController.cs" />
     <Compile Include="Controllers\CGEAPI\Autorizaciones\EnviovoboController.cs" />
+    <Compile Include="Controllers\CGEAPI\CargaMasivaXMLAdminERPController.cs" />
     <Compile Include="Controllers\CGEAPI\CatalogoVoBo\ActualizaConfVoBoController.cs" />
     <Compile Include="Controllers\CGEAPI\CatalogoVoBo\ConsultaConfVoBoController.cs" />
     <Compile Include="Controllers\CGEAPI\Confrontacion\CargarExcelBancoClosedXMLController.cs" />
@@ -5075,9 +5077,12 @@
     <Compile Include="Controllers\CGEAPI\ObtieneResponsableController.cs" />
     <Compile Include="Controllers\CGEAPI\PruebaGetController.cs" />
     <Compile Include="Controllers\CGEAPI\RechazarInformeController.cs" />
+    <Compile Include="Controllers\CGEAPI\rep_informes_estatusController.cs" />
     <Compile Include="Controllers\CGEAPI\RotarImagenController.cs" />
     <Compile Include="Controllers\CGEAPI\SaveDatosAdicionalesGastoController.cs" />
+    <Compile Include="Controllers\CGEAPI\SelectEstatusInformeController.cs" />
     <Compile Include="Controllers\CGEAPI\SelectInformeController.cs" />
+    <Compile Include="Controllers\CGEAPI\SelectUsuariosController.cs" />
     <Compile Include="Controllers\CGEAPI\TotalLetraController.cs" />
     <Compile Include="Controllers\CGEAPI\UpdateCategoriaGastoAjusteController.cs" />
     <Compile Include="Controllers\CGEAPI\UpdateComensalesGastoController.cs" />
@@ -5205,6 +5210,13 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="rep_estatus_informes.aspx.cs">
+      <DependentUpon>rep_estatus_informes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="rep_estatus_informes.aspx.designer.cs">
+      <DependentUpon>rep_estatus_informes.aspx</DependentUpon>
     </Compile>
     <Compile Include="requisiciones.aspx.cs">
       <DependentUpon>requisiciones.aspx</DependentUpon>

@@ -12,6 +12,7 @@ namespace SCGESP.Controllers
         {
             public string Usuario { get; set; }
             public string RmOcoId { get; set; }
+            public string RmOcoRequisicion { get; set; }
             public string RmOcoComentario { get; set; }
         }
 
@@ -33,6 +34,8 @@ namespace SCGESP.Controllers
             };
             entrada.agregaElemento("RmOcoId", Datos.RmOcoId);
             entrada.agregaElemento("RmOcoComentarios", Datos.RmOcoComentario);
+            entrada.agregaElemento("RmOcoRequisicion", Datos.RmOcoRequisicion);
+            
 
             DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 
