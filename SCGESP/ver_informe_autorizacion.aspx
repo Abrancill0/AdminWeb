@@ -685,7 +685,7 @@
 				<tr>
 					<td>Estatus:</td>
 					<td>
-						<p class="valor">{{ e_estatus }}</p>
+						<p class="valor">{{ e_estatus }} / {{ bandeja_usuario }} / {{ a_fsolicitud }}</p>
 					</td>
 				</tr>
 			</table>
@@ -910,6 +910,7 @@
 					//cargando();
 				},
 				success: function (result) {
+					//console.log(result);
 					var informe = result[0];
 					//informe.del = valorVacio(informe.del) ? "" : formatFecha(new Date(informe.del), "dd/mm/yyyy");
 					//informe.al = valorVacio(informe.al) ? "" : formatFecha(new Date(informe.al), "dd/mm/yyyy");

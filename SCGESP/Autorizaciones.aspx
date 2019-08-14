@@ -593,7 +593,7 @@
     <script src="js/app.min.js"></script>
     <script src="js/js.js"></script>
     <script src="js/Autorizaciones.js?11q1q111q"></script>
-    <script src="js/AutorizaInformes.js?11q11q1x1q"></script>
+    <script src="js/AutorizaInformes.js?11q11q1x1q1"></script>
 
    
 

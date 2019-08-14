@@ -128,6 +128,7 @@
                     <li><a href='/requisicionesporautorizar'><i class='zmdi zmdi-check-all'></i>Requisiciones por Autorizar</a></li>
                     <li><a href='/Informes'><i class='zmdi zmdi-assignment'></i>Mis Requisiciones por Comprobar</a></li>
                     <li><a href='/Autorizaciones'><i class='zmdi zmdi-assignment-account'></i>Autorizaciones de Requisiciones por Comprobar</a></li>
+					<li><a href='/rep_estatus_informes'><i class='zmdi zmdi-format-list-bulleted'></i>Resporte Estatus Informes</a></li>
                     <li class='navigation__sub sp-info'>
                         <a href='#' onclick="abreMenuModulo(this)"><i class='zmdi zmdi-help'></i> Ayuda</a>
                         <ul class='main-menu'>
@@ -171,8 +172,8 @@
         <script type='text/javascript' src='js/bootstrap/bootstrap.min.js'></script>
         <script type="text/javascript" src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js?"></script>
 
-        <script type="text/javascript" src='js/js.js?12'></script>
-        <script type='text/javascript' src='js/seguridad.js?fghgvdsd'></script>
+        <script type="text/javascript" src='js/js.js?123456'></script>
+        <script type='text/javascript' src='js/seguridad.js?'></script>
         <!-- Vendors: Data tables -->
         <script type="text/javascript" src="vendors/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="vendors/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>

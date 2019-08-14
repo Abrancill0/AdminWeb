@@ -960,7 +960,7 @@
 			<tr>
 				<td>Estatus:</td>
 				<td>
-					<p class="valor">{{ e_estatus }}</p>
+					<p class="valor">{{ e_estatus }} / {{ bandeja_usuario }} / {{ a_fsolicitud }}</p>
 				</td>
 			</tr>
 		</table>
@@ -1150,7 +1150,6 @@
 
 
 	<script type="text/javascript" src="js/app.min.js"></script>
-	<script type="text/javascript" src="js/js.js"></script>
 	<script type="text/javascript" src="js/handlebars-v4.0.11.js"></script>
 	<script type="text/javascript">
 
@@ -1343,8 +1342,9 @@
 							btnEditar = true;
 							btnEliminar = false;
 						}
-
-						var result_justificacion = conceptos_adicionales(value.g_concepto, value.g_nombreCategoria, tipoajuste);
+						var gConcepto = value.g_concepto;
+						gConcepto = gConcepto.replace(/\"/gi, "");//error al hacer paser a un json con ", solución temporal supr "
+						var result_justificacion = conceptos_adicionales(gConcepto, value.g_nombreCategoria, tipoajuste);
 
 						var justificacion_text_1 = "";
 						try {
@@ -1654,11 +1654,11 @@
 			} else {
 				$.each(justificacion, function (key, value) {
 					var campo = valorVacio(value[2]) ? "" : value[2];
-					var valor = value[1];
+					var valor = value[1].replace(/[.?+*^$|({[\\]/g, '\\$&');
+					//valor = '"' + valor.replace(/\"/gi, valor) + '"';
 					var valores = "{\"" + campo + "\": \"" + valor + "\"}";
-					
 					try {
-						valores = JSON.parse(valores);
+						valores = StrToJSON(valores); //JSON.parse(valores);
 					} catch (e) {
 						valores = [valor];
 					}
@@ -1726,7 +1726,6 @@
 				},
 				success: function (result) {
 					resultado = result.Salida.Tablas.Llave.NewDataSet.Llave;
-					console.log(resultado);
 					var fInicio = ((datoEle(resultado.RmReqFechaRequerida)).split("T"))[0];
 					var fFin = ((datoEle(resultado.RmReqFechaFinal)).split("T"))[0];
 
@@ -2137,36 +2136,23 @@
 			//strJson = strJson.replace(/\"/g,'&quot;');
 			try {
 				JsonStr = JSON.parse(strJson);
-				console.log("JSON.parse(strJson)");
 			} catch (e) {
-				console.log("falla, JSON.parse(strJson)");
 				try {
 					var gJson = JSON.stringify(eval('(' + JSONize(strJson) + ')'));
 					var JSONObj = JSON.parse(gJson);
-					console.log(" JSON.stringify(eval('(' + strJson + ')'))");
 					JsonStr = JSONObj;
 				} catch (e) {
-					console.log("falla JSON.stringify(eval('(' + strJson + ')'))");
 					try {
-						JsonStr = JSONize(strJson);
-						console.log("JSONize(strJson)");
+						JsonStr = jsonParseC(strJson); // JSON.parse(JSONize(strJson));
 					} catch (e) {
-						console.log("falla JSONize(strJson)");
-						try {
-							JsonStr = JSON.parse(JSONize(strJson));
-							console.log("JSON.parse(JSONize(strJson))");
-						} catch (e) {
-							console.log("falla JSON.parse(JSONize(strJson))");
-							var errorString= strJson;
-							var jsonValidString = JSON.stringify(eval("(" + errorString+ ")"));
- 							var JSONObj=JSON.parse(jsonValidString);
-							JsonStr = JSONObj;
-							console.log("JSON.stringify(eval(( + errorString+ )))");
-						}
+						console.log("falla JSON.parse(JSONize(strJson))", strJson);
+						var errorString = strJson;
+						var jsonValidString = JSON.stringify(eval("(" + errorString + ")"));
+						var JSONObj = JSON.parse(jsonValidString);
+						JsonStr = JSONObj;
 					}
 				}
 			}
-			console.log(JsonStr);
 			return JsonStr;
 		}
 function JSONize(str) {
@@ -3108,22 +3094,33 @@ function JSONize(str) {
 			r.readAsDataURL(file);
 
 		}
-		function RecuperaDatos(id, idinforme, binimagePDF) {
+		function RecuperaDatos(id, idinforme, binimagePDF, file) {
+
 			var datos = {
 				"id": id,
 				"idinforme": idinforme,
 				"dir": binimagePDF,
-				"Valida": "1"
+				"Valida": "1",
+				"FilePDF": file
 			};
+
+			var aDatos = new FormData();
+			aDatos.append("id", id);
+			aDatos.append("idinforme", idinforme);
+			aDatos.append("dir", binimagePDF);
+			aDatos.append("Valida", 1);
+			aDatos.append("FilePDF", file);
 
 			$.ajax({
 				async: false,
 				type: "POST",
 				url: "/api/UpdateGastoPDFOtros",
-				data: JSON.stringify(datos),
-				contentType: 'application/json; charset=utf-8',
-				dataType: 'json',
+				data: aDatos,
+				//dataType: "json",
+				contentType: false,
+				processData: false,
 				cache: false,
+				dataType: "json",
 				success: function (result) {
 					$.notify("Gasto Actualizado [Comprobante PDF Cargado].", { globalPosition: 'top center', className: 'success' });
 				},
@@ -3175,15 +3172,13 @@ function JSONize(str) {
 			var binimagePDF;
 
 			var file = $('#filepdf').get(0).files[0];
+
 			var r = new FileReader();
 			r.onload = function () {
 				binimagePDF = r.result;
-				RecuperaDatos(id, idinforme, binimagePDF)
-
+				RecuperaDatos(id, idinforme, binimagePDF, file);
 			};
 			r.readAsDataURL(file);
-
-
 		}
 		function recuperadatosotros(id, idinforme, bitImg) {
 
@@ -3191,17 +3186,27 @@ function JSONize(str) {
 				"id": id,
 				"idinforme": idinforme,
 				"dir": bitImg,
-				"Valida": "0"
+				"Valida": "0",
+				"FilePDF": null
 			};
+
+			var aDatos = new FormData();
+			aDatos.append("id", id);
+			aDatos.append("idinforme", idinforme);
+			aDatos.append("dir", bitImg);
+			aDatos.append("Valida", 0);
+			aDatos.append("FilePDF", null);
 
 			$.ajax({
 				async: false,
 				type: "POST",
 				url: "/api/UpdateGastoPDFOtros",
-				data: JSON.stringify(datos),
-				contentType: 'application/json; charset=utf-8',
-				dataType: 'json',
+				data: aDatos,
+				//dataType: "json",
+				contentType: false,
+				processData: false,
 				cache: false,
+				dataType: "json",
 				success: function () {
 					$.notify("Gasto Actualizado [Comprobante Cargado].", { globalPosition: 'top center', className: 'success' });
 				},
