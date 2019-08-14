@@ -27,28 +27,30 @@
                 <!--th width="80px">Monto</!--th>
                     <th width="80px">Disponible</th>
                     <th width="80px">Gastado</th-->
-                <table id="tblRequisiciones" class="display browse" cellspacing="0" width="100%" data-page-length="10">
-                    <thead>
-                        <tr>
-                            <th width="10px">#</th>
-                            <th width="250px">Justificaci&oacute;n</th>
-                            <th width="250px">Responsable</th>
-                            <th width="100px">Oficina</th>
-                            <th width="100px">SubRamo</th>
-                            <th width="250px">Estatus</th>
-                            <th width="50px">Importe</th>
-                            <th width="50px"></th>
-                            <th width="50px"></th>
-                            <th width="50px"></th>
-                            <th width="50px"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                    <tfoot>
-                    </tfoot>
-                </table>
 
+				<div class="table-responsive">
+					<table id="tblRequisiciones" class="display browse" cellspacing="0" width="100%" data-page-length="10">
+						<thead>
+							<tr>
+								<th width="10px">#</th>
+								<th width="250px">Justificaci&oacute;n</th>
+								<th width="250px">Responsable</th>
+								<th width="100px">Oficina</th>
+								<th width="100px">SubRamo</th>
+								<th width="250px">Estatus</th>
+								<th width="50px">Importe</th>
+								<th width="50px"></th>
+								<th width="50px"></th>
+								<th width="50px"></th>
+								<th width="50px"></th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+						<tfoot>
+						</tfoot>
+					</table>
+				</div>
 
                 <!--Modal Requisicion-->
         <div class="modal fade" id="verRequisiciones" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

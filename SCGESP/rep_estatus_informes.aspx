@@ -5,10 +5,10 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				Reporte Estatus Informes
-        <a href="#" onclick='cerrarPanel(".panel")' class='btn btn-danger btn-xs'><i class="zmdi zmdi-close"></i>Cerrar</a>
+        <a href="#" onclick='cerrarPanel(".panel")' style="color:#FFF;border-left:1px solid #FFF "><i class="zmdi zmdi-close"></i>Cerrar</a>
 			</div>
 			<div class="panel-body">
-				
+				<div class="table-responsive">
 				<table class="filtro">
 					<tr>
 						<td style="text-align:center; padding: 10px 20px">
@@ -68,9 +68,11 @@
 						</td>
 					</tr>
 				</table>
+				</div>
 
 				<hr />
 
+				<div class="table-responsive">
 				<table id="tblInformes" class="display browse" cellspacing="0" width="100%" data-page-length="-1">
                     <thead>
                         <tr style="text-align:center;">
@@ -89,7 +91,7 @@
                     <tbody>
                     </tbody>
                 </table>
-
+					</div>
 
 			</div>
 

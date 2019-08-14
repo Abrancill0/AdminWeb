@@ -33,7 +33,8 @@
                 <!--th width="80px">Monto</!--th>
                     <th width="80px">Disponible</th>
                     <th width="80px">Gastado</th-->
-                <table id="tblRequisiciones" class="display browse" cellspacing="0" width="100%" data-page-length="10">
+                <div class="table-responsive">
+				<table id="tblRequisiciones" class="display browse" cellspacing="0" width="100%" data-page-length="10">
                     <thead>
                         <tr>
                             <th width="10px">#</th>
@@ -49,7 +50,7 @@
                     <tbody>
                     </tbody>
                 </table>
-
+			</div>
             </div>
         </div>
 

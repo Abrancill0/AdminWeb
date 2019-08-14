@@ -32,6 +32,7 @@
 
 					</table>
 				</form>
+				<div class="table-responsive">
 					<table id="tblProyectos" class="display browse" cellspacing="0" width="100%" data-page-length="-1">
 						<thead>
 							<tr>
@@ -47,6 +48,7 @@
 						<tbody>
 						</tbody>
 					</table>
+				</div>
 			</div>
 		</div>
 

@@ -17,6 +17,7 @@
                     <span id="infoDisp"></span>
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 </div>
+				<div class="table-responsive">
 					<table id="tblProyectos" class="display browse" cellspacing="0" width="100%" data-page-length="-1">
                     <thead>
                         <tr style="text-align:center;">
@@ -32,6 +33,7 @@
                     <tbody>
                     </tbody>
                 </table>
+			</div>
             </div>
         </div>
         
