@@ -1787,7 +1787,7 @@ function JSONize(str) {
 					$.notify("Se ha enviado correctamente a revisión.", { globalPosition: 'top center', className: 'success' });
 					//$("#verInformeGastos").modal("hide");
 					setTimeout(function () {
-						//window.location.href = "/Autorizaciones?" + fh;
+						window.location.href = "/Autorizaciones?" + fh;
 					}, 1000);
 				},
 				error: function (result) {
