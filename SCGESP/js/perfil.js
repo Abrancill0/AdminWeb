@@ -168,18 +168,21 @@ $("#fileFotoUsuario").change(function () {
     var r = new FileReader();
     r.onload = function () {
         var binimage = r.result;
-        guardarFotoUsuario(binimage);
+        guardarFotoUsuario(binimage, file);
     };
     r.readAsDataURL(file);
 });
 
-function guardarFotoUsuario(binimage) {
+function guardarFotoUsuario(binimage, fileFoto) {
     var fotoold = $(".img-perfil.img-responsive").attr("src");
     var fotoold2 = fotoold.split("?");
+
     fotoold = fotoold2[0];
     if (fotoold.indexOf("default") > 0)
         fotoold = "";
-    var datos = { 'Usuario': encriptaDesencriptaEle(UsuarioActivo, 0), 'Foto': binimage, 'FotoOld': fotoold };
+
+    //var datos = { 'Usuario': encriptaDesencriptaEle(UsuarioActivo, 0), 'Foto': binimage, 'FotoOld': fotoold };
+    /*
     $.ajax({
         async: true,
         type: "POST",
@@ -187,12 +190,29 @@ function guardarFotoUsuario(binimage) {
         data: JSON.stringify(datos),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
+        cache: false,*/
+
+    var aDatos = new FormData();
+    aDatos.append("Usuario", encriptaDesencriptaEle(UsuarioActivo, 0));
+    aDatos.append("Foto", binimage);
+    aDatos.append("FotoOld", fotoold);
+    aDatos.append("FileFoto", fileFoto);
+
+    $.ajax({
+        async: false,
+        type: "POST",
+        url: "/api/CargarFotoUsuario",
+        data: aDatos,
+        //dataType: "json",
+        contentType: false,
+        processData: false,
         cache: false,
+        dataType: "json",
         beforeSend: function () {
             //cargado();
         },
         success: function (result) {
-            var resultado = result[0];
+            var resultado = result;
             var img = resultado.Img + "?" + Math.random();
             $(".img-perfil").attr("src", img);
             localStorage.setItem("cosa4", encriptaDesencriptaEle(img, 1));

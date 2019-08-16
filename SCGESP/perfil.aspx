@@ -141,7 +141,7 @@
     <!-- App functions and actions -->
     <script type="text/javascript" src="js/app.min.js"></script>
     <script type="text/javascript" src="js/js.js"></script>
-    <script type="text/javascript" src="js/perfil.js?123"></script>
+    <script type="text/javascript" src="js/perfil.js?1234"></script>
 
 
 </asp:Content>
