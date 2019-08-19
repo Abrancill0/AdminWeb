@@ -133,7 +133,7 @@ namespace SCGESP.Controllers
 
 						if (row["a_fsolicitud"] != null && Convert.ToString(row["a_fsolicitud"]) != "")
 						{
-							FechaSolicitud = Convert.ToDateTime(row["a_fsolicitud"]).ToShortDateString() + " " + Convert.ToDateTime(row["a_fsolicitud"]).ToShortTimeString();
+							FechaSolicitud = Convert.ToDateTime(row["a_fsolicitud"]).ToString("dd/MM/yyyy") + " " + Convert.ToDateTime(row["a_fsolicitud"]).ToShortTimeString();
 						}
 
 						Resultado ent = new Resultado
