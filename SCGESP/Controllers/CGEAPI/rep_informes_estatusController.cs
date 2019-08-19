@@ -206,7 +206,7 @@ namespace SCGESP.Controllers
 			{
 				if (fecha != null && Convert.ToString(fecha) != "")
 				{
-					return Convert.ToDateTime(fecha).ToShortDateString();
+					return Convert.ToDateTime(fecha).ToString("dd/MM/yyyy");//.ToShortDateString();
 				}
 				else
 				{

@@ -111,7 +111,7 @@ namespace SCGESP.Controllers
 
                     if (row["del"] != null && Convert.ToString(row["del"]) != "")
                     {
-                        FechaInicio = Convert.ToDateTime(row["del"]).ToShortDateString();
+						FechaInicio = Convert.ToDateTime(row["del"]).ToString("dd/MM/yyyy");//.ToShortDateString();
                     }
                     else
                     {
@@ -120,8 +120,8 @@ namespace SCGESP.Controllers
 
                     if (row["al"]!= null && Convert.ToString(row["al"]) != "")
                     {
-                        FechaFin = Convert.ToDateTime(row["al"]).ToShortDateString();
-                    }
+                        FechaFin = Convert.ToDateTime(row["al"]).ToString("dd/MM/yyyy");//.ToShortDateString();
+					}
                     else
                     {
                         FechaFin = "";
@@ -129,7 +129,7 @@ namespace SCGESP.Controllers
 
 					if (row["a_fsolicitud"] != null && Convert.ToString(row["a_fsolicitud"]) != "")
 					{
-						FechaSolicitudAut = Convert.ToDateTime(row["a_fsolicitud"]).ToShortDateString() + " " + Convert.ToDateTime(row["a_fsolicitud"]).ToShortTimeString();
+						FechaSolicitudAut = Convert.ToDateTime(row["a_fsolicitud"]).ToString("dd/MM/yyyy");// + " " + Convert.ToDateTime(row["a_fsolicitud"]).ToShortTimeString();
 					}
 					else
 					{
