@@ -84,7 +84,7 @@ namespace SCGESP.Controllers.CGEAPI.Autorizaciones
                 {
 					if (row["i_finicio"] != null && Convert.ToString(row["i_finicio"]) != "")
 					{
-						FechaInicio = Convert.ToDateTime(row["i_finicio"]).ToShortDateString();
+						FechaInicio = Convert.ToDateTime(row["i_finicio"]).ToString("dd/MM/yyyy");//.ToShortDateString();
 					}
 					else
 					{
@@ -93,7 +93,7 @@ namespace SCGESP.Controllers.CGEAPI.Autorizaciones
 
 					if (row["i_ffin"] != null && Convert.ToString(row["i_ffin"]) != "")
 					{
-						FechaFin = Convert.ToDateTime(row["i_ffin"]).ToShortDateString();
+						FechaFin = Convert.ToDateTime(row["i_ffin"]).ToString("dd/MM/yyyy");//.ToShortDateString();
 					}
 					else
 					{
