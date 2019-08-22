@@ -145,7 +145,7 @@ namespace SCGESP.Controllers
                         AdminWebPendientesSalida ent = new AdminWebPendientesSalida
                         {
                             Tipo = Convert.ToString(row["Tipo"]),
-                            Numero = Convert.ToInt32(row["NumeroInformes"])
+                            Numero = 0 //Convert.ToInt32(row["NumeroInformes"])
                         };
 
                         lista.Add(ent);
