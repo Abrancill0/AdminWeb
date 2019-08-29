@@ -773,14 +773,14 @@
 												<td width="110px">No. Tarjeta</td>
 												<td id="tdTarjeta"></td>
 											</tr>
-											<tr>
+											<!--tr>
 												<td>Nombre:</td>
 												<td id="tdNombre"></td>
 											</tr>
 											<tr>
 												<td>Nomina:</td>
 												<td id="tdNomina"></td>
-											</tr>
+											</tr-->
 										</table>
 
 										<span id="msnbanco">Guardar los siguientes movimientos para el banco</span>

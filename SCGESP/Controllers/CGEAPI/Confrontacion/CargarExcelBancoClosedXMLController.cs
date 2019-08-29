@@ -79,14 +79,15 @@ namespace SCGESP.Controllers.CGEAPI
                 List<ListExcelResult> RowsExcel = new List<ListExcelResult>();
                 foreach (IXLRow row in workSheet.Rows())
                 {
+					/*
                     if (i == 3 && RowEmbosado == "")
                         RowEmbosado = row.Cell("B").GetString();
                     if (i == 4 && RowNombre == "")
                         RowNombre = row.Cell("B").GetString();
                     if (i == 5 && RowNomina == "")
                         RowNomina = row.Cell("B").GetString();
-
-                    if (i > 8)
+					*/
+                    if (i > 1)
                     {
                         try
                         {
@@ -100,8 +101,9 @@ namespace SCGESP.Controllers.CGEAPI
                                     if (RowImporte > 0)
                                     {
                                         string RowDescripcion = row.Cell("D").GetString();
-                                        if (RowDescripcion.Trim() != "MOV.REVERSION RECARGA EFECTIVO" &&
-                                            RowDescripcion.Trim() != "")
+                                        if ((RowDescripcion.Trim() != "MOV.REVERSION RECARGA EFECTIVO" && RowDescripcion.Trim() != "DECREMENTO ON LINE" && RowDescripcion.Trim() != "DECREMENTO ONLINE") &&
+
+											RowDescripcion.Trim() != "")
                                         {
                                             string RowTipo = row.Cell("B").GetString();
                                             string RowFecha = row.Cell("C").GetString();//.ToString("dd/MM/yyyy");
