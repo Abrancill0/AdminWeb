@@ -444,7 +444,7 @@
 							<h6>Monto Comprobado: <span class="valor monto_comprobado">$ 0.00</span></h6>
 							<h6>Dentro de Pol&iacute;tica: <span class="valor dentro_politica">$ 0.00</span></h6>
 							<label for="fuera_politica" style="width: 100%;">
-								<span>Fueta de Pol&iacute;tica:</span>
+								<span>Fuera de Pol&iacute;tica:</span>
 								<div class="input-group" style="background-color: #ffffff">
 									<span></span>
 									<div class="form-group">

@@ -279,12 +279,14 @@
         });
     
         function abrirManual(manual){
-            var direccionManual = "";
+			var direccionManual = "";
+			var f = new Date();
+			var fh = f.getDate() + '' + f.getMonth() + '' + f.getFullYear() + '' + f.getHours() + '' + f.getMinutes() + '' + f.getSeconds();
             if(manual === "adminweb"){
-                direccionManual = "/manuales/manual_de_usuario_admin_web.pdf";
+				direccionManual = "/manuales/manual_de_usuario_admin_web.pdf?" + fh;
 $("#ModalLabelManual").empty().append('<a style="color:#FFF"> Manual AdminWeb </a>');
             }else if(manual === "adminapp"){
-                direccionManual = "/manuales/manual_de_usuario_admin_app.pdf";
+				direccionManual = "/manuales/manual_de_usuario_admin_app.pdf?" + fh;
 $("#ModalLabelManual").empty().append('<a style="color:#FFF"> Manual AdminApp </a>');
             }
 $("#manualUsuario").removeAttr("data");
