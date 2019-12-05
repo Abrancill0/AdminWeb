@@ -289,8 +289,10 @@ $("#ModalLabelManual").empty().append('<a style="color:#FFF"> Manual AdminWeb </
 				direccionManual = "/manuales/manual_de_usuario_admin_app.pdf?" + fh;
 $("#ModalLabelManual").empty().append('<a style="color:#FFF"> Manual AdminApp </a>');
             }
-$("#manualUsuario").removeAttr("data");
-$("#manualUsuario").attr("data", direccionManual);
+			$("#manualUsuario").removeAttr("data");
+			setTimeout(function () {
+				$("#manualUsuario").attr("data", direccionManual);
+			}, 200);
 $("#verManuales").modal({
         show: true,
         keyboard: false,
