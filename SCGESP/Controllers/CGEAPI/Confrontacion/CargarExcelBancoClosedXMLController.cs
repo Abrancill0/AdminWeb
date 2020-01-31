@@ -155,6 +155,7 @@ namespace SCGESP.Controllers.CGEAPI
                     valores
                 };
             }
+			File.Delete(filePath);
             return respuesta;
         }
         public IEnumerable<ListArchivoResult> PostSaveArchivo(string Based64BinaryString, string ArchivoNmb, string ArchivoExt)

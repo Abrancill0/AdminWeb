@@ -164,7 +164,11 @@
             });
         }
 
-
+		$("#contrasena").on('keyup', function (e) {
+			if (e.keyCode === 13) {
+				Login();
+			}
+		});
         function Login() {
 
             jQuery.support.cors = true;
