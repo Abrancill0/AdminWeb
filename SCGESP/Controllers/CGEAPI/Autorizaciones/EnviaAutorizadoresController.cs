@@ -39,8 +39,9 @@ namespace SCGESP.Controllers.CGEAPI.Autorizaciones
             int i = 2;
             foreach (var item in Datos.Autorizadores) {
                 string autorizador = item;
+				string UAlterno = GetUsuarioAlterno.UsuarioAlterno(autorizador).Resultado;
 
-                SqlCommand comando = new SqlCommand("EnviaAutorizadores");
+				SqlCommand comando = new SqlCommand("EnviaAutorizadores");
                 comando.CommandType = CommandType.StoredProcedure;
 
                 //Declaracion de parametros
@@ -50,6 +51,7 @@ namespace SCGESP.Controllers.CGEAPI.Autorizaciones
                 comando.Parameters.Add("@NumeroNiveles", SqlDbType.Int);
 				comando.Parameters.Add("@usuario_actual", SqlDbType.VarChar);
 				comando.Parameters.Add("@comentario", SqlDbType.VarChar);
+				comando.Parameters.Add("@ualterno", SqlDbType.VarChar);
 
 				//Asignacion de valores a parametros
 				comando.Parameters["@idinforme"].Value = Datos.idinforme;
@@ -58,6 +60,7 @@ namespace SCGESP.Controllers.CGEAPI.Autorizaciones
 				comando.Parameters["@NumeroNiveles"].Value = 0; // (nAutorizadores + 1);
 				comando.Parameters["@usuario_actual"].Value = UsuarioDesencripta;
 				comando.Parameters["@comentario"].Value = Datos.comentario;
+				comando.Parameters["@ualterno"].Value = UAlterno;
 
 				comando.Connection = new SqlConnection(VariablesGlobales.CadenaConexion);
                 comando.CommandTimeout = 0;

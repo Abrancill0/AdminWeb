@@ -120,13 +120,13 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				Requisición / Informe de gastos por autorizar
-        <a href="#" onclick='cerrarPanel(".panel")' style="color:#FFF;border-left:1px solid #FFF " ><i class="zmdi zmdi-close"></i>Cerrar</a>
+        <a href="#" onclick='cerrarPanel(".panel")' style="color: #FFF; border-left: 1px solid #FFF"><i class="zmdi zmdi-close"></i>Cerrar</a>
 			</div>
 			<div class="panel-body">
 				<table>
 					<tr>
 						<td style="width: 130px">
-							<a class="btn btn-primary btn-md" href="/autorizaciones" style="background-color:#6b5c4f" role="button"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Regresar</a>
+							<a class="btn btn-primary btn-md" href="/autorizaciones" style="background-color: #6b5c4f" role="button"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Regresar</a>
 							<!--<a class="btn btn-primary btn-md" href="#" onclick="location.reload();" role="button"><span class="zmdi zmdi-refresh"></span>&nbsp;Actualizar</a-->
 						</td>
 						<td style="vertical-align: middle; text-align: right; padding-left: 50px;">
@@ -141,7 +141,7 @@
 						</td>
 					</tr>
 				</table>
-                </br>
+				</br>
 				<div class="card" style="margin: 0px; padding: 0px;">
 					<div class="card-header card-info" role="tab" style="margin: 0px; padding: 2px 5px;">
 					</div>
@@ -194,17 +194,17 @@
 			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
 					<div class="modal-header titulo-modal">
-                        <table width="100%">
-                                <tr>
-                                    <td style="text-align:right">
-                                        <h4 style="padding: 5px 0px !important;color: #FFF!important;"> Ver </h4>
-                                    </td>
-                                    <td style="text-align:right">
-                                        <a  href="#" data-dismiss="modal" aria-label="Close" style="color:#FFF;border-left:1px solid #FFF ">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a> 
+						<table width="100%">
+							<tr>
+								<td style="text-align: right">
+									<h4 style="padding: 5px 0px !important; color: #FFF!important;">Ver </h4>
+								</td>
+								<td style="text-align: right">
+									<a href="#" data-dismiss="modal" aria-label="Close" style="color: #FFF; border-left: 1px solid #FFF">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a>
 
-                                    </td>
-                                </tr>
-                            </table>
+								</td>
+							</tr>
+						</table>
 					</div>
 					<div class="modal-body">
 
@@ -411,18 +411,17 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header titulo-modal">
-					<table width="100%">
-                                <tr>
-                                    <td style="text-align:right">
-						Editar Gasto
-                                    </td>
-                                    <td style="text-align:right">
-                                        <a  href="#" data-dismiss="modal" aria-label="Close" style="color:#FFF;border-left:1px solid #FFF ">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a> 
+						<table width="100%">
+							<tr>
+								<td style="text-align: right">Editar Gasto
+								</td>
+								<td style="text-align: right">
+									<a href="#" data-dismiss="modal" aria-label="Close" style="color: #FFF; border-left: 1px solid #FFF">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a>
 
-                                    </td>
-                                </tr>
-                            </table>
-                    </div>
+								</td>
+							</tr>
+						</table>
+					</div>
 					<div class="modal-body">
 						<input type="hidden" id="idGasto" value="" />
 						<input type="hidden" id="gasto" value="" />
@@ -474,23 +473,22 @@
 			</div>
 		</div>
 		<!--Autorizadores-->
-		
+
 		<div id="tabAutoriza" class="modal fade" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header titulo-modal">
-                        <table width="100%">
-                                <tr>
-                                    <td style="text-align:right">
-                                        VoBo
-                                    </td>
-                                    <td style="text-align:right">
-                                        <a  href="#" data-dismiss="modal" aria-label="Close" style="color:#FFF;border-left:1px solid #FFF ">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a> 
+						<table width="100%">
+							<tr>
+								<td style="text-align: right">VoBo
+								</td>
+								<td style="text-align: right">
+									<a href="#" data-dismiss="modal" aria-label="Close" style="color: #FFF; border-left: 1px solid #FFF">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a>
 
-                                    </td>
-                                </tr>
-                            </table>
-				
+								</td>
+							</tr>
+						</table>
+
 					</div>
 					<div class="modal-body">
 						<label id="lblAutOpcional">
@@ -523,18 +521,20 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header titulo-modal">
-						
-<table width="100%">
-                                <tr>
-                                    <td style="text-align:right">
-<div id="titulo_modal_alert" style="width: 100%; padding: 1px 10px;">
-						</div>                                    </td>
-                                    <td style="text-align:right">
-                                        <a  href="#" data-dismiss="modal" aria-label="Close" style="color:#FFF;border-left:1px solid #FFF ">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a> 
 
-                                    </td>
-                                </tr>
-                            </table>					</div>
+						<table width="100%">
+							<tr>
+								<td style="text-align: right">
+									<div id="titulo_modal_alert" style="width: 100%; padding: 1px 10px;">
+									</div>
+								</td>
+								<td style="text-align: right">
+									<a href="#" data-dismiss="modal" aria-label="Close" style="color: #FFF; border-left: 1px solid #FFF">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a>
+
+								</td>
+							</tr>
+						</table>
+					</div>
 					<div class="modal-body">
 						<div id="contenido_modal_alert" style="width: 100%; color: black">
 						</div>
@@ -559,7 +559,7 @@
 			<input type="hidden" id="esvobo" name="esvobo" value="{{ esvobo }}" />
 			<input type="hidden" id="esvobo_2" name="esvobo_2" value="{{ esvobo_2 }}" />
 
-			<table id="tblCabeceraInforme" class="filtro text-left" style="text-align: left;" border="1" style="width:100%">
+			<table id="tblCabeceraInforme" class="filtro text-left" style="text-align: left;" border="1" style="width: 100%">
 				<tr>
 					<td style="width: 180px">Requisici&oacute;n:</td>
 					<td>
@@ -636,7 +636,7 @@
 							{{#each comentario_rechazo}}
 								{{#if this}}
 									{{this}}<br />
-								{{/if}}
+							{{/if}}
 							{{/each}}
 						</p>
 					</td>
@@ -644,7 +644,7 @@
 				{{/if}}
 				{{#if comentario_1}}
 				<tr>
-					<td style="vertical-align: top">Solicitud<span style="color:#ffffff;">_</span>VoBo:</td>
+					<td style="vertical-align: top">Solicitud<span style="color: #ffffff;">_</span>VoBo:</td>
 					<td>
 						<p class="valor">{{ comentario_1 }}</p>
 					</td>
@@ -661,7 +661,7 @@
 
 				{{#if comentario_3}}
 				<tr>
-					<td style="vertical-align: top">Comentario<span style="color:#ffffff;">_</span>Validación:</td>
+					<td style="vertical-align: top">Comentario<span style="color: #ffffff;">_</span>Validación:</td>
 					<td>
 						<p class="valor">{{ comentario_3 }}</p>
 					</td>
@@ -669,7 +669,7 @@
 				{{/if}}
                 {{#if comentario_4}}
 				<tr>
-					<td style="vertical-align: top">Comentario<span style="color:#ffffff;">_</span>Autorización:</td>
+					<td style="vertical-align: top">Comentario<span style="color: #ffffff;">_</span>Autorización:</td>
 					<td>
 						<p class="valor">{{ comentario_4 }}</p>
 					</td>
@@ -802,14 +802,15 @@
 				</label>
 			</div>
 		</script>
-        
+
 		<script id="modal-confirma-comprobacion-msn" type="text/x-handlebars-template">
-            <div class="form-group">
-                <label>Comentarios:
-                </label>
-                <input type="text" id="comentariosValidacion" name="comentariosValidacion" style="width: 100%" class="form-control">
-                <i class="form-group__bar"></i>
-            </div>
+			<div class="form-group">
+				<label>
+					Comentarios:
+				</label>
+				<input type="text" id="comentariosValidacion" name="comentariosValidacion" style="width: 100%" class="form-control">
+				<i class="form-group__bar"></i>
+			</div>
 			<div id='divChkVoBo' style="color: black">
 				<label class='custom-control custom-checkbox'>
 					<input type='checkbox' id='ChkVoBo' class='custom-control-input'>
@@ -940,7 +941,7 @@
 					}
 					informe.esSesion = esSesion;
 					informe.esViaje = esViaje;
-                    informe.esOtros = esOtros;
+					informe.esOtros = esOtros;
 
 					$('#cabeceraInforme').append(cabeceraInformeTemplate(informe));
 
@@ -1184,7 +1185,7 @@
 			var hoy = new Date();
 			var fechaFormulario = new Date('2018-08-15');
 			// Comparamos solo las fechas => no las horas!!
-			hoy.setHours(0,0,0,0); // Lo iniciamos a 00:00 horas
+			hoy.setHours(0, 0, 0, 0); // Lo iniciamos a 00:00 horas
 
 			if (hoy <= fechaFormulario) {
 				list_justificacion.push(["", $.trim(justificacion), "justificacion"]);
@@ -1301,24 +1302,24 @@
 		}
 		function StrToJSON(strJson) {
 			var JsonStr = [];
-			strJson = strJson.replace(/\\/g,'\\');
+			strJson = strJson.replace(/\\/g, '\\');
 			try {
 				JsonStr = JSON.parse(strJson);
 			} catch (e) {
 				try {
 					var gJson = JSON.stringify(eval('(' + strJson + ')'));
-					var JSONObj=JSON.parse(gJson);
+					var JSONObj = JSON.parse(gJson);
 					JsonStr = JSONObj;
 				} catch (e) {
 					try {
 						JsonStr = JSONize(strJson);
 					} catch (e) {
 						try {
-							JsonStr = JSON.parse(JSONize(strJson)) 
+							JsonStr = JSON.parse(JSONize(strJson))
 						} catch (e) {
-							var errorString= strJson;
-							var jsonValidString = JSON.stringify(eval("(" + errorString+ ")"));
- 							var JSONObj=JSON.parse(jsonValidString);
+							var errorString = strJson;
+							var jsonValidString = JSON.stringify(eval("(" + errorString + ")"));
+							var JSONObj = JSON.parse(jsonValidString);
 							JsonStr = JSONObj;
 						}
 					}
@@ -1326,13 +1327,13 @@
 			}
 			return JsonStr;
 		}
-function JSONize(str) {
-  return str
-    // wrap keys without quote with valid double quote
-    .replace(/([\$\w]+)\s*:/g, function(_, $1){return '"'+$1+'":'})    
-    // replacing single quote wrapped ones to double quote 
-    .replace(/'([^']+)'/g, function(_, $1){return '"'+$1+'"'})         
-}
+		function JSONize(str) {
+			return str
+				// wrap keys without quote with valid double quote
+				.replace(/([\$\w]+)\s*:/g, function (_, $1) { return '"' + $1 + '":' })
+				// replacing single quote wrapped ones to double quote 
+				.replace(/'([^']+)'/g, function (_, $1) { return '"' + $1 + '"' })
+		}
 		function quitar_punto_final(cadena) {
 			var cadena_final = $.trim(cadena);
 			if (cadena_final.substr(-1) === ".") {
@@ -1620,10 +1621,10 @@ function JSONize(str) {
 			var UsuarioActivo = localStorage.getItem("cosa");
 			var req = DatosRequisicion(RmRdeRequisicion);
 			var datos =
-				{
-					"idinforme": idinforme,
-					"Usuario": UsuarioActivo
-				};
+			{
+				"idinforme": idinforme,
+				"Usuario": UsuarioActivo
+			};
 
 			var totalg = $("#totalg").val() * 1;//monto a comprobar informe
 			var RmReqImporteComprobar = datoEle(req.RmReqImporteComprobar) * 1;//monto a comprobar requisicion
@@ -1670,27 +1671,27 @@ function JSONize(str) {
 				show: true,
 				keyboard: false,
 				backdrop: "static"
-            });
-            setTimeout(function () { $("#comentariosValidacion").focus(); }, 500);
+			});
+			setTimeout(function () { $("#comentariosValidacion").focus(); }, 500);
 			habilitaChkVoBo();
 		}
 		function enviarComprobarRevisar() {
 			var idinforme = $("#idinforme").val();
-            var req = DatosRequisicion();
-            var comentariosValidacion = $.trim($("#comentariosValidacion").val());
-            var nmbemp = localStorage.getItem("nmbemp");
-            var fecha = fechaActual() + " " + horaActual("hh:mm");
-            var comentariode = ". (Validado por: " + nmbemp + " / " + fecha + ")";
-            comentariosValidacion += comentariosValidacion !== "" ? comentariode : "";
+			var req = DatosRequisicion();
+			var comentariosValidacion = $.trim($("#comentariosValidacion").val());
+			var nmbemp = localStorage.getItem("nmbemp");
+			var fecha = fechaActual() + " " + horaActual("hh:mm");
+			var comentariode = ". (Validado por: " + nmbemp + " / " + fecha + ")";
+			comentariosValidacion += comentariosValidacion !== "" ? comentariode : "";
 
 			var datos =
-				{
-					"idinforme": idinforme,
-					"comentariosValidacion": comentariosValidacion,
-					"Usuario": UsuarioActivo
-            };
+			{
+				"idinforme": idinforme,
+				"comentariosValidacion": comentariosValidacion,
+				"Usuario": UsuarioActivo
+			};
 			if ($("#ChkVoBo").is(":checked")) {
-				//console.log("enviado a vobo");
+				//console.log("enviado a vobo"); //revisión
 				enviarVoBo();
 			} else {
 				//console.log("enviado a adminerp");
@@ -1755,18 +1756,18 @@ function JSONize(str) {
 		function enviarVoBo() {
 			var usuarioActual = localStorage.getItem("cosa");;
 			var usuariovobo = $("#HFUsuariovobo").val();
-            var idinforme = $("#idinforme").val();
-            var comentariosValidacion = $.trim($("#comentariosValidacion").val());
-            var nmbemp = localStorage.getItem("nmbemp");
-            var fecha = fechaActual() + " " + horaActual("hh:mm");
-            var comentariode = ". (Validado por: " + nmbemp + " / " + fecha + ")";
-            comentariosValidacion += comentariosValidacion !== "" ? comentariode : "";
+			var idinforme = $("#idinforme").val();
+			var comentariosValidacion = $.trim($("#comentariosValidacion").val());
+			var nmbemp = localStorage.getItem("nmbemp");
+			var fecha = fechaActual() + " " + horaActual("hh:mm");
+			var comentariode = ". (Validado por: " + nmbemp + " / " + fecha + ")";
+			comentariosValidacion += comentariosValidacion !== "" ? comentariode : "";
 
 			var datos = {
 				"usuarioActual": usuarioActual,
 				"usuariovobo": usuariovobo,
-                "idinforme": idinforme,
-                "comentariosValidacion": comentariosValidacion
+				"idinforme": idinforme,
+				"comentariosValidacion": comentariosValidacion
 			};
 
 			$.ajax({
@@ -1783,7 +1784,7 @@ function JSONize(str) {
 					cargando();
 				},
 				success: function (result) {
-                    console.log(result);
+					console.log(result);
 					$.notify("Se ha enviado correctamente a revisión.", { globalPosition: 'top center', className: 'success' });
 					//$("#verInformeGastos").modal("hide");
 					setTimeout(function () {
@@ -1798,22 +1799,22 @@ function JSONize(str) {
 			});
 		}
 		function enviarAAutorizacion(datos) {
-/*
-cargando();
-				var respuesta = enviarAAutorizacion(datos);
-				//if (respuesta.stResultado === 1) {
-				if (respuesta.stResultado === 1) {
-					$.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'success' });
-					setTimeout(function () {
-						window.location.href = "/Autorizaciones?" + fh;
-					}, 2000);
-				} else {
-					//"Error al enviar comprobacion,favor de verificar"
-					$.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'error' });
-				}
-				cargado();
-*/
-            var respuesta = [];
+			/*
+			cargando();
+							var respuesta = enviarAAutorizacion(datos);
+							//if (respuesta.stResultado === 1) {
+							if (respuesta.stResultado === 1) {
+								$.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'success' });
+								setTimeout(function () {
+									window.location.href = "/Autorizaciones?" + fh;
+								}, 2000);
+							} else {
+								//"Error al enviar comprobacion,favor de verificar"
+								$.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'error' });
+							}
+							cargado();
+			*/
+			var respuesta = [];
 			$.ajax({
 				async: true,
 				type: "POST",
@@ -1839,11 +1840,11 @@ cargando();
 							'stResultado': 1,
 							'descripcion': 'El informe se envio a comprobación.'
 						};
-$.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'success' });
-setTimeout(function () {
-						window.location.href = "/Autorizaciones?" + fh;
-cargado();
-					}, 2000);
+						$.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'success' });
+						setTimeout(function () {
+							window.location.href = "/Autorizaciones?" + fh;
+							cargado();
+						}, 2000);
 					} else {
 						var error = stResultado; //datoEle(result.Salida.Errores.Error.Descripcion);
 						if (valorVacio(error)) {
@@ -1853,9 +1854,9 @@ cargado();
 							'stResultado': 0,
 							'descripcion': error
 						};
-					$.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'error' });
+						$.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'error' });
 					}
-					
+
 				},
 				error: function (result) {
 					console.log(result);
@@ -1864,7 +1865,7 @@ cargado();
 						'stResultado': 0,
 						'descripcion': result
 					};
-$.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'error' });
+					$.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'error' });
 				}
 			});
 			return respuesta;
@@ -1894,10 +1895,10 @@ $.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'erro
 				keyboard: false,
 				backdrop: "static"
 			});
-			
+
 			setTimeout(function () {
 				$("#ComentariosRechazo").focus();
-			},500);
+			}, 500);
 		});
 		function rechazar() {
 			var idinforme = $("#idinforme").val();
@@ -1911,11 +1912,11 @@ $.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'erro
 			}
 			var fecha = fechaActual() + " " + horaActual("hh:mm");
 			var datos =
-				{
-					"idinforme": idinforme,
-					"comentarioaut": Comentarios + ". (Rechazado por: " + nmbemp + " / " + fecha + ")",
-					"usuario": UsuarioActivo
-				};
+			{
+				"idinforme": idinforme,
+				"comentarioaut": Comentarios + ". (Rechazado por: " + nmbemp + " / " + fecha + ")",
+				"usuario": UsuarioActivo
+			};
 			$.ajax({
 				async: true,
 				type: "POST",
@@ -1937,7 +1938,7 @@ $.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'erro
 					}, 2000);
 				},
 				complete: function () {
-					
+
 				}
 			});
 
@@ -1969,7 +1970,7 @@ $.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'erro
 			});
 			setTimeout(function () {
 				$("#comentarioVoBo").focus();
-			},500);
+			}, 500);
 		});
 		function regresarComentarioVoBo() {
 			var idinforme = $("#idinforme").val();
@@ -1985,7 +1986,7 @@ $.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'erro
 			if (Comentarios === "") {
 				$.notify("Se requiere un comentario de VoBo.", { globalPosition: 'top center', className: 'error', autoHideDelay: 2000 });
 				return false;
-			} 
+			}
 			var fecha = fechaActual() + " " + horaActual("hh:mm");
 			var usuario_fecha = ". (Enviado por: " + nmbemp + " / " + fecha + ")";
 			datos['comentario'] = Comentarios + usuario_fecha;
@@ -2319,7 +2320,7 @@ $.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'erro
 			return seleccionado;
 		}
 		$("#EnviarAutorizadores").click(function () {
-			
+
 			$("#tabAutoriza").modal("hide");
 			let confirmaSolicitarVobo = Handlebars.compile($("#modal-confirma-solicitar-vobo").html());
 			let alertaTitulo = Handlebars.compile($("#modal-alerta-titulo").html());
@@ -2348,9 +2349,9 @@ $.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'erro
 				$("#modal_alerta").css({ 'z-index': 2000 });
 				setTimeout(function () {
 					$("#comentarioEnvioVoBo").focus();
-				},500);
+				}, 500);
 			}, 600);
-			
+
 		});
 		function solicitarVoBo() {
 			var idinforme = $("#idinforme").val()
@@ -2419,7 +2420,7 @@ $.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'erro
 			}
 		}
 
-//inicio excel
+		//inicio excel
 		$("#aexportarxls").click(function () {
 			var idinforme = $("#idinforme").val() * 1;
 			var IdRequisicion = $("#RmRdeRequisicion").val();
@@ -2460,7 +2461,7 @@ $.notify(respuesta.descripcion, { globalPosition: 'top center', className: 'erro
 
 		function SelectEmpleado(GrEmpID) {
 			var resultado = [];
-//UsuarioActivo;EmpeladoActivo;
+			//UsuarioActivo;EmpeladoActivo;
 			$.ajax({
 				async: false,
 				type: "POST",

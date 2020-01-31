@@ -30,18 +30,22 @@ namespace SCGESP.Controllers.CGEAPI.Autorizaciones
                 comando.Parameters.Add("@usuarioActual", SqlDbType.VarChar);
                 comando.Parameters.Add("@usuariovobo", SqlDbType.VarChar);
                 comando.Parameters.Add("@idinforme", SqlDbType.VarChar);
-                comando.Parameters.Add("@comentariosValidacion", SqlDbType.VarChar);
+				comando.Parameters.Add("@comentariosValidacion", SqlDbType.VarChar);
+				comando.Parameters.Add("@ualterno", SqlDbType.VarChar);
 
-                string ususariodesencripta = Seguridad.DesEncriptar(Datos.usuarioActual);
+				string ususariodesencripta = Seguridad.DesEncriptar(Datos.usuarioActual);
+
+				string UAlterno = GetUsuarioAlterno.UsuarioAlterno(Datos.usuariovobo).Resultado;
 
                 //Asignacion de valores a parametros
                 comando.Parameters["@usuarioActual"].Value = ususariodesencripta;
                 comando.Parameters["@usuariovobo"].Value = Datos.usuariovobo;
                 comando.Parameters["@idinforme"].Value = Datos.idinforme;
-                comando.Parameters["@comentariosValidacion"].Value = Datos.comentariosValidacion;
+				comando.Parameters["@comentariosValidacion"].Value = Datos.comentariosValidacion;
+				comando.Parameters["@ualterno"].Value = UAlterno;
 
 
-                comando.Connection = new SqlConnection(VariablesGlobales.CadenaConexion);
+				comando.Connection = new SqlConnection(VariablesGlobales.CadenaConexion);
                 comando.CommandTimeout = 0;
                 comando.Connection.Open();
 

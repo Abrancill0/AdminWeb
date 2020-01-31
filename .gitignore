@@ -338,3 +338,9 @@ SCGESP/Web.config
 desktop.ini
 SCGESP/SCGESP.csproj
 SCGESP/Web.config
+
+Publicar/
+SCGESP/Comprobantes/
+SCGESP/PDF/
+SCGESP/XML/
+SCGESP/temp/

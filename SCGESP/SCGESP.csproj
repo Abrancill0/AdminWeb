@@ -4949,6 +4949,8 @@
     </Compile>
     <Compile Include="Clases\BlogSite.cs" />
     <Compile Include="Clases\EnvioCorreosELE.cs" />
+    <Compile Include="Clases\GetAlternoDe.cs" />
+    <Compile Include="Clases\GetUsuarioAlterno.cs" />
     <Compile Include="Clases\PruebaConexion.cs" />
     <Compile Include="Clases\Seguridad.cs" />
     <Compile Include="Clases\StrToJson.cs" />

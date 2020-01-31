@@ -67,7 +67,11 @@ namespace SCGESP.Controllers
             string UsuarioDesencripta = Seguridad.DesEncriptar(Datos.uresponsable);
             string EmpleadoDesencripta = Seguridad.DesEncriptar(Datos.empleadoactivo);
 
-            DocumentoEntrada entrada = new DocumentoEntrada();
+			//var prb = GetUsuarioAlterno.UsuarioAlterno(UsuarioDesencripta);
+			//var prb2 = GetAlternoDe.Usuarios(UsuarioDesencripta);
+
+
+			DocumentoEntrada entrada = new DocumentoEntrada();
             entrada.Usuario = UsuarioDesencripta; //Datos.Usuario;  
             entrada.Origen = "AdminWEB";  //Datos.Origen; 
             entrada.Transaccion = 120760;

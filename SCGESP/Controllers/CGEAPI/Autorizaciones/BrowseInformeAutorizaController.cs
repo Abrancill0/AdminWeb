@@ -44,23 +44,27 @@ namespace SCGESP.Controllers.CGEAPI.Autorizaciones
 
         public List<ObtieneInformeResult> PostObtieneInformes(Parametros1Informes Datos)
         {
-            SqlCommand comando = new SqlCommand("BrowseInformeAutoriza");
+			//var prb = GetUsuarioAlterno.UsuarioAlterno(UsuarioDesencripta);
+			string UsuarioDesencripta = Seguridad.DesEncriptar(Datos.uresponsable);
+			var AutorizaPor = GetAlternoDe.Usuarios(UsuarioDesencripta);
+
+			SqlCommand comando = new SqlCommand("BrowseInformeAutoriza");
             comando.CommandType = CommandType.StoredProcedure;
 
             //Declaracion de parametros
             comando.Parameters.Add("@estatus", SqlDbType.Int);
             comando.Parameters.Add("@uresponsable", SqlDbType.VarChar);
-            //comando.Parameters.Add("@idempresa", SqlDbType.Int);
+            comando.Parameters.Add("@uautorizadores", SqlDbType.VarChar);
 
             //Asignacion de valores a parametros
             comando.Parameters["@estatus"].Value = Datos.estatus;
-            string UsuarioDesencripta = Seguridad.DesEncriptar(Datos.uresponsable);
 
-            comando.Parameters["@uresponsable"].Value = UsuarioDesencripta;
-            //comando.Parameters["@idempresa"].Value = Datos.idempresa;
-            //comando.Parameters["@pid"].Direction = ParameterDirection.Output;
+			comando.Parameters["@uresponsable"].Value = UsuarioDesencripta;
+			comando.Parameters["@uautorizadores"].Value = AutorizaPor.Resultado;
+			//comando.Parameters["@idempresa"].Value = Datos.idempresa;
+			//comando.Parameters["@pid"].Direction = ParameterDirection.Output;
 
-            comando.Connection = new SqlConnection(VariablesGlobales.CadenaConexion);
+			comando.Connection = new SqlConnection(VariablesGlobales.CadenaConexion);
             comando.CommandTimeout = 0;
             comando.Connection.Open();
             //DA.SelectCommand = comando;

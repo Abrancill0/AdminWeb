@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
+using System.Web;
 using System.Web.Http;
 using System.Xml;
 
@@ -62,7 +64,11 @@ namespace SCGESP.Controllers.CGEAPI
                         string idGasto = Convert.ToString(row["idgasto"]);
                         string uResponsable = Convert.ToString(row["uresponsable"]);
 
-                        if (UUID.Trim() != "")
+						string DirXML = Convert.ToString(row["DirXML"]);
+						string DirPDF = Convert.ToString(row["DirPDF"]);
+						string DirIMG = Convert.ToString(row["DirIMG"]);
+
+						if (UUID.Trim() != "")
                         {
                             try
                             {
@@ -90,6 +96,41 @@ namespace SCGESP.Controllers.CGEAPI
                             mensaje = Convert.ToString(row["ELIMINADO"]),
                         };
 
+						if (DirXML != "" || DirPDF != "" || DirIMG != "")
+						{
+							string path = HttpContext.Current.Server.MapPath("/");
+							string consulta = "";
+							if (File.Exists(path + DirXML))
+							{
+								File.Delete(path + DirXML);
+								consulta = "UPDATE gastos SET " +
+										"g_dirxml = ''" +
+										"WHERE g_idinforme = " + Datos.idinforme + " AND " +
+											"g_dirxml = '" + DirXML + "';";
+								DA = new SqlDataAdapter(consulta, VariablesGlobales.CadenaConexion);
+								DA.Fill(DT);
+							}
+							if (File.Exists(path + DirPDF))
+							{
+								File.Delete(path + DirPDF);
+								consulta = "UPDATE gastos SET " +
+										"g_dirpdf = ''" +
+										"WHERE g_idinforme = " + Datos.idinforme + " AND " +
+											"g_dirpdf = '" + DirPDF + "';";
+								DA = new SqlDataAdapter(consulta, VariablesGlobales.CadenaConexion);
+								DA.Fill(DT);
+							}
+							if (File.Exists(path + DirIMG))
+							{
+								File.Delete(path + DirIMG);
+								consulta = "UPDATE gastos SET " +
+										"g_dirotros = ''" +
+										"WHERE g_idinforme = " + Datos.idinforme + " AND " +
+											"g_dirotros = '" + DirIMG + "';";
+								DA = new SqlDataAdapter(consulta, VariablesGlobales.CadenaConexion);
+								DA.Fill(DT);
+							}
+						}
                         lista.Add(ent);
                     }
 

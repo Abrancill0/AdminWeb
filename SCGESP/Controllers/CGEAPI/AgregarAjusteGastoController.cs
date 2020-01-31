@@ -74,14 +74,13 @@ namespace SCGESP.Controllers.CGEAPI
             {
                 ListResultArchivo archivo = new ListResultArchivo();
                 ListResultCFDIXML ArcCdfi = new ListResultCFDIXML();
-
-                if (Datos.Tipo == 2)
+				string path = HttpContext.Current.Server.MapPath("/");
+				if (Datos.Tipo == 2)
                 {
                     archivo = GuardarXmlAdicional(Datos.IdInforme, Datos.IdGasto, Datos.BinXML, Datos.ExtFile);
 
                     if (archivo.ArchivoOk == true)
                     {
-                        string path = HttpContext.Current.Server.MapPath("/");
                         string urlXML = path + (archivo.Ruta ?? "");
                         
                         ArcCdfi = LeerCFDIXML(urlXML);
@@ -261,7 +260,7 @@ namespace SCGESP.Controllers.CGEAPI
 												}
 												if (msnError != "")
 												{
-													string path = HttpContext.Current.Server.MapPath("/");
+													path = HttpContext.Current.Server.MapPath("/");
 													string urlXML = path + (archivo.Ruta ?? "");
 													Deletexml(urlXML);
 												}
@@ -326,6 +325,41 @@ namespace SCGESP.Controllers.CGEAPI
 									resultado.IdGasto = Convert.ToInt16(row["idgasto"]);
 									resultado.IdGastoOrigen = Convert.ToInt16(row["idgastoorigen"]);
 								}
+
+								if (Convert.ToString(row["DirPDFOrigen"]) != "" || Convert.ToString(row["DirIMGOrigen"]) != "") {
+									string dirPDF = path + Convert.ToString(row["DirPDFOrigen"]);
+									string dirIMG = path + Convert.ToString(row["DirIMGOrigen"]);
+
+									string dirPDFAd = "", dirIMGAd = "";
+									if(Convert.ToString(row["DirPDFOrigen"]) != "")
+									{
+										string[] PDF = dirPDF.Split('.');
+										dirPDFAd = PDF[0] + "ad" + resultado.IdGasto + "." + PDF[1];
+										if (File.Exists(dirPDFAd) == false) {
+											File.Copy(dirPDF, dirPDFAd);
+										}
+									}
+									if (Convert.ToString(row["DirIMGOrigen"]) != "")
+									{
+										string[] IMG = dirIMG.Split('.');
+										dirIMGAd = IMG[0] + "ad" + resultado.IdGasto + "." + IMG[1];
+										if(File.Exists(dirIMGAd) == false)
+										{
+											File.Copy(dirIMG, dirIMGAd);
+										}										
+									}
+									dirPDFAd = dirPDFAd.Replace(path, "");
+									dirIMGAd = dirIMGAd.Replace(path, "");
+
+									string consulta = "UPDATE gastos SET " + 
+										"g_dirpdf = '" + dirPDFAd + "', " +
+										"g_dirotros = '" + dirIMGAd + "' " +
+										"WHERE g_idinforme = " + resultado.IdInforme + " AND " + 
+											"g_idgorigen = " + resultado.IdGastoOrigen + " AND " + 
+											"g_id = " + resultado.IdGasto + ";";
+									DA = new SqlDataAdapter(consulta, VariablesGlobales.CadenaConexion);
+									DA.Fill(DT);
+								}
                             }
                             else {
                                 resultado.AgregadoOk = false;
@@ -333,7 +367,7 @@ namespace SCGESP.Controllers.CGEAPI
 
                                 if (Datos.Tipo == 2)
                                 {
-                                    string path = HttpContext.Current.Server.MapPath("/");
+                                    path = HttpContext.Current.Server.MapPath("/");
                                     string urlXML = path + (archivo.Ruta ?? "");
                                     if (urlXML != "")
                                         Deletexml(urlXML);
@@ -358,7 +392,7 @@ namespace SCGESP.Controllers.CGEAPI
                             }
                             if (Datos.Tipo == 2)
                             {
-                                string path = HttpContext.Current.Server.MapPath("/");
+                                path = HttpContext.Current.Server.MapPath("/");
                                 string urlXML = path + (archivo.Ruta ?? "");
                                 if(urlXML != "")
                                     Deletexml(urlXML);
@@ -376,7 +410,7 @@ namespace SCGESP.Controllers.CGEAPI
                     resultado.AgregadoOk = false;
                     if (Datos.Tipo == 2)
                     {
-                        string path = HttpContext.Current.Server.MapPath("/");
+                        path = HttpContext.Current.Server.MapPath("/");
                         string urlXML = path + (archivo.Ruta ?? "");
                         if (urlXML != "")
                             Deletexml(urlXML);

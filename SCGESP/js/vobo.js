@@ -91,7 +91,7 @@ function SelectUsuario() {
                 }
                 if (nsubramos > 0) {
                     $.each(resultado, function (key, value) {
-                        var option = "<option value = '" + $.trim(value.SgUsuId) + "'>" + value.SgUsuNombre + "</option>";
+                        var option = "<option value = '" + $.trim(value.SgUsuId) + "' data-SgUsuEmpleado='" + $.trim(value.SgUsuEmpleado) + "'>" + value.SgUsuNombre + "</option>";
                         $("#SgUsuId").append(option);
                     });
                 } else {
@@ -159,7 +159,7 @@ function actualizarConfiVoBo() {
         ChkVoBoImporte = 1;
     }
 
-    var importemayor = $("#importemayor").val() * 1;
+    importemayor = $("#importemayor").val() * 1;
 
     if (importemayor <= 0 && ChkVoBoImporte === 1) {
         $.notify("El importe debe ser mayor a cero (0).", { globalPosition: 'top center', className: 'error' });
@@ -172,15 +172,19 @@ function actualizarConfiVoBo() {
     var SelectUsuario = $("#SgUsuId");
     SelectUsuario = SelectUsuario[0];
     var nombreUsuario = SelectUsuario.options[SelectUsuario.selectedIndex].text;
-
+    var SgUsuEmpleado = $("#SgUsuId option:selected").attr("data-SgUsuEmpleado")
+        //$("#SgUsuId").children('option:selected').data("SgUsuEmpleado"); //$("#SgUsuId option:selected").data("SgUsuEmpleado");
+    
     var datos = {
         'Usuario': Usuario,
         'NombreUsuario': nombreUsuario,
         'ValorDefault': ChkVoBoActivo,
         'ChkBloqueado': ChkVoBoBloqueado,
         'ValidarImporte': ChkVoBoImporte,
-        'ImporteMayorQue': importemayor
+        'ImporteMayorQue': importemayor,
+        'SgUsuEmpleado': SgUsuEmpleado
     };
+
     $.ajax({
         async: true,
         type: "POST",

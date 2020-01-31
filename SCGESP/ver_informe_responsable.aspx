@@ -32,7 +32,7 @@
 			word-wrap: break-word !important;
 		}
 
-   
+
 
 		#tblGastos td p.valor {
 			font-size: 12px;
@@ -96,7 +96,7 @@
 
 			table.tblGastos tbody tr {
 				border-right: #000 solid 1px;
-                border-left: #000 solid 1px;
+				border-left: #000 solid 1px;
 			}
 
 			table.tblGastos tfoot {
@@ -133,15 +133,15 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				Requisición / Informe de gastos
-        <a href="#" onclick='cerrarPanel(".panel")' style="color:#FFF;border-left:1px solid #FFF " ><i class="zmdi zmdi-close"></i>Cerrar</a>
+        <a href="#" onclick='cerrarPanel(".panel")' style="color: #FFF; border-left: 1px solid #FFF"><i class="zmdi zmdi-close"></i>Cerrar</a>
 			</div>
 			<div class="panel-body">
 				<table>
 					<tr>
 						<td style="width: 130px">
-							<a class="btn btn-primary btn-md" href="/Informes" style="background-color:#706259" role="button"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Regresar</a>
+							<a class="btn btn-primary btn-md" href="/Informes" style="background-color: #706259" role="button"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Regresar</a>
 						</td>
-						<td style="vertical-align: middle; text-align:right; padding-left: 50px;">
+						<td style="vertical-align: middle; text-align: right; padding-left: 50px;">
 							<!--Opciones-->
 							<a id="aenvia" class="btn btn-primary btn-md" href="#" role="button"><span class="glyphicon glyphicon-send"></span>&nbsp;Enviar a Validación</a>
 							<a id="aexportarxls" class="btn btn-primary btn-md" href="#" role="button" onclick=""><span class="glyphicon glyphicon-export"></span>&nbsp;Excel</a>
@@ -153,7 +153,7 @@
 						</td>
 					</tr>
 				</table>
-                </br>
+				</br>
 				<div class="card" style="margin: 0px; padding: 0px;">
 					<div class="card-header card-info" role="tab" style="margin: 0px; padding: 2px 5px;">
 					</div>
@@ -204,8 +204,8 @@
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header titulo-modal">
-                    <a class="center-block	"> Ver </a>
-                   <a  href="#" data-dismiss="modal" aria-label="Close" style="color:#FFF;border-left:1px solid #FFF ">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a> 
+					<a class="center-block	">Ver </a>
+					<a href="#" data-dismiss="modal" aria-label="Close" style="color: #FFF; border-left: 1px solid #FFF">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a>
 
 				</div>
 				<div class="modal-body">
@@ -412,8 +412,8 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header titulo-modal">
-                   <a class="center-block	"> Editar gasto. </a>
-                   <a  href="#" data-dismiss="modal" aria-label="Close" style="color:#FFF;border-left:1px solid #FFF ">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a>                             
+					<a class="center-block	">Editar gasto. </a>
+					<a href="#" data-dismiss="modal" aria-label="Close" style="color: #FFF; border-left: 1px solid #FFF">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a>
 				</div>
 				<div class="modal-body">
 					<input type="hidden" id="idGasto" value="" />
@@ -660,15 +660,14 @@
 			<div class="modal-content">
 				<div class="modal-header titulo-modal">
 					<table width="100%">
-                        <tr>
-                            <td style="text-align:right">
-				Confrontación
-                            </td>
-                            <td style="text-align:right">
-                                <a  href="#" data-dismiss="modal" aria-label="Close" style="color:#FFF;border-left:1px solid #FFF ">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a> 
-                            </td>
-                        </tr>
-                    </table>
+						<tr>
+							<td style="text-align: right">Confrontación
+							</td>
+							<td style="text-align: right">
+								<a href="#" data-dismiss="modal" aria-label="Close" style="color: #FFF; border-left: 1px solid #FFF">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a>
+							</td>
+						</tr>
+					</table>
 
 				</div>
 				<div class="modal-body">
@@ -679,7 +678,7 @@
 							<li><a href="#tabCargaEdoCuenta" onclick="preparaCarga()">Carga Edo.Cuenta</a></li>
 						</ul>
 						<div id="tabConfrontacion">
-							<table style="width:80%">
+							<table style="width: 80%">
 								<tr>
 									<td><span id="msnmb"></span></td>
 									<td>
@@ -688,19 +687,19 @@
 											<input class="form-control reporte2" name="repa2" id="repa2" type="hidden" style="width: 80px;" />
 											<input type="hidden" id="importede" name="importede" class="form-control text-right" style="width: 80px;" />
 											<input type="hidden" id="importea" name="importea" class="form-control text-right" style="width: 80px;" />
-                                            <a  id="btnBuscarMovBanco"  class="btn btn-success" href="#" role="button"   style="color:#FFF"><i class="zmdi zmdi-refresh-alt"></i>&nbsp;Actualizar</a>
+											<a id="btnBuscarMovBanco" class="btn btn-success" href="#" role="button" style="color: #FFF"><i class="zmdi zmdi-refresh-alt"></i>&nbsp;Actualizar</a>
 
 										</form>
 									</td>
 									<td>
-										<button id="confrontarInforme" type="button" class="btn btn-primary centerxy"><i class="zmdi zmdi-thumb-up"></i> Confrontar Informe</button>
+										<button id="confrontarInforme" type="button" class="btn btn-primary centerxy"><i class="zmdi zmdi-thumb-up"></i>Confrontar Informe</button>
 									</td>
 									<td>
-										<button id="cancelarConfrontacion" type="button" class="btn btn-danger centerxy"><i class="zmdi zmdi-thumb-down"></i> Cancelar Confrontación</button>
+										<button id="cancelarConfrontacion" type="button" class="btn btn-danger centerxy"><i class="zmdi zmdi-thumb-down"></i>Cancelar Confrontación</button>
 									</td>
 								</tr>
 							</table>
-							
+
 							<div id="scrolltblMovBanco">
 								<table id="tblMovBanco" class="display browse" cellspacing="0" width="100%">
 									<thead>
@@ -709,7 +708,7 @@
 											<th>Descripción</th>
 											<th width="70px">Fecha</th>
 											<th width="70px">Monto $</th>
-											<th width="200px" style="width:200px"></th>
+											<th width="200px" style="width: 200px"></th>
 										</tr>
 									</thead>
 									<tbody></tbody>
@@ -827,19 +826,19 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header titulo-modal">
-					
-                    					<table width="100%">
-                        <tr>
-                            <td style="text-align:right">
-				<div id="titulo_modal_alert" style="width: 100%; padding: 1px 10px;">
-					</div>
-                            </td>
-                            <td>&nbsp;&nbsp;</td>
-                            <td style="text-align:right">
-                    <a  href="#" data-dismiss="modal" aria-label="Close" style="color:#FFF;border-left:1px solid #FFF ">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a> 
-                            </td>
-                        </tr>
-                    </table>
+
+					<table width="100%">
+						<tr>
+							<td style="text-align: right">
+								<div id="titulo_modal_alert" style="width: 100%; padding: 1px 10px;">
+								</div>
+							</td>
+							<td>&nbsp;&nbsp;</td>
+							<td style="text-align: right">
+								<a href="#" data-dismiss="modal" aria-label="Close" style="color: #FFF; border-left: 1px solid #FFF">&nbsp;<i class="zmdi zmdi-close"></i>Cerrar&nbsp;</a>
+							</td>
+						</tr>
+					</table>
 				</div>
 				<div class="modal-body">
 					<div id="contenido_modal_alert" style="width: 100%; color: black">
@@ -852,7 +851,7 @@
 			</div>
 		</div>
 	</div>
-    </br>
+	</br>
 	<!--Informe cabecera-->
 	<script id="informe-cabecera-template" type="text/x-handlebars-template">
 
@@ -995,13 +994,13 @@
 			<tr>
 				<td class="concepto-importe">Por Comprobar: </td>
 				<td>
-					<span style='font-size: 16px; display: block; background-color: transparent !important; color:#000; ' class='label label-success text-right'>{{ disponible }}
+					<span style='font-size: 16px; display: block; background-color: transparent !important; color: #000;' class='label label-success text-right'>{{ disponible }}
 					</span>
 				</td>
 			</tr>
 			<tr>
 				<td class="concepto-importe">Decrementado: </td>
-				<td><span style='font-size: 16px; display: block; background-color: transparent !important; color:#000; ' class='label label-warning text-right'>{{ decrementado }}
+				<td><span style='font-size: 16px; display: block; background-color: transparent !important; color: #000;' class='label label-warning text-right'>{{ decrementado }}
 				</span></td>
 			</tr>
 		</table>
@@ -1162,7 +1161,7 @@
 		if (valorVacio(localStorage.getItem("fechasReq")) === false) {
 			fechasReq = JSON.parse(localStorage.getItem("fechasReq"));
 		}
-		
+
 		var f = new Date();
 		var fh = f.getDate() + '' + f.getMonth() + '' + f.getFullYear() + '' + f.getHours() + '' + f.getMinutes() + '' + f.getSeconds();
 		// compile handlebars templates and store them for use later
@@ -1257,7 +1256,7 @@
 						num_decrementado: RmReqImporteDecrementado,
 						num_montog: informe.i_total
 					};
-					
+
 
 					$("#importesInforme").empty();
 					$("#importesInforme").append(importesInformeTemplate(importesInforme));
@@ -1509,7 +1508,7 @@
 				} catch (e) {
 					list_justificacion.push(["", $.trim(justificacion), "justificacion"]);
 				}
-				
+
 
 			} else if ((categoria.toLowerCase()).indexOf("autobus") > -1 ||
 				(categoria.toLowerCase()).indexOf("autobús") > -1 ||
@@ -1541,7 +1540,7 @@
 				} catch (e) {
 					list_justificacion.push(["", $.trim(justificacion), "justificacion"]);
 				}
-				
+
 			} else if ((categoria.toLowerCase()).indexOf("caseta") > -1) {
 				list_justificacion.push(["", $.trim(justificacion), "justificacion"]);
 			} else if ((categoria.toLowerCase()).indexOf("uber") > -1 || (categoria.toLowerCase()).indexOf("taxi") > -1) {
@@ -1780,7 +1779,7 @@
 			}
 			if (estatus === 2 && conciliacionOk === 1) {
 				$("#aenvia").show();
-				
+
 				$("#aconfrontar, #cancelarConfrontacion").show();
 				$("#confrontarInforme").hide();
 			}
@@ -1800,14 +1799,14 @@
 			if (conciliacionOk === 0) {
 				$("#aenvia").hide();
 			}
-			
+
 			if (disAnticipo === 0) {
 				$("#aagregarg").hide();
 			}
 
-			if(decrementado > 0){
+			if (decrementado > 0) {
 				$("#aconfrontar").removeClass("disabled");
-			}else{
+			} else {
 				$("#aconfrontar").addClass("disabled");
 				if (disAnticipo === 0) {
 					$("#aconfrontar").removeClass("disabled");
@@ -1817,6 +1816,7 @@
 		function verComprobante(dircomp, comprobante, idgasto) {
 
 			var IdInforme = $("#idinforme").val() * 1;
+			var f = new Date();
 			$("#ModalLabelComprobante").empty();
 			$("#ModalLabelComprobante").append("Comprobante: " + comprobante);
 			$("#compPDF").removeAttr("data");
@@ -1832,7 +1832,7 @@
 			var btnEliCom = "";
 			if (ConfBanco === 0) {
 				btnEliCom = "&nbsp;<a type='button' class='btn btn-primary btn-xs' href='#' onclick='eliminarGastoCom(\"" + comprobante + "\", " + IdInforme + ", " + idgasto + ")'><i class='zmdi zmdi-delete zmdi-hc-2x'></i> </a>";
-			};
+			};			
 
 			if (comprobante === "XML") {
 				$("#print_compXML").show();
@@ -1870,7 +1870,10 @@
 				$("#divPDF").show();
 				"#controles_compPDF".AsHTML(btnEliCom);
 				$("#compPDF").show();
-				$("#compPDF").attr("data", "/" + dircomp);
+				$("#compPDF").removeAttr("data");
+				setTimeout(function () {
+					$("#compPDF").attr("data", "/" + dircomp + "?" + f.getTime());
+				}, 200);
 			}
 			if (comprobante === "OTRO") {
 				$("#verComprobante").modal('show');
@@ -2070,7 +2073,7 @@
 			$(":file").filestyle('clear');
 			menucategorias();
 			var disponible = $("#disAnticipo").val() * 1;
-			
+
 			var ConfBanco = $("#ConfBanco").val() * 1;
 			var nmbEstatus = $("#nmbEstatus").val();
 
@@ -2083,7 +2086,7 @@
 			"#mEditarGastoInf .modal-header.titulo-modal span".AsHTML("Editar Gasto");
 			var gasto = [];
 			gasto = StrToJSON(datos_gasto);
-			
+
 			var valores_justificacion = gasto.valores_justificacion;
 			$("input[id*='justificacion']").val("");
 			$("#comensales_gasto").hide();
@@ -2155,13 +2158,13 @@
 			}
 			return JsonStr;
 		}
-function JSONize(str) {
-  return str
-    // wrap keys without quote with valid double quote
-    .replace(/([\$\w]+)\s*:/g, function(_, $1){return '"'+$1+'":'})    
-    // replacing single quote wrapped ones to double quote 
-    .replace(/'([^']+)'/g, function(_, $1){return '"'+$1+'"'})         
-}
+		function JSONize(str) {
+			return str
+				// wrap keys without quote with valid double quote
+				.replace(/([\$\w]+)\s*:/g, function (_, $1) { return '"' + $1 + '":' })
+				// replacing single quote wrapped ones to double quote 
+				.replace(/'([^']+)'/g, function (_, $1) { return '"' + $1 + '"' })
+		}
 
 		function eliminar_gasto(datos_gasto) {
 			var gasto = StrToJSON(datos_gasto);
@@ -2204,10 +2207,10 @@ function JSONize(str) {
 					$(this).dialog("close");
 				}
 			};
-            Seguridad.confirmar("Eliminar Gasto:<br /><b>¿" + nombre + "</b>?", botones, "Eliminar Gasto.");
+			Seguridad.confirmar("Eliminar Gasto:<br /><b>¿" + nombre + "</b>?", botones, "Eliminar Gasto.");
 
-               
-        }
+
+		}
 
 
 		$("#btnGuardaGasto").click(function () {
@@ -2343,7 +2346,7 @@ function JSONize(str) {
 			};
 
 			var apiEjecutar = IdGasto > 0 ? "UpdateGasto" : "InsertGasto";
-			
+
 			$.ajax({
 				async: true,
 				type: "POST",
@@ -2630,7 +2633,7 @@ function JSONize(str) {
 				Seguridad.alerta("Todos los gastos deben contener almenos un comprobante.");
 			} else {
 				cargado();
-				if (estatus === 52) {					
+				if (estatus === 52) {
 					if (valida.NoGastosNoDeducible > 0) {
 						confGastosNoDeducibles(totalg, RmReqImporteComprobar);
 					} else if (totalg.toFixed(2) != RmReqImporteComprobar.toFixed(2)) {
@@ -2677,9 +2680,9 @@ function JSONize(str) {
 			var idinforme = $("#idinforme").val();
 
 			var datos =
-				{
-					"idinforme": idinforme
-				};
+			{
+				"idinforme": idinforme
+			};
 
 			var botones = [];
 			botones[0] = {
@@ -2744,9 +2747,9 @@ function JSONize(str) {
 			var idinforme = $("#idinforme").val();
 
 			var datos =
-				{
-					"idinforme": idinforme
-				};
+			{
+				"idinforme": idinforme
+			};
 			$.ajax({
 				async: false,
 				type: "POST",
@@ -2812,8 +2815,8 @@ function JSONize(str) {
 				var extFile = (nombre.substring(nombre.lastIndexOf(".") + 1)).toLowerCase();
 				if (extFile === "xml") {
 
-                    var botones = [];
-                    botones[0] = {
+					var botones = [];
+					botones[0] = {
 						text: "No", click: function () {
 							$(this).dialog("close");
 							$("#fileXmlAdicional" + datos.IdGasto).clearInputs();
@@ -2993,7 +2996,7 @@ function JSONize(str) {
 						//$.notify(('El Xml cargado ya existe en la base de datos, favor de verificar: ' + $.trim(infReq[1])), { globalPosition: 'top center', className: 'error', autoHideDelay: 8000 });
 						Seguridad.alerta(('El XML NO cargado, ya existe en la base de datos, favor de verificar: ' + $.trim(infReq[1])));
 					};
-					
+
 					if (result === 'No se puede guardar el comprobante, el importe es igual o mayor a $ 2000.00 y la forma de pago es efectivo.') {
 						$.notify(result, { globalPosition: 'top center', className: 'error', autoHideDelay: 6000 });
 
@@ -3472,7 +3475,7 @@ function JSONize(str) {
 
 		function SelectEmpleado(GrEmpID) {
 			var resultado = [];
-//UsuarioActivo;EmpeladoActivo;
+			//UsuarioActivo;EmpeladoActivo;
 			$.ajax({
 				async: false,
 				type: "POST",
@@ -3673,7 +3676,7 @@ function JSONize(str) {
 				}
 			} else {
 				Seguridad.alerta("No existen gastos para confrontar.");
-					return false;
+				return false;
 			}
 
 			if (disAnticipo > 0) {
@@ -3729,22 +3732,9 @@ function JSONize(str) {
 
 
 			$("#tabsConfrontar").tabs();
-			/*$("#confrontacion").modal({
-				show: true,
-				keyboard: false,
-				backdrop: "static"
-			});*/
 			BuscarMovBancariosParaConfrontar(tarjeta);
-			//$("#confrontacion").css({ 'z-index': 2000 });
-			//#filebanco + bootstrap-filestyle.input-group .group-span-filestyle label
 			$("label[for='filebanco']").attr("class", "btn btn-success waves-effect");
 			$("label[for='filebanco'] span.buttonText").empty().append("&nbsp; Cargar Movimientos*");
-			
-			/*$("#filebanco:file").filestyle({
-				input: false,
-				buttonName: "btn-success",
-				buttonText: "&nbsp; Cargar Movimientos*"
-			});*/
 
 		});
 		$("#importede, #importea").change(function () {
@@ -3755,7 +3745,7 @@ function JSONize(str) {
 			//$("#confrontacion").modal("hide");
 			//cargando();
 			browseGastos(IdInforme);
-				BuscarMovBancariosParaConfrontar("");
+			BuscarMovBancariosParaConfrontar("");
 		});
 		$("#confrontarInforme").click(function () {
 			var ConfBanco = $("#ConfBanco").val() * 1;
@@ -3905,6 +3895,7 @@ function JSONize(str) {
 				var datos = JSON.parse(localStorage.getItem("listGastos"));
 				tarjeta = $.trim($("#formaPagoInforme").val());// datos[0]['FormaPago'];
 			}
+			//alert(tarjeta);
 			repde = repde.split("-");
 			repa = repa.split("-");
 
@@ -3931,7 +3922,7 @@ function JSONize(str) {
 					cargando();
 					var ocultarModal = $('#confrontacion').is(':visible');
 					if (ocultarModal)
-					   $("#confrontacion").modal("hide");
+						$("#confrontacion").modal("hide");
 				},
 				success: function (result) {
 					console.log(result);
@@ -4080,7 +4071,7 @@ function JSONize(str) {
 			};
 
 			crearLigaGasto(datos);
-			
+
 			cargado();
 		}
 		function crearLigaGasto(datos) {
@@ -4095,7 +4086,7 @@ function JSONize(str) {
 				beforeSend: function () {
 					var ocultarModal = $('#confrontacion').is(':visible');
 					if (ocultarModal)
-					   $("#confrontacion").modal("hide");
+						$("#confrontacion").modal("hide");
 				},
 				success: function (result) {
 					var tipomsn = result.RelacionOk === true ? "success" : "error";
@@ -4181,7 +4172,7 @@ function JSONize(str) {
 				beforeSend: function () {
 					var ocultarModal = $('#confrontacion').is(':visible');
 					if (ocultarModal)
-					   $("#confrontacion").modal("hide");
+						$("#confrontacion").modal("hide");
 				},
 				success: function (result) {
 					$.notify("Gasto Guardado.", { globalPosition: 'top center', className: 'success' });
@@ -4239,7 +4230,7 @@ function JSONize(str) {
 
 			} else {
 				if (ConfBanco === 1) {
-					Seguridad.alerta("No puedes cargar movimientos. El Informe ya esta confrontado.","#confrontacion");
+					Seguridad.alerta("No puedes cargar movimientos. El Informe ya esta confrontado.", "#confrontacion");
 				} else {
 					$("#banco").notify("Seleciona un banco.", { globalPosition: 'top center', className: 'error' });
 				}
@@ -4266,7 +4257,7 @@ function JSONize(str) {
 				complete: function () {
 					//consultaInfoGastos(IdInforme, 2, 1);
 					selectInforme(IdInforme);
-					browseGastos(IdInforme);				
+					browseGastos(IdInforme);
 				},
 				error: function (result) {
 					//cargado();
@@ -4441,26 +4432,37 @@ function JSONize(str) {
 			var elementosSel = false;
 			var IdInforme = $("#idinforme").val() * 1;
 			//resetInformeConfrontado();
-cargando();
+			cargando();
 			var ocultarModal = $('#confrontacion').is(':visible');
 			//setTimeout(function () {
-				if (ocultarModal)
-					$("#confrontacion").modal("hide");
+			if (ocultarModal)
+				$("#confrontacion").modal("hide");
 			//}, 2000);
-			
+
 			var nchkBox = $("input:checkbox[name=movBanco]").length;
-var ii=1;
+			var ii = 1;
 			$("input:checkbox[name=movBanco]").each(function () {
 				if ($(this).is(':checked')) {
 					elementosSel = true;
-					
+
 					var datos = $(this).val(); //JSON.parse($(this).val());
 					var resultado = guardarMBanco(datos, nchkBox, ii);
-ii++;
+					ii++;
 				}
 			});
 			if (elementosSel === false) {
 				$.notify("Seleccionar movimiento(s).", { position: "top center", className: 'error' });
+				cargado();
+				setTimeout(function () {
+					var ocultarModal = $('#confrontacion').is(':visible');
+					if (ocultarModal === false) {
+						$("#confrontacion").modal({
+							show: true,
+							keyboard: false,
+							backdrop: "static"
+						});
+					}
+				}, 500);
 			} else {
 				//obtenerGastosInforme(IdInforme, 0, 2);
 				$.notify("Información guardada.", { position: "top center", className: 'success' });
@@ -4517,7 +4519,7 @@ ii++;
 						("#tdChk" + idchk).AsHTML("<span style='font-size: 11px' class='label label-danger'><span class='glyphicon glyphicon-remove'></span> Cargado</span>");
 					}
 					//console.log(nchkBox, ii, "modal es visible " + $('#confrontacion').is(':visible'));
-					if(nchkBox === ii){
+					if (nchkBox === ii) {
 						setTimeout(function () {
 							cargado();
 							/*var ocultarModal = $('#confrontacion').is(':visible');
@@ -4577,7 +4579,7 @@ ii++;
 					var ocultarModal = $('#confrontacion').is(':visible');
 					if (ocultarModal)
 						$("#confrontacion").modal("hide");
-					
+
 				},
 				success: function (result) {
 					//
@@ -4599,9 +4601,9 @@ ii++;
 							});*/
 						setTimeout(function () {
 							BuscarMovBancariosParaConfrontar("");
-						}, 400);						
+						}, 400);
 					}, 1000);
-					
+
 				},
 				error: function (result) {
 					//cargado();

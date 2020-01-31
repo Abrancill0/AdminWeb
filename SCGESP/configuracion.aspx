@@ -31,7 +31,7 @@
                                             </select>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr hidden>
                                         <td>Validar Importe:</td>
                                         <td>
                                             <label class='custom-control custom-checkbox'>
@@ -45,7 +45,7 @@
                                             <input type="number" id='importemayor' name='importemayor' min="0" max="1000000" step="1" class='form-control' placeholder="0.00" />
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr hidden>
                                         <td>Control Activo:</td>
                                         <td colspan="3">
                                             <label class='custom-control custom-checkbox'>
@@ -55,7 +55,7 @@
                                             </label>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr hidden>
                                         <td>Control Bloqueado:</td>
                                         <td colspan="3">
                                             <label class='custom-control custom-checkbox'>
@@ -66,7 +66,7 @@
                                             </label>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr hidden>
                                         <td>Ejemplo:</td>
                                         <td colspan="3">
                                             <img id="chkVoBo" src="img/chkVoBo/chkActivoBloqueado.PNG" class="img-responsive" style="width: 250px" />
@@ -130,7 +130,7 @@
     <!-- App functions and actions -->
     <script type="text/javascript" src="js/app.min.js"></script>
     <script type="text/javascript" src="js/js.js"></script>
-    <script type="text/javascript" src="js/vobo.js?11"></script>
+    <script type="text/javascript" src="js/vobo.js?111111111"></script>
     <script type="text/javascript" src="js/usuariosAutInforme.js?kjh"></script>
 
     <script type="text/javascript">

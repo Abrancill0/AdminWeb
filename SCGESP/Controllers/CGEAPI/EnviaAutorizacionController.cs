@@ -22,17 +22,20 @@ namespace SCGESP.Controllers.CGEAPI
 
         public string PostInsertGasto(ParametrosGastos Datos)
         {
-            SqlCommand comando = new SqlCommand("EnviaAutorizacion");
+			
+			SqlCommand comando = new SqlCommand("EnviaAutorizacion");
             comando.CommandType = CommandType.StoredProcedure;
 
             //Declaracion de parametros
 
             comando.Parameters.Add("@idinforme", SqlDbType.Int);
+			comando.Parameters.Add("@ualterno", SqlDbType.VarChar);
 
-            //Asignacion de valores a parametros
-            comando.Parameters["@idinforme"].Value = Datos.idinforme;
+			//Asignacion de valores a parametros
+			comando.Parameters["@idinforme"].Value = Datos.idinforme;
+			comando.Parameters["@ualterno"].Value = "";
 
-            comando.Connection = new SqlConnection(VariablesGlobales.CadenaConexion);
+			comando.Connection = new SqlConnection(VariablesGlobales.CadenaConexion);
             comando.CommandTimeout = 0;
             comando.Connection.Open();
             //DA.SelectCommand = comando;
@@ -49,13 +52,38 @@ namespace SCGESP.Controllers.CGEAPI
 
                 foreach (DataRow row in DT.Rows)
                 {
-                    string usuarioResponsable = Convert.ToString(row["usuarioResponsable"]);
+					string usuarioResponsable = Convert.ToString(row["usuarioResponsable"]);
                     string usuarioAutoriza = Convert.ToString(row["usuarioAutoriza"]);
                     string mensaje = Convert.ToString(row["msn"]);
                     string titulo = Convert.ToString(row["titulo"]);
                     int idgasto = Convert.ToInt32(row["idgasto"]);
 
-                    EnvioCorreosELE.Envio(usuarioResponsable, "", "", usuarioAutoriza, "", titulo, mensaje, 0);
+					//agregar altenerno del autorizador
+					try
+					{
+						var ResultadoAlterno = GetUsuarioAlterno.UsuarioAlterno(usuarioAutoriza);
+						string consulta = "";
+						if (ResultadoAlterno.Estatus == 1)
+						{
+							consulta = "UPDATE autorizarinforme SET a_ualterno = '" + ResultadoAlterno.Resultado + "' " +
+							"WHERE a_idinforme = " + Datos.idinforme + " AND a_nivel = 1 AND a_uautoriza = '" + usuarioAutoriza + "'";
+						}
+						else
+						{
+							consulta = "UPDATE autorizarinforme SET a_ualterno = '" + usuarioAutoriza + "' " +
+							"WHERE a_idinforme = " + Datos.idinforme + " AND a_nivel = 1 AND a_uautoriza = '" + usuarioAutoriza + "'";
+						}
+						DA = new SqlDataAdapter(consulta, VariablesGlobales.CadenaConexion);
+						DA.Fill(DT);
+					}
+					catch (Exception ex)
+					{
+						//ex
+					}
+					
+
+
+					EnvioCorreosELE.Envio(usuarioResponsable, "", "", usuarioAutoriza, "", titulo, mensaje, 0);
 
                     try
                     {
