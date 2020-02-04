@@ -1,9 +1,11 @@
-﻿using SCGESP.Clases;
+﻿using Ele.Generales;
+using SCGESP.Clases;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.Http;
+using System.Xml;
 
 namespace SCGESP.Controllers
 {
@@ -16,6 +18,8 @@ namespace SCGESP.Controllers
 			public string RepA { get; set; }
 			public string Estatus { get; set; }
 			public string UResponsable { get; set; }
+			public string UsuarioActivo { get; set; }
+			public int VerEstatusAdminERP { get; set; }
 		}
 		public class Resultado
 		{
@@ -69,6 +73,7 @@ namespace SCGESP.Controllers
 		{
 			try
 			{
+				string uConsulta = Seguridad.DesEncriptar(Datos.UsuarioActivo);
 				Datos.RepDe += " 00:00:00";
 				Datos.RepA += " 23:59:59";
 				SqlDataAdapter DA;
@@ -121,6 +126,19 @@ namespace SCGESP.Controllers
 					string FechaSolicitud = "";
 					string FechaLibera = "";
 
+					//consulta requisiciones 
+					DataTable DTRequisiciones = new DataTable();
+					if (Datos.VerEstatusAdminERP == 1)
+					{
+						DocumentoSalida Requisiciones = BrowseRequisiciones(uConsulta, FormatFecha(Datos.RepDe), FormatFecha(Datos.RepA), "");
+						if (Requisiciones.Resultado == "1")
+						{
+							DTRequisiciones = Requisiciones.obtieneTabla("Catalogo");
+						}
+					}
+					
+
+
 					foreach (DataRow row in DT.Rows)
 					{
 						FechaCrea = FechaInicio = FechaFin = FechaSolicitud = FechaLibera = "";
@@ -136,12 +154,28 @@ namespace SCGESP.Controllers
 							FechaSolicitud = Convert.ToDateTime(row["a_fsolicitud"]).ToString("dd/MM/yyyy") + " " + Convert.ToDateTime(row["a_fsolicitud"]).ToShortTimeString();
 						}
 
+						string estatus = Convert.ToString(row["e_estatus"]);
+						int idrequisicion = Convert.ToInt32(row["r_idrequisicion"]);
+
+						if (Datos.VerEstatusAdminERP == 1 && DTRequisiciones.Rows.Count > 0 && estatus == "Enviado a AdminERP")
+						{
+							try
+							{
+								DataView DVRequisicion = SelecionaRequisicionId(DTRequisiciones, idrequisicion);
+								estatus += " / " + DVRequisicion[0]["RmReqEstatusNombre"];
+							}
+							catch (Exception)
+							{
+								estatus += "";
+							}
+						}
+
 						Resultado ent = new Resultado
 						{
 							i_id = Convert.ToInt32(row["i_id"]),
 							i_ninforme = Convert.ToInt32(row["i_ninforme"]),
 							i_estatus = Convert.ToInt32(row["i_estatus"]),
-							e_estatus = Convert.ToString(row["e_estatus"]),
+							e_estatus = estatus,
 							i_fcrea = FechaCrea,
 							i_ucrea = Convert.ToString(row["i_ucrea"]),
 							i_uresponsable = Convert.ToString(row["i_uresponsable"] is DBNull ? "" : row["i_uresponsable"]),
@@ -151,7 +185,7 @@ namespace SCGESP.Controllers
 							i_total = Convert.ToDecimal(row["i_total"] is DBNull ? 0 : row["i_total"]),
 							i_totalg = Convert.ToDecimal(row["i_totalg"] is DBNull ? 0 : row["i_totalg"]),
 							responsable = Convert.ToString(row["responsable"] is DBNull ? "" : row["responsable"]),
-							r_idrequisicion = Convert.ToInt32(row["r_idrequisicion"]),
+							r_idrequisicion = idrequisicion,
 							i_motivo = Convert.ToString(row["i_motivo"] is DBNull ? "" : row["i_motivo"]),
 							i_notas = Convert.ToString(row["i_notas"] is DBNull ? "" : row["i_notas"]),
 							i_tipo = Convert.ToString(row["i_tipo"] is DBNull ? "" : row["i_tipo"]),
@@ -219,6 +253,65 @@ namespace SCGESP.Controllers
 
 				return "";
 			}
+		}
+
+		private DocumentoSalida BrowseRequisiciones(string uConsulta, string fechaInicial, string fechaFinal, string UResponsable)
+		{
+			try
+			{
+				DocumentoEntrada entrada = new DocumentoEntrada
+				{
+					Usuario = uConsulta, //Datos.Usuario;  
+					Origen = "AdminWEB",  //Datos.Origen; 
+					Transaccion = 120760,
+					Operacion = 1
+				};
+				entrada.agregaElemento("RmTirRutaProceso", Convert.ToInt32(4));
+				entrada.agregaElemento("RmReqFechaRequerida", fechaInicial);
+				entrada.agregaElemento("RmReqFechaRequerida", fechaFinal);
+				if(UResponsable != "")
+				{
+					//entrada.agregaElemento("RmReqSolicitante", Convert.ToInt32(RmReqSolicitante));
+				}
+
+				//
+				//entrada.agregaElemento("proceso", 9);
+
+				//entrada.agregaElemento("RmReqTipoRequisicion", Convert.ToInt32(99));
+				//entrada.agregaElemento("RmReqEstatus", Convert.ToInt32(51));
+
+
+				DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
+				return respuesta;
+			}
+			catch (Exception)
+			{
+
+				throw;
+			}
+		}
+		private DataView SelecionaRequisicionId(DataTable Requisiciones, int idrequisicion)
+		{
+			try
+			{
+				string expression = "RmReqId = " + idrequisicion;
+				DataView Requisicion = new DataView(Requisiciones)
+				{
+					RowFilter = expression
+				};
+				return Requisicion;
+			}
+			catch (Exception)
+			{
+				throw;
+			}
+		}
+		private static DocumentoSalida PeticionCatalogo(XmlDocument doc)
+		{
+			Localhost.Elegrp ws = new Localhost.Elegrp();
+			ws.Timeout = -1;
+			string respuesta = ws.PeticionCatalogo(doc);
+			return new DocumentoSalida(respuesta);
 		}
 
 	}

@@ -189,6 +189,15 @@
 								</select>
 							</td>
 						</tr>
+						<tr>
+							<td colspan="5" style="text-align: right; padding: 10px 20px">
+								<label class='custom-control custom-checkbox'>
+									<input type='checkbox' checked id='VerEstatusAdminERP' class='custom-control-input'>
+									<span class='custom-control-indicator'></span>
+									<span class='custom-control-description'>Ver estatus AdminERP</span>
+								</label>
+						    </td>
+						</tr>
 					</table>
 				</div>
 
@@ -543,12 +552,16 @@
 		function consultarInformes() {
 			var repde = $("#repde").val().split("-");
 			var repa = $("#repa").val().split("-");
+			var VerEstatusAdminERP = 1;
+			VerEstatusAdminERP = $("#VerEstatusAdminERP").is(':checked') ? 1 : 0;
 			var aDatos = {
 				'TipoFecha': $("#tipoFecha").val(),
 				'RepDe': repde[2] + "-" + repde[1] + "-" + repde[0],
 				'RepA': repa[2] + "-" + repa[1] + "-" + repa[0],
 				'Estatus': $("#estatus").val(),
-				'UResponsable': $("#uResponsable").val()
+				'UResponsable': $("#uResponsable").val(),
+				'UsuarioActivo': UsuarioActivo,
+				'VerEstatusAdminERP': VerEstatusAdminERP
 			};
 			$.ajax({
 				async: true,
