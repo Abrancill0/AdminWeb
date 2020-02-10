@@ -280,7 +280,7 @@
 				'VerEstatusAdminERP': VerEstatusAdminERP
 			};
 			$.ajax({
-				async: false,
+				async: true,
 				type: "POST",
 				url: "/api/ReporteDesgloseEstatusInformes",
 				data: aDatos,

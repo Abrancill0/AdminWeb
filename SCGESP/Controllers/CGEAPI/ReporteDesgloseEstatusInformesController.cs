@@ -1,10 +1,12 @@
-﻿using SCGESP.Clases;
+﻿using Ele.Generales;
+using SCGESP.Clases;
 using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.Http;
+using System.Xml;
 
 namespace SCGESP.Controllers.CGEAPI
 {
@@ -29,6 +31,7 @@ namespace SCGESP.Controllers.CGEAPI
 			public int IdInforme { get; set; }
 			public int Informe { get; set; }
 			public string UResponsable { get; set; }
+			public string IdEmpleado { get; set; }
 			public string NombreResponsabe { get; set; }
 			public string Justificacion { get; set; }
 			public string EstatusActual { get; set; }
@@ -46,6 +49,7 @@ namespace SCGESP.Controllers.CGEAPI
 		{
 			try
 			{
+				string uConsulta = Seguridad.DesEncriptar(Datos.UsuarioActivo);
 				List<Resultado> Resultado = new List<Resultado>();
 				Datos.RepDe += " 00:00:00";
 				Datos.RepA += " 23:59:59";
@@ -85,6 +89,17 @@ namespace SCGESP.Controllers.CGEAPI
 				{
 					var SelUsuarios = GetUsuarios.Post();
 
+					//consulta requisiciones 
+					DataTable DTRequisiciones = new DataTable();
+					if (Datos.VerEstatusAdminERP == 1)
+					{
+						DocumentoSalida Requisiciones = BrowseRequisiciones(uConsulta, FormatFecha(Datos.RepDe), FormatFecha(Datos.RepA), Datos.IdEmpleado);
+						if (Requisiciones.Resultado == "1")
+						{
+							DTRequisiciones = Requisiciones.obtieneTabla("Catalogo");
+						}
+					}
+
 					foreach (DataRow row in DT.Rows)
 					{
 						Resultado res = new Resultado
@@ -119,7 +134,7 @@ namespace SCGESP.Controllers.CGEAPI
 						}
 						
 						Resultado[i].NombreResponsabe = nmbUsuario;
-
+						int idrequisicion = Resultado[i].Requisicion;
 						string EstActual = Resultado[i].EstatusActual;
 						string _sqlWhere = "IdInforme = " + Resultado[i].IdInforme + "";
 						string _sqlOrder = "Orden ASC";
@@ -128,6 +143,19 @@ namespace SCGESP.Controllers.CGEAPI
 						foreach (DataRow row in DTEstatus.Rows) {
 							string estatus = Convert.ToString(row["Estatus"]);
 							string usuario = Convert.ToString(row["Usuario"]).Trim();
+							
+							if (Datos.VerEstatusAdminERP == 1 && DTRequisiciones.Rows.Count > 0 && estatus == "Enviado a AdminERP")
+							{
+								try
+								{
+									DataView DVRequisicion = SelecionaRequisicionId(DTRequisiciones, idrequisicion);
+									estatus += " / " + DVRequisicion[0]["RmReqEstatusNombre"];
+								}
+								catch (Exception e)
+								{
+									estatus += "";
+								}
+							}
 
 							try
 							{
@@ -156,6 +184,79 @@ namespace SCGESP.Controllers.CGEAPI
 			{
 				return null;
 			}
+		}
+		private string FormatFecha(string fecha)
+		{
+			try
+			{
+				if (fecha != null && Convert.ToString(fecha) != "")
+				{
+					return Convert.ToDateTime(fecha).ToString("dd/MM/yyyy");//.ToShortDateString();
+				}
+				else
+				{
+					return "";
+				}
+
+			}
+			catch (Exception)
+			{
+
+				return "";
+			}
+		}
+		private DocumentoSalida BrowseRequisiciones(string uConsulta, string fechaInicial, string fechaFinal, string IdEmpleado)
+		{
+			try
+			{
+				DocumentoEntrada entrada = new DocumentoEntrada
+				{
+					Usuario = uConsulta, //Datos.Usuario;  
+					Origen = "AdminWEB",  //Datos.Origen; 
+					Transaccion = 120760,
+					Operacion = 1
+				};
+				entrada.agregaElemento("RmTirRutaProceso", Convert.ToInt32(4));
+				entrada.agregaElemento("RmReqFechaRequerida", fechaInicial);
+				entrada.agregaElemento("RmReqFechaRequerida", fechaFinal);
+				if (Convert.ToInt32(IdEmpleado) > 0)
+				{
+					entrada.agregaElemento("RmReqSolicitante", Convert.ToInt32(IdEmpleado));
+				}
+				
+
+
+				DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
+				return respuesta;
+			}
+			catch (Exception ex)
+			{
+
+				throw;
+			}
+		}
+		private DataView SelecionaRequisicionId(DataTable Requisiciones, int idrequisicion)
+		{
+			try
+			{
+				string expression = "RmReqId = " + idrequisicion;
+				DataView Requisicion = new DataView(Requisiciones)
+				{
+					RowFilter = expression
+				};
+				return Requisicion;
+			}
+			catch (Exception)
+			{
+				throw;
+			}
+		}
+		private static DocumentoSalida PeticionCatalogo(XmlDocument doc)
+		{
+			Localhost.Elegrp ws = new Localhost.Elegrp();
+			ws.Timeout = -1;
+			string respuesta = ws.PeticionCatalogo(doc);
+			return new DocumentoSalida(respuesta);
 		}
 	}
 }
