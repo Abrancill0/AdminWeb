@@ -296,8 +296,6 @@
 					if (valorVacio(result) === false) {
 						$.each(result, function (key, estatus) {
 							var newTr = "<tr><td>";
-							//newTr += value.NombreResponsabe;
-							//newTr += bodyEstatus(value);
 
 							newTr += "<div class='card border rounded'>";
 							newTr += "<div class='card-header border rounded panel-heading h3 p-1'>Requisición: " + estatus.Requisicion + " - Informe: " + estatus.Informe + "</div>";
@@ -347,34 +345,6 @@
 				}
 			});
 		}
-
-		function bodyEstatus(estatus) {
-			var html = "";
-
-			html = "<div class='card'>";
-			html += "<h5 class='card-header'>Requisición: " + estatus.Requisicion + " - Informe: " + estatus.Informe + "</h5>";
-			html += "<div class='card-body'>";
-			html += "<h5 class='card-title'><small class='float-right'><b>Responsable:</b> " + estatus.NombreResponsabe + "</small>";
-			html += "<b>Justificación:</b> " + estatus.Justificacion + "</h5>";
-
-
-			html += "<table>";
-
-			html += "<tr>";
-			html += "<td>";
-			html += "ssssss";
-			html += "</td>";
-			html += "</tr>";
-
-			html += "</table>";
-
-
-			html += "</div>";
-			html += "</div>";
-
-			return html;
-		}
-
 	</script>
 
 </asp:Content>
