@@ -124,7 +124,7 @@ namespace SCGESP.Controllers.CGEAPI
 							while (reader.MoveToNextAttribute())
 							{ // Read the attributes.
 
-								if (reader.Name == "total" || reader.Name == "Total")
+								if ((reader.Name == "total" || reader.Name == "Total") && Total == 0)
 								{
 									Total = Convert.ToDouble(reader.Value);
 								}

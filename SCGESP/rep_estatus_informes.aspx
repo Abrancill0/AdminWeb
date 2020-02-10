@@ -135,6 +135,7 @@
         <a href="#" onclick='cerrarPanel(".panel")' style="color: #FFF; border-left: 1px solid #FFF"><i class="zmdi zmdi-close"></i>Cerrar</a>
 			</div>
 			<div class="panel-body">
+				<a class="btn btn-primary btn-md float-left" href="/reportes" style="background-color: #706259" role="button"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Regresar</a>
 				<div class="table-responsive">
 					<table class="filtro">
 						<tr>
@@ -143,7 +144,7 @@
 							<td>
 								<select id="tipoFecha" name="tipoFecha" class="select2" data-width="230px">
 									<option value="*">--- Todas ---</option>
-									<option value="periodo">Periodo de Informe</option>
+									<option value="periodo">Registro de Gastos</option>
 									<option value="registro">Registro de Informe</option>
 								</select>
 							</td>
@@ -520,7 +521,7 @@
 				},
 				success: function (result) {
 					$.each(result, function (key, value) {
-						$("#uResponsable").append("<option value='" + value.Usuario + "'>" + value.Nombre + " (" + value.Usuario + ")" + "</option>");
+						$("#uResponsable").append("<option value='" + value.Usuario + "|" + value.IdEmpleado + "'>" + value.Nombre + " (" + value.Usuario + " - " + value.IdEmpleado + ")" + "</option>");
 					});
 				},
 				error: function (result) {
@@ -554,12 +555,14 @@
 			var repa = $("#repa").val().split("-");
 			var VerEstatusAdminERP = 1;
 			VerEstatusAdminERP = $("#VerEstatusAdminERP").is(':checked') ? 1 : 0;
+			var UsuarioIdEmpleado = ($("#uResponsable").val()).split("|");
 			var aDatos = {
 				'TipoFecha': $("#tipoFecha").val(),
 				'RepDe': repde[2] + "-" + repde[1] + "-" + repde[0],
 				'RepA': repa[2] + "-" + repa[1] + "-" + repa[0],
 				'Estatus': $("#estatus").val(),
-				'UResponsable': $("#uResponsable").val(),
+				'UResponsable': UsuarioIdEmpleado[0],
+				'IdEmpleado': UsuarioIdEmpleado[1],
 				'UsuarioActivo': UsuarioActivo,
 				'VerEstatusAdminERP': VerEstatusAdminERP
 			};

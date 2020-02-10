@@ -18,6 +18,7 @@ namespace SCGESP.Controllers
 			public string RepA { get; set; }
 			public string Estatus { get; set; }
 			public string UResponsable { get; set; }
+			public string IdEmpleado { get; set; }
 			public string UsuarioActivo { get; set; }
 			public int VerEstatusAdminERP { get; set; }
 		}
@@ -130,7 +131,7 @@ namespace SCGESP.Controllers
 					DataTable DTRequisiciones = new DataTable();
 					if (Datos.VerEstatusAdminERP == 1)
 					{
-						DocumentoSalida Requisiciones = BrowseRequisiciones(uConsulta, FormatFecha(Datos.RepDe), FormatFecha(Datos.RepA), "");
+						DocumentoSalida Requisiciones = BrowseRequisiciones(uConsulta, FormatFecha(Datos.RepDe), FormatFecha(Datos.RepA), Datos.IdEmpleado);
 						if (Requisiciones.Resultado == "1")
 						{
 							DTRequisiciones = Requisiciones.obtieneTabla("Catalogo");
@@ -164,7 +165,7 @@ namespace SCGESP.Controllers
 								DataView DVRequisicion = SelecionaRequisicionId(DTRequisiciones, idrequisicion);
 								estatus += " / " + DVRequisicion[0]["RmReqEstatusNombre"];
 							}
-							catch (Exception)
+							catch (Exception e)
 							{
 								estatus += "";
 							}
@@ -255,7 +256,7 @@ namespace SCGESP.Controllers
 			}
 		}
 
-		private DocumentoSalida BrowseRequisiciones(string uConsulta, string fechaInicial, string fechaFinal, string UResponsable)
+		private DocumentoSalida BrowseRequisiciones(string uConsulta, string fechaInicial, string fechaFinal, string IdEmpleado)
 		{
 			try
 			{
@@ -269,9 +270,9 @@ namespace SCGESP.Controllers
 				entrada.agregaElemento("RmTirRutaProceso", Convert.ToInt32(4));
 				entrada.agregaElemento("RmReqFechaRequerida", fechaInicial);
 				entrada.agregaElemento("RmReqFechaRequerida", fechaFinal);
-				if(UResponsable != "")
+				if(Convert.ToInt32(IdEmpleado) > 0)
 				{
-					//entrada.agregaElemento("RmReqSolicitante", Convert.ToInt32(RmReqSolicitante));
+					entrada.agregaElemento("RmReqSolicitante", Convert.ToInt32(IdEmpleado));
 				}
 
 				//
@@ -284,7 +285,7 @@ namespace SCGESP.Controllers
 				DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 				return respuesta;
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
 
 				throw;

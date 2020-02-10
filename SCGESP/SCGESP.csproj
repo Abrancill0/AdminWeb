@@ -523,7 +523,10 @@
     <Content Include="Login.html" />
     <Content Include="oficinas.aspx" />
     <Content Include="perfil.aspx" />
+    <Content Include="reportes.aspx" />
+    <Content Include="rep_desglose_estatus_informes.aspx" />
     <Content Include="rep_estatus_informes.aspx" />
+    <Content Include="rep_por_categorias.aspx" />
     <Content Include="requisiciones.aspx" />
     <Content Include="requisicionesporautorizar.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -4951,6 +4954,7 @@
     <Compile Include="Clases\EnvioCorreosELE.cs" />
     <Compile Include="Clases\GetAlternoDe.cs" />
     <Compile Include="Clases\GetUsuarioAlterno.cs" />
+    <Compile Include="Clases\GetUsuarios.cs" />
     <Compile Include="Clases\PruebaConexion.cs" />
     <Compile Include="Clases\Seguridad.cs" />
     <Compile Include="Clases\StrToJson.cs" />
@@ -5079,9 +5083,11 @@
     <Compile Include="Controllers\CGEAPI\ObtieneResponsableController.cs" />
     <Compile Include="Controllers\CGEAPI\PruebaGetController.cs" />
     <Compile Include="Controllers\CGEAPI\RechazarInformeController.cs" />
+    <Compile Include="Controllers\CGEAPI\ReporteDesgloseEstatusInformesController.cs" />
     <Compile Include="Controllers\CGEAPI\rep_informes_estatusController.cs" />
     <Compile Include="Controllers\CGEAPI\RotarImagenController.cs" />
     <Compile Include="Controllers\CGEAPI\SaveDatosAdicionalesGastoController.cs" />
+    <Compile Include="Controllers\CGEAPI\SelectCategoriasController.cs" />
     <Compile Include="Controllers\CGEAPI\SelectEstatusInformeController.cs" />
     <Compile Include="Controllers\CGEAPI\SelectInformeController.cs" />
     <Compile Include="Controllers\CGEAPI\SelectUsuariosController.cs" />
@@ -5154,6 +5160,7 @@
     <Compile Include="Controllers\EleAPI\RequisicionProcesosController.cs" />
     <Compile Include="Controllers\EleAPI\RequisicionReembolsoController.cs" />
     <Compile Include="Controllers\EleAPI\ValidarCFDIController.cs" />
+    <Compile Include="Controllers\ReportePorCategoriasController.cs" />
     <Compile Include="Controllers\SelectDatosAdicionalesController.cs" />
     <Compile Include="depuracionmovbanco.aspx.cs">
       <DependentUpon>depuracionmovbanco.aspx</DependentUpon>
@@ -5213,12 +5220,33 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="reportes.aspx.cs">
+      <DependentUpon>reportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="reportes.aspx.designer.cs">
+      <DependentUpon>reportes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="rep_desglose_estatus_informes.aspx.cs">
+      <DependentUpon>rep_desglose_estatus_informes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="rep_desglose_estatus_informes.aspx.designer.cs">
+      <DependentUpon>rep_desglose_estatus_informes.aspx</DependentUpon>
+    </Compile>
     <Compile Include="rep_estatus_informes.aspx.cs">
       <DependentUpon>rep_estatus_informes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="rep_estatus_informes.aspx.designer.cs">
       <DependentUpon>rep_estatus_informes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="rep_por_categorias.aspx.cs">
+      <DependentUpon>rep_por_categorias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="rep_por_categorias.aspx.designer.cs">
+      <DependentUpon>rep_por_categorias.aspx</DependentUpon>
     </Compile>
     <Compile Include="requisiciones.aspx.cs">
       <DependentUpon>requisiciones.aspx</DependentUpon>

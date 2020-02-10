@@ -126,6 +126,9 @@
 		.rowBlanco {
 			background-color: #ffffff;
 		}
+		#fechagasto[readonly] {
+			background-color: white !important;
+		}
 	</style>
 
 	<section class="content">
@@ -2056,10 +2059,13 @@
 			fInicio.setHours(0, 0, 0, 0); // Lo iniciamos a 00:00 horas
 			fFin.setHours(0, 0, 0, 0); // Lo iniciamos a 00:00 horas
 
-			if (hoy < fInicio || hoy > fFin) {
-				if (valorVacio($("#fechagasto").val())) {
-					$("#fechagasto").val(fechasReq.fInicio);
-				}
+			if (hoy >= fInicio && hoy <= fFin) {
+				var fHoy = hoy.getDay() < 10 ? "0" + hoy.getDay() : hoy.getDay();
+				fHoy += "-" + (hoy.getMonth() < 10 ? "0" + hoy.getMonth() : hoy.getMonth());
+				fHoy += "-" + hoy.getFullYear();
+				$("#fechagasto").val(fHoy);
+			} else {
+				$("#fechagasto").val(fechasReq.fInicio);
 			}
 			$("#idGasto").val("");
 			$("#categoria").val("");
@@ -2258,6 +2264,12 @@
 			if (((NombreCategoria.toLowerCase()).indexOf("alimenta") > -1 || (NombreCategoria.toLowerCase()).indexOf("sesion") > -1) && tipoajuste === 0) {
 				comensalesObligatorios = true;
 			}
+
+			if (valorVacio(fechagasto)) {
+				$.notify("La fecha del gasto es obligatoria.", { position: "top center" }, "error");
+				error = 1;
+			}
+
 			if (!validarNumero($("#monto").val())) {//($.trim($("#filexml" + id).val()) != "" || xml != "") &&
 				$.notify("Ingresa un Importe valido.", { position: "top center" }, "error");
 				error = 1;
