@@ -267,10 +267,12 @@ namespace SCGESP.Controllers
 					Transaccion = 120760,
 					Operacion = 1
 				};
-				entrada.agregaElemento("RmTirRutaProceso", Convert.ToInt32(4));
-				entrada.agregaElemento("RmReqFechaRequerida", fechaInicial);
-				entrada.agregaElemento("RmReqFechaRequerida", fechaFinal);
-				if(Convert.ToInt32(IdEmpleado) > 0)
+				//entrada.agregaElemento("RmTirRutaProceso", Convert.ToInt32(4));
+				//entrada.agregaElemento("RmReqFechaRequerida", fechaInicial);
+				//entrada.agregaElemento("RmReqFechaRequerida", fechaFinal);
+				entrada.agregaElemento("FechaInicial", fechaInicial);//fechaInicial.ToString("dd/MM/yyyy")
+				entrada.agregaElemento("FechaFinal", fechaFinal);
+				if (Convert.ToInt32(IdEmpleado) > 0)
 				{
 					entrada.agregaElemento("RmReqSolicitante", Convert.ToInt32(IdEmpleado));
 				}

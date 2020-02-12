@@ -38,7 +38,7 @@ namespace SCGESP.Controllers
             
             DocumentoEntrada entrada = new DocumentoEntrada();
             entrada.Usuario = UsuarioDesencripta;  
-            entrada.Origen = "Programa CGE";  //Datos.Origen; 
+            entrada.Origen = "AdminWEB";  //Datos.Origen; 
             entrada.Transaccion = 120760;
             entrada.Operacion = 2;
 
@@ -48,7 +48,7 @@ namespace SCGESP.Controllers
             entrada.agregaElemento("RmReqFechaRequisicion", Datos.RmReqFechaRequisicion);
             entrada.agregaElemento("RmReqFechaRequerida", Datos.RmReqFechaRequrida);
             entrada.agregaElemento("RmReqFechaFinal", Datos.RmReqFechaFinal);
-            entrada.agregaElemento("RmReqSolicitante", EmpleadoDesencripta); 
+            entrada.agregaElemento("RmReqSolicitante", Datos.RmReqSolicitante); 
             entrada.agregaElemento("RmReqTipoGasto", Datos.RmReqTipoDeGasto);
             entrada.agregaElemento("RmReqCentro", Datos.RmReqCentro);
             entrada.agregaElemento("RmReqOficina", Datos.RmReqOficina);

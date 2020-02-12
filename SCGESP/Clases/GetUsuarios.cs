@@ -14,6 +14,8 @@ namespace SCGESP.Clases
 			public string Usuario { get; set; }
 			public string IdEmpleado { get; set; }
 			public string Nombre { get; set; }
+			public string IdDepartamento { get; set; }
+			public string Departamento { get; set; }
 		}
 		internal static List<Resultado> Post()
 		{
@@ -35,18 +37,34 @@ namespace SCGESP.Clases
 
 				if (DT.Rows.Count > 0)
 				{
-					DataView SelUsuarios = Usuarios();
+					DataTable SelUsuarios = Usuarios();
+					DataTable SelEmpleados = Empleados();
 					//SgUsuEmpleado
 					foreach (DataRow row in DT.Rows)
 					{
 						string usu = Convert.ToString(row["usuario"]).Trim();
 						string idempleado = "";//Convert.ToString(SelUsuarios[0]["SgUsuEmpleado"]).Trim()
+						string nombre = Convert.ToString(row["nombre"]).Trim();
+						string departamento = "";
+						string iddepartamento = "";
 						try
 						{
 							if (usu != "")
 							{
-								SelUsuarios.RowFilter = "SgUsuId = '" + usu + "'";
-								idempleado = Convert.ToString(SelUsuarios[0]["SgUsuEmpleado"]).Trim();
+								//SgUsuEmpleado GrEmpId
+								DataView DVSelUsuarios = new DataView(SelUsuarios)
+								{
+									RowFilter = "SgUsuId = '" + usu + "'"
+								};
+								idempleado = Convert.ToString(DVSelUsuarios[0]["SgUsuEmpleado"]).Trim();
+								nombre = Convert.ToString(DVSelUsuarios[0]["SgUsuNombre"]).Trim();
+
+								DataView DVSelEmpleados = new DataView(SelEmpleados)
+								{
+									RowFilter = "GrEmpId = '" + idempleado + "'"
+								};
+								departamento = Convert.ToString(DVSelEmpleados[0]["GrEmpCentroNombre"]).Trim();
+								iddepartamento = Convert.ToString(DVSelEmpleados[0]["GrEmpCentro"]).Trim();
 							}
 						}
 						catch (Exception ex)
@@ -58,7 +76,9 @@ namespace SCGESP.Clases
 						{
 							Usuario = usu,
 							IdEmpleado = idempleado,
-							Nombre = Convert.ToString(row["nombre"]).Trim()
+							Nombre = nombre,
+							IdDepartamento = iddepartamento,
+							Departamento = departamento
 						};
 						Resultado.Add(ent);
 					}
@@ -75,7 +95,7 @@ namespace SCGESP.Clases
 				return null;
 			}
 		}
-		private static DataView Usuarios()
+		private static DataTable Usuarios()
 		{
 			DocumentoEntrada entrada = new DocumentoEntrada
 			{
@@ -91,8 +111,27 @@ namespace SCGESP.Clases
 			{
 				DTUsuarios = respuesta.obtieneTabla("Catalogo");
 			}
-			DataView DVUsuarios = new DataView(DTUsuarios);
-			return DVUsuarios;
+			//DataView DVUsuarios = new DataView(DTUsuarios);
+			return DTUsuarios;
+		}
+		private static DataTable Empleados()
+		{
+			DocumentoEntrada entrada = new DocumentoEntrada
+			{
+				Usuario = "imartinez",
+				Origen = "AdminWEB",  //Datos.Origen; 
+				Transaccion = 120037,
+				Operacion = 1//regresa una tabla con todos los campos de la tabla ( La cantidad de registros depende del filtro enviado)
+			};
+
+			DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
+			DataTable DTEmpleados = new DataTable();
+			if (respuesta.Resultado == "1")
+			{
+				DTEmpleados = respuesta.obtieneTabla("Catalogo");
+			}
+			//DataView DVEmpleados = new DataView(DTEmpleados);
+			return DTEmpleados;
 		}
 		private static DocumentoSalida PeticionCatalogo(XmlDocument doc)
 		{

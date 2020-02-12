@@ -27,17 +27,25 @@ namespace SCGESP.Controllers
 
             string EmpleadoDesencripta = Seguridad.DesEncriptar(Datos.Empleado);
 
-            DocumentoEntrada entrada = new DocumentoEntrada();
+			string fechaInicial = (DateTime.Today.Subtract(TimeSpan.FromDays(60))).ToString("dd/MM/yyyy");
+			string fechaFinal = (DateTime.Today.AddDays(30)).ToString("dd/MM/yyyy");
+
+			DocumentoEntrada entrada = new DocumentoEntrada();
             entrada.Usuario = UsuarioDesencripta; //Datos.Usuario;  
-            entrada.Origen = "Programa CGE";  //Datos.Origen; 
+            entrada.Origen = "AdminWEB";  //Datos.Origen; 
             entrada.Transaccion = 120760;
             entrada.Operacion = 1;
-            //entrada.agregaElemento("proceso", 9);
-            entrada.agregaElemento("RmReqSolicitante", Convert.ToInt32(EmpleadoDesencripta));
+            //entrada.agregaElemento("RmReqSolicitante", Convert.ToInt32(EmpleadoDesencripta));
+			entrada.agregaElemento("RmReqUsuarioAlta", UsuarioDesencripta);
+			entrada.agregaElemento("FechaInicial", fechaInicial);//fechaInicial.ToString("dd/MM/yyyy")
+			entrada.agregaElemento("FechaFinal", fechaFinal);
+
+			//RmReqFechaRequisicion
+			//RmReqUsuarioAlta
 
 
 
-            DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
+			DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 
             if (respuesta.Resultado == "1")
             {

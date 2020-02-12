@@ -55,6 +55,40 @@ function cargaInicialReq() {
     ConsultaCatalogo(UsuarioActivo, 'ConsultaOficinaUsuario', 'RmReqOficina');
     ConsultaCatalogo(UsuarioActivo, 'ConsultaSubramos', 'RmReqSubramo');
     obtenerTipoRequisicion();
+
+    catDefault = selectCatalogosDefault(encriptaDesencriptaEle(EmpeladoActivo, 0));
+
+    selectUsuarios(catDefault);
+}
+
+function selectUsuarios(catDefault) {
+    var GrEmpCentro = catDefault.GrEmpCentro;
+    $.ajax({
+        async: false,
+        type: "POST",
+        url: "/api/SelectUsuarios",
+        data: {},
+        dataType: "json",
+        beforeSend: function () {
+            $("#RmReqSolicitante").empty();
+        },
+        success: function (result) {
+            var fUsuarios = result.filter(function (res) {
+                return res.IdDepartamento === GrEmpCentro;
+            });
+            
+            fUsuarios = fUsuarios.length === 0 ? result : fUsuarios;
+
+            $.each(fUsuarios, function (key, value) {
+                $("#RmReqSolicitante").append("<option value='" + value.IdEmpleado + "'>" + value.Nombre + " (" + value.Usuario + " - " + value.IdEmpleado + ")" + "</option>");
+            });
+        },
+        error: function (result) {
+            console.log(result);
+        }
+    });
+    
+    $("#RmReqSolicitante").val(encriptaDesencriptaEle(EmpeladoActivo, 0));
 }
 function ConsultaCatalogo(usuario, catalogo, menuselect) {
     var datos = { 'Usuario': usuario, 'Empleado': EmpeladoActivo };
@@ -166,38 +200,42 @@ function ObtenerRequisiciones() {
         },
         success: function (result) {
             //console.log(result.Salida);
-            var resultado = result.Salida.Tablas.Catalogo.NewDataSet.Catalogo;
-            if (result.Salida.Resultado === "1") {
-                $('#tblRequisiciones tbody').empty();
-                tabla
-                    .clear()
-                    .draw();
+            try {
+                var resultado = result.Salida.Tablas.Catalogo.NewDataSet.Catalogo;
+                if (result.Salida.Resultado === "1") {
+                    $('#tblRequisiciones tbody').empty();
+                    tabla
+                        .clear()
+                        .draw();
 
-                var nrow = 1;
+                    var nrow = 1;
 
-                var nreq = 0;
-                try {
-                    nreq = resultado.length;
-                } catch (err) {
-                    nreq = 0;
-                }
-                if (nreq > 0) {
-                    $.each(resultado, function (key, value) {
-                        tabla.row.add(newRowRequisiciones(value, nrow)).draw(false);
+                    var nreq = 0;
+                    try {
+                        nreq = resultado.length;
+                    } catch (err) {
+                        nreq = 0;
+                    }
+                    if (nreq > 0) {
+                        $.each(resultado, function (key, value) {
+                            tabla.row.add(newRowRequisiciones(value, nrow)).draw(false);
+                            nrow++;
+                        });
+                    } else {
+                        tabla.row.add(newRowRequisiciones(resultado, nrow)).draw(false);
                         nrow++;
-                    });
+                    }
                 } else {
-                    tabla.row.add(newRowRequisiciones(resultado, nrow)).draw(false);
-                    nrow++;
+                    $.notify("Sin Requisiciones", { globalPosition: 'top center', className: 'error' });
                 }
-            } else {
-                $.notify("Error al cargar las Requisiciones", { globalPosition: 'top center', className: 'error' });
+            } catch (e) {
+                $.notify("Requisiciones no seleccionadas.", { globalPosition: 'top center', className: 'error' });
             }
             cargado();
         },
         error: function (result) {
             cargado();
-            console.log(result)
+            console.log(result);
             $.notify("Error al cargar las Requisiciones", { globalPosition: 'top center', className: 'error' });
         }
     });
@@ -232,7 +270,7 @@ function newRowRequisiciones(datos, nrow) {
         ]
 
     } catch (err) {
-        var newrow = ["", "", "", "", "", "", "", ""];
+        newrow = ["", "", "", "", "", "", "", ""];
     }
     return newrow;
 }
@@ -388,10 +426,11 @@ function verRequisiciones(ac, id, estatus) {
 
     if (ac === "i") {
         $("#liDetalleReq").attr("onclick", "guardadoAutomatico()");
+        $("#RmReqSolicitante").val(encriptaDesencriptaEle(EmpeladoActivo, 0));
     } else {
         $("#liDetalleReq").removeAttr("onclick");
     }
-
+    console.log(estatus, ac);
     if (estatus === 1) {
         $(".textotd").hide();
         $(".inputtd").show();
@@ -440,7 +479,7 @@ function verRequisiciones(ac, id, estatus) {
         backdrop: "static"
     });
 
-    $("#formaPago, #RmReqCentro, #RmReqTipoDeGasto, #RmReqOficina, #RmReqSubramo, #RmReqTipoRequisicion").select2({
+    $("#formaPago, #RmReqCentro, #RmReqTipoDeGasto, #RmReqOficina, #RmReqSubramo, #RmReqTipoRequisicion, #RmReqSolicitante").select2({
         dropdownParent: $("#tabSolicitud")
     });
     $("#categoria").select2({
@@ -552,8 +591,8 @@ function SelectRequisicion(id) {
             RmReqEstatus = RmReqEstatus === "98" ? "1" : RmReqEstatus;
             var RmReqEstatusNombre = datoEle(resultado.RmReqEstatusNombre);
             var RmReqComentarios = datoEle(resultado.RmReqComentarios);
-            var RmReqTipoRequisicion = datoEle(resultado.RmReqTipoRequisicion);
-            var RmReqTipoRequisicionNombre = datoEle(resultado.RmReqTipoRequisicionNombre);
+            //var RmReqTipoRequisicion = datoEle(resultado.RmReqTipoRequisicion);
+            //var RmReqTipoRequisicionNombre = datoEle(resultado.RmReqTipoRequisicionNombre);
             var RmReqTotal = datoEle(resultado.RmReqTotal) * 1;
 
             $("#idreq").val(RmReqId);
@@ -581,6 +620,9 @@ function SelectRequisicion(id) {
             $("#idestatus").val(RmReqEstatus);
             "#tdEstatus".AsHTML(RmReqEstatusNombre);
 
+            $("#RmReqSolicitante").val(RmReqSolicitante);
+            "#tdSolicitante .textotd".AsHTML(RmReqSolicitante + " - " + RmReqSolicitanteNombre);
+
             "#tdComentarios".AsHTML(RmReqComentarios);
 
             $("#repde2").val(fechaini);
@@ -606,7 +648,7 @@ function SelectRequisicion(id) {
                     $("#liAutoriza").show();
                 }
             }
-            $("#RmReqCentro, #RmReqTipoDeGasto, #RmReqOficina, #RmReqSubramo, #RmReqTipoRequisicion").select2({
+            $("#RmReqCentro, #RmReqTipoDeGasto, #RmReqOficina, #RmReqSubramo, #RmReqTipoRequisicion, #RmReqSolicitante").select2({
                 dropdownParent: $("#tabSolicitud")
             });
 
@@ -704,10 +746,12 @@ function guardarRequisicion(origen, doc) {
     }
     var SgUsuId = UsuarioActivo;
     var datosEmp = SelectUsuario(SgUsuId);
-    var SgUsuEmpleado = encriptaDesencriptaEle(EmpeladoActivo, 0);
-    //datoEle(datosEmp.SgUsuEmpleado);
-    if (valorVacio(SgUsuEmpleado)) {
-        $("#RmReqJustificacion").notify("Indica una justificacion para el Requisicion.", { position: "top", autoHideDelay: 2000 }, "error");
+    var RmReqSolicitante = $("#RmReqSolicitante").val();
+    RmReqSolicitante = valorVacio(RmReqSolicitante) ? encriptaDesencriptaEle(EmpeladoActivo, 0) : RmReqSolicitante;
+
+    //datoEle(datosEmp.RmReqSolicitante);
+    if (valorVacio(RmReqSolicitante)) {
+        $("#RmReqJustificacion").notify("Indica un solicitante para la Requisicion.", { position: "top", autoHideDelay: 2000 }, "error");
         error = 1;
     }
     if (error === 1)
@@ -722,7 +766,7 @@ function guardarRequisicion(origen, doc) {
         'RmReqFechaRequisicion': (fechaActual().replace(/-/gi, "/")) + " 00:00:00",
         'RmReqFechaRequrida': finicio.replace(/-/gi, "/") + " 00:00:00",
         'RmReqFechaFinal': ffin.replace(/-/gi, "/") + " 23:59:59",
-        'RmReqSolicitante': SgUsuEmpleado, //UsuarioActivo,//responsableInf
+        'RmReqSolicitante': RmReqSolicitante, //UsuarioActivo,//responsableInf
         'RmReqTipoDeGasto': RmReqTipoDeGasto,
         'RmReqCentro': RmReqCentro,
         'RmReqOficina': RmReqOficina,
@@ -1951,12 +1995,12 @@ function guardadoAutomatico() {
         var RmReqTipoRequisicion = $("#RmReqTipoRequisicion").val();
         var finicio = $("#repde2").val();
         var ffin = $("#repa2").val();
-        var SgUsuEmpleado = encriptaDesencriptaEle(EmpeladoActivo, 0);
+        var RmReqSolicitante = encriptaDesencriptaEle(EmpeladoActivo, 0);
         var RmReqEstatus = "1";
         if (!valorVacio(justificacion) && !valorVacio(RmReqCentro) &&
             !valorVacio(RmReqTipoDeGasto) && !valorVacio(RmReqOficina) &&
             !valorVacio(RmReqSubramo) && !valorVacio(RmReqTipoRequisicion) &&
-            !valorVacio(SgUsuEmpleado)) {
+            !valorVacio(RmReqSolicitante)) {
             var datos = {
                 'RmReqId': idReq,
                 'RmReqEstatus': RmReqEstatus,
@@ -1964,7 +2008,7 @@ function guardadoAutomatico() {
                 'RmReqFechaRequisicion': (fechaActual().replace(/-/gi, "/")) + " 00:00:00",
                 'RmReqFechaRequrida': finicio.replace(/-/gi, "/") + " 00:00:00",
                 'RmReqFechaFinal': ffin.replace(/-/gi, "/") + " 23:59:59",
-                'RmReqSolicitante': SgUsuEmpleado, 
+                'RmReqSolicitante': RmReqSolicitante, 
                 'RmReqTipoDeGasto': RmReqTipoDeGasto,
                 'RmReqCentro': RmReqCentro,
                 'RmReqOficina': RmReqOficina,

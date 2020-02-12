@@ -134,6 +134,18 @@
                                                     </div>
                                                 </td>
                                             </tr>
+
+                                            <tr>
+                                                <td>Solicitante:</td>
+                                                <td colspan="5" id="tdSolicitante">
+                                                    <span class="textotd"></span>
+                                                    <span class="inputtd">
+														<select id="RmReqSolicitante" name="RmReqSolicitante" class="select2" data-width="100%">
+															<option value="*">--- Todos ---</option>
+														</select>
+                                                    </span>
+                                                </td>
+                                            </tr>
                                             <tr>
                                                 <td>Tipo Requisición:</td>
                                                 <td colspan="5" id="tdTipoRequisicion">
@@ -321,6 +333,6 @@
     <!-- App functions and actions -->
     <script type="text/javascript" src="js/app.min.js"></script>
     <script type="text/javascript" src="js/js.js"></script>
-    <script type="text/javascript" src="js/requisiciones.js?v.hnvghg19"></script>
+    <script type="text/javascript" src="js/requisiciones.js?v.hnvghg199o"></script>
 
 </asp:Content>
