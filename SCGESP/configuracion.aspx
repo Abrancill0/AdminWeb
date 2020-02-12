@@ -18,12 +18,13 @@
                     <ul>
                         <li><a href="#tabVoBo">Revisar Informe</a></li>
                         <li><a href="#tabAutorizadores">Autorizadores de Requisiciones de Viaje</a></li>
+                        <li><a href="#tabGenerarGastoAjuste">Generar Gasto Por ajuste</a></li>
                     </ul>
                     <div id="tabVoBo">
                         <div class="panel panel-default">
                             <div class="panel-heading">Usuario que Revisa</div>
                             <div class="panel-body">
-                                <table width="100%">
+                                <table width="50%">
                                     <tr>
                                         <td>Usuario:</td>
                                         <td colspan="3">
@@ -120,6 +121,35 @@
                         </table>
 
                     </div>
+                    <div id="tabGenerarGastoAjuste">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Generar gasto por ajuste en informes</div>
+                            <div class="panel-body">
+                                <table width="25%">
+                                    <tr>
+                                        <td>Gasto Automático:</td>
+                                        <td>
+                                            <label class='custom-control custom-checkbox'>
+                                                <input type='checkbox' id='ChkGastoAutomaticoPorAjuste' class='custom-control-input'>
+                                                <span class='custom-control-indicator'></span>
+                                            </label>
+                                        </td>
+                                    </tr>
+									<tr>
+										<td>Importe menor o igual:</td>
+                                        <td>
+                                            <input type="number" id='importemenorigual' name='importemenorigual' min="0" max="1000000" step="1" class='form-control' placeholder="0.00" />
+                                        </td>
+									</tr>
+                                    <tr>
+                                        <td colspan="2" style="text-align:right">
+                                            <button id="btnGuardaToleraciaInforme" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-saved"></span>Guardar</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -130,11 +160,69 @@
     <!-- App functions and actions -->
     <script type="text/javascript" src="js/app.min.js"></script>
     <script type="text/javascript" src="js/js.js"></script>
-    <script type="text/javascript" src="js/vobo.js?111111111"></script>
-    <script type="text/javascript" src="js/usuariosAutInforme.js?kjh"></script>
+    <script type="text/javascript" src="js/vobo.js?v.1"></script>
+    <script type="text/javascript" src="js/usuariosAutInforme.js?v.1"></script>
 
     <script type="text/javascript">
-        $("#tabsConfiguracion").tabs()
+		$("#tabsConfiguracion").tabs()
+		SelectConfigGastoAutomaticoAjuste();
+		function SelectConfigGastoAutomaticoAjuste() {
+			var datos = {
+				"Accion": "seleccionar"
+			};
+			$.ajax({
+				async: false,
+				type: 'POST',
+				url: '/api/ConfigGastoAutomaticoAjuste',
+				data: JSON.stringify(datos),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
+				beforeSend: function () {
+					//cargando();
+				},
+				success: function (result) {
+					$("#ChkGastoAutomaticoPorAjuste").attr("checked", result.GenerarGastoAjuste);
+					$("#importemenorigual").val(result.ToleranciaInformeMenorIgual);
+				},
+				error: function (result) {
+					console.log(result);
+				}
+			});
+		}
+		$("#btnGuardaToleraciaInforme").click(function () {
+			ActualizarConfigGastoAutomaticoAjuste();
+		});
+		function ActualizarConfigGastoAutomaticoAjuste() {
+			var datos = {
+				"Accion": "actualizar",
+				"ToleranciaInformeMenorIgual": $("#importemenorigual").val() * 1,
+				"GenerarGastoAjuste": $("#ChkGastoAutomaticoPorAjuste").is(":checked")
+			};
+			$.ajax({
+				async: false,
+				type: 'POST',
+				url: '/api/ConfigGastoAutomaticoAjuste',
+				data: JSON.stringify(datos),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
+				beforeSend: function () {
+					//cargando();
+				},
+				success: function (result) {
+					if (result.Ok) {
+						$("#ChkGastoAutomaticoPorAjuste").attr("checked", result.GenerarGastoAjuste);
+						$("#importemenorigual").val(result.ToleranciaInformeMenorIgual);
+						$.notify(result.Mensaje, { globalPosition: 'top center', className: 'success' });
+					} else {
+						$.notify(result.Mensaje, { globalPosition: 'top center', className: 'error' });
+					}
+				},
+				error: function (result) {
+					console.log(result);
+				}
+			});
+		}
+
     </script>
 
 </asp:Content>

@@ -5047,6 +5047,7 @@
     <Compile Include="Controllers\CGEAPI\CargaMasivaXMLAdminERPController.cs" />
     <Compile Include="Controllers\CGEAPI\CatalogoVoBo\ActualizaConfVoBoController.cs" />
     <Compile Include="Controllers\CGEAPI\CatalogoVoBo\ConsultaConfVoBoController.cs" />
+    <Compile Include="Controllers\CGEAPI\ConfigGastoAutomaticoAjusteController.cs" />
     <Compile Include="Controllers\CGEAPI\Confrontacion\CargarExcelBancoClosedXMLController.cs" />
     <Compile Include="Controllers\CGEAPI\Confrontacion\CargarExcelBancoController.cs" />
     <Compile Include="Controllers\CGEAPI\Confrontacion\ConfrontarGastoInformeController.cs" />

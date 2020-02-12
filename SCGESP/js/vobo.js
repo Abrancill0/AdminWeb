@@ -28,7 +28,7 @@ function SelectVoBo() {
             cargado();
         },
         success: function (result) {
-            console.log("success", result);
+            //console.log("success", result);
             var resultado = result[0];
 
             if (resultado.ValorDefault === 1) {

@@ -66,10 +66,17 @@ namespace SCGESP.Controllers
 			public string bandeja_usuario { get; set; }
 			public string a_fsolicitud { get; set; }
 
-
+			public bool GenerarGastoAjuste { get; set; }
+			public decimal ToleranciaInformeMenorIgual { get; set; }
 		}
 
-        public class datos
+		public class ConfiGastoAutomatico
+		{
+			public bool GenerarGastoAjuste { get; set; }
+			public decimal ToleranciaInformeMenorIgual { get; set; }
+		}
+
+		public class datos
         {
             public int id { get; set; }
         }
@@ -106,6 +113,7 @@ namespace SCGESP.Controllers
                 string FechaInicio = "";
                 string FechaFin = "";
 				string FechaSolicitudAut = "";
+				ConfiGastoAutomatico ConfiGAutomatico = SelConfiGastoAutomatico();
 				foreach (DataRow row in DT.Rows)
                 {
 
@@ -182,7 +190,10 @@ namespace SCGESP.Controllers
 						idinforme_2 = Convert.ToInt16(row["idinforme_2"]),
 						autorizador_final = Convert.ToInt16(row["autorizador_final"]),
 						bandeja_usuario = Convert.ToString(row["bandeja_usuario"]),
-						a_fsolicitud = Convert.ToString(FechaSolicitudAut)
+						a_fsolicitud = Convert.ToString(FechaSolicitudAut),
+						GenerarGastoAjuste = ConfiGAutomatico.GenerarGastoAjuste,
+						ToleranciaInformeMenorIgual = ConfiGAutomatico.ToleranciaInformeMenorIgual
+
 					};
 
                     lista.Add(ent);
@@ -196,5 +207,39 @@ namespace SCGESP.Controllers
             }
         }
 
-    }
+		private ConfiGastoAutomatico SelConfiGastoAutomatico()
+		{
+			ConfiGastoAutomatico Resultado = new ConfiGastoAutomatico()
+			{
+				GenerarGastoAjuste = false,
+				ToleranciaInformeMenorIgual = 0
+			};
+			try
+			{
+				SqlDataAdapter DA;
+				DataTable DT = new DataTable();
+
+				SqlConnection Conexion = new SqlConnection
+				{
+					ConnectionString = VariablesGlobales.CadenaConexion
+				};
+				string consulta = "SELECT TOP(1) c_generar_gasto_ajuste, c_tolerancia_informe_menor_igual " +
+								  "FROM configuracion; ";
+
+				DA = new SqlDataAdapter(consulta, Conexion);
+				DA.Fill(DT);
+				if (DT.Rows.Count > 0)
+				{
+					DataRow row = DT.Rows[0];
+					Resultado.GenerarGastoAjuste = Convert.ToInt16(row["c_generar_gasto_ajuste"] is DBNull ? 0 : row["c_generar_gasto_ajuste"]) > 0 ? true : false;
+					Resultado.ToleranciaInformeMenorIgual = Convert.ToDecimal(row["c_tolerancia_informe_menor_igual"] is DBNull ? 0 : row["c_tolerancia_informe_menor_igual"]);
+				}
+				return Resultado;
+			}
+			catch (Exception)
+			{
+				return Resultado;
+			}
+		}
+	}
 }

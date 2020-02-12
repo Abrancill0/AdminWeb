@@ -12,10 +12,9 @@ $(function () {
 
 function cargaInicialUsuarios() {
     tabla = crearTabla("#tblUsuarios", 4, "asc");
-    ObtenerCatalogoUsuarios();
 }
 
-$("#refreshTbl").click(function () {
+$("#refreshTbl, [href='#tabAutorizadores']").click(function () {
     ObtenerCatalogoUsuarios();
 });
 
