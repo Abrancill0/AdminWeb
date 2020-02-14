@@ -394,7 +394,8 @@ namespace SCGESP.Controllers.CGEAPI
 										"g_dirotros = '" + dirIMGAd + "' " +
 										"WHERE g_idinforme = " + resultado.IdInforme + " AND " + 
 											"g_idgorigen = " + resultado.IdGastoOrigen + " AND " + 
-											"g_id = " + resultado.IdGasto + ";";
+											"g_id = " + resultado.IdGasto + "; " +
+										"EXEC UpdateTotalInforme " + resultado.IdInforme + ";";
 									DA = new SqlDataAdapter(consulta, VariablesGlobales.CadenaConexion);
 									DA.Fill(DT);
 								}
