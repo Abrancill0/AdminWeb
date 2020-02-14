@@ -68,8 +68,8 @@ namespace SCGESP.Controllers.CGEAPI
 
         public ListResult PostAgregaAjuste(Parametros Datos)
         {
-
-            ListResult resultado = new ListResult();
+			string msnRespuesta = "";
+			ListResult resultado = new ListResult();
             try
             {
                 ListResultArchivo archivo = new ListResultArchivo();
@@ -104,8 +104,15 @@ namespace SCGESP.Controllers.CGEAPI
                     }
                     else
                     {
-                        resultado.AgregadoOk = false;
-                        resultado.Descripcion = (Datos.Tipo == 1 ? "Gasto Adicinal / Propina NO Agregada al Gasto." : "Comprobante (CFDI) adicional NO agregado. ") + (archivo.Descripcion ?? " Error al cargar archivo");
+						if (Datos.Tipo == 1)
+							msnRespuesta = "Gasto Adicinal / Propina NO Agregada al Gasto. ";
+						else if (Datos.Tipo == 2)
+							msnRespuesta = "Comprobante (CFDI) adicional NO agregado. " +(archivo.Descripcion ?? " Error al cargar archivo");
+						else if (Datos.Tipo == 3)
+							msnRespuesta = "Gasto por ajuste NO agregado. ";
+
+						resultado.AgregadoOk = false;
+                        resultado.Descripcion = msnRespuesta;
                         resultado.IdInforme = Datos.IdInforme;
                         resultado.IdGasto = Datos.IdGasto;
                         resultado.IdGastoOrigen = Datos.IdGasto;
@@ -265,7 +272,15 @@ namespace SCGESP.Controllers.CGEAPI
 													Deletexml(urlXML);
 												}
 												resultado.AgregadoOk = false;
-												resultado.Descripcion = (Datos.Tipo == 1 ? "Gasto Adicinal / Propina NO Agregada al Gasto. " : "Comprobante (CFDI) adicional NO agregado. ") + msnError;
+												
+												if (Datos.Tipo == 1)
+													msnRespuesta = "Gasto Adicinal / Propina NO Agregada al Gasto. ";
+												else if (Datos.Tipo == 2)
+													msnRespuesta = "Comprobante (CFDI) adicional NO agregado. ";
+												else if (Datos.Tipo == 3)
+													msnRespuesta = "Gasto por ajuste NO agregado. ";
+
+												resultado.Descripcion = msnRespuesta + msnError;
 												resultado.IdInforme = Convert.ToInt16(row["idinforme"]);
 												resultado.IdGasto = Convert.ToInt16(row["idgasto"]);
 												resultado.IdGastoOrigen = Convert.ToInt16(row["idgastoorigen"]);
@@ -297,8 +312,16 @@ namespace SCGESP.Controllers.CGEAPI
 
 											}
 											else {
+
+												if (Datos.Tipo == 1)
+													msnRespuesta = "Gasto Adicinal / Propina Agregada al Gasto. ";
+												else if (Datos.Tipo == 2)
+													msnRespuesta = "Comprobante (CFDI) adicional agregado. ";
+												else if (Datos.Tipo == 3)
+													msnRespuesta = "Gasto por ajuste agregado al gasto. ";
+
 												resultado.AgregadoOk = true;
-												resultado.Descripcion = Datos.Tipo == 1 ? "Gasto Adicinal / Propina Agregada al Gasto. " : "Comprobante (CFDI) adicional agregado. ";
+												resultado.Descripcion = msnRespuesta;
 												resultado.IdInforme = Convert.ToInt16(row["idinforme"]);
 												resultado.IdGasto = Convert.ToInt16(row["idgasto"]);
 												resultado.IdGastoOrigen = Convert.ToInt16(row["idgastoorigen"]);
@@ -311,8 +334,15 @@ namespace SCGESP.Controllers.CGEAPI
 										}
 									}
 									else {
+										if (Datos.Tipo == 1)
+											msnRespuesta = "Gasto Adicinal / Propina Agregada al Gasto. ";
+										else if (Datos.Tipo == 2)
+											msnRespuesta = "Comprobante (CFDI) adicional agregado. ";
+										else if (Datos.Tipo == 3)
+											msnRespuesta = "Gasto por ajuste agregado al gasto. ";
+
 										resultado.AgregadoOk = true;
-										resultado.Descripcion = Datos.Tipo == 1 ? "Gasto Adicinal / Propina Agregada al Gasto. " : "Comprobante (CFDI) adicional agregado. ";
+										resultado.Descripcion = msnRespuesta;
 										resultado.IdInforme = Convert.ToInt16(row["idinforme"]);
 										resultado.IdGasto = Convert.ToInt16(row["idgasto"]);
 										resultado.IdGastoOrigen = Convert.ToInt16(row["idgastoorigen"]);
@@ -320,7 +350,15 @@ namespace SCGESP.Controllers.CGEAPI
 								}
 								else {
 									resultado.AgregadoOk = true;
-									resultado.Descripcion = Datos.Tipo == 1 ? "Gasto Adicinal / Propina Agregada al Gasto. " : "Comprobante (CFDI) adicional agregado. ";
+
+									if (Datos.Tipo == 1)
+										msnRespuesta = "Gasto Adicinal / Propina Agregada al Gasto. ";
+									else if (Datos.Tipo == 2)
+										msnRespuesta = "Comprobante (CFDI) adicional agregado. ";
+									else if (Datos.Tipo == 3)
+										msnRespuesta = "Gasto por ajuste agregado al gasto. ";
+
+									resultado.Descripcion = msnRespuesta;
 									resultado.IdInforme = Convert.ToInt16(row["idinforme"]);
 									resultado.IdGasto = Convert.ToInt16(row["idgasto"]);
 									resultado.IdGastoOrigen = Convert.ToInt16(row["idgastoorigen"]);
@@ -362,8 +400,15 @@ namespace SCGESP.Controllers.CGEAPI
 								}
                             }
                             else {
-                                resultado.AgregadoOk = false;
-                                resultado.Descripcion = Datos.Tipo == 1 ? "Gasto Adicinal / Propina NO Agregada al Gasto. " : "Comprobante (CFDI) adicional NO agregado. ";
+								if (Datos.Tipo == 1)
+									msnRespuesta = "Gasto Adicinal / Propina NO Agregada al Gasto. ";
+								else if (Datos.Tipo == 2)
+									msnRespuesta = "Comprobante (CFDI) adicional NO agregado. ";
+								else if (Datos.Tipo == 3)
+									msnRespuesta = "Gasto por ajuste NO agregado al gasto. ";
+
+								resultado.AgregadoOk = false;
+                                resultado.Descripcion = msnRespuesta;
 
                                 if (Datos.Tipo == 2)
                                 {
@@ -415,7 +460,15 @@ namespace SCGESP.Controllers.CGEAPI
                         if (urlXML != "")
                             Deletexml(urlXML);
                     }
-                    resultado.Descripcion = Datos.Tipo == 1 ? "Gasto Adicinal / Propina NO Agregada al Gasto" : "Comprobante (CFDI) adicional NO agregado.";
+
+					if (Datos.Tipo == 1)
+						msnRespuesta = "Gasto Adicinal / Propina NO Agregada al Gasto. ";
+					else if (Datos.Tipo == 2)
+						msnRespuesta = "Comprobante (CFDI) adicional NO agregado. ";
+					else if (Datos.Tipo == 3)
+						msnRespuesta = "Gasto por ajuste NO agregado al gasto. ";
+
+					resultado.Descripcion = msnRespuesta;
                     resultado.IdInforme = Datos.IdInforme;
                     resultado.IdGasto = Datos.IdGasto;
                     resultado.IdGastoOrigen = Datos.IdGasto;
@@ -424,8 +477,15 @@ namespace SCGESP.Controllers.CGEAPI
             catch (Exception err)
             {
                 string error = "Error: " + err.ToString();
-                resultado.AgregadoOk = false;
-                resultado.Descripcion = (Datos.Tipo == 1 ? "Gasto Adicinal / Propina NO Agregada al Gasto. " : "Comprobante (CFDI) adicional NO agregado. ") + error;
+				if (Datos.Tipo == 1)
+					msnRespuesta = "Gasto Adicinal / Propina NO Agregada al Gasto. ";
+				else if (Datos.Tipo == 2)
+					msnRespuesta = "Comprobante (CFDI) adicional NO agregado. ";
+				else if (Datos.Tipo == 3)
+					msnRespuesta = "Gasto por ajuste NO agregado al gasto. ";
+
+				resultado.AgregadoOk = false;
+                resultado.Descripcion = msnRespuesta + error;
                 resultado.IdInforme = Datos.IdInforme;
                 resultado.IdGasto = Datos.IdGasto;
                 resultado.IdGastoOrigen = Datos.IdGasto;
@@ -577,7 +637,7 @@ namespace SCGESP.Controllers.CGEAPI
                             while (reader.MoveToNextAttribute())
                             { // Read the attributes.
 
-                                if (reader.Name == "total" || reader.Name == "Total")
+                                if ((reader.Name == "total" || reader.Name == "Total") && Total <= 0)
                                 {
                                     Total = Convert.ToDouble(reader.Value);
                                 }

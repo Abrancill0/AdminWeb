@@ -3643,14 +3643,103 @@
 
 		}
 
+		function ConsultarDiferenciaValXMLvsGasto(IdInforme) {
+			var datos = {
+				"IdInforme": IdInforme
+			};
+			var resultado = {};
+			$.ajax({
+				async: false,
+				type: 'POST',
+				url: '/api/SelectAplicaGastoPorAjuste',
+				data: JSON.stringify(datos),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
+				beforeSend: function () {
+					//cargando();
+				},
+				success: function (result) {
+					resultado = result;
+				},
+				error: function (result) {
+					console.log(result);
+				}
+			});
+			return resultado;
+		}
+		function AgregarGastosPorAjusteAutomatico(Gastos) {
+			var ok = false;
+			var ngastos = Gastos.length * 1;
+			var gagregados = 0;
+			$.each(Gastos, function (key, gasto) {
+				ok = agregaAjusteAutomaticoGasato(gasto);
+				gagregados += ok ? 1 : 0;
+			});
+
+			if (gagregados === ngastos) {
+				$.notify("Se agregaron " + gagregados + " gasto(s) por ajuste.", { globalPosition: 'top center', className: 'success' });
+			} else {
+				if (gagregados === 0)
+					$.notify("Gastos por ajuste NO agregados", { globalPosition: 'top center', className: 'error', autoHideDelay: 6000 });
+				else if (gagregados !== ngastos) {
+					$.notify("Se agregaron " + gagregados + " gasto(s) por ajuste.", { globalPosition: 'top center', className: 'success' });
+					$.notify((ngastos - gagregados) + " Gastos no agregados.", { globalPosition: 'top center', className: 'error' });
+
+				}
+			}
+			
+		}
+		function agregaAjusteAutomaticoGasato(datos) {
+			var resultado = false;
+			$.ajax({
+				async: false,
+				type: "POST",
+				url: "/api/AgregarAjusteGasto",
+				data: JSON.stringify(datos),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
+				success: function (result) {
+					resultado = result;
+				},
+				complete: function () {
+				},
+				error: function (result) {
+					$.notify("Error al agregar.", { globalPosition: 'top center', className: 'error' });
+				}
+			});
+			return resultado.AgregadoOk
+		}
+
 		//confrontación
 		$("#aconfrontar").click(function () {
-			//if ($("#tabsConfrontar").tabs()) {
-			//  $("#tabsConfrontar").tabs("destroy").tabs();
-			//}
+
 			var IdInforme = $("#idinforme").val() * 1;
+			var GastosConDiferencia = ConsultarDiferenciaValXMLvsGasto(IdInforme);
+			
+			if (GastosConDiferencia.Ok) {
+				var botones = [];
+				botones[0] = {
+					text: "Si", click: function () {
+						$(this).dialog("close");
+						AgregarGastosPorAjusteAutomatico(GastosConDiferencia.Gastos);
+						EjecutarAbrirModalConfrontar(IdInforme);
+					}
+				};
+				botones[1] = {
+					text: "No", click: function () {
+						$(this).dialog("close");
+						EjecutarAbrirModalConfrontar(IdInforme);
+					}
+				};
+				Seguridad.confirmar("Existen gastos con diferencia en el importe gastado y comprobado por un valor de: <b>" + formatNumber.new(GastosConDiferencia.TotalDiferencia, "$ ") +
+				"</b><br />Desea agregar los movmientos de ajuste antes de confrontar?", botones, " Ajustar monto comprobado.", "");
+			} else {
+				EjecutarAbrirModalConfrontar(IdInforme);
+			}			
+		});
+
+		function EjecutarAbrirModalConfrontar(IdInforme) {
 			var valida = validaExistenComprobantes();
-			console.log(valida);
 			var disAnticipo = $("#disAnticipo").val() * 1;
 			var errorJustificacion = ValidarJustificacion();
 
@@ -3747,8 +3836,8 @@
 			BuscarMovBancariosParaConfrontar(tarjeta);
 			$("label[for='filebanco']").attr("class", "btn btn-success waves-effect");
 			$("label[for='filebanco'] span.buttonText").empty().append("&nbsp; Cargar Movimientos*");
+		}
 
-		});
 		$("#importede, #importea").change(function () {
 			//BuscarMovBancariosParaConfrontar("");
 		});
@@ -4096,9 +4185,12 @@
 				dataType: 'json',
 				cache: false,
 				beforeSend: function () {
-					var ocultarModal = $('#confrontacion').is(':visible');
-					if (ocultarModal)
-						$("#confrontacion").modal("hide");
+					setTimeout(function () {
+						var ocultarModal = $('#confrontacion').is(':visible');
+						if (ocultarModal)
+							$("#confrontacion").modal("hide");
+					}, 500);
+
 				},
 				success: function (result) {
 					var tipomsn = result.RelacionOk === true ? "success" : "error";
@@ -4109,6 +4201,7 @@
 					BuscarMovBancariosParaConfrontar(datos.Tarjeta);
 				},
 				error: function (result) {
+					cargado();
 				}
 			});
 		}

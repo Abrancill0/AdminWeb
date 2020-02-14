@@ -5088,6 +5088,7 @@
     <Compile Include="Controllers\CGEAPI\rep_informes_estatusController.cs" />
     <Compile Include="Controllers\CGEAPI\RotarImagenController.cs" />
     <Compile Include="Controllers\CGEAPI\SaveDatosAdicionalesGastoController.cs" />
+    <Compile Include="Controllers\CGEAPI\SelectAplicaGastoPorAjusteController.cs" />
     <Compile Include="Controllers\CGEAPI\SelectCategoriasController.cs" />
     <Compile Include="Controllers\CGEAPI\SelectEstatusInformeController.cs" />
     <Compile Include="Controllers\CGEAPI\SelectInformeController.cs" />

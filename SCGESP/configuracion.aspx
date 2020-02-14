@@ -18,7 +18,7 @@
                     <ul>
                         <li><a href="#tabVoBo">Revisar Informe</a></li>
                         <li><a href="#tabAutorizadores">Autorizadores de Requisiciones de Viaje</a></li>
-                        <li><a href="#tabGenerarGastoAjuste">Generar Gasto Por ajuste</a></li>
+                        <li><a href="#tabGenerarGastoAjuste">Generar Gasto Por Ajuste</a></li>
                     </ul>
                     <div id="tabVoBo">
                         <div class="panel panel-default">
