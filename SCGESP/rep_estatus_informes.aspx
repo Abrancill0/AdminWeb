@@ -502,7 +502,7 @@
 			}
 		);
 		$("#btn-consultar").click(function () {
-			consultarInformes();
+			//consultarInformes();
 		});
 
 		selectUsuarios();

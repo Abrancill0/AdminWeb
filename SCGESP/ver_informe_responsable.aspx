@@ -3714,7 +3714,9 @@
 		$("#aconfrontar").click(function () {
 
 			var IdInforme = $("#idinforme").val() * 1;
-			var GastosConDiferencia = ConsultarDiferenciaValXMLvsGasto(IdInforme);
+			var GastosConDiferencia = {
+				Ok: false
+			};//ConsultarDiferenciaValXMLvsGasto(IdInforme);
 			
 			if (GastosConDiferencia.Ok) {
 				var botones = [];

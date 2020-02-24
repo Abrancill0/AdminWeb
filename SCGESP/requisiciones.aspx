@@ -135,7 +135,7 @@
                                                 </td>
                                             </tr>
 
-                                            <tr>
+                                            <tr class="d-none">
                                                 <td>Solicitante:</td>
                                                 <td colspan="5" id="tdSolicitante">
                                                     <span class="textotd"></span>
