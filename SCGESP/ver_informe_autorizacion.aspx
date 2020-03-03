@@ -563,7 +563,7 @@
 				<tr>
 					<td style="width: 180px">Requisici&oacute;n:</td>
 					<td>
-						<table style="width: 250px">
+						<table>
 							<tr>
 								<td style="width: 80px">
 									<p class="valor">{{ r_idrequisicion }}</p>
@@ -591,7 +591,7 @@
 				<tr>
 					<td>Inicio:</td>
 					<td>
-						<table style="width: 250px">
+						<table>
 							<tr>
 								<td style="width: 80px">
 									<p class="valor">{{ del }}</p>
@@ -688,6 +688,12 @@
 						<p class="valor">{{ e_estatus }} / {{ bandeja_usuario }} / {{ a_fsolicitud }}</p>
 					</td>
 				</tr>
+				<tr>
+				<td>Est.<span style="color: #ffffff;">_</span>Requisición:</td>
+				<td>
+					<p class="valor">{{ EstatusReq }}</p>
+				</td>
+			</tr>
 			</table>
 		</script>
 		<!--Importes informe-->
@@ -707,26 +713,26 @@
 				<tr>
 					<td class="concepto-importe">Autorizado: </td>
 					<td>
-						<span style='font-size: 16px; display: block;' class='label label-primary text-right'>{{ montoRequisicion }}
+						<span style='font-size: 16px; display: block; background-color: #007aff !important;' class='label label-primary text-right'>{{ montoRequisicion }}
 						</span>
 					</td>
 				</tr>
 				<tr>
 					<td class="concepto-importe">Gastado: </td>
 					<td>
-						<span style='font-size: 16px; display: block;' class='label label-danger text-right'>{{ montoGastado }}
+						<span style='font-size: 16px; display: block; background-color: #ffa000 !important;' class='label label-danger text-right'>{{ montoGastado }}
 						</span></td>
 				</tr>
 				<tr>
 					<td class="concepto-importe">Por Comprobar: </td>
 					<td>
-						<span style='font-size: 16px; display: block;' class='label label-success text-right'>{{ disponible }}
+						<span style='font-size: 16px; display: block; background-color: transparent !important; color: #000;' class='label label-success text-right'>{{ disponible }}
 						</span>
 					</td>
 				</tr>
 				<tr>
 					<td class="concepto-importe">Decrementado: </td>
-					<td><span style='font-size: 16px; display: block;' class='label label-warning text-right'>{{ decrementado }}
+					<td><span style='font-size: 16px; display: block; background-color: transparent !important; color: #000;' class='label label-warning text-right'>{{ decrementado }}
 					</span></td>
 				</tr>
 			</table>
@@ -942,6 +948,7 @@
 					informe.esSesion = esSesion;
 					informe.esViaje = esViaje;
 					informe.esOtros = esOtros;
+					informe.EstatusReq = requisicion.RmReqEstatusNombre;
 
 					$('#cabeceraInforme').append(cabeceraInformeTemplate(informe));
 

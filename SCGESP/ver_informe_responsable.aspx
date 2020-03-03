@@ -162,15 +162,16 @@
 					</div>
 					<div class="card-block" style="margin: 0px; padding: 2px;">
 						<div class="row">
-							<div id="cabeceraInforme" class="col-xs-12 col-md-6 col-lg-8">
+							<div id="cabeceraInforme" class="col col-xs-12 col-md-6 col-lg-8">
 								<!--informe-cabecera-template-->
 							</div>
 
-							<div id="importesInforme" class="col-md-6 col-lg-4">
+							<div id="importesInforme" class="col col-md-6 col-lg-4">
 								<!--importes-informe-template-->
 							</div>
 						</div>
 						<div class="row" style="padding: 0px 5px;">
+							<div class="col col-md-12">
 							<table id="tblGastos" class="tblGastos display nowrap" cellspacing="0" data-page-length="-1">
 								<thead>
 									<tr>
@@ -195,6 +196,7 @@
 								<tfoot>
 								</tfoot>
 							</table>
+								</div>
 						</div>
 					</div>
 				</div>
@@ -870,9 +872,9 @@
 
 		<table id="tblCabeceraInforme" class="filtro text-left" style="text-align: left;" border="1">
 			<tr>
-				<td style="width: 150px">Requisici&oacute;n:</td>
+				<td style="width: 150px !important;">Requisici&oacute;n:</td>
 				<td>
-					<table style="width: 250px">
+					<table>
 						<tr>
 							<td style="width: 80px">
 								<p class="valor">{{ r_idrequisicion }}</p>
@@ -900,7 +902,7 @@
 			<tr>
 				<td>Inicio:</td>
 				<td>
-					<table style="width: 250px">
+					<table>
 						<tr>
 							<td style="width: 80px">
 								<p class="valor">{{ del }}</p>
@@ -963,6 +965,13 @@
 				<td>Estatus:</td>
 				<td>
 					<p class="valor">{{ e_estatus }} / {{ bandeja_usuario }} / {{ a_fsolicitud }}</p>
+				</td>
+			</tr>
+
+			<tr>
+				<td>Est.<span style="color: #ffffff;">_</span>Requisición:</td>
+				<td>
+					<p class="valor">{{ EstatusReq }}</p>
 				</td>
 			</tr>
 		</table>
@@ -1231,6 +1240,7 @@
 					informe.esSesion = esSesion;
 					informe.esViaje = esViaje;
 					informe.esOtros = esOtros;
+					informe.EstatusReq = requisicion.RmReqEstatusNombre;
 
 					$('#cabeceraInforme').empty();
 					$('#cabeceraInforme').append(cabeceraInformeTemplate(informe));
@@ -1340,7 +1350,7 @@
 							btnEliminar = false;
 						}
 
-						if (ConfBanco === 1 && nmbEstatus === "Rechazado") {
+						if (ConfBanco === 1 && nmbEstatus.indexOf("Rechazado") > -1) { //nmbEstatus === "Rechazado") {
 							btnEditar = true;
 							btnEliminar = false;
 						}
@@ -2130,7 +2140,7 @@
 			$("#monto").attr("max", (gasto.num_monto + disponible).toFixed(2));
 			$("#monto").attr("valueOld", gasto.num_monto);
 
-			if (ConfBanco === 1 && nmbEstatus === "Rechazado") {
+			if (ConfBanco === 1 && nmbEstatus.indexOf("Rechazado") > -1) {//nmbEstatus === "Rechazado") {
 				$("#monto").addClass("disabled")
 					.attr("disabled", true);
 				$("#file_comprobantes").hide();

@@ -95,7 +95,8 @@ function ObtenerInformes() {
         "estatus": 0,
         "uresponsable": UsuarioActivo,
         "uconsulta": UsuarioActivo,
-        "empleadoactivo": EmpeladoActivo
+        "empleadoactivo": EmpeladoActivo,
+        "ExcluirEstatusReq": "Contabilizada"
     };
 
     $('#tblProyectos tbody').empty();

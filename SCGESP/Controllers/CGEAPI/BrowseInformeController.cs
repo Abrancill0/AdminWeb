@@ -19,8 +19,9 @@ namespace SCGESP.Controllers
             public string uresponsable { get; set; }
             public int idempresa { get; set; }
             public string uconsulta { get; set; }
-            public string empleadoactivo { get; set; }
-        }
+			public string empleadoactivo { get; set; }
+			public string ExcluirEstatusReq { get; set; }
+		}
 
         public class ObtieneInformeResult
         {
@@ -88,12 +89,12 @@ namespace SCGESP.Controllers
 
             entrada.agregaElemento("RmReqSolicitante", Convert.ToInt32(EmpleadoDesencripta));
             entrada.agregaElemento("proceso", 9);
+			
+			//entrada.agregaElemento("RmReqTipoRequisicion", Convert.ToInt32(99));
+			//entrada.agregaElemento("RmReqEstatus", Convert.ToInt32(51));
 
-            //entrada.agregaElemento("RmReqTipoRequisicion", Convert.ToInt32(99));
-            //entrada.agregaElemento("RmReqEstatus", Convert.ToInt32(51));
 
-
-            DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
+			DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
             
             try
             {
@@ -244,7 +245,16 @@ namespace SCGESP.Controllers
                     }
 
                 }
-                return ObtieneInformesActuales(Datos.estatus, UsuarioDesencripta);
+
+				DocumentoSalida Requisiciones = BrowseRequisiciones(UsuarioDesencripta, Convert.ToInt32(EmpleadoDesencripta));
+				DataTable DTRequisiciones2;
+				if (Requisiciones.Resultado == "1")
+					DTRequisiciones2 = Requisiciones.obtieneTabla("Catalogo");
+				else
+					DTRequisiciones2 = DTRequisiciones;
+				
+				
+				return ObtieneInformesActuales(Datos.estatus, UsuarioDesencripta, DTRequisiciones2, Datos.ExcluirEstatusReq);
 
                 //}
                 //else
@@ -274,7 +284,7 @@ namespace SCGESP.Controllers
             return new DocumentoSalida(respuesta);
         }
 
-        public List<ObtieneInformeResult> ObtieneInformesActuales(int status,string usuario)
+        public List<ObtieneInformeResult> ObtieneInformesActuales(int status, string usuario, DataTable DTRequisiciones, string ExcluirEstatusReq)
         {
             SqlCommand comando = new SqlCommand("BrowseInforme");
             comando.CommandType = CommandType.StoredProcedure;
@@ -333,8 +343,8 @@ namespace SCGESP.Controllers
                         FechaFin = "";
                     }
 
-
-                    ObtieneInformeResult ent = new ObtieneInformeResult
+					int IdReq = Convert.ToInt32(row["r_idrequisicion"]);
+					ObtieneInformeResult ent = new ObtieneInformeResult
                     {
                         i_id = Convert.ToInt32(row["i_id"]),
                         i_ninforme = Convert.ToInt32(row["i_ninforme"]),
@@ -348,7 +358,7 @@ namespace SCGESP.Controllers
                         i_ffin = Convert.ToString(FechaFin),
                         i_total = Convert.ToDouble(row["i_total"]),
                         i_totalg = Convert.ToDouble(row["i_totalg"]),
-                        r_idrequisicion = Convert.ToInt32(row["r_idrequisicion"]),
+                        r_idrequisicion = IdReq,
                         usuconsulta = Convert.ToString(row["usuconsulta"]),
                         i_motivo = Convert.ToString(row["i_motivo"]),
                         i_notas = Convert.ToString(row["i_notas"]),
@@ -360,7 +370,43 @@ namespace SCGESP.Controllers
 						ToleranciaInformeMenorIgual = ConfiGAutomatico.ToleranciaInformeMenorIgual
 					};
 
-                    lista.Add(ent);
+					string EstatusReq = "";
+					if (DTRequisiciones.Rows.Count > 0 )
+					{
+						try
+						{
+							DataView DVRequisicion = SelecionaRequisicionId(DTRequisiciones, IdReq);
+							EstatusReq = Convert.ToString(DVRequisicion[0]["RmReqEstatusNombre"]);
+						}
+						catch (Exception)
+						{
+							EstatusReq = "";
+						}
+					}
+
+					if (ExcluirEstatusReq == "" || EstatusReq != ExcluirEstatusReq)
+					{
+						if(EstatusReq != "")
+							ent.e_estatus = ent.e_estatus + " / " + EstatusReq;
+
+						lista.Add(ent);
+					}
+					else if(ExcluirEstatusReq == "Contabilizada")
+					{
+						try
+						{
+							SqlConnection conexion = new SqlConnection(VariablesGlobales.CadenaConexion);
+							conexion.Open();
+							string consulta = "UPDATE informe SET i_estatus = 5 WHERE i_id = " + ent.i_id + ";";
+							SqlCommand cmd = new SqlCommand(consulta, conexion);
+							cmd.ExecuteNonQuery();
+							conexion.Close();
+						}
+						catch (Exception)
+						{
+							//error qry
+						}
+					}
                 }
 
                 return lista;
@@ -512,6 +558,60 @@ namespace SCGESP.Controllers
 			catch (Exception)
 			{
 				return Resultado;
+			}
+		}
+
+		private DocumentoSalida BrowseRequisiciones(string uConsulta, int IdEmpleado)
+		{
+			try
+			{
+				string fechaInicial = (DateTime.Today.Subtract(TimeSpan.FromDays(60))).ToString("dd/MM/yyyy");
+				string fechaFinal = (DateTime.Today.AddDays(30)).ToString("dd/MM/yyyy");
+				DocumentoEntrada entrada = new DocumentoEntrada
+				{
+					Usuario = uConsulta, //Datos.Usuario;  
+					Origen = "AdminWEB",  //Datos.Origen; 
+					Transaccion = 120760,
+					Operacion = 1
+				};
+				entrada.agregaElemento("FechaInicial", fechaInicial);//fechaInicial.ToString("dd/MM/yyyy")
+				entrada.agregaElemento("FechaFinal", fechaFinal);
+				if (Convert.ToInt32(IdEmpleado) > 0)
+				{
+					entrada.agregaElemento("RmReqSolicitante", Convert.ToInt32(IdEmpleado));
+				}
+
+				//
+				//entrada.agregaElemento("proceso", 9);
+
+				//entrada.agregaElemento("RmReqTipoRequisicion", Convert.ToInt32(99));
+				//entrada.agregaElemento("RmReqEstatus", Convert.ToInt32(51));
+
+
+				DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
+				return respuesta;
+			}
+			catch (Exception ex)
+			{
+
+				throw;
+			}
+		}
+
+		private DataView SelecionaRequisicionId(DataTable Requisiciones, int idrequisicion)
+		{
+			try
+			{
+				string expression = "RmReqId = " + idrequisicion;
+				DataView Requisicion = new DataView(Requisiciones)
+				{
+					RowFilter = expression
+				};
+				return Requisicion;
+			}
+			catch (Exception)
+			{
+				throw;
 			}
 		}
 	}

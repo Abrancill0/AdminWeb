@@ -27,7 +27,7 @@ namespace SCGESP.Controllers
 
             string EmpleadoDesencripta = Seguridad.DesEncriptar(Datos.Empleado);
 
-			string fechaInicial = (DateTime.Today.Subtract(TimeSpan.FromDays(60))).ToString("dd/MM/yyyy");
+			string fechaInicial = (DateTime.Today.Subtract(TimeSpan.FromDays(90))).ToString("dd/MM/yyyy");
 			string fechaFinal = (DateTime.Today.AddDays(30)).ToString("dd/MM/yyyy");
 
 			DocumentoEntrada entrada = new DocumentoEntrada();
@@ -35,8 +35,8 @@ namespace SCGESP.Controllers
             entrada.Origen = "AdminWEB";  //Datos.Origen; 
             entrada.Transaccion = 120760;
             entrada.Operacion = 1;
-            //entrada.agregaElemento("RmReqSolicitante", Convert.ToInt32(EmpleadoDesencripta));
-			entrada.agregaElemento("RmReqUsuarioAlta", UsuarioDesencripta);
+            entrada.agregaElemento("RmReqSolicitante", Convert.ToInt32(EmpleadoDesencripta));
+			//entrada.agregaElemento("RmReqUsuarioAlta", UsuarioDesencripta);
 			entrada.agregaElemento("FechaInicial", fechaInicial);//fechaInicial.ToString("dd/MM/yyyy")
 			entrada.agregaElemento("FechaFinal", fechaFinal);
 

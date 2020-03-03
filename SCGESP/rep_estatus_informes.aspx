@@ -297,7 +297,7 @@
 			<tr>
 				<td style="width: 150px">Requisici&oacute;n:</td>
 				<td>
-					<table style="width: 250px">
+					<table>
 						<tr>
 							<td style="width: 80px">
 								<p class="valor">{{ r_idrequisicion }}</p>
@@ -325,7 +325,7 @@
 			<tr>
 				<td>Inicio:</td>
 				<td>
-					<table style="width: 250px">
+					<table>
 						<tr>
 							<td style="width: 80px">
 								<p class="valor">{{ del }}</p>
@@ -388,6 +388,12 @@
 				<td>Estatus:</td>
 				<td>
 					<p class="valor">{{ e_estatus }} / {{ bandeja_usuario }} / {{ a_fsolicitud }}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>Est.<span style="color: #ffffff;">_</span>Requisición:</td>
+				<td>
+					<p class="valor">{{ EstatusReq }}</p>
 				</td>
 			</tr>
 		</table>
@@ -502,7 +508,7 @@
 			}
 		);
 		$("#btn-consultar").click(function () {
-			//consultarInformes();
+			consultarInformes();
 		});
 
 		selectUsuarios();
@@ -680,6 +686,7 @@
 					informe.esSesion = esSesion;
 					informe.esViaje = esViaje;
 					informe.esOtros = esOtros;
+					informe.EstatusReq = requisicion.RmReqEstatusNombre;
 
 					$('#cabeceraInforme').empty();
 					$('#cabeceraInforme').append(cabeceraInformeTemplate(informe));
