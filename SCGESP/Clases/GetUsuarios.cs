@@ -1,8 +1,10 @@
 ﻿using Ele.Generales;
+using FastMember;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Xml;
 
 namespace SCGESP.Clases
@@ -17,85 +19,80 @@ namespace SCGESP.Clases
 			public string IdDepartamento { get; set; }
 			public string Departamento { get; set; }
 		}
-		internal static List<Resultado> Post()
+		internal static List<Resultado> Post(int VerSoloActivos)
 		{
 			try
 			{
-				SqlDataAdapter DA;
-				DataTable DT = new DataTable();
-
-				SqlConnection Conexion = new SqlConnection
-				{
-					ConnectionString = VariablesGlobales.CadenaConexion
-				};
-
 				List<Resultado> Resultado = new List<Resultado>();
-				string query = "SELECT usuario, nombre FROM vw_usuarios_informe ORDER BY nombre ASC";
 
-				DA = new SqlDataAdapter(query, Conexion);
-				DA.Fill(DT);
+				DataTable SelUsuarios = Usuarios(VerSoloActivos);
+				DataTable SelEmpleados = Empleados();
 
-				if (DT.Rows.Count > 0)
+				//SgUsuEmpleado, SgUsuActivo
+
+				/*
+				var ListUsuariosEmpleados = (from Usu in SelUsuarios.AsEnumerable()
+									join Emp in SelEmpleados.AsEnumerable() on Convert.ToString(Usu["SgUsuEmpleado"]) equals Convert.ToString(Emp["GrEmpId"])
+									//(string)Emp["GrEmpId"] = (string)Usu["SgUsuEmpleado"]
+				select new
+									{
+										SgUsuId = (string)Usu["SgUsuId"],
+										SgUsuEmpleado = (string)Usu["SgUsuEmpleado"],
+										SgUsuNombre = (string)Usu["SgUsuNombre"],
+										SgUsuActivo = (bool)Usu["SgUsuActivo"],
+										GrEmpCentroNombre = (string)Emp["GrEmpCentroNombre"],
+										GrEmpCentro = (string)Emp["GrEmpCentro"]
+									}).ToList();
+				DataTable DTUsuariosEmpleados = new DataTable();
+				using (var reader = ObjectReader.Create(ListUsuariosEmpleados))
 				{
-					DataTable SelUsuarios = Usuarios();
-					DataTable SelEmpleados = Empleados();
-					//SgUsuEmpleado
-					foreach (DataRow row in DT.Rows)
+					DTUsuariosEmpleados.Load(reader);
+				}*/
+
+				foreach (DataRow RowUsu in SelUsuarios.Rows)
+				{
+					string usu = Convert.ToString(RowUsu["SgUsuId"]).Trim();
+					string idempleado = Convert.ToString(RowUsu["SgUsuEmpleado"]).Trim();
+					string nombre = Convert.ToString(RowUsu["SgUsuNombre"]).Trim();
+					string departamento = "";//Convert.ToString(RowUsu["GrEmpCentroNombre"]).Trim();
+					string iddepartamento = "";//Convert.ToString(RowUsu["GrEmpCentro"]).Trim();
+
+					try
 					{
-						string usu = Convert.ToString(row["usuario"]).Trim();
-						string idempleado = "";//Convert.ToString(SelUsuarios[0]["SgUsuEmpleado"]).Trim()
-						string nombre = Convert.ToString(row["nombre"]).Trim();
-						string departamento = "";
-						string iddepartamento = "";
-						try
+						if(idempleado != "")
 						{
-							if (usu != "")
-							{
-								//SgUsuEmpleado GrEmpId
-								DataView DVSelUsuarios = new DataView(SelUsuarios)
-								{
-									RowFilter = "SgUsuId = '" + usu + "'"
-								};
-								idempleado = Convert.ToString(DVSelUsuarios[0]["SgUsuEmpleado"]).Trim();
-								nombre = Convert.ToString(DVSelUsuarios[0]["SgUsuNombre"]).Trim();
-
-								DataView DVSelEmpleados = new DataView(SelEmpleados)
-								{
-									RowFilter = "GrEmpId = '" + idempleado + "'"
-								};
-								departamento = Convert.ToString(DVSelEmpleados[0]["GrEmpCentroNombre"]).Trim();
-								iddepartamento = Convert.ToString(DVSelEmpleados[0]["GrEmpCentro"]).Trim();
-							}
+							DataTable Emp = SelEmpleados.AsEnumerable()
+								.Where(w => Convert.ToString(w["GrEmpId"]) == idempleado)
+								.CopyToDataTable();
+							departamento = Convert.ToString(Emp.Rows[0]["GrEmpCentroNombre"]).Trim();
+							iddepartamento = Convert.ToString(Emp.Rows[0]["GrEmpCentro"]).Trim();
 						}
-						catch (Exception ex)
-						{
-							var er = ex;
-						}
-
-						Resultado ent = new Resultado
-						{
-							Usuario = usu,
-							IdEmpleado = idempleado,
-							Nombre = nombre,
-							IdDepartamento = iddepartamento,
-							Departamento = departamento
-						};
-						Resultado.Add(ent);
 					}
-					return Resultado;
+					catch (Exception ex)
+					{
+						throw;
+					}
+
+					Resultado ent = new Resultado
+					{
+						Usuario = usu,
+						IdEmpleado = idempleado,
+						Nombre = nombre,
+						IdDepartamento = iddepartamento,
+						Departamento = departamento
+					};
+					Resultado.Add(ent);
 				}
-				else
-				{
-					return null;
-				}
+				return Resultado;
+
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
 
 				return null;
 			}
 		}
-		private static DataTable Usuarios()
+		private static DataTable Usuarios(int VerSoloActivos)
 		{
 			DocumentoEntrada entrada = new DocumentoEntrada
 			{
@@ -109,7 +106,17 @@ namespace SCGESP.Clases
 			DataTable DTUsuarios = new DataTable();
 			if (respuesta.Resultado == "1")
 			{
-				DTUsuarios = respuesta.obtieneTabla("Catalogo");
+				DataTable DTUsuarios1 = respuesta.obtieneTabla("Catalogo");
+				if (VerSoloActivos == 1)
+				{
+					DTUsuarios = DTUsuarios1.AsEnumerable()
+						.Where(w => Convert.ToString(w["SgUsuActivo"]) == "True")
+						.CopyToDataTable();
+				}
+				else
+				{
+					DTUsuarios = DTUsuarios1;
+				}
 			}
 			//DataView DVUsuarios = new DataView(DTUsuarios);
 			return DTUsuarios;

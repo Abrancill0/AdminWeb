@@ -87,7 +87,7 @@ namespace SCGESP.Controllers.CGEAPI
 
 				if (DT.Rows.Count > 0)
 				{
-					var SelUsuarios = GetUsuarios.Post();
+					var SelUsuarios = GetUsuarios.Post(0);
 
 					//consulta requisiciones 
 					DataTable DTRequisiciones = new DataTable();

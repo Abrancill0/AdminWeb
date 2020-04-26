@@ -365,6 +365,8 @@
 				success: function (result) {
 					console.log(result);
 					$("#tblInformesCategoria tbody").empty();
+					
+                tblInformesCategoria.clear().draw();
 
 					var f = new Date();
 					if (valorVacio(result) === false) {
@@ -377,7 +379,7 @@
 						var ValTipoGasto = [];
 						$.each(result, function (key, value) {
 							var total = (value.Total * 1);
-							var newTr = "<tr>";
+							/*var newTr = "<tr>";
 							newTr += "<td>" + value.Requisicion + "</td>";
 							newTr += "<td>" + value.NombreResponsabe + "</td>";
 							newTr += "<td>" + value.TipoGasto + "</td>";
@@ -387,7 +389,18 @@
 							newTr += "<td>" + value.Periodo + "</td>";
 							newTr += "<td>" + value.Justificacion + "</td>";
 							newTr += "</tr>";
-							$("#tblInformesCategoria tbody").append(newTr);
+							$("#tblInformesCategoria tbody").append(newTr);*/
+							var newTr = [
+								value.Requisicion,
+								value.NombreResponsabe,
+								value.TipoGasto,
+								value.Departamento,
+								value.Categoria,
+								formatNumber.new(total.toFixed(2), "$ "),
+								value.Periodo,
+								value.Justificacion
+							];
+							tblInformesCategoria.row.add(newTr).draw(false);
 							totalGastado += total;
 							ValDepartamento.push({
 								"label": value.Departamento,

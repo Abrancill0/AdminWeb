@@ -67,8 +67,12 @@ function selectUsuarios(catDefault) {
         async: false,
         type: "POST",
         url: "/api/SelectUsuarios",
-        data: {},
-        dataType: "json",
+        data: JSON.stringify({
+            VerSoloActivos: 1
+        }),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        cache: false,
         beforeSend: function () {
             $("#RmReqSolicitante").empty();
         },
@@ -199,10 +203,10 @@ function ObtenerRequisiciones() {
             cargando();
         },
         success: function (result) {
-            //console.log(result.Salida);
+            console.log(result);
             try {
-                var resultado = result.Salida.Tablas.Catalogo.NewDataSet.Catalogo;
-                if (result.Salida.Resultado === "1") {
+                var resultado = result;//result.Salida.Tablas.Catalogo.NewDataSet.Catalogo;
+                if (resultado.length > 0) {
                     $('#tblRequisiciones tbody').empty();
                     tabla
                         .clear()
@@ -253,7 +257,7 @@ function newRowRequisiciones(datos, nrow) {
         var RmReqSubramoNombre = datoEle(datos.RmReqSubramoNombre);
         var btnVer = "";
         btnVer = "<button type='button' onclick='verRequisiciones(\"u\", " + RmReqId + "," + RmReqEstatus + ")' class='btn btn-success btn-sm'><span class='glyphicon glyphicon-eye-open'></span> Ver</button>";
-
+        
         var btnEli = "";
         if (RmReqEstatus === "1" || RmReqEstatusNombre === "Captura")
             btnEli = "<button type='button' class='btn btn-danger btn-sm' onclick='confCancelarRequisiciones(" + RmReqId + ", \"" + (RmReqId + ".- " + RmReqJustificacion) + "\")'><span class='glyphicon glyphicon-ban-circle'></span> Cancelar</button>";
@@ -266,8 +270,8 @@ function newRowRequisiciones(datos, nrow) {
             RmReqSubramoNombre,
             RmReqEstatusNombre,
             btnVer,
-            btnEli,
-        ]
+            btnEli
+        ];
 
     } catch (err) {
         newrow = ["", "", "", "", "", "", "", ""];

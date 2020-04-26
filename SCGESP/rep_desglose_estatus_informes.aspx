@@ -232,7 +232,7 @@
 		$("#repa").val(fechaActual());
 
 		$("#btn-consultar").click(function () {
-			//ConsultarDesgloseEstatusInformes();
+			ConsultarDesgloseEstatusInformes();
 		});
 
 		selectUsuarios();

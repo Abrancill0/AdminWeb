@@ -135,7 +135,7 @@
                                                 </td>
                                             </tr>
 
-                                            <tr class="d-none">
+                                            <tr>
                                                 <td>Solicitante:</td>
                                                 <td colspan="5" id="tdSolicitante">
                                                     <span class="textotd"></span>
@@ -333,6 +333,6 @@
     <!-- App functions and actions -->
     <script type="text/javascript" src="js/app.min.js"></script>
     <script type="text/javascript" src="js/js.js"></script>
-    <script type="text/javascript" src="js/requisiciones.js?v.hnvghg199o"></script>
+    <script type="text/javascript" src="js/requisiciones.js?v.12345"></script>
 
 </asp:Content>
