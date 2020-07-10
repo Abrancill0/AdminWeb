@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -10,26 +11,18 @@ using Ele.Generales;
 
 namespace SCGESP.Controllers
 {
-    public class TraspasosAutorizarController : ApiController
+    public class RequisicionesSoportePDFController : ApiController
     {
         //Parametros Entrada
         public class ParametrosEntrada
         {
             public string Usuario { get; set; }
+            public string RmRdoRequisicion { get; set; }
         }
 
         public class ObtieneParametrosSalida
         {
-            public string PrTraId { get; set; } //No.Traspaso
-            public string PrTraEstatus { get; set; } //Estatus del Traspaso
-            public string PrTraFecha { get; set; } //Fecha del Traspaso
-            public string PrTraReferencia { get; set; } //Referencia del Traspaso
-            public string PrTraComentario { get; set; } //Comentarios del Traspaso
-            public string PrTraTotal { get; set; } // Total
-            public string PrTraEstatusNombre { get; set; }
-            public string PrTraEstatusSiguienteNombre { get; set; }
-            public string MesesFuturos { get; set; }
-
+            public string PDF { get; set; } //PDF
         }
 
 
@@ -40,45 +33,48 @@ namespace SCGESP.Controllers
             {
                 Usuario = Datos.Usuario,
                 Origen = "AdminAPP",
-                Transaccion = 120697,
-                Operacion = 1,
+                Transaccion = 120859,
+                Operacion = 16,
             };
 
-            entrada.agregaElemento("proceso", "2");
+//            elementos: "RmRdoRequisicion".- número de requisición
+//        "RmRdoTipoDocumento".- 53(fijo)
+//te regresa una tabla de un renglón que tiene:
+//            una columna que se llama "Archivo"(string en formato base 64)
+//    una columna que se llama "NombreArchivo"(string con el nombre del archivo)
+//para generar el archivo yo uso lo siguiente:
+
+            entrada.agregaElemento("RmRdoRequisicion", Datos.RmRdoRequisicion);
            
             DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
-
-            DataTable DTLista = new DataTable();
-            
+  
             try
             {
 
                 if (respuesta.Resultado == "1")
             {
-                DTLista = respuesta.obtieneTabla("Catalogo");
-
-                int NumOCVobo = DTLista.Rows.Count;
-
+                
                 List<ObtieneParametrosSalida> lista = new List<ObtieneParametrosSalida>();
 
-                foreach (DataRow row in DTLista.Rows)
-                {
+                    string result = "";
+                    string format = ".pdf";
+                    string path = HttpContext.Current.Server.MapPath("/PDF/AutorizaTraspasos/");
+                    string name = DateTime.Now.ToString("yyyyMMddhhmmss");
+
+                    byte[] data = Convert.FromBase64String(respuesta.Valores.InnerText);
+
+                    MemoryStream ms = new MemoryStream(data, 0, data.Length);
+                    ms.Write(data, 0, data.Length);
+                    string rutacompleta = path + name + format;
+                    File.WriteAllBytes(rutacompleta, data);
+                    result = "PDF/AutorizaTraspasos/" + name + format;
+
                     ObtieneParametrosSalida ent = new ObtieneParametrosSalida
                     {
-                        PrTraId = Convert.ToString(row["PrTraId"]), 
-                        PrTraEstatus = Convert.ToString(row["PrTraEstatus"]),
-                        PrTraFecha = Convert.ToString(row["PrTraFecha"]), 
-                        PrTraReferencia = Convert.ToString(row["PrTraReferencia"]),
-                        PrTraComentario = Convert.ToString(row["PrTraComentario"]),
-                        PrTraEstatusNombre = Convert.ToString(row["PrTraEstatusNombre"]),
-                        PrTraEstatusSiguienteNombre = Convert.ToString(row["PrTraEstatusSiguienteNombre"]),
-                        PrTraTotal = string.IsNullOrEmpty(Convert.ToString(row["PrTraTotal"])) ? "0" : Convert.ToString(row["PrTraTotal"]),
-                        MesesFuturos = Convert.ToString(row["MesesFuturos"]),
-
+                        PDF = result
                     };
-
                     lista.Add(ent);
-                }
+               
                 return lista;
             }
             else
@@ -87,7 +83,7 @@ namespace SCGESP.Controllers
 
                 ObtieneParametrosSalida ent = new ObtieneParametrosSalida
                 {
-                    PrTraComentario = Convert.ToString("no encontro ningun registro"),
+                    PDF = Convert.ToString("no encontro ningun registro"),
                     
                 };
                 lista.Add(ent);
@@ -103,7 +99,7 @@ namespace SCGESP.Controllers
                 ObtieneParametrosSalida ent = new ObtieneParametrosSalida
                 {
 
-                    PrTraComentario = ex.ToString()
+                    PDF = ex.ToString()
 
                 };
                 lista.Add(ent);

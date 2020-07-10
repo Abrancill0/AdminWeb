@@ -33,6 +33,7 @@ namespace SCGESP.Controllers.APP
             public string RmReqCentroNombre { get; set; }
             public string RmReqMonedaNombre { get; set; }
             public string RmCuenta { get; set; }
+          
         }
 
         public List<RequisicionesPorAutorizarResult> Post(datos Datos)
@@ -64,8 +65,7 @@ namespace SCGESP.Controllers.APP
                     foreach (DataRow row in DTRequisiciones.Rows)
                     {
 
-                       //string Cuenta= ObtieneCuenta(UsuarioDesencripta, Convert.ToString(row["RmReqId"]));
-                        
+                       
                         RequisicionesPorAutorizarResult ent = new RequisicionesPorAutorizarResult
                         {
                             RmReqId = Convert.ToString(row["RmReqId"]), //OK
@@ -80,8 +80,8 @@ namespace SCGESP.Controllers.APP
                             RmReqCentroNombre = Convert.ToString(row["RmReqCentroNombre"]),
                             RmReqTipoRequisicion = Convert.ToString(row["RmReqTipoRequisicion"]),
                             RmReqSubramo = Convert.ToString(row["RmReqSubramo"]),
-                            RmReqMonedaNombre = Convert.ToString(row["RmReqMonedaNombre"])
-                            
+                            RmReqMonedaNombre = Convert.ToString(row["RmReqMonedaNombre"]),
+                           
                         };
                         lista.Add(ent);
                     }
@@ -111,7 +111,7 @@ namespace SCGESP.Controllers.APP
                     RmReqCentroNombre = Convert.ToString("0"),
                     RmReqTipoRequisicion = Convert.ToString("0"),
                     RmReqSubramo = Convert.ToString("Error Ex"),
-                    RmCuenta =""
+                    RmCuenta = ""
                 };
                 lista.Add(ent);
 
@@ -146,13 +146,14 @@ namespace SCGESP.Controllers.APP
 
                     foreach (DataRow row in DTRequisiciones.Rows)
                     {
-                        if ((Convert.ToDouble(row["RmRdeSubtotal"]) + Convert.ToDouble(row["RmRdeIva"])) > MontoActual){
+                        if ((Convert.ToDouble(row["RmRdeSubtotal"]) + Convert.ToDouble(row["RmRdeIva"])) > MontoActual)
+                        {
 
                             Cuenta = Convert.ToString(row["RmRdeCuentaNombre"]);
 
                             MontoActual = Convert.ToDouble(row["RmRdeSubtotal"]) + Convert.ToDouble(row["RmRdeIva"]);
                         }
-                       
+
                     }
 
                     return Cuenta;
@@ -172,10 +173,10 @@ namespace SCGESP.Controllers.APP
                 return "";
             }
 
-            
 
 
-            
+
+
         }
         public static DocumentoSalida PeticionCatalogo(XmlDocument doc)
         {

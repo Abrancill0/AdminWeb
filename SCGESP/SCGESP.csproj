@@ -339,7 +339,6 @@
     <Content Include="img\clientes-2.jpg" />
     <Content Include="img\correo-leido.png" />
     <Content Include="img\correo-noleido.png" />
-    <Content Include="img\demo\logo.png" />
     <Content Include="img\doc.jpg" />
     <Content Include="img\iconos\Calendario.png" />
     <Content Include="img\iconos\Camara.png" />
@@ -4981,6 +4980,7 @@
     <Compile Include="Controllers\APP\Cambios Presupuesto\SolicitudCambioPresupuestoController.cs" />
     <Compile Include="Controllers\APP\ActualizaPendientesAppController.cs" />
     <Compile Include="Controllers\APP\ObtieneAnalisisPDFController.cs" />
+    <Compile Include="Controllers\APP\RequisicionesSoportePDFController.cs" />
     <Compile Include="Controllers\APP\Ordenes de compra\AutorizaOCController.cs" />
     <Compile Include="Controllers\APP\Ordenes de compra\OCDetalleController.cs" />
     <Compile Include="Controllers\APP\Ordenes de compra\ObtieneAnalisisPDFOCController.cs" />
@@ -5323,6 +5323,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Comprobantes\" />
+    <Folder Include="img\demo\" />
     <Folder Include="Models\" />
     <Folder Include="PDF\" />
     <Folder Include="vendors\bower_components\jquery-mask-plugin\test\" />

@@ -34,8 +34,13 @@ namespace SCGESP.Controllers.APP
             public string RmReqEmpleadoObligado  {get; set; }
             public string RmReqEmpleadoObligadoNombre { get; set; }
             public string RmReqTipoRequisicionNombre { get; set; }
-
             public string RMCuenta { get; set; }
+            public string RmTirRutaProceso { get; set; }
+            public string RmReqPolizaReferencia { get; set; }   /*(Póliza Referencia)*/
+            public string RmReqCliente { get; set; } /*(Cliente póliza referencia)*/
+            public string RmReqFechaInicialPoliza { get; set; }
+            public string RmReqFechaFinalPoliza { get; set; } //(Vigencia póliza)
+            public string RmReqClasificacionNombre { get; set; } //(Clasificación)
         }
 
         public List<RequisicionesPorAutorizarResult> Post(Datos Datos)
@@ -67,6 +72,23 @@ namespace SCGESP.Controllers.APP
 
                     string Cuenta = ObtieneCuenta(UsuarioDesencripta, Convert.ToString(row["RmReqId"]));
 
+
+                    string RmTirRutaProceso = Convert.ToString(row["RmTirRutaProceso"]);
+                    string RmReqPolizaReferencia = "";
+                    string RmReqCliente = "";
+                    string RmReqFechaInicialPoliza = "";
+                    string RmReqFechaFinalPoliza = "";
+                    string RmReqClasificacionNombre = "";
+
+                    if (RmTirRutaProceso == "9")
+                    {
+                        RmReqPolizaReferencia = Convert.ToString(row["RmReqPolizaReferencia"]);
+                        RmReqCliente = Convert.ToString(row["RmReqCliente"]);
+                        RmReqFechaInicialPoliza = Convert.ToString(row["RmReqFechaInicialPoliza"]);
+                        RmReqFechaFinalPoliza = Convert.ToString(row["RmReqFechaFinalPoliza"]);
+                        RmReqClasificacionNombre = Convert.ToString(row["RmReqClasificacionNombre"]);
+                    }
+
                     RequisicionesPorAutorizarResult ent = new RequisicionesPorAutorizarResult
                     {
                         RmReqId = Convert.ToString(row["RmReqId"]), //OK
@@ -85,7 +107,13 @@ namespace SCGESP.Controllers.APP
                         RmReqEmpleadoObligado = Convert.ToString(row["RmReqEmpleadoObligado"]),
                         RmReqEmpleadoObligadoNombre = Convert.ToString(row["RmReqEmpleadoObligadoNombre"]),
                         RmReqTipoRequisicionNombre = Convert.ToString(row["RmReqTipoRequisicionNombre"]),
-                        RMCuenta = Cuenta
+                        RMCuenta = Cuenta,
+                        RmTirRutaProceso = RmTirRutaProceso,
+                        RmReqPolizaReferencia = RmReqPolizaReferencia,
+                        RmReqCliente = RmReqCliente,
+                        RmReqFechaInicialPoliza = RmReqFechaInicialPoliza,
+                        RmReqFechaFinalPoliza = RmReqFechaFinalPoliza,
+                        RmReqClasificacionNombre = RmReqClasificacionNombre,
                     };
                     lista.Add(ent);
                 }
