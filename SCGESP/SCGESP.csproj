@@ -4972,6 +4972,7 @@
     <Compile Include="confrontacion.aspx.designer.cs">
       <DependentUpon>confrontacion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\APP\RutaIndicadoresController.cs" />
     <Compile Include="Controllers\APP\Cambios Presupuesto\AutorizaCambioPrespupuestoController.cs" />
     <Compile Include="Controllers\APP\Cambios Presupuesto\DetalleCambioPresupuestoController.cs" />
     <Compile Include="Controllers\APP\Cambios Presupuesto\FlujoProcesoCambioPresupuestoController.cs" />

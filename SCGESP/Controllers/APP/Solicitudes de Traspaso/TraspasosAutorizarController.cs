@@ -45,55 +45,66 @@ namespace SCGESP.Controllers
             };
 
             entrada.agregaElemento("proceso", "2");
-           
+
             DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 
             DataTable DTLista = new DataTable();
-            
+
             try
             {
 
                 if (respuesta.Resultado == "1")
-            {
-                DTLista = respuesta.obtieneTabla("Catalogo");
-
-                int NumOCVobo = DTLista.Rows.Count;
-
-                List<ObtieneParametrosSalida> lista = new List<ObtieneParametrosSalida>();
-
-                foreach (DataRow row in DTLista.Rows)
                 {
+                    DTLista = respuesta.obtieneTabla("Catalogo");
+
+                    int NumOCVobo = DTLista.Rows.Count;
+
+                    List<ObtieneParametrosSalida> lista = new List<ObtieneParametrosSalida>();
+
+                    foreach (DataRow row in DTLista.Rows)
+                    {
+
+                        string mesesfuturos = "";
+
+                        try
+                        {
+                            mesesfuturos = Convert.ToString(row["MesesFuturos"]);
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
+                        ObtieneParametrosSalida ent = new ObtieneParametrosSalida
+                        {
+                            PrTraId = Convert.ToString(row["PrTraId"]),
+                            PrTraEstatus = Convert.ToString(row["PrTraEstatus"]),
+                            PrTraFecha = Convert.ToString(row["PrTraFecha"]),
+                            PrTraReferencia = Convert.ToString(row["PrTraReferencia"]),
+                            PrTraComentario = Convert.ToString(row["PrTraComentario"]),
+                            PrTraEstatusNombre = Convert.ToString(row["PrTraEstatusNombre"]),
+                            PrTraEstatusSiguienteNombre = Convert.ToString(row["PrTraEstatusSiguienteNombre"]),
+                            PrTraTotal = string.IsNullOrEmpty(Convert.ToString(row["PrTraTotal"])) ? "0" : Convert.ToString(row["PrTraTotal"]),
+                            MesesFuturos = mesesfuturos
+
+                        };
+
+                        lista.Add(ent);
+                    }
+                    return lista;
+                }
+                else
+                {
+                    List<ObtieneParametrosSalida> lista = new List<ObtieneParametrosSalida>();
+
                     ObtieneParametrosSalida ent = new ObtieneParametrosSalida
                     {
-                        PrTraId = Convert.ToString(row["PrTraId"]), 
-                        PrTraEstatus = Convert.ToString(row["PrTraEstatus"]),
-                        PrTraFecha = Convert.ToString(row["PrTraFecha"]), 
-                        PrTraReferencia = Convert.ToString(row["PrTraReferencia"]),
-                        PrTraComentario = Convert.ToString(row["PrTraComentario"]),
-                        PrTraEstatusNombre = Convert.ToString(row["PrTraEstatusNombre"]),
-                        PrTraEstatusSiguienteNombre = Convert.ToString(row["PrTraEstatusSiguienteNombre"]),
-                        PrTraTotal = string.IsNullOrEmpty(Convert.ToString(row["PrTraTotal"])) ? "0" : Convert.ToString(row["PrTraTotal"]),
-                        MesesFuturos = Convert.ToString(row["MesesFuturos"]),
+                        PrTraComentario = Convert.ToString("no encontro ningun registro"),
 
                     };
-
                     lista.Add(ent);
-                }
-                return lista;
-            }
-            else
-            {
-                List<ObtieneParametrosSalida> lista = new List<ObtieneParametrosSalida>();
 
-                ObtieneParametrosSalida ent = new ObtieneParametrosSalida
-                {
-                    PrTraComentario = Convert.ToString("no encontro ningun registro"),
-                    
-                };
-                lista.Add(ent);
-                
-                return lista;
-            }
+                    return lista;
+                }
 
             }
             catch (Exception ex)
@@ -107,7 +118,7 @@ namespace SCGESP.Controllers
 
                 };
                 lista.Add(ent);
-                
+
                 return lista;
             }
 

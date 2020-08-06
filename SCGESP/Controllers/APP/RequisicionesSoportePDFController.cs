@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Xml;
+using System.Xml.Linq;
 using Ele.Generales;
 
 namespace SCGESP.Controllers
@@ -34,7 +35,7 @@ namespace SCGESP.Controllers
                 Usuario = Datos.Usuario,
                 Origen = "AdminAPP",
                 Transaccion = 120859,
-                Operacion = 16,
+                Operacion = 16
             };
 
 //            elementos: "RmRdoRequisicion".- número de requisición
@@ -44,8 +45,9 @@ namespace SCGESP.Controllers
 //    una columna que se llama "NombreArchivo"(string con el nombre del archivo)
 //para generar el archivo yo uso lo siguiente:
 
+            entrada.agregaElemento("RmRdoTipoDocumento",53);
             entrada.agregaElemento("RmRdoRequisicion", Datos.RmRdoRequisicion);
-           
+
             DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
   
             try
@@ -61,7 +63,17 @@ namespace SCGESP.Controllers
                     string path = HttpContext.Current.Server.MapPath("/PDF/AutorizaTraspasos/");
                     string name = DateTime.Now.ToString("yyyyMMddhhmmss");
 
-                    byte[] data = Convert.FromBase64String(respuesta.Valores.InnerText);
+
+                    XDocument doc = XDocument.Parse(respuesta.Documento.InnerXml);
+                    XElement Salida = doc.Element("Salida");
+                    XElement Tablas = Salida.Element("Tablas");
+                    XElement ConsultaAdicional = Tablas.Element("ConsultaAdicional1");
+                    XElement NewDataSet = ConsultaAdicional.Element("NewDataSet");
+                    XElement ConsultaAdicional1 = NewDataSet.Element("ConsultaAdicional1");
+                    XElement Archivo = ConsultaAdicional1.Element("Archivo");
+
+
+                    byte[] data = Convert.FromBase64String(Archivo.Value);
 
                     MemoryStream ms = new MemoryStream(data, 0, data.Length);
                     ms.Write(data, 0, data.Length);
