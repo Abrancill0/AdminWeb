@@ -41,7 +41,7 @@ namespace SCGESP.Controllers
                 Usuario = Datos.Usuario,
                 Origen = "AdminAPP",
                 Transaccion = 120697,
-                Operacion = 1,
+                Operacion = 16,
             };
 
             entrada.agregaElemento("proceso", "2");

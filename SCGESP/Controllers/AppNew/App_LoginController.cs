@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System;
 using System.Data;
 using Newtonsoft.Json.Linq;
+using System.Xml.Linq;
 
 namespace SCGESP.Controllers.APP
 {
@@ -13,9 +14,9 @@ namespace SCGESP.Controllers.APP
     {
         public class ParametrosSalida
         {
-            public string cosa { get; set; }
-            public string cosa2 { get; set; }
-            public string cosa3 { get; set; }
+            public string SgUsuId { get; set; }
+            public string SgUsuEmpleado { get; set; }
+            public string SgUsuNombre { get; set; }
             public string GrEmpCentro { get; set; }
             public string GrEmpOficina { get; set; }
             public string GrEmpTipoGasto { get; set; }
@@ -67,14 +68,14 @@ namespace SCGESP.Controllers.APP
 
                     foreach (DataRow row in DTLista.Rows)
                     {
-                        string cadenaCosa = Convert.ToString(row["SgUsuId"]);
-                        string cadenaCosa2 = Convert.ToString(row["SgUsuEmpleado"]);
+                        string SgUsuId = Convert.ToString(row["SgUsuId"]);
+                        string SgUsuEmpleado = Convert.ToString(row["SgUsuEmpleado"]);
 
-                        cadenaCosa = cadenaCosa.Replace(" ", "");
-                        cadenaCosa2 = cadenaCosa2.Replace(" ", "");
+                        SgUsuId = SgUsuId.Replace(" ", "");
+                        SgUsuEmpleado = SgUsuEmpleado.Replace(" ", "");
 
-                        string cosa = Seguridad.Encriptar(cadenaCosa);
-                        string cosa2 = Seguridad.Encriptar(cadenaCosa2);
+                        //string cosa = Seguridad.Encriptar(cadenaCosa);
+                        //string cosa2 = Seguridad.Encriptar(cadenaCosa2);
 
                         DateTime dt = DateTime.Today;
 
@@ -93,12 +94,12 @@ namespace SCGESP.Controllers.APP
                         
                         ParametrosSalida ent = new ParametrosSalida
                         {
-                            cosa = cosa,
-                            cosa2 = cosa2,
+                            SgUsuId = SgUsuId,
+                            SgUsuEmpleado = SgUsuEmpleado,
                             GrEmpCentro = Convert.ToString(row["GrEmpCentro"]),
                             GrEmpOficina = Convert.ToString(row["GrEmpOficina"]),
                             GrEmpTipoGasto = Convert.ToString(row["GrEmpTipoGasto"]),
-                            cosa3 = Convert.ToString(row["SgUsuNombre"]),
+                            SgUsuNombre = Convert.ToString(row["SgUsuNombre"]),
                             GrEmpTarjetaToka = Convert.ToString(row["GrEmpTarjetaToka"]),
                             CambiaContrasena = CambiaContrasena,
                             SgUsuMostrarGraficaAlAutorizar = Convert.ToString(row["SgUsuMostrarGraficaAlAutorizar"]),
@@ -124,29 +125,25 @@ namespace SCGESP.Controllers.APP
                 else
                 {
 
+                    //  < Error >< Concepto > SgUsuClaveAcceso </ Concepto >< Descripcion > CONTRASEÑA INVÁLIDA </ Descripcion ></ Error >
+                    Mensaje = respuesta.Errores.InnerText;
+                    XDocument doc = XDocument.Parse(respuesta.Documento.InnerXml);
+                    XElement Salida = doc.Element("Salida");
+                    XElement Errores = Salida.Element("Errores");
+                    XElement Error = Errores.Element("Error");
+                    XElement Descripcion = Error.Element("Descripcion");
+                    Estatus = 0;
+
                     string resultado2 = respuesta.Errores.InnerText;
-
-                    List<ParametrosSalida> lista = new List<ParametrosSalida>();
-                    
-                        ParametrosSalida ent = new ParametrosSalida
-                        {
-                            cosa = resultado2,
-                            CambiaContrasena=false
-
-                        };
-                        lista.Add(ent);
-
 
                     JObject Resultado = JObject.FromObject(new
                     {
-                        mensaje = resultado2,
+                        mensaje = Descripcion.Value,
                         estatus = Estatus,
-                        CambiaContrasena = false,
-                        Result = lista
                     });
 
-
                     return Resultado;
+                  
                 }
             }
             catch (Exception ex)
