@@ -59,7 +59,7 @@ namespace SCGESP.Controllers.APP
 
                 if (respuesta.Resultado == "1")//&& idUsuario.Trim() != ""
                 {
-                     Mensaje = "0";
+                     Mensaje = "OK";
                      Estatus = 1;
 
                     DTLista = respuesta.obtieneTabla("Llave");
@@ -108,7 +108,6 @@ namespace SCGESP.Controllers.APP
 
                         lista.Add(ent);
                     }
-
 
                     JObject Resultado = JObject.FromObject(new
                     {
