@@ -8,7 +8,7 @@ using System;
 using Newtonsoft.Json.Linq;
 using System.Xml.Linq;
 
-namespace SCGESP.Controllers
+namespace SCGESP.Controllers.AppNew
 {
     public class App_ListaUsuariosAlternosController : ApiController
     {

@@ -9,7 +9,7 @@ using System.Xml;
 using Ele.Generales;
 using Newtonsoft.Json.Linq;
 
-namespace SCGESP.Controllers
+namespace SCGESP.Controllers.AppNew
 {
     //AutorizarSolicitudCambio
     public class App_AutorizarSolicitudCambioCentroController : ApiController

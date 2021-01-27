@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using System.Xml;
 using Ele.Generales;
 
-namespace SCGESP.Controllers
+namespace SCGESP.Controllers.AppNew
 {
     public class App_RutaIndicadoresController : ApiController
     {

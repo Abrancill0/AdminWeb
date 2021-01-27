@@ -10,7 +10,7 @@ using System.Xml;
 using Ele.Generales;
 using SCGESP.Clases;
 
-namespace SCGESP.Controllers
+namespace SCGESP.Controllers.AppNew
 {
     public class App_ActualizaPendientesController : ApiController
     {

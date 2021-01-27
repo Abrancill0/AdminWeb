@@ -8,7 +8,7 @@ using System.Web.Http;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace SCGESP.Controllers.APP
+namespace SCGESP.Controllers.AppNew
 {
     public class App_ConsultaRequisicionDetalleAppController : ApiController
     {

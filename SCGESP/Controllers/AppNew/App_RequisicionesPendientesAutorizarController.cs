@@ -7,7 +7,7 @@ using System.Data;
 using System.Web.Http;
 using System.Xml;
 
-namespace SCGESP.Controllers.APP
+namespace SCGESP.Controllers.AppNew
 {
     public class App_RequisicionesPendientesAutorizarController : ApiController
     {

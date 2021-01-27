@@ -5,7 +5,7 @@ using System.Xml;
 using System.Collections.Generic;
 using System;
 
-namespace SCGESP.Controllers.APP
+namespace SCGESP.Controllers.AppNew
 {
     public class App_CambioPasswordEleController : ApiController
     {

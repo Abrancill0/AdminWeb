@@ -10,7 +10,7 @@ using Ele.Generales;
 using Newtonsoft.Json.Linq;
 using SCGESP.Clases;
 
-namespace SCGESP.Controllers
+namespace SCGESP.Controllers.AppNew
 {
     public class App_ActivosAsociadosSolicitudController : ApiController
     {

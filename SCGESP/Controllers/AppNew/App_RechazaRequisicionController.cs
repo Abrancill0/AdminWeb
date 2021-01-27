@@ -4,7 +4,7 @@ using System.Web.Http;
 using System.Collections.Generic;
 using SCGESP.Clases;
 
-namespace SCGESP.Controllers
+namespace SCGESP.Controllers.AppNew
 {
     public class App_RechazaRequisicionController : ApiController
     {

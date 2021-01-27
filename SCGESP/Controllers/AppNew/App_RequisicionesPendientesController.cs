@@ -8,7 +8,7 @@ using System.Data;
 using Newtonsoft.Json.Linq;
 using System.Xml.Linq;
 
-namespace SCGESP.Controllers.APP
+namespace SCGESP.Controllers.AppNew
 {
     public class App_RequisicionesPendientesController : ApiController
     {

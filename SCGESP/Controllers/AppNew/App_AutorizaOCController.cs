@@ -3,7 +3,7 @@ using System.Xml;
 using System.Web.Http;
 using SCGESP.Clases;
 
-namespace SCGESP.Controllers
+namespace SCGESP.Controllers.AppNew
 {
     public class App_AutorizaOCController : ApiController
     {
