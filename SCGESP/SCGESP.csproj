@@ -4974,13 +4974,14 @@
     <Compile Include="Controllers\AppNew\App_ActivosAsociadosSolicitudController.cs" />
     <Compile Include="Controllers\AppNew\App_AltaAlternoController.cs" />
     <Compile Include="Controllers\AppNew\App_ActualizaPendientesController.cs" />
+    <Compile Include="Controllers\AppNew\App_ConsultaRequisicionDetalleController.cs" />
     <Compile Include="Controllers\AppNew\App_LoginController.cs" />
     <Compile Include="Controllers\AppNew\App_AutorizarSolicitudMovimientoActivoFijoController.cs" />
     <Compile Include="Controllers\AppNew\App_RechazarSolicitudMovimientoActivoFijoController.cs" />
     <Compile Include="Controllers\AppNew\App_SolicitudMovimientoActivoFijoController.cs" />
     <Compile Include="Controllers\AppNew\App_ObtieneAnalisisPDFController.cs" />
     <Compile Include="Controllers\AppNew\App_RechazaRequisicionController.cs" />
-    <Compile Include="Controllers\AppNew\App_RequisicionesPendientesAutorizarAppController.cs" />
+    <Compile Include="Controllers\AppNew\App_RequisicionesPendientesAutorizarController.cs" />
     <Compile Include="Controllers\AppNew\App_AutorizaOCController.cs" />
     <Compile Include="Controllers\AppNew\App_CambioPasswordEleController.cs" />
     <Compile Include="Controllers\AppNew\App_RutaIndicadoresController.cs" />

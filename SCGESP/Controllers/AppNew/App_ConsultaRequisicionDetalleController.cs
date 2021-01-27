@@ -1,14 +1,16 @@
 ﻿using Ele.Generales;
+using Newtonsoft.Json.Linq;
 using SCGESP.Clases;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Web.Http;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace SCGESP.Controllers.APP
 {
-    public class ConsultaRequisicionDetalleAppController : ApiController
+    public class App_ConsultaRequisicionDetalleAppController : ApiController
     {
         public class datos
         {
@@ -93,8 +95,8 @@ namespace SCGESP.Controllers.APP
 
                     JObject Resultado = JObject.FromObject(new
                     {
-                        mensaje = Mensaje,
-                        estatus = Estatus,
+                        mensaje = "OK",
+                        estatus = 1,
                         Result = lista
 
                     });
@@ -106,21 +108,20 @@ namespace SCGESP.Controllers.APP
                 else
                 {
 
-                    //  < Error >< Concepto > SgUsuClaveAcceso </ Concepto >< Descripcion > CONTRASEÑA INVÁLIDA </ Descripcion ></ Error >
-                    Mensaje = respuesta.Errores.InnerText;
+
                     XDocument doc = XDocument.Parse(respuesta.Documento.InnerXml);
                     XElement Salida = doc.Element("Salida");
                     XElement Errores = Salida.Element("Errores");
                     XElement Error = Errores.Element("Error");
                     XElement Descripcion = Error.Element("Descripcion");
-                    Estatus = 0;
+                    
 
                     string resultado2 = respuesta.Errores.InnerText;
 
                     JObject Resultado = JObject.FromObject(new
                     {
                         mensaje = Descripcion.Value,
-                        estatus = Estatus,
+                        estatus = 0,
                     });
 
                     return Resultado;

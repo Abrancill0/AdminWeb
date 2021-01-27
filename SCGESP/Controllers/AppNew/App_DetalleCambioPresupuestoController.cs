@@ -6,7 +6,9 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Xml;
+using System.Xml.Linq;
 using Ele.Generales;
+using Newtonsoft.Json.Linq;
 
 namespace SCGESP.Controllers
 {
@@ -81,31 +83,31 @@ namespace SCGESP.Controllers
                 }
                     JObject Resultado = JObject.FromObject(new
                     {
-                        mensaje = Mensaje,
-                        estatus = Estatus,
+                        mensaje = "OK",
+                        estatus = 1,
                         Result = lista
 
                     });
 
 
-                    return lista;
+                    return Resultado;
                 }
                 else
                 {
-                    Mensaje = respuesta.Errores.InnerText;
+
                     XDocument doc = XDocument.Parse(respuesta.Documento.InnerXml);
                     XElement Salida = doc.Element("Salida");
                     XElement Errores = Salida.Element("Errores");
                     XElement Error = Errores.Element("Error");
                     XElement Descripcion = Error.Element("Descripcion");
-                    Estatus = 0;
+                    
 
                     string resultado2 = respuesta.Errores.InnerText;
 
                     JObject Resultado = JObject.FromObject(new
                     {
                         mensaje = Descripcion.Value,
-                        estatus = Estatus,
+                        estatus = 0,
                     });
 
                     return Resultado;
@@ -114,20 +116,17 @@ namespace SCGESP.Controllers
             }
             catch (Exception ex)
             {
-                List<ObtieneParametrosSalida> lista = new List<ObtieneParametrosSalida>();
-
-                ObtieneParametrosSalida ent = new ObtieneParametrosSalida
+                JObject Resultado = JObject.FromObject(new
                 {
+                    mensaje = ex.ToString(),
+                    estatus = 0,
+                });
 
-                    PrPdeOficinaNombre = ex.ToString()
 
-                };
-                lista.Add(ent);
-
-                return lista;
+                return Resultado;
             }
-
-            public static DocumentoSalida PeticionCatalogo(XmlDocument doc)
+        }
+        public static DocumentoSalida PeticionCatalogo(XmlDocument doc)
         {
             Localhost.Elegrp ws = new Localhost.Elegrp();
             ws.Timeout = -1;

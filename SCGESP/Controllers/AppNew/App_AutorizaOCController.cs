@@ -5,7 +5,7 @@ using SCGESP.Clases;
 
 namespace SCGESP.Controllers
 {
-    public class AutorizaOCController : ApiController
+    public class App_AutorizaOCController : ApiController
     {
         public class datos
         {

@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Xml;
 using Ele.Generales;
+using Newtonsoft.Json.Linq;
 using SCGESP.Clases;
 
 namespace SCGESP.Controllers
@@ -117,18 +118,16 @@ namespace SCGESP.Controllers
                 }
                 else
                 {
-                    List<ObtieneParametrosSalida> lista = new List<ObtieneParametrosSalida>();
-
-                    ObtieneParametrosSalida ent = new ObtieneParametrosSalida
+                    JObject Resultado = JObject.FromObject(new
                     {
-                        mensaje = "no encontro informacion",
-                        estatus = 0,
-                      
-                    };
-                    lista.Add(ent);
+                        mensaje = "No existen datos",
+                        estatus = 1,
 
 
-                    return lista;
+                    });
+
+
+                    return Resultado;
                 }
 
 
@@ -136,20 +135,19 @@ namespace SCGESP.Controllers
             catch (Exception ex)
             {
           
-
-                List<ObtieneParametrosSalida> lista = new List<ObtieneParametrosSalida>();
-
-                ObtieneParametrosSalida ent = new ObtieneParametrosSalida
+                JObject Resultado = JObject.FromObject(new
                 {
                     mensaje = ex.ToString(),
-                    estatus = 0,
-
-                };
-                lista.Add(ent);
+                    estatus = 1,
 
 
-                return lista;
+                });
+
+
+                return Resultado;
             }
+
+        
 
         }
 

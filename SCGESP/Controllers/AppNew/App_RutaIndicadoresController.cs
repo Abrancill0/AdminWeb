@@ -9,7 +9,7 @@ using Ele.Generales;
 
 namespace SCGESP.Controllers
 {
-    public class RutaIndicadoresController : ApiController
+    public class App_RutaIndicadoresController : ApiController
     {
         public string Get()
         {
