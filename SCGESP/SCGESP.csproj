@@ -5002,6 +5002,17 @@
     <Compile Include="Controllers\AppNew\App_AutorizarSolicitudCambioCentroController.cs" />
     <Compile Include="Controllers\AppNew\App_RechazarSolicitudCambioCentroController.cs" />
     <Compile Include="Controllers\AppNew\App_SolicitudescambioCentroAutorizarController.cs" />
+    <Compile Include="Controllers\AppNew\App_AutorizaCambioPrespupuestoController.cs" />
+    <Compile Include="Controllers\AppNew\App_RechazarCambioPresupuestoController.cs" />
+    <Compile Include="Controllers\AppNew\App_SolicitudCambioPresupuestoController.cs" />
+    <Compile Include="Controllers\AppNew\App_RequisicionesSoportePDFController.cs" />
+    <Compile Include="Controllers\AppNew\App_TraspasosAutorizarController.cs" />
+    <Compile Include="Controllers\AppNew\App_AutorizarTraspasoController.cs" />
+    <Compile Include="Controllers\AppNew\App_RechazarTraspasoController.cs" />
+    <Compile Include="Controllers\AppNew\App_RequisicionesPendientesController.cs" />
+    <Compile Include="Controllers\AppNew\App_VoBoRMController.cs" />
+    <Compile Include="Controllers\AppNew\App_AutorizaVoboController.cs" />
+    <Compile Include="Controllers\AppNew\App_RechazoOCController.cs" />
     <Compile Include="Controllers\APP\RutaIndicadoresController.cs" />
     <Compile Include="Controllers\APP\Cambios Presupuesto\AutorizaCambioPrespupuestoController.cs" />
     <Compile Include="Controllers\APP\Cambios Presupuesto\DetalleCambioPresupuestoController.cs" />
