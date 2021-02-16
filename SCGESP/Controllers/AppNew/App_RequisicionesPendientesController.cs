@@ -42,17 +42,13 @@ namespace SCGESP.Controllers.AppNew
         {
             try
             {
-                string UsuarioDesencripta = Seguridad.DesEncriptar(Datos.Usuario);
-
-                string EmpleadoDesencripta = Seguridad.DesEncriptar(Datos.Empleado);
-
                 DocumentoEntrada entrada = new DocumentoEntrada();
-                entrada.Usuario = UsuarioDesencripta; //Datos.Usuario;  
+                entrada.Usuario = Datos.Usuario; //Datos.Usuario;  
                 entrada.Origen = "Programa CGE";  //Datos.Origen; 
                 entrada.Transaccion = 120760;
                 entrada.Operacion = 1;
                 //entrada.agregaElemento("proceso", 9);
-                entrada.agregaElemento("RmReqSolicitante", Convert.ToInt32(EmpleadoDesencripta));
+                entrada.agregaElemento("RmReqSolicitante", Convert.ToInt32(Datos.Empleado));
 
                 DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 
@@ -136,59 +132,6 @@ namespace SCGESP.Controllers.AppNew
                 return Resultado;
             }
 
-
-        }
-        public string ObtieneCuenta(string Usuario, string RmRdeRequisicion)
-        {
-            try
-            {
-                DocumentoEntrada entrada = new DocumentoEntrada();
-                entrada.Usuario = Usuario;
-                entrada.Origen = "Programa CGE";  //Datos.Origen; 
-                entrada.Transaccion = 120762;
-                entrada.Operacion = 1;
-
-                entrada.agregaElemento("RmRdeRequisicion", RmRdeRequisicion);
-
-                DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
-
-                if (respuesta.Resultado == "1")
-                {
-                    DataTable DTRequisiciones = new DataTable();
-
-                    DTRequisiciones = respuesta.obtieneTabla("Catalogo");
-
-                    double MontoActual = 0;
-                    string Cuenta = "";
-
-                    foreach (DataRow row in DTRequisiciones.Rows)
-                    {
-                        if ((Convert.ToDouble(row["RmRdeSubtotal"]) + Convert.ToDouble(row["RmRdeIva"])) > MontoActual)
-                        {
-
-                            Cuenta = Convert.ToString(row["RmRdeCuentaNombre"]);
-
-                            MontoActual = Convert.ToDouble(row["RmRdeSubtotal"]) + Convert.ToDouble(row["RmRdeIva"]);
-                        }
-
-                    }
-
-                    return Cuenta;
-
-
-                }
-                else
-                {
-                    var errores = respuesta.Errores;
-
-                    return "";
-                }
-            }
-            catch (Exception)
-            {
-
-                return "";
-            }
 
         }
         public static DocumentoSalida PeticionCatalogo(XmlDocument doc)

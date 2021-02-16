@@ -48,11 +48,10 @@ namespace SCGESP.Controllers.AppNew
         {
             try
             {
-                string UsuarioDesencripta = Seguridad.DesEncriptar(Datos.Usuario);
-
+               
                 DocumentoEntrada entrada = new DocumentoEntrada
                 {
-                    Usuario = UsuarioDesencripta,
+                    Usuario = Datos.Usuario,
                     Origen = "Programa CGE",  //Datos.Origen; 
                     Transaccion = 120760,
                     Operacion = 1//regresa una tabla con todos los campos de la tabla ( La cantidad de registros depende del filtro enviado)
@@ -73,7 +72,7 @@ namespace SCGESP.Controllers.AppNew
                     foreach (DataRow row in DTRequisiciones.Rows)
                     {
 
-                        string Cuenta = ObtieneCuenta(UsuarioDesencripta, Convert.ToString(row["RmReqId"]));
+                        string Cuenta = ObtieneCuenta(Datos.Usuario, Convert.ToString(row["RmReqId"]));
 
 
                         string RmTirRutaProceso = Convert.ToString(row["RmTirRutaProceso"]);

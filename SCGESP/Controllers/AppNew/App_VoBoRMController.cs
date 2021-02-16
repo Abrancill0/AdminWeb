@@ -40,11 +40,10 @@ namespace SCGESP.Controllers.AppNew
 
 		public JObject Post(ParametrosEntrada Datos)
 		{
-			string UsuarioDesencripta = Seguridad.DesEncriptar(Datos.Usuario);
-
+			
 			DocumentoEntrada entrada = new DocumentoEntrada
 			{
-				Usuario = UsuarioDesencripta,
+				Usuario = Datos.Usuario,
 				Origen = "AdminAPP",
 				Transaccion = 120768,
 				Operacion = 1,

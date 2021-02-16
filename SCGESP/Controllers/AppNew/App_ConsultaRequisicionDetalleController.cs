@@ -46,10 +46,9 @@ namespace SCGESP.Controllers.AppNew
         {
             try
             {
-                string UsuarioDesencripta = Seguridad.DesEncriptar(Datos.Usuario);
 
                 DocumentoEntrada entrada = new DocumentoEntrada();
-                entrada.Usuario = UsuarioDesencripta;
+                entrada.Usuario = Datos.Usuario;
                 entrada.Origen = "Programa CGE";  //Datos.Origen; 
                 entrada.Transaccion = 120762;
                 entrada.Operacion = 1;
