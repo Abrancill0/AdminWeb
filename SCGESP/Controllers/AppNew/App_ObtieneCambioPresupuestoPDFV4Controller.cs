@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -12,82 +13,118 @@ using Newtonsoft.Json.Linq;
 
 namespace SCGESP.Controllers.AppNew
 {
-    //AutorizarSolicitudCambio
-    public class App_AutorizarSolicitudCambioCentroController : ApiController
+    public class App_ObtieneCambioPresupuestoPDFV4Controller : ApiController
     {
         //Parametros Entrada
         public class ParametrosEntrada
         {
             public string Usuario { get; set; }
-            public string FiCscSolicitud { get; set; }
-            public string FiCscEstatus { get; set; }
+            public string PrPtiAnio { get; set; }
+            public string PrPtiFolio { get; set; }
         }
 
+        public class ObtieneParametrosSalida
+        {
+            public string PDF { get; set; } //PDF
+        }
 
-        //public List<ObtieneParametrosSalida> Post(ParametrosEntrada Datos)
         public JObject Post(ParametrosEntrada Datos)
         {
             DocumentoEntrada entrada = new DocumentoEntrada
             {
                 Usuario = Datos.Usuario,
                 Origen = "AdminAPP",
-                Transaccion = 120402,
-                Operacion = 10,
+                Transaccion = 120623,
+                Operacion = 22,
             };
 
-            entrada.agregaElemento("FiCscSolicitud", Datos.FiCscSolicitud);
-            entrada.agregaElemento("FiCscEstatus", Datos.FiCscEstatus);
+            entrada.agregaElemento("PrPtiAnio", Datos.PrPtiAnio);
+            entrada.agregaElemento("PrPtiFolio", Datos.PrPtiFolio);
 
             DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
-
-            DataTable DTLista = new DataTable();
 
             try
             {
 
                 if (respuesta.Resultado == "1")
                 {
-                    //< Salida >< Resultado > 0 </ Resultado >< Valores />< Tablas />< Errores >< Error >< Concepto > RmReqId </ Concepto >< Descripcion > Usuario mdribarra no es alterno del usuario obligado imartinez, no puede autorizar</ Descripcion ></ Error ></ Errores ></ Salida >
+
+                    DataTable DT = new DataTable();
+                    // DT = respuesta.obtieneValor("Valores");
+                    string cosa = respuesta.obtieneValor("ArchivoPdf");
+                    List<ObtieneParametrosSalida> lista = new List<ObtieneParametrosSalida>();
+
+                    string result = "";
+                    string format = ".pdf";
+                    string path = HttpContext.Current.Server.MapPath("/PDF/SolicitudCambio/");
+                    string name = DateTime.Now.ToString("yyyyMMddhhmmss");
+
+                    // foreach (DataRow row in DT.Rows)
+                    // {
+                    byte[] data = Convert.FromBase64String(cosa);
+
+                    //ArchivoPdf
+                    MemoryStream ms = new MemoryStream(data, 0, data.Length);
+                    ms.Write(data, 0, data.Length);
+                    string rutacompleta = path + name + format;
+                    File.WriteAllBytes(rutacompleta, data);
+                    result = "PDF/SolicitudCambio/" + name + format;
+                    //}
+
+                    ObtieneParametrosSalida ent = new ObtieneParametrosSalida
+                    {
+                        PDF = result
+                    };
+                    lista.Add(ent);
 
                     JObject Resultado = JObject.FromObject(new
                     {
                         mensaje = "OK",
-                        estatus = 1
+                        estatus = 1,
+                        Result = lista
+
                     });
 
 
                     return Resultado;
+
                 }
                 else
                 {
+
+
                     XDocument doc = XDocument.Parse(respuesta.Documento.InnerXml);
                     XElement Salida = doc.Element("Salida");
                     XElement Errores = Salida.Element("Errores");
                     XElement Error = Errores.Element("Error");
                     XElement Descripcion = Error.Element("Descripcion");
 
+                    string resultado2 = respuesta.Errores.InnerText;
+
                     JObject Resultado = JObject.FromObject(new
                     {
                         mensaje = Descripcion.Value,
-                        estatus = 0
+                        estatus = 0,
                     });
 
-
                     return Resultado;
+
                 }
             }
             catch (Exception ex)
             {
 
-
                 JObject Resultado = JObject.FromObject(new
                 {
                     mensaje = ex.ToString(),
-                    estatus = 0
+                    estatus = 0,
+                    CambiaContrasena = false,
                 });
+
 
                 return Resultado;
             }
+
 
         }
 
@@ -100,3 +137,4 @@ namespace SCGESP.Controllers.AppNew
         }
     }
 }
+

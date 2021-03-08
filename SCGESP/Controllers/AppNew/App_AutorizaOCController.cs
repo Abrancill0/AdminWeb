@@ -2,6 +2,8 @@
 using System.Xml;
 using System.Web.Http;
 using SCGESP.Clases;
+using Newtonsoft.Json.Linq;
+using System.Xml.Linq;
 
 namespace SCGESP.Controllers.AppNew
 {
@@ -19,7 +21,7 @@ namespace SCGESP.Controllers.AppNew
             public int Resultado { get; set; }
         }
 
-        public XmlDocument Post(datos Datos)
+        public JObject Post(datos Datos)
         {
             DocumentoEntrada entrada = new DocumentoEntrada
             {
@@ -34,11 +36,33 @@ namespace SCGESP.Controllers.AppNew
 
             if (respuesta.Resultado == "1")
             {
-                return respuesta.Documento;
+                //< Salida >< Resultado > 0 </ Resultado >< Valores />< Tablas />< Errores >< Error >< Concepto > RmReqId </ Concepto >< Descripcion > Usuario mdribarra no es alterno del usuario obligado imartinez, no puede autorizar</ Descripcion ></ Error ></ Errores ></ Salida >
+
+                JObject Resultado = JObject.FromObject(new
+                {
+                    mensaje = "OK",
+                    estatus = 1
+                });
+
+
+                return Resultado;
             }
             else
             {
-                return respuesta.Documento;
+                XDocument doc = XDocument.Parse(respuesta.Documento.InnerXml);
+                XElement Salida = doc.Element("Salida");
+                XElement Errores = Salida.Element("Errores");
+                XElement Error = Errores.Element("Error");
+                XElement Descripcion = Error.Element("Descripcion");
+
+                JObject Resultado = JObject.FromObject(new
+                {
+                    mensaje = Descripcion.Value,
+                    estatus = 0
+                });
+
+
+                return Resultado;
             }
 
         }

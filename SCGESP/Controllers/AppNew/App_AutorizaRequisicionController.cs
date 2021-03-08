@@ -1,44 +1,38 @@
 ﻿using Ele.Generales;
 using System.Xml;
 using System.Web.Http;
-using System.Collections.Generic;
 using SCGESP.Clases;
 using Newtonsoft.Json.Linq;
 using System.Xml.Linq;
 
-namespace SCGESP.Controllers.AppNew
+namespace SCGESP.Controllers
 {
-    public class App_RechazaRequisicionController : ApiController
+    public class App_AutorizaRequisicionController : ApiController
     {
-        public class Datos
+        public class datos
         {
             public string Usuario { get; set; }
-            public string Empelado { get; set; }
-            public string Origen { get; set; }
             public string RmReqId { get; set; }
             public string RmReqEstatus { get; set; }
-            public string RmReqComentarios { get; set; }
         }
 
-        public class RechazaRequisicionResult
+        public class AutorizaRequisicionResult
         {
             public int Resultado { get; set; }
         }
 
-        public JObject Post(Datos Datos)
+        public JObject Post(datos Datos)
         {
-            string UsuarioDesencripta = Seguridad.DesEncriptar(Datos.Usuario);
 
             DocumentoEntrada entrada = new DocumentoEntrada
             {
-                Usuario = UsuarioDesencripta, //Datos.Usuario;  
+                Usuario = Datos.Usuario,
                 Origen = "Programa CGE",  //Datos.Origen; 
                 Transaccion = 120760,
-                Operacion = 11 //rechazar requisiciones
+                Operacion = 10 //autorizar requisiciones
             };
             entrada.agregaElemento("RmReqId", Datos.RmReqId);
             entrada.agregaElemento("RmReqEstatus", Datos.RmReqEstatus);
-            entrada.agregaElemento("RmReqComentarios", Datos.RmReqComentarios);
             DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 
             if (respuesta.Resultado == "1")
@@ -72,7 +66,6 @@ namespace SCGESP.Controllers.AppNew
                 return Resultado;
             }
 
-
         }
 
         public static DocumentoSalida PeticionCatalogo(XmlDocument doc)
@@ -86,5 +79,4 @@ namespace SCGESP.Controllers.AppNew
 
     }
 }
-
 

@@ -4978,6 +4978,8 @@
     <Compile Include="Controllers\AppNew\App_LoginController.cs" />
     <Compile Include="Controllers\AppNew\App_AutorizarSolicitudMovimientoActivoFijoController.cs" />
     <Compile Include="Controllers\AppNew\App_RechazarSolicitudMovimientoActivoFijoController.cs" />
+    <Compile Include="Controllers\AppNew\App_ObtieneCambioPresupuestoPDFV4Controller.cs" />
+    <Compile Include="Controllers\AppNew\App_ObtieneCambioPresupuestoPDFV5Controller.cs" />
     <Compile Include="Controllers\AppNew\App_SolicitudMovimientoActivoFijoController.cs" />
     <Compile Include="Controllers\AppNew\App_ObtieneAnalisisPDFController.cs" />
     <Compile Include="Controllers\AppNew\App_RechazaRequisicionController.cs" />
@@ -4998,7 +5000,6 @@
     <Compile Include="Controllers\AppNew\App_BajaAlternoController.cs" />
     <Compile Include="Controllers\AppNew\App_ListaUsuariosAlternosController.cs" />
     <Compile Include="Controllers\AppNew\App_ListaUsuariosCentroController.cs" />
-    <Compile Include="Controllers\AppNew\App_ObtieneCambioPresupuestoPDFController.cs" />
     <Compile Include="Controllers\AppNew\App_ObtieneTraspasoPDFController.cs" />
     <Compile Include="Controllers\AppNew\App_AutorizarSolicitudCambioCentroController.cs" />
     <Compile Include="Controllers\AppNew\App_RechazarSolicitudCambioCentroController.cs" />
@@ -5014,6 +5015,8 @@
     <Compile Include="Controllers\AppNew\App_VoBoRMController.cs" />
     <Compile Include="Controllers\AppNew\App_AutorizaVoboController.cs" />
     <Compile Include="Controllers\AppNew\App_RechazoOCController.cs" />
+    <Compile Include="Controllers\AppNew\App_OrdenCompraV2Controller.cs" />
+    <Compile Include="Controllers\AppNew\App_AutorizaRequisicionController.cs" />
     <Compile Include="Controllers\APP\RutaIndicadoresController.cs" />
     <Compile Include="Controllers\APP\Cambios Presupuesto\AutorizaCambioPrespupuestoController.cs" />
     <Compile Include="Controllers\APP\Cambios Presupuesto\DetalleCambioPresupuestoController.cs" />

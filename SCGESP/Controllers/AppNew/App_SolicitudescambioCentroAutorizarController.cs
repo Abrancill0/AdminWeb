@@ -57,7 +57,7 @@ namespace SCGESP.Controllers.AppNew
             };
 
             entrada.agregaElemento("proceso", "2");
-           
+
             DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 
             DataTable DTLista = new DataTable();
@@ -67,40 +67,40 @@ namespace SCGESP.Controllers.AppNew
             {
 
                 if (respuesta.Resultado == "1")
-            {
-                DTLista = respuesta.obtieneTabla("Catalogo");
-
-                int NumOCVobo = DTLista.Rows.Count;
-
-                List<ObtieneParametrosSalida> lista = new List<ObtieneParametrosSalida>();
-
-                foreach (DataRow row in DTLista.Rows)
                 {
-                    ObtieneParametrosSalida ent = new ObtieneParametrosSalida
-                    {
-                        FiCscSolicitud = Convert.ToString(row["FiCscSolicitud"]),
-                        FiCscTipo = Convert.ToString(row["FiCscTipo"]),
-                        FiCscEstatus = Convert.ToString(row["FiCscEstatus"]),
-                        FiCscEstatusNombre = Convert.ToString(row["FiCscEstatusNombre"]),
-                        FiCscSolicitante = Convert.ToString(row["FiCscSolicitante"]),
-                        FiCscSolicitanteNombre = Convert.ToString(row["FiCscSolicitanteNombre"]),
-                        FiCscCentro = Convert.ToString(row["FiCscCentro"]),
-                        FiCscNombre = Convert.ToString(row["FiCscNombre"]),
-                        FiCscResponsable = Convert.ToString(row["FiCscResponsable"]),
-                        FiCscResponsableNombre = Convert.ToString(row["FiCscResponsableNombre"]),
-                        FiCscMontoMinimo = string.IsNullOrEmpty(Convert.ToString(row["FiCscMontoMinimo"])) ? "0" : Convert.ToString(row["FiCscMontoMinimo"]),
-                        FiCscMontoMaximo = string.IsNullOrEmpty(Convert.ToString(row["FiCscMontoMaximo"])) ? "0" : Convert.ToString(row["FiCscMontoMaximo"]),
-                        FiCscEstatusSiguiente = Convert.ToString(row["FiCscEstatusSiguiente"]),
-                        FiCscEstatusSiguienteNombre = Convert.ToString(row["FiCscEstatusSiguienteNombre"]),
-                        FiCenResponsableNombre = string.IsNullOrEmpty(Convert.ToString(row["FiCenResponsableNombre"])) ? "N/A" : Convert.ToString(row["FiCenResponsableNombre"]),
-                        // FiCscEmpleadoObligadoNombre = Convert.ToString(row["FiCscEmpleadoObligadoNombre"]),
-                        FICenResponsable = Convert.ToString(row["FICenResponsable"]),
-                        FiCenMontoMinimo = string.IsNullOrEmpty(Convert.ToString(row["FiCenMontoMinimo"])) ? "0" : Convert.ToString(row["FiCenMontoMinimo"]),
-                        FiCenMontoMaximo = string.IsNullOrEmpty(Convert.ToString(row["FiCenMontoMaximo"])) ? "0" : Convert.ToString(row["FiCenMontoMaximo"]),
+                    DTLista = respuesta.obtieneTabla("Catalogo");
 
-                    };
-                    lista.Add(ent);
-                }
+                    int NumOCVobo = DTLista.Rows.Count;
+
+                    List<ObtieneParametrosSalida> lista = new List<ObtieneParametrosSalida>();
+
+                    foreach (DataRow row in DTLista.Rows)
+                    {
+                        ObtieneParametrosSalida ent = new ObtieneParametrosSalida
+                        {
+                            FiCscSolicitud = Convert.ToString(row["FiCscSolicitud"]),
+                            FiCscTipo = Convert.ToString(row["FiCscTipo"]),
+                            FiCscEstatus = Convert.ToString(row["FiCscEstatus"]),
+                            FiCscEstatusNombre = Convert.ToString(row["FiCscEstatusNombre"]),
+                            FiCscSolicitante = Convert.ToString(row["FiCscSolicitante"]),
+                            FiCscSolicitanteNombre = Convert.ToString(row["FiCscSolicitanteNombre"]),
+                            FiCscCentro = Convert.ToString(row["FiCscCentro"]),
+                            FiCscNombre = Convert.ToString(row["FiCscNombre"]),
+                            FiCscResponsable = Convert.ToString(row["FiCscResponsable"]),
+                            FiCscResponsableNombre = Convert.ToString(row["FiCscResponsableNombre"]),
+                            FiCscMontoMinimo = string.IsNullOrEmpty(Convert.ToString(row["FiCscMontoMinimo"])) ? "0" : Convert.ToString(row["FiCscMontoMinimo"]),
+                            FiCscMontoMaximo = string.IsNullOrEmpty(Convert.ToString(row["FiCscMontoMaximo"])) ? "0" : Convert.ToString(row["FiCscMontoMaximo"]),
+                            FiCscEstatusSiguiente = Convert.ToString(row["FiCscEstatusSiguiente"]),
+                            FiCscEstatusSiguienteNombre = Convert.ToString(row["FiCscEstatusSiguienteNombre"]),
+                            FiCenResponsableNombre = string.IsNullOrEmpty(Convert.ToString(row["FiCenResponsableNombre"])) ? "N/A" : Convert.ToString(row["FiCenResponsableNombre"]),
+                            // FiCscEmpleadoObligadoNombre = Convert.ToString(row["FiCscEmpleadoObligadoNombre"]),
+                            FICenResponsable = Convert.ToString(row["FICenResponsable"]),
+                            FiCenMontoMinimo = string.IsNullOrEmpty(Convert.ToString(row["FiCenMontoMinimo"])) ? "0" : Convert.ToString(row["FiCenMontoMinimo"]),
+                            FiCenMontoMaximo = string.IsNullOrEmpty(Convert.ToString(row["FiCenMontoMaximo"])) ? "0" : Convert.ToString(row["FiCenMontoMaximo"]),
+
+                        };
+                        lista.Add(ent);
+                    }
 
                     JObject Resultado = JObject.FromObject(new
                     {
@@ -122,7 +122,7 @@ namespace SCGESP.Controllers.AppNew
                     XElement Errores = Salida.Element("Errores");
                     XElement Error = Errores.Element("Error");
                     XElement Descripcion = Error.Element("Descripcion");
-                
+
                     string resultado2 = respuesta.Errores.InnerText;
 
                     JObject Resultado = JObject.FromObject(new

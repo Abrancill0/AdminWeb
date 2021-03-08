@@ -13,9 +13,8 @@ using Newtonsoft.Json.Linq;
 
 namespace SCGESP.Controllers.AppNew
 {
-    public class App_ObtieneCambioPresupuestoPDFController : ApiController
+    public class App_ObtieneCambioPresupuestoPDFV5Controller : ApiController
     {
-        //Parametros Entrada
         public class ParametrosEntrada
         {
             public string Usuario { get; set; }
@@ -28,10 +27,10 @@ namespace SCGESP.Controllers.AppNew
             public string PDF { get; set; } //PDF
         }
 
-
-        //public List<ObtieneParametrosSalida> Post(ParametrosEntrada Datos)
+        [System.Web.Http.HttpPost]
         public JObject Post(ParametrosEntrada Datos)
         {
+
             DocumentoEntrada entrada = new DocumentoEntrada
             {
                 Usuario = Datos.Usuario,
@@ -44,15 +43,15 @@ namespace SCGESP.Controllers.AppNew
             entrada.agregaElemento("PrPtiFolio", Datos.PrPtiFolio);
 
             DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
-  
-            try
-            {
+
+           // try
+          //  {
 
                 if (respuesta.Resultado == "1")
-            {
+                {
 
                     DataTable DT = new DataTable();
-                   // DT = respuesta.obtieneValor("Valores");
+                    // DT = respuesta.obtieneValor("Valores");
                     string cosa = respuesta.obtieneValor("ArchivoPdf");
                     List<ObtieneParametrosSalida> lista = new List<ObtieneParametrosSalida>();
 
@@ -61,18 +60,18 @@ namespace SCGESP.Controllers.AppNew
                     string path = HttpContext.Current.Server.MapPath("/PDF/SolicitudCambio/");
                     string name = DateTime.Now.ToString("yyyyMMddhhmmss");
 
-                   // foreach (DataRow row in DT.Rows)
-                   // {
-                        byte[] data = Convert.FromBase64String(cosa);
+                    // foreach (DataRow row in DT.Rows)
+                    // {
+                    byte[] data = Convert.FromBase64String(cosa);
 
-                        //ArchivoPdf
-                        MemoryStream ms = new MemoryStream(data, 0, data.Length);
-                        ms.Write(data, 0, data.Length);
-                        string rutacompleta = path + name + format;
-                        File.WriteAllBytes(rutacompleta, data);
-                        result = "PDF/SolicitudCambio/" + name + format;
+                    //ArchivoPdf
+                    MemoryStream ms = new MemoryStream(data, 0, data.Length);
+                    ms.Write(data, 0, data.Length);
+                    string rutacompleta = path + name + format;
+                    File.WriteAllBytes(rutacompleta, data);
+                    result = "PDF/SolicitudCambio/" + name + format;
                     //}
-                    
+
                     ObtieneParametrosSalida ent = new ObtieneParametrosSalida
                     {
                         PDF = result
@@ -112,21 +111,20 @@ namespace SCGESP.Controllers.AppNew
                     return Resultado;
 
                 }
-            }
-            catch (Exception ex)
-            {
+          //  }
+           // catch (Exception ex)
+           // {
 
-                JObject Resultado = JObject.FromObject(new
-                {
-                    mensaje = ex.ToString(),
-                    estatus = 0,
-                    CambiaContrasena = false,
-                });
+            //    JObject Resultado = JObject.FromObject(new
+            //    {
+            //        mensaje = ex.ToString(),
+            //        estatus = 0,
+            ///        CambiaContrasena = false,
+            //    });
 
 
-                return Resultado;
-            }
-
+           //     return Resultado;
+          //  }
 
         }
 
