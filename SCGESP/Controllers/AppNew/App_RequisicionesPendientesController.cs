@@ -16,7 +16,6 @@ namespace SCGESP.Controllers.AppNew
         {
             public string Usuario { get; set; }
             public string Empleado { get; set; }
-            public string Origen { get; set; }
         }
 
         public class RequisicionesPorAutorizarResult
@@ -44,7 +43,7 @@ namespace SCGESP.Controllers.AppNew
             {
                 DocumentoEntrada entrada = new DocumentoEntrada();
                 entrada.Usuario = Datos.Usuario; //Datos.Usuario;  
-                entrada.Origen = "Programa CGE";  //Datos.Origen; 
+                entrada.Origen = "AdminApp";  //Datos.Origen; 
                 entrada.Transaccion = 120760;
                 entrada.Operacion = 1;
                 //entrada.agregaElemento("proceso", 9);

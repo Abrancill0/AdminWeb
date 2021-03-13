@@ -5,7 +5,9 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Xml;
+using System.Xml.Linq;
 using Ele.Generales;
+using Newtonsoft.Json.Linq;
 
 namespace SCGESP.Controllers.AppNew
 {
@@ -18,13 +20,12 @@ namespace SCGESP.Controllers.AppNew
             public string RmUaaUsuarioAlterno { get; set; }
         }
 
-        //public List<ObtieneParametrosSalida> Post(ParametrosEntrada Datos)
-        public DocumentoSalida Post(ParametrosEntrada Datos)
+        public JObject Post(ParametrosEntrada Datos)
         {
             DocumentoEntrada entrada = new DocumentoEntrada
             {
                 Usuario = Datos.Usuario,
-                Origen = "CGE",
+                Origen = "AdminApp",
                 Transaccion = 120795,
                 Operacion = 9,
             };
@@ -35,13 +36,33 @@ namespace SCGESP.Controllers.AppNew
 
             if (respuesta.Resultado == "1")
             {
-                return respuesta;
+                JObject Resultado = JObject.FromObject(new
+                {
+                    mensaje = "OK",
+                    estatus = 1
+                });
+
+
+                return Resultado;
             }
             else
             {
-                //var errores = respuesta.Errores;
-                return respuesta;
+                XDocument doc = XDocument.Parse(respuesta.Documento.InnerXml);
+                XElement Salida = doc.Element("Salida");
+                XElement Errores = Salida.Element("Errores");
+                XElement Error = Errores.Element("Error");
+                XElement Descripcion = Error.Element("Descripcion");
+
+                JObject Resultado = JObject.FromObject(new
+                {
+                    mensaje = Descripcion.Value,
+                    estatus = 0
+                });
+
+
+                return Resultado;
             }
+
         }
 
         public static DocumentoSalida PeticionCatalogo(XmlDocument doc)

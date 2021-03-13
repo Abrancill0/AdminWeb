@@ -10,20 +10,19 @@ using System.Xml.Linq;
 
 namespace SCGESP.Controllers.AppNew
 {
-    public class App_ListaUsuariosAlternosController : ApiController
+    public class App_ListaUsuariosCentroController : ApiController
     {
         public class Datos
         {
             public string Usuario { get; set; }
-            public string Origen { get; set; }
+            public string Empleado { get; set; }
         }
 
         public class ParametrosSalidaResult
         {
-            public string Alterno { get; set; }
+            public string Empleado { get; set; }
             public string Nombre { get; set; }
-            public string FechaInicial { get; set; }
-            public string FechaFinal { get; set; }
+            public string Usuario { get; set; }
 
         }
 
@@ -31,15 +30,16 @@ namespace SCGESP.Controllers.AppNew
         {
             try
             {
-                string UsuarioDesencripta = Seguridad.DesEncriptar(Datos.Usuario);
-
+               
                 DocumentoEntrada entrada = new DocumentoEntrada
                 {
-                    Usuario = UsuarioDesencripta,
+                    Usuario = Datos.Usuario,
                     Origen = "AdminApp",
-                    Transaccion = 120795,
-                    Operacion = 16
+                    Transaccion = 120037,
+                    Operacion = 17
                 };
+
+                entrada.agregaElemento("GrEmpId", Datos.Empleado);
 
                 DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 
@@ -47,7 +47,7 @@ namespace SCGESP.Controllers.AppNew
 
                 if (respuesta.Resultado == "1")
                 {
-                    DTRequisiciones = respuesta.obtieneTabla("Alternos");
+                    DTRequisiciones = respuesta.obtieneTabla("Empleados");
 
                     List<ParametrosSalidaResult> lista = new List<ParametrosSalidaResult>();
 
@@ -55,13 +55,13 @@ namespace SCGESP.Controllers.AppNew
                     {
                         ParametrosSalidaResult ent = new ParametrosSalidaResult
                         {
-                            Alterno = Convert.ToString(row["Alterno"]),
+                            Empleado = Convert.ToString(row["Empleado"]),
                             Nombre = Convert.ToString(row["Nombre"]),
-                            FechaInicial = Convert.ToString(row["FechaInicial"]),
-                            FechaFinal = Convert.ToString(row["FechaFinal"]),
+                            Usuario = Convert.ToString(row["Usuario"]),
                         };
                         lista.Add(ent);
                     }
+
                     JObject Resultado = JObject.FromObject(new
                     {
                         mensaje = "OK",
@@ -76,12 +76,13 @@ namespace SCGESP.Controllers.AppNew
                 }
                 else
                 {
+
                     XDocument doc = XDocument.Parse(respuesta.Documento.InnerXml);
                     XElement Salida = doc.Element("Salida");
                     XElement Errores = Salida.Element("Errores");
                     XElement Error = Errores.Element("Error");
                     XElement Descripcion = Error.Element("Descripcion");
-                    
+                  
                     string resultado2 = respuesta.Errores.InnerText;
 
                     JObject Resultado = JObject.FromObject(new
@@ -110,7 +111,6 @@ namespace SCGESP.Controllers.AppNew
 
 
         }
-
 
         public static DocumentoSalida PeticionCatalogo(XmlDocument doc)
         {

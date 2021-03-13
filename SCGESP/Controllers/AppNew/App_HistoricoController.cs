@@ -17,7 +17,6 @@ namespace SCGESP.Controllers.AppNew
             public string Usuario { get; set; }
             public string FechaInicio { get; set; }
             public string FechaFinal { get; set; }
-            public string Origen { get; set; }
         }
 
         public class RequisicionesPorAutorizarResult
@@ -49,10 +48,8 @@ namespace SCGESP.Controllers.AppNew
                 {
                     string UsuarioDesencripta = Seguridad.DesEncriptar(Datos.Usuario);
 
-                    //string EmpleadoDesencripta = Seguridad.DesEncriptar(Datos.Empleado);
-
                     DocumentoEntrada entrada = new DocumentoEntrada();
-                    entrada.Usuario = UsuarioDesencripta; //Datos.Usuario;  
+                    entrada.Usuario = Datos.Usuario; //Datos.Usuario;  
                     entrada.Origen = "AdminApp";  //Datos.Origen; 
                     entrada.Transaccion = 120761;
                     entrada.Operacion = 16;//ConsultaAdicional1
