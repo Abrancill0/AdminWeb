@@ -25,17 +25,18 @@ namespace SCGESP.Controllers.AppNew
             DocumentoEntrada entrada = new DocumentoEntrada
             {
                 Usuario = Datos.Usuario,
-                Origen = "AdminApp",
+                Origen = "CGE",
                 Transaccion = 120795,
                 Operacion = 9,
             };
 
             entrada.agregaElemento("RmUaaUsuarioAlterno", Datos.RmUaaUsuarioAlterno);
-           
+
             DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
 
             if (respuesta.Resultado == "1")
             {
+
                 JObject Resultado = JObject.FromObject(new
                 {
                     mensaje = "OK",
@@ -62,7 +63,6 @@ namespace SCGESP.Controllers.AppNew
 
                 return Resultado;
             }
-
         }
 
         public static DocumentoSalida PeticionCatalogo(XmlDocument doc)

@@ -24,7 +24,7 @@ namespace SCGESP.Controllers
             DocumentoEntrada entrada = new DocumentoEntrada
             {
                 Usuario = Datos.Usuario,
-                Origen = "CGE",
+                Origen = "AdminApp",
                 Transaccion = 120795,
                 Operacion = 9,
             };
