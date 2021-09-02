@@ -4,7 +4,7 @@ using System.Web.Http;
 using System.Collections.Generic;
 using SCGESP.Clases;
 
-namespace SCGESP.Controllers
+namespace SCGESP.Controllers.AppNew
 {
     public class RechazaOCController : ApiController
     {
@@ -23,11 +23,10 @@ namespace SCGESP.Controllers
 
         public XmlDocument Post(Datos Datos)
         {
-            string UsuarioDesencripta = Seguridad.DesEncriptar(Datos.Usuario);
-
+           
             DocumentoEntrada entrada = new DocumentoEntrada
             {
-                Usuario = UsuarioDesencripta,
+                Usuario = Datos.Usuario,
                 Origen = "AdminApp",  //Datos.Origen; 
                 Transaccion = 120768,
                 Operacion = 14 //rechazar requisiciones

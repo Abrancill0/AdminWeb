@@ -21,11 +21,10 @@ namespace SCGESP.Controllers.AppNew
 
         public XmlDocument Post(Datos Datos)
         {
-            string UsuarioDesencripta = Seguridad.DesEncriptar(Datos.Usuario);
-
+           
             DocumentoEntrada entrada = new DocumentoEntrada
             {
-                Usuario = UsuarioDesencripta,
+                Usuario = Datos.Usuario,
                 Origen = "Programa CGE",  //Datos.Origen; 
                 Transaccion = 120760,
                 Operacion = 17
