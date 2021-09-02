@@ -15,11 +15,7 @@ namespace SCGESP.Controllers.AppNew
         public class Datos
         {
             public string Usuario { get; set; }
-<<<<<<< HEAD:SCGESP/Controllers/AppNew/App_ListaUsuariosAlternosController.cs
-          
-=======
            
->>>>>>> f0800bfa784d8b3a190d97c9212b0c9c91ba8b94:SCGESP/Controllers/AppNew/Alternos/App_ListaUsuariosAlternosController.cs
         }
 
         public class ParametrosSalidaResult
