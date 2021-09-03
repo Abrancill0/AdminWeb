@@ -4963,6 +4963,8 @@
     <Compile Include="confrontacion.aspx.designer.cs">
       <DependentUpon>confrontacion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AppNew\Requisiciones\App_ConsultaDocumentosRequisicionController.cs" />
+    <Compile Include="Controllers\AppNew\Requisiciones\App_VisualizaArchivoRequisicionController.cs" />
     <Compile Include="Controllers\AppNew\SolicitudMovimientosActivosFijos\App_ActivosAsociadosSolicitudController.cs" />
     <Compile Include="Controllers\AppNew\Alternos\App_AltaAlternoController.cs" />
     <Compile Include="Controllers\AppNew\Usuarios\App_ActualizaPendientesController.cs" />

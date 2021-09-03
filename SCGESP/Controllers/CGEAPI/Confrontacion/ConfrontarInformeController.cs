@@ -54,8 +54,8 @@ namespace SCGESP.Controllers
                         string UsuarioSolicita = Convert.ToString(row["usuario"]);
                         string UsuarioId = Convert.ToString(row["uautoriza"]);
                         string EmpleadoId = Convert.ToString(row["idempleado"]);
-                        int ninforme = Convert.ToInt16(row["ninforme"]);
-                        int idrequisicion = Convert.ToInt16(row["idrequisicion"]);
+                        int ninforme = Convert.ToInt32(row["ninforme"]);
+                        int idrequisicion = Convert.ToInt32(row["idrequisicion"]);
 
                         string mensaje = "Confrontación Generada de la Requisición de Viaje (Informe) #" + ninforme + " Requisición " + idrequisicion + ". \n" +
                             " Importe confrontado: $ " + Datos.ImporteMovBanco + "\n" +

@@ -7,18 +7,21 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Xml;
+using System.Xml.Linq;
 using Ele.Generales;
 using Newtonsoft.Json.Linq;
 
 namespace SCGESP.Controllers.AppNew
 {
-    public class App_ObtieneAnalisisPDFController : ApiController
+    public class App_VisualizaArchivoRequisicionController : ApiController
     {
         //Parametros Entrada
         public class ParametrosEntrada
         {
             public string Usuario { get; set; }
-            public string RmReqId { get; set; }
+            public string RmRdoRequisicion { get; set; }
+            public string  RmRdoTipoDocumento { get; set; }
+            public string ExtencionDocumentos { get; set; }
         }
 
         public class ObtieneParametrosSalida
@@ -30,17 +33,15 @@ namespace SCGESP.Controllers.AppNew
         //public List<ObtieneParametrosSalida> Post(ParametrosEntrada Datos)
         public JObject Post(ParametrosEntrada Datos)
         {
-            DocumentoEntrada entrada = new DocumentoEntrada
-            {
-                Usuario = Datos.Usuario,
-                Origen = "AdminAPP",
-                Transaccion = 120760,
-                Operacion = 21,
-            };
+            DocumentoEntrada entrada = new DocumentoEntrada();
+            entrada.Usuario = Datos.Usuario;
+            entrada.Origen = "AdminApp";  //Datos.Origen; 
+            entrada.Transaccion = 120859;
+            entrada.Operacion = 16;
 
-            entrada.agregaElemento("RmReqId", Datos.RmReqId);
-            entrada.agregaElemento("proceso", "9");
-
+            entrada.agregaElemento("RmRdoRequisicion", Datos.RmRdoRequisicion);
+            entrada.agregaElemento("RmRdoTipoDocumento", Datos.RmRdoTipoDocumento);
+           
             DocumentoSalida respuesta = PeticionCatalogo(entrada.Documento);
   
             try
@@ -49,22 +50,33 @@ namespace SCGESP.Controllers.AppNew
                 if (respuesta.Resultado == "1")
             {
                    
-                    string pdf= respuesta.obtieneValor("ArchivoPdf"); 
-                    
+                   // string Archivo = respuesta.obtieneValor("NombreArchivo");
+
+
+                    XDocument doc = XDocument.Parse(respuesta.Documento.InnerXml);
+                    XElement Salida = doc.Element("Salida");
+                    XElement Tablas = Salida.Element("Tablas");
+                    XElement ConsultaAdicional1 = Tablas.Element("ConsultaAdicional1");
+                    XElement NewDataSet = ConsultaAdicional1.Element("NewDataSet");
+                    XElement ConsultaAdicional11 = NewDataSet.Element("ConsultaAdicional1");
+                    XElement NombreArchivo = ConsultaAdicional11.Element("NombreArchivo");
+                    XElement Archivo = ConsultaAdicional11.Element("Archivo");
+
+
                     List<ObtieneParametrosSalida> lista = new List<ObtieneParametrosSalida>();
 
                     string result = "";
-                    string format = ".pdf";
-                    string path = HttpContext.Current.Server.MapPath("/PDF/Analisis/");
+                    string format = Datos.ExtencionDocumentos;
+                    string path = HttpContext.Current.Server.MapPath("/PDF/ArchivosComunes/");
                     string name = DateTime.Now.ToString("yyyyMMddhhmmss");
 
-                    byte[] data = Convert.FromBase64String(pdf);
+                    byte[] data = Convert.FromBase64String(Archivo.Value);
 
                     MemoryStream ms = new MemoryStream(data, 0, data.Length);
                     ms.Write(data, 0, data.Length);
                     string rutacompleta = path + name + format;
                     File.WriteAllBytes(rutacompleta, data);
-                    result = "PDF/Analisis/" + name + format;
+                    result = "PDF/ArchivosComunes/" + name + format;
 
                     JObject Resultado = JObject.FromObject(new
                     {
